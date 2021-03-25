@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "4165c85a764f1e3afc51667a669694c8",
+    "content-hash": "d1e432159447aa205a6ee74270104d54",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -4706,6 +4706,86 @@
             "time": "2020-07-13T06:12:54+00:00"
         },
         {
+            "name": "uspdev/cache",
+            "version": "0.7.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/uspdev/cache.git",
+                "reference": "766bac22955267f3f1eaed1313caab28344de899"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/uspdev/cache/zipball/766bac22955267f3f1eaed1313caab28344de899",
+                "reference": "766bac22955267f3f1eaed1313caab28344de899",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Uspdev\\Cache\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "GPL-3.0-or-later"
+            ],
+            "authors": [
+                {
+                    "name": "Masaki Kawabata Neto",
+                    "email": "masaki.kawabata@gmail.com"
+                }
+            ],
+            "description": "Library to connect to cache server",
+            "homepage": "https://github.com/uspdev/cache",
+            "time": "2021-01-27T13:56:38+00:00"
+        },
+        {
+            "name": "uspdev/laravel-usp-faker",
+            "version": "1.0.6",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/uspdev/laravel-usp-faker.git",
+                "reference": "f55f0b566d3ac61db9a7de6ac482ebcf7a791ca3"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/uspdev/laravel-usp-faker/zipball/f55f0b566d3ac61db9a7de6ac482ebcf7a791ca3",
+                "reference": "f55f0b566d3ac61db9a7de6ac482ebcf7a791ca3",
+                "shasum": ""
+            },
+            "require": {
+                "uspdev/replicado": "^1.5"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Uspdev\\UspdevFakerServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Uspdev\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Thiago Gomes Veríssimo",
+                    "email": "verissimotgv@gmail.com"
+                }
+            ],
+            "description": "Uma biblioteca para geração de faker no contexto USP",
+            "time": "2020-09-23T20:35:34+00:00"
+        },
+        {
             "name": "uspdev/laravel-usp-theme",
             "version": "2.0.4",
             "source": {
@@ -4748,6 +4828,51 @@
                 "source": "https://github.com/uspdev/laravel-usp-theme/tree/2.0.4"
             },
             "time": "2021-02-23T13:05:27+00:00"
+        },
+        {
+            "name": "uspdev/replicado",
+            "version": "1.6.10",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/uspdev/replicado.git",
+                "reference": "178fc204099f0f092375ede339e2638f64102c7f"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/uspdev/replicado/zipball/178fc204099f0f092375ede339e2638f64102c7f",
+                "reference": "178fc204099f0f092375ede339e2638f64102c7f",
+                "shasum": ""
+            },
+            "require": {
+                "ext-pdo_dblib": "*",
+                "monolog/monolog": "^1.25 || ^2",
+                "php": ">=7.0",
+                "uspdev/cache": "^0.7.1"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^8.0 || ^9.0",
+                "vlucas/phpdotenv": "^5.2"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Uspdev\\Replicado\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "GPL-2.0-or-later"
+            ],
+            "authors": [
+                {
+                    "name": "Thiago Gomes Verissimo",
+                    "email": "thiago.verissimo@usp.br",
+                    "homepage": "https://github.com/thiagogomesverissimo"
+                }
+            ],
+            "description": "Classes PHP que consome dados do Replicado USP",
+            "homepage": "https://github.com/uspdev/replicado",
+            "time": "2021-03-12T13:46:44+00:00"
         },
         {
             "name": "uspdev/senhaunica-socialite",
@@ -7325,5 +7450,5 @@
         "php": "^7.3|^8.0"
     },
     "platform-dev": [],
-    "plugin-api-version": "2.0.0"
+    "plugin-api-version": "1.1.0"
 }

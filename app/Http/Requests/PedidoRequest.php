@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class DiscenteRequest extends FormRequest
+class PedidoRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -13,7 +13,7 @@ class DiscenteRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,16 +24,9 @@ class DiscenteRequest extends FormRequest
     public function rules()
     {
         return [
-        'Nome'=> 'required',
-        'nUSP' => 'required',
-        'Curso' => 'required',
-        'Instituicao' => 'required',
-        'NomeDisciplina'=> 'required',
-        'Nota'=> 'required',
-        'Credito' => 'required',
-        'CargaHoraria' => 'required',
-        'Codigo' => 'required',
-        'NomeUsp' => 'required',
+            'codpes' => 'required',
+            'curso' => 'required',
+            'instituicao' => 'required',
         ];
     }
 }

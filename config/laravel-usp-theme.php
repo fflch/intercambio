@@ -1,56 +1,19 @@
 <?php
 
-$submenu1 = [
+$aproveitamento = [
     [
-        'type' => 'header',
-        'text' => 'Cadastros',
-    ],
-    [
-        'text' => 'Discente',
-        'url' => config('app.url') . '/Discente',
-    ],
-    [
-        'text' => 'DiscenteOpt',
-        'url' => config('app.url') . '/DiscenteOpt',
-        
-    ],
-   
-];
-
-$submenu2 = [
-    [
-        'text' => 'Discente',
-        'url' => config('app.url') . '/Discente',
-    ],
-    [
-        'text' => 'DiscenteOpt',
-        'url' => config('app.url') . '/DiscenteOpt',
-        
+        'text' => 'Nova solicitação',
+        'url' => config('app.url') . '/pedidos/creates',
     ],
 ];
 $menu = [
     [
-        'text' => '<i class="fas fa-home"></i> Item 1',
-        'url' => config('app.url') . '/item1',
+        'text' => 'Aproveitamento de Créditos',
+        'submenu' => $aproveitamento,
     ],
     [
-        'text' => 'Item 2',
-        'url' => config('app.url') . '/item2',
-        'can' => '',
-    ],
-    [
-        'text' => 'Item 3',
-        'url' => config('app.url') . '/item3',
-        'can' => 'admin',
-    ],
-    [
-        'text' => 'SubMenu1',
-        'submenu' => $submenu1,
-    ],
-    [
-        'text' => 'SubMenu2',
-        'submenu' => $submenu2,
-        'can' => 'admin',
+        'text' => 'Pedidos',
+        'url' => config('app.url') . '/pedidos',
     ],
 ];
 

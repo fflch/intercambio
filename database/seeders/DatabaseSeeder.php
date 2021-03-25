@@ -15,8 +15,8 @@ class DatabaseSeeder extends Seeder
     {
         $this->call([
             
-            DiscenteSeeder::class,
-            DiscenteOptSeeder::class,
+            PedidoSeeder::class,
+            #DisciplinaSeeder::class,
          
         ]);
     }
