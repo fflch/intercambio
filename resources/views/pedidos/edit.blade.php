@@ -2,10 +2,10 @@
 
 @section('content')
 
-  <form method="POST" action="/Discente/{{$discente->id}}">
+  <form method="POST" action="/pedidos/{{$pedido->id}}">
     @csrf
     @method('patch')
-    @include('discente.formDoc')
+    @include('pedidos.form')
    
   </form> 
 @endsections

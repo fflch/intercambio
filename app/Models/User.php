@@ -40,4 +40,13 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function getNomeAttribute($value){
+        return Pessoa::nomeCompleto($this->codpes);
+    }
+
+    public function getCursoAttribute($value){
+        $curso = Graduacao::curso($this->codpes, 8);
+        return $curso['nomcur'];
+    }
 }

@@ -29,5 +29,15 @@ class Pedido extends Model
         $curso = Graduacao::curso($this->codpes, 8);
         return $curso['nomcur'];
     }
+
+   
+    public function files()
+    {
+        return $this->hasMany('App\Models\File');
+    }
+    public function disciplinas()
+    {
+        return $this->hasMany('App\Models\Disciplina');
+    }
     
 }
