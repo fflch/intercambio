@@ -1,3 +1,5 @@
+<form method="POST" action="/disciplinas">
+    @csrf
 
 <div class="card">
 <div class="card-header"><h5><b>À COMISSÃO DE GRADUAÇÃO DA FACULDADE DE FILOSOFIA LETRAS E CIÊNCIAS HUMANAS DA USP.</b></h5></div>
@@ -19,8 +21,7 @@ Na instituicao: {{ $pedido->instituicao ?? '' }}</b></label>
 <div class="card-header"><b>Disciplinas cadastradas por arquivo</b></div>
 <br>
 @forelse($pedido->files as $file)
-<li><a href="/files/{{$file->id}}">{{ $file->original_name ?? '' }}</a></li>
-
+<li><a href="/files/{{$file->id}}">{{ $file->original_name ?? '' }} </a></li>
 @empty
     Não há nenhum arquivo cadastrado
 @endforelse
@@ -35,7 +36,6 @@ Na instituicao: {{ $pedido->instituicao ?? '' }}</b></label>
     Não há nenhum cadastrado
 @endforelse
 <br>
-
 
 @csrf
 

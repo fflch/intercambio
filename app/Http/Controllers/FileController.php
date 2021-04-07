@@ -37,14 +37,14 @@ class FileController extends Controller
     public function store(Request $request)
     {
         $request->file('file')->getClientMimeType();
-        
+
         $request->validate([
 
             'file'     => 'required|mimes:pdf|max:10000',
-            'pedido_id' => 'required|integer|exists:pedidos,id'
+            'pedido_file_id' => 'required|integer|exists:pedidos,id'
         ]);
         $file = new File;
-        $file->pedido_id = $request->pedido_id;
+        $file->pedido_file_id = $request->pedido_file_id;
         $file->original_name = $request->file('file')->getClientOriginalName();
         $file->path = $request->file('file')->store('.');
         $file->save();
@@ -93,6 +93,9 @@ class FileController extends Controller
      */
     public function destroy(File $file)
     {
-        //
+        $pedido_file_id = $file->pedido_file_id;
+        $file->delete();
+        request()->session()->flash('alert-info','Arquivo excluído com sucesso.');
+        return redirect("/pedidos/{$file->$pedido_file_id}"); 
     }
 }

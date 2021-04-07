@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class PedidoRequest extends FormRequest
+class DisciplinaRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -31,7 +31,8 @@ class PedidoRequest extends FormRequest
             'carga_horaria' => 'required',
             'codigo' => 'required',
             'nome_usp' => 'required',
-            'codigo' => 'pedido_id',
+            'codigo' => 'required',
+            'pedido_id' => 'required'
         ];
     }
 }

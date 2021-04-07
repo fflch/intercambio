@@ -68,9 +68,8 @@
             
       </div>
       <div class="form-group">
-     
      <button type="submit" class="btn btn-success">Enviar</button>
-     
+     <input class="form-control" type="hidden" name="pedido_id" value="{{ $pedido->id }}" >
     </div>
     </div>
 </div>

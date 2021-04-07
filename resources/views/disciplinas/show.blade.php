@@ -71,7 +71,7 @@
             
       </div>
       <div class="form-group">
-      <form method="POST" action="/disciplinas/{{$disciplina}}"> 
+      <form method="POST" action="/disciplinas/{{$disciplina->id}}"> 
                 @csrf
                 @method('delete')
 <a href="/disciplinas/{{$disciplina->id}}/edit"><i class="fas fa-pencil-alt"></a></i>
