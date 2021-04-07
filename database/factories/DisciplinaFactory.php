@@ -22,10 +22,7 @@ class DisciplinaFactory extends Factory
     public function definition()
     {
 
-        $tipo_key = array_rand(Disciplina::tipo); 
-
         return [
-            'tipo'          => Disciplina::tipo[$tipo_key],
             'nome'          => $this->faker->sentence($nbWords = 8, $variableNbWords = true),
             'nota'          => $this->faker->numberBetween(0, 10),
             'creditos'      => $this->faker->numberBetween(0, 99999999), 

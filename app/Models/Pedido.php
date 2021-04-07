@@ -11,10 +11,11 @@ use Uspdev\Replicado\Graduacao;
 class Pedido extends Model
 {
     use HasFactory;
+    protected $guarded = ['id'];
 
     const status = [
         'Em elaboração',
-        'Análise ccint',
+        'Análise',
         'Comissão de Graduação',
         'Serviço de Graduação',
         'Docente',
@@ -27,9 +28,9 @@ class Pedido extends Model
 
     public function getCursoAttribute($value){
         $curso = Graduacao::curso($this->codpes, 8);
-        return $curso['nomcur'];
+        if($curso['nomcur']) return $curso['nomcur'];
+        return 'Não matriculado em nenhum curso de Graduação';
     }
-
    
     public function files()
     {

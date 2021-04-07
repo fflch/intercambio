@@ -19,5 +19,8 @@ Route::get('/callback', [LoginController::class, 'handleProviderCallback']);
 Route::resource('/pedidos', PedidoController::class);
 Route::resource('/disciplinas', DisciplinaController::class);
 
-//files
+// files
 Route::resource('files', FileController::class);
+
+// Rotas do workflow
+Route::get('/pedidos/{pedido}/analise', [PedidoController::class, 'analise']);

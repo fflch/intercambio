@@ -10,11 +10,6 @@ class Disciplina extends Model
 {
     use HasFactory;
 
-    const tipo = [
-        'Optativa',
-        'Obrigatoria',
-    ];
-
     protected $guarded = ['id'];
 
     public function record(){

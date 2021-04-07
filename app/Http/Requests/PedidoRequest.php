@@ -24,8 +24,6 @@ class PedidoRequest extends FormRequest
     public function rules()
     {
         return [
-            'codpes' => 'required',
-            'curso' => 'required',
             'instituicao' => 'required',
         ];
     }
