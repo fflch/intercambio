@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
+use App\Models\Disciplina;
 
 class DisciplinaSeeder extends Seeder
 {
@@ -13,6 +14,18 @@ class DisciplinaSeeder extends Seeder
      */
     public function run()
     {
-        //
+        $disciplina = [   
+            'tipo'          => Disciplina::tipo[0],
+            'nome'          => 'Progamação II',
+            'nota'          => '10',
+            'creditos'      => '40', 
+            'carga_horaria' => '25',
+            'codigo'        => 'FLA0205',
+            'nome_usp'      => 'Programação Aplicada',
+            'pedido_id'     => 1,
+        ];
+        
+        Disciplina::create($disciplina);
+        Disciplina::factory(10)->create();
     }
 }

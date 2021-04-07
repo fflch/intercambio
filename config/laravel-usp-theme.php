@@ -3,7 +3,7 @@
 $aproveitamento = [
     [
         'text' => 'Nova solicitação',
-        'url' => config('app.url') . '/pedidos/creates',
+        'url' => config('app.url') . '/pedidos/create',
     ],
 ];
 $menu = [
