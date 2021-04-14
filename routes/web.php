@@ -7,6 +7,7 @@ use App\Http\Controllers\IndexController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\FileController;
 use App\Http\Controllers\DisciplinaController;
+use App\Http\Controllers\WorkflowController;
 
 Route::get('/', [IndexController::class,'index']);
 
@@ -23,4 +24,4 @@ Route::resource('/disciplinas', DisciplinaController::class);
 Route::resource('files', FileController::class);
 
 // Rotas do workflow
-Route::get('/pedidos/{pedido}/analise', [PedidoController::class, 'analise']);
+Route::get('/pedidos/{pedido}/analise', [WorkflowController::class, 'analise']);

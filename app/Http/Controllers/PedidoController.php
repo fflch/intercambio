@@ -15,22 +15,18 @@ class PedidoController extends Controller
         if ($request->buscastatus != null && $request->search != null){
 
             $pedidos = Pedido::where('codpes','LIKE',"%{$request->search}%")
-            -> where('status', $request->buscastatus)->paginate(10);
+              ->where('status', $request->buscastatus)->paginate(10);
             
-        } else if(isset($request->busca)) {
+        } else if(isset($request->search)) {
             $pedidos = Pedido::where('codpes','LIKE',"%{$request->search}%")->paginate(10);
-            }
-            
-            else if(isset($request->buscastatus)){
-            if ($request->buscastatus != null){
-                $pedidos = Pedido::where('status', $request->buscastatus)->paginate(10);
-            }
-
-        } else {
-
-            $pedidos = Pedido::paginate(10);
-
         }
+            
+        else if(isset($request->buscastatus)){
+            $pedidos = Pedido::where('status', $request->buscastatus)->paginate(10);
+        } else {
+            $pedidos = Pedido::paginate(10);
+        }
+
         return view ('pedidos.index',[
             'pedidos' => $pedidos
         ]);
@@ -79,11 +75,5 @@ class PedidoController extends Controller
     {
         $pedido->delete();
         return redirect('/pedidos');
-    }
-
-    public function analise(Pedido $pedido){
-        $pedido->status = 'Análise';
-        $pedido->save();
-        return redirect("/pedidos/$pedido->id");
     }
 }

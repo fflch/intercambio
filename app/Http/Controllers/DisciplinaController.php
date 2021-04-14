@@ -21,7 +21,7 @@ class DisciplinaController extends Controller
         $pedido_id = $disciplina->pedido_id;
         $disciplina->delete();
         request()->session()->flash('alert-info','Disciplina excluída com sucesso.');
-        return redirect("/pedidos/{$disciplina->$pedido_id}"); 
+        return redirect("/pedidos/{$pedido_id}"); 
     }
 
     public function show(Disciplina $disciplina)

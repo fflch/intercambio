@@ -11,12 +11,9 @@ Na instituição: <b>{{ $pedido->instituicao ?? '' }}</b> <br>
 Status do pedido: <b>{{ $pedido->status }}</b>                
 </div>
 
-
-@if($pedido -> status == 'Em elaboração')
+@if($pedido-> status == 'Em elaboração' && !$pedido->disciplinas->isEmpty() )
 
 <a href="/pedidos/{{$pedido->id}}/analise" onclick="return confirm('Enviar para análise? Depois de enviado o pedido não pode ser alterado');" class="btn btn-success"> Enviar para Análise </a>
-
-
 
 @endif
 <hr>
