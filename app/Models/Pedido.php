@@ -22,6 +22,32 @@ class Pedido extends Model
         'Finalização ccint'
     ];
 
+    public function getStatus(){
+
+    $status = [
+        'Em elaboração' => [
+        'name' => "Em Elaboração",
+        ],
+        'Análise' => [
+        'name' => "Análise",       
+        ],
+        'Comissão de Graduação' => [
+        'name' => "Comissão de Graduação",       
+        ],
+        'Serviço de Graduação' => [
+        'name' => "Serviço de Graduaçã",       
+        ],
+        'Docente' => [
+        'name' => "Docente",       
+        ],
+        'Finalização ccint' => [
+        'name' => "Finalização ccint",       
+        ]
+        ];
+        
+        return $status;
+    }
+
     public function getNomeAttribute($value){
         return Pessoa::nomeCompleto($this->codpes);
     }

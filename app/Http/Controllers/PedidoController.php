@@ -11,10 +11,25 @@ class PedidoController extends Controller
     public function index(Request $request)
     {
         #Campo de busca
-        if(isset(request()->search)){
-            $pedidos = Pedido::where('codpes','LIKE',"%{$request->search}%")->paginate(5);
-        }else {
-            $pedidos = Pedido::paginate(5);
+
+        if ($request->buscastatus != null && $request->search != null){
+
+            $pedidos = Pedido::where('codpes','LIKE',"%{$request->search}%")
+            -> where('status', $request->buscastatus)->paginate(10);
+            
+        } else if(isset($request->busca)) {
+            $pedidos = Pedido::where('codpes','LIKE',"%{$request->search}%")->paginate(10);
+            }
+            
+            else if(isset($request->buscastatus)){
+            if ($request->buscastatus != null){
+                $pedidos = Pedido::where('status', $request->buscastatus)->paginate(10);
+            }
+
+        } else {
+
+            $pedidos = Pedido::paginate(10);
+
         }
         return view ('pedidos.index',[
             'pedidos' => $pedidos

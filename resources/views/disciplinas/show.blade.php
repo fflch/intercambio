@@ -2,31 +2,20 @@
 @section('content')
 
 <div class="card">
-<div class="card-header"><b>Informar os dados </b></div>
-    <div class="card-body">
-
-    <div class="row">
-            <div class="col-sm form-group col-sm-4">
-                <div class="form-group">
-                    <label for="tipo" class="required"><b>Escolha o tipo: </b></label>
-                    <br>  {{ $disciplina->tipo ?? '' }} 
-                </div>  
-            </div> 
-
-            <div class="col-sm form-group">
-                <div class="form-group">
-                    <label for="nome" class="required"><b>Nome da Disciplina: </b></label>
-                    <br>  {{ $disciplina->nome ?? '' }} 
-                </div>  
-            </div>  
-        </div>
-    </div>
 
 <div class="card-header"><b>Dados da disciplina cursada</b></div>
     <div class="card-body">
 
         <div class="row">
-            <div class="col-sm form-group col-sm-4">
+
+        <div class="col-sm form-group">
+                <div class="form-group">
+                    <label for="nome" class="required"><b>Nome da Disciplina: </b></label>
+                    <br>  {{ $disciplina->nome ?? '' }} 
+                </div>  
+            </div>
+
+            <div class="col-sm form-group">
                 <div class="form-group">
                     <label for="nota" class="required"><b>Nota: </b></label>
                     <br>  {{ $disciplina->nota ?? '' }} 
