@@ -2,8 +2,6 @@
 @csrf
 <div class="card-header"><b>Adicione abaixo as disciplinas que deseja pedir aproveitamento de crédito</b></div>
 
-<div class="card-body">
-
     <div class="card-body">
         <div class="row">
 
@@ -58,14 +56,25 @@
                     <input type="text" class="form-control" id="nome_usp" name="nome_usp" value="">
                </div>
             </div>
-            
-      </div>
-      <div class="form-group">
-     <button type="submit" class="btn btn-success">Adicionar Disciplina</button>
-     <input class="form-control" type="hidden" name="pedido_id" value="{{ $pedido->id }}" >
-    </div>
+        </div>
+
+        <div class="row">
+            <div class="col-sm form-group col-sm-3">
+                <div class="form-group">
+                    <button type="submit" class="btn btn-success">Adicionar Disciplina</button>
+                    <input class="form-control" type="hidden" name="pedido_id" value="{{ $pedido->id }}" >
+                </div>
+            </div>
+</form>
+            <div class="col-sm form-group">
+                <div class="form-group">
+                    @include('files.partials.form')
+                    <br><small> Se necessário indexe os arquivos de comprovação </small></br>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
-<form>
+
 
 

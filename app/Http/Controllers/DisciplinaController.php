@@ -13,8 +13,8 @@ class DisciplinaController extends Controller
         $validated = $request->validated();
         $disciplina = Disciplina::create($validated);
         request()->session()->flash('alert-info','Disciplina adicionada com sucesso');
-        return redirect("/pedidos/{$disciplina->pedido_id}");    }
-
+        return redirect("/pedidos/{$disciplina->pedido_id}");    
+    }
    
     public function destroy(Disciplina $disciplina)
     {
@@ -32,9 +32,9 @@ class DisciplinaController extends Controller
     }
 
     public function edit(Disciplina $disciplina)
-{
+    {
     return view('disciplinas.edit',[
         'disciplina' => $disciplina
     ]);
-}
+    }
 }
