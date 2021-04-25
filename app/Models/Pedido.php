@@ -35,7 +35,7 @@ class Pedido extends Model
         'name' => "Comissão de Graduação",       
         ],
         'Serviço de Graduação' => [
-        'name' => "Serviço de Graduaçã",       
+        'name' => "Serviço de Graduação",       
         ],
         'Docente' => [
         'name' => "Docente",       

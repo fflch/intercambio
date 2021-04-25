@@ -25,3 +25,5 @@ Route::resource('files', FileController::class);
 
 // Rotas do workflow
 Route::get('/pedidos/{pedido}/analise', [WorkflowController::class, 'analise']);
+Route::get('/pedidos/{pedido}/retornar_analise', [WorkflowController::class, 'retornar_analise']);
+Route::get('/pedidos/{pedido}/comissao', [WorkflowController::class, 'comissao']);
