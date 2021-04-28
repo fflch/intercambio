@@ -30,7 +30,7 @@ class RetornarAnaliseMail extends Mailable
      */
     public function build()
     {
-        return $this->view('emails.analise')
+        return $this->view('emails.retornar')
             ->to('ccint@usp.br')
             ->from('sti@usp.br')
             ->subject('Pedido de aproveitamento de créditos para análise recusado')

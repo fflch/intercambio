@@ -44,7 +44,14 @@
             <div class="col-sm form-group col-sm-3">
                 <div class="form-group">
                     <label for="codigo" class="required"><b>Código: </b></label>
-                    <input type="text" class="form-control" id="codigo" name="codigo" value="">
+
+                    <select class="form-select" aria-label="Default select example">
+
+                        @foreach($disciplinas as $disciplina)
+                            <option value="{{$disciplina}}">{{$disciplina}}</option>
+                        @endforeach
+                    </select>
+
                     <small> Exemplo: FLM1988 </small>
                 </div>
             </div> 

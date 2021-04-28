@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Pedido;
 use Illuminate\Http\Request;
 use App\Http\Requests\PedidoRequest;
+use Uspdev\Replicado\Graduacao;
 
 class PedidoController extends Controller
 {
@@ -51,8 +52,15 @@ class PedidoController extends Controller
 
     public function show(Pedido $pedido)
     {
+        $curso = Graduacao::curso(11838478,8);
+        
+        $disciplinas = Graduacao::disciplinasCurriculo($curso['codcur'], $curso['codhab']);
+
+        $disciplinas = ['Disciplia 1', 'Disciplia 2'];
+
         return view('pedidos.show',[
-            'pedido' => $pedido
+            'pedido' => $pedido,
+            'disciplinas' => $disciplinas
         ]);
     }
 

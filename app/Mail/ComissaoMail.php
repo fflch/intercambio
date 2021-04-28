@@ -30,7 +30,7 @@ class ComissaoMail extends Mailable
      */
     public function build()
     {
-        return $this->view('emails.analise')
+        return $this->view('emails.comissao')
             ->to('ccint@usp.br')
             ->from('sti@usp.br')
             ->subject('Pedido de aproveitamento de créditos para Comissão de Graduação')
