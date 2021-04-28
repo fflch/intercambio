@@ -66,15 +66,9 @@
                 </div>
             </div>
 </form>
-            <div class="col-sm form-group">
-                <div class="form-group">
-                    @include('files.partials.form')
-                    <br><small> Se necessário indexe os arquivos de comprovação </small></br>
-                </div>
-            </div>
         </div>
     </div>
-</div>
+
 
 
 
