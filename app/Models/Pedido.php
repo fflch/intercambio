@@ -16,10 +16,7 @@ class Pedido extends Model
     const status = [
         'Em elaboração',
         'Análise',
-        'Comissão de Graduação',
-        'Serviço de Graduação',
-        'Docente',
-        'Finalização ccint'
+        'Finalizado',
     ];
 
     public function getStatus(){
@@ -31,18 +28,10 @@ class Pedido extends Model
         'Análise' => [
         'name' => "Análise",       
         ],
-        'Comissão de Graduação' => [
-        'name' => "Comissão de Graduação",       
+        'Finalizado' => [
+        'name' => "Finalizado",       
         ],
-        'Serviço de Graduação' => [
-        'name' => "Serviço de Graduação",       
-        ],
-        'Docente' => [
-        'name' => "Docente",       
-        ],
-        'Finalização ccint' => [
-        'name' => "Finalização ccint",       
-        ]
+        
         ];
         
         return $status;

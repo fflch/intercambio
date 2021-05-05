@@ -56,7 +56,7 @@ class PedidoController extends Controller
         
         $disciplinas = Graduacao::disciplinasCurriculo($curso['codcur'], $curso['codhab']);
 
-        $disciplinas = ['Disciplia 1', 'Disciplia 2'];
+        $disciplinas = ['Disciplina 1', 'Disciplina 2'];
 
         return view('pedidos.show',[
             'pedido' => $pedido,

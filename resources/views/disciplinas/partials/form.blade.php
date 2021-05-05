@@ -1,11 +1,36 @@
 <form method="POST" action="/disciplinas/">
 @csrf
-<div class="card-header"><b>Adicione abaixo as disciplinas que deseja pedir aproveitamento de crédito</b></div>
+
+<script>
+
+function Habilitar() {
+    document.getElementById("codigo").disabled = false;
+}
+
+function Desabilitar() {
+    document.getElementById("codigo").disabled = true;
+}
+</script>
+
+<div class="card-header"><b>Adicione as informações da disciplina</b></div>
 
     <div class="card-body">
         <div class="row">
 
-            <div class="col-sm form-group">
+            <div class="col-sm form-group sm-1">
+                <div class="form-group">
+                    <label for="tipo" class="required"><b>Tipo da disciplina: </b></label>
+                    <br>
+                    <input type="radio" onclick="Habilitar()" id="Objetiva" name="tipo" value="Objetiva">
+                    <label for="Objetiva">Objetiva</label><br>
+                    <input type="radio" onclick="Desabilitar()" id="Optativa Livre" name="tipo" value="Optativa Livre">
+                    <label for="Optativa Livre ">Optativa Livre </label><br>
+                    <input type="radio" onclick="Desabilitar()" id="Optativa Eletiva" name="tipo" value="Optativa Eletiva">
+                    <label for="Optativa Eletiva">Optativa Eletiva</label> 
+                </div>  
+            </div>
+
+            <div class="col-sm form-group sm-5">
                 <div class="form-group">
                     <label for="nome" class="required"><b>Nome da Disciplina: </b></label>
                     <input type="text" class="form-control" id="nome" name="nome" value="">
@@ -37,20 +62,22 @@
     </div>
 </div>
 
-<div class="card-header"><b>Disciplina equivalante na USP</b></div>
-    <div class="card-body">
+<div class="card-header" ><b>Disciplina equivalante na USP</b></div>
+    <div class="card-body" >
 
-        <div class="row">
+        <div class="row" >
             <div class="col-sm form-group col-sm-3">
                 <div class="form-group">
                     <label for="codigo" class="required"><b>Código: </b></label>
+                    <br>
 
-                    <select class="form-select" aria-label="Default select example">
+                    <select id="codigo" class="form-select" aria-label="Default select example" disabled>
 
                         @foreach($disciplinas as $disciplina)
                             <option value="{{$disciplina}}">{{$disciplina}}</option>
                         @endforeach
                     </select>
+                    <br>
 
                     <small> Exemplo: FLM1988 </small>
                 </div>
@@ -60,7 +87,6 @@
             <div class="col-sm form-group">
                 <div class="form-group">
                     <label for="nome_usp" class="required"><b>Nome: </b></label>
-                    <input type="text" class="form-control" id="nome_usp" name="nome_usp" value="">
                </div>
             </div>
         </div>
@@ -69,7 +95,7 @@
             <div class="col-sm form-group col-sm-3">
                 <div class="form-group">
                     <button type="submit" class="btn btn-success">Adicionar Disciplina</button>
-                    <input class="form-control" type="hidden" name="pedido_id" value="{{ $pedido->id }}" >
+                    <input class="form-control" type="hidden" name="pedido_id" value="{{ $pedido->id }}">
                 </div>
             </div>
 </form>

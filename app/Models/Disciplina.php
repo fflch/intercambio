@@ -15,4 +15,23 @@ class Disciplina extends Model
     public function record(){
         return $this->belongsTo(Pedido::class);
     }
+
+    const status = [
+        'Análise',
+        'Comissão de Graduação',
+        'Serviço de Graduação',
+        'Docente',
+        'Finalização ccint'
+    ];
+
+    const tipo = [
+        'Obrigatoria',
+        'Optativa Livre',
+        'Optativa Eletiva',
+    ];
+
+    public function files()
+    {
+        return $this->hasMany('App\Models\FileDisciplina');
+    }
 }

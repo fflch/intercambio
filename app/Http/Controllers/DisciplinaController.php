@@ -11,6 +11,7 @@ class DisciplinaController extends Controller
     public function store(DisciplinaRequest $request)
     {
         $validated = $request->validated();
+        $validated['status'] = 'Em elaboração';
         $disciplina = Disciplina::create($validated);
         request()->session()->flash('alert-info','Disciplina adicionada com sucesso');
         return redirect("/pedidos/{$disciplina->pedido_id}");    

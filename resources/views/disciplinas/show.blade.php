@@ -1,8 +1,11 @@
 @extends('main')
 @section('content')
 
-<div class="card">
 
+
+<b> Status: </b>  {{ $disciplina->status ?? '' }}
+
+<div class="card">
 <div class="card-header"><b>Dados da disciplina cursada</b></div>
     <div class="card-body">
 
@@ -53,8 +56,7 @@
 
             <div class="col-sm form-group">
                 <div class="form-group">
-                    <label for="nome_usp" class="required"><b>Nome: </b></label>
-                    <br>  {{ $disciplina->nome_usp ?? '' }} 
+                    <label for="nome_usp" class="required"><b>Nome: </b></label> 
                </div>
             </div>
             
@@ -69,7 +71,8 @@
             
     </div>
     </div>
-</div>
 
+
+@include('filesdisciplina.partials.form')
 
 @endsection

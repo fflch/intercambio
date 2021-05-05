@@ -9,7 +9,7 @@ use Illuminate\Queue\SerializesModels;
 use App\Models\Pedido;
 
 
-class ComissaoMail extends Mailable
+class FinalizadoMail extends Mailable
 {
     use Queueable, SerializesModels;
     private $pedido;
@@ -30,7 +30,7 @@ class ComissaoMail extends Mailable
      */
     public function build()
     {
-        return $this->view('emails.comissao')
+        return $this->view('emails.finalizado')
             ->to('ccint@usp.br')
             ->from('sti@usp.br')
             ->subject('Pedido de aproveitamento de créditos para Comissão de Graduação')
