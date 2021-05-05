@@ -15,12 +15,13 @@ class DisciplinaSeeder extends Seeder
     public function run()
     {
         $disciplina = [   
+            'tipo'          => Disciplina::tipo[0],
             'nome'          => 'Progamação II',
             'nota'          => '10',
             'creditos'      => '40', 
             'carga_horaria' => '25',
             'codigo'        => 'FLA0205',
-            'nome_usp'      => 'Programação Aplicada',
+            'status'        => Disciplina::status[0],
             'pedido_id'     => 1,
         ];
         

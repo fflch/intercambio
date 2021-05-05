@@ -24,13 +24,11 @@ class DisciplinaRequest extends FormRequest
     public function rules()
     {
         return [
+            'tipo' => 'required',
             'nome' => 'required',
             'nota' => 'required',
             'creditos' => 'required',
             'carga_horaria' => 'required',
-            'codigo' => 'required',
-            'nome_usp' => 'required',
-            'codigo' => 'required',
             'pedido_id' => 'required'
         ];
     }

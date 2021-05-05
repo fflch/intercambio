@@ -16,12 +16,13 @@ class CreateDisciplinasTable extends Migration
         Schema::create('disciplinas', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
+            $table->string('tipo');
             $table->string('nome');
             $table->float('nota');
             $table->integer('creditos');
             $table->integer('carga_horaria');
             $table->string('codigo');
-            $table->string('nome_usp');
+            $table->string('status');
 
             $table->foreignId('pedido_id')->constrained('pedidos')->onDelete('cascade');
         });

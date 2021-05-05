@@ -8,7 +8,7 @@ use App\Models\Pedido;
 use Mail;
 use App\Mail\AnaliseMail;
 use App\Mail\RetornarAnaliseMail;
-use App\Mail\ComissaoMail;
+use App\Mail\FinalizadoMail;
 
 class WorkflowController extends Controller
 {
@@ -32,11 +32,11 @@ class WorkflowController extends Controller
         return redirect("/pedidos/$pedido->id");
     }
 
-    public function comissao(Pedido $pedido){
-        $pedido->status = 'Comissão de Graduação';
+    public function finalizado(Pedido $pedido){
+        $pedido->status = 'Finalizado';
 
         # Disparar um email
-        Mail::queue(new ComissaoMail($pedido));
+        Mail::queue(new FinalizadoMail($pedido));
 
         $pedido->save();
         return redirect("/pedidos/$pedido->id");

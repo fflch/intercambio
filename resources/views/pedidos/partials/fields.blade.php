@@ -26,7 +26,7 @@ Status do pedido: <b>{{ $pedido->status }}</b>
         </div>  
     
         <div class="form-group col-sm-5">
-        <a href="/pedidos/{{$pedido->id}}/comissao" onclick="return confirm('Enviar para Comissão de Gradução?');" class="btn btn-success"> Enviar para Comissão de Graduação </a>        
+        <a href="/pedidos/{{$pedido->id}}/finalizado" onclick="return confirm('Finalizar o pedido? ao confirmar não poderão ser feitas mais mudanças');" class="btn btn-success"> Finalizar Pedido Completamente </a>        
         </div>
     </div> 
 </div> 

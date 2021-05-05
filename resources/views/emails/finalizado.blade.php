@@ -1,6 +1,6 @@
 Prezados(as) Comissão,
 
-Chegou um novo pedido de análise da comissão:
+O seu pedido de aproveitamento de créditos foi finalizado:
 
 do aluno: {{ $pedido->codpes }}
 
