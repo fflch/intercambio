@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Disciplina;
 use Illuminate\Http\Request;
 use App\Http\Requests\DisciplinaRequest;
+use App\Service\DisciplinaStatus;
 
 class DisciplinaController extends Controller
 {
@@ -13,6 +14,9 @@ class DisciplinaController extends Controller
         $validated = $request->validated();
         $validated['status'] = 'Em elaboração';
         $disciplina = Disciplina::create($validated);
+        
+        $disciplina->setStatus('Em elaboração');
+
         request()->session()->flash('alert-info','Disciplina adicionada com sucesso');
         return redirect("/pedidos/{$disciplina->pedido_id}");    
     }
@@ -25,11 +29,13 @@ class DisciplinaController extends Controller
         return redirect("/pedidos/{$pedido_id}"); 
     }
 
-    public function show(Disciplina $disciplina)
+    public function show(Disciplina $disciplina, DisciplinaStatus $stepper)
     {
-    return view('disciplinas.show',[
-        'disciplina' => $disciplina
-    ]);
+        $stepper->setCurrentStepName($disciplina->status);
+        return view('disciplinas.show',[
+            'disciplina' => $disciplina,
+            'stepper' => $stepper->render()
+        ]);
     }
 
     public function edit(Disciplina $disciplina)

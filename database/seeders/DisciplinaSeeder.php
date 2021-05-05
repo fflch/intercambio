@@ -21,11 +21,12 @@ class DisciplinaSeeder extends Seeder
             'creditos'      => '40', 
             'carga_horaria' => '25',
             'codigo'        => 'FLA0205',
-            'status'        => Disciplina::status[0],
             'pedido_id'     => 1,
         ];
         
-        Disciplina::create($disciplina);
+        $disciplina = Disciplina::create($disciplina);
+        $disciplina->setStatus('Em elaboração');
+        $disciplina->save();
         Disciplina::factory(10)->create();
     }
 }

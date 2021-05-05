@@ -6,6 +6,12 @@
         "framework",
         "laravel"
     ],
+    "repositories": {
+        "stepper": {
+            "type": "git",
+            "url": "https://github.com/fflch/laravel-stepper.git"
+        }
+    },
     "license": "MIT",
     "require": {
         "php": "^7.3|^8.0",
@@ -15,6 +21,8 @@
         "laravel/framework": "^8.12",
         "laravel/tinker": "^2.5",
         "laravel/ui": "^3.2",
+        "axn/laravel-stepper": "dev-master",
+        "spatie/laravel-model-status": "^1.10",
         "uspdev/laravel-usp-faker": "^1.0",
         "uspdev/laravel-usp-theme": "^2.0",
         "uspdev/senhaunica-socialite": "^2.0"

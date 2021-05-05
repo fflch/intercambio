@@ -5,10 +5,12 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Pedido;
+use Spatie\ModelStatus\HasStatuses;
 
 class Disciplina extends Model
 {
     use HasFactory;
+    use HasStatuses;
 
     protected $guarded = ['id'];
 
@@ -17,6 +19,7 @@ class Disciplina extends Model
     }
 
     const status = [
+        'Em elaboração',
         'Análise',
         'Comissão de Graduação',
         'Serviço de Graduação',
@@ -25,7 +28,7 @@ class Disciplina extends Model
     ];
 
     const tipo = [
-        'Obrigatoria',
+        'Obrigatória',
         'Optativa Livre',
         'Optativa Eletiva',
     ];

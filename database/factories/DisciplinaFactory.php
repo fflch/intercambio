@@ -32,7 +32,7 @@ class DisciplinaFactory extends Factory
             'creditos'      => $this->faker->numberBetween(0, 99999999), 
             'carga_horaria' => $this->faker->numberBetween(0, 99999999),
             'codigo'        => $this->faker->sentence($nbWords = 1, $variableNbWords = true),
-            'status'        => Disciplina::status[$status_key],
+            #'status'        => Disciplina::status[$status_key],
             'pedido_id'     => $this->faker->numberBetween($min = 1, $max = 10),
         ];
     }

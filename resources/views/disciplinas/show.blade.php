@@ -1,9 +1,12 @@
 @extends('main')
 @section('content')
 
-
-
 <b> Status: </b>  {{ $disciplina->status ?? '' }}
+
+{!! $stepper !!}
+
+<br>
+<br>
 
 <div class="card">
 <div class="card-header"><b>Dados da disciplina cursada</b></div>

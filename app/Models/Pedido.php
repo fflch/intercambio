@@ -13,6 +13,7 @@ class Pedido extends Model
     use HasFactory;
     protected $guarded = ['id'];
 
+    # talvez não precise ?
     const status = [
         'Em elaboração',
         'Análise',

@@ -21,8 +21,7 @@ class CreateDisciplinasTable extends Migration
             $table->float('nota');
             $table->integer('creditos');
             $table->integer('carga_horaria');
-            $table->string('codigo');
-            $table->string('status');
+            $table->string('codigo')->nullable();
 
             $table->foreignId('pedido_id')->constrained('pedidos')->onDelete('cascade');
         });

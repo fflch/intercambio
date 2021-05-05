@@ -1,35 +1,10 @@
 
-@foreach($pedido->disciplinas as $disciplina)
-<b>Disciplinas Obrigatorias Cadastradas</b>
-    <br><br>
-
-    <ul>
-        @if($disciplina->tipo == 'Obrigatoria')
-        <li><a href="/disciplinas/{{$disciplina->id}}">{{ $disciplina->nome ?? '' }} - {{ $disciplina->codigo ?? '' }} - {{ $disciplina->status ?? '' }}</a></li>
-        @else
-        <li>Não há nenhum cadastrado</li>
-        @endif
-    </ul>
+<b>Disciplinas Obrigatórias Cadastradas</b>
+@include('disciplinas.partials.list_by_type',['tipo'=>'Obrigatória'])
 
 <b>Disciplinas Optativas Livres Cadastradas</b>
-    <br><br>
-
-    <ul>
-        @if($disciplina->tipo == 'Optativa Livre')
-        <li><a href="/disciplinas/{{$disciplina->id}}">{{ $disciplina->nome ?? '' }} - {{ $disciplina->codigo ?? '' }} - {{ $disciplina->status ?? '' }}</a></li>
-        @else
-        <li>Não há nenhum cadastrado</li>
-        @endif
-    </ul>
+@include('disciplinas.partials.list_by_type',['tipo'=>'Optativa Livre'])
 
 <b>Disciplinas Optativas Eletivas Cadastradas</b>
-    <br><br>
+@include('disciplinas.partials.list_by_type',['tipo'=>'Optativa Eletiva'])
 
-    <ul>
-        @if($disciplina->tipo == 'Optativa Eletiva')
-        <li><a href="/disciplinas/{{$disciplina->id}}">{{ $disciplina->nome ?? '' }} - {{ $disciplina->codigo ?? '' }} - {{ $disciplina->status ?? '' }}</a></li>
-        @else
-        <li>Não há nenhum cadastrado</li>
-        @endif
-    </ul>
-@endforeach
