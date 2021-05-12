@@ -21,8 +21,8 @@ function Desabilitar() {
                 <div class="form-group">
                     <label for="tipo" class="required"><b>Tipo da disciplina: </b></label>
                     <br>
-                    <input type="radio" onclick="Habilitar()" id="Objetiva" name="tipo" value="Objetiva">
-                    <label for="Objetiva">Objetiva</label><br>
+                    <input type="radio" onclick="Habilitar()" id="Obrigatória" name="tipo" value="Obrigatória">
+                    <label for="Obrigatória">Obrigatória</label><br>
                     <input type="radio" onclick="Desabilitar()" id="Optativa Livre" name="tipo" value="Optativa Livre">
                     <label for="Optativa Livre ">Optativa Livre </label><br>
                     <input type="radio" onclick="Desabilitar()" id="Optativa Eletiva" name="tipo" value="Optativa Eletiva">
@@ -74,7 +74,7 @@ function Desabilitar() {
                     <select id="codigo" class="form-select" aria-label="Default select example" disabled>
 
                         @foreach($disciplinas as $disciplina)
-                            <option value="{{$disciplina}}">{{$disciplina}}</option>
+                         <option value="{{$disciplina}}">{{$disciplina}}</option>
                         @endforeach
                     </select>
                     <br>

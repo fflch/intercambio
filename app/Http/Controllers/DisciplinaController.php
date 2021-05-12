@@ -44,4 +44,6 @@ class DisciplinaController extends Controller
         'disciplina' => $disciplina
     ]);
     }
+
+    
 }
