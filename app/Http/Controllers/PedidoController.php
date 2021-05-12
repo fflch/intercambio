@@ -52,17 +52,22 @@ class PedidoController extends Controller
 
     public function show(Pedido $pedido)
     {
-        $curso = Graduacao::curso(11838478,8);
-        
-        $disciplinas = Graduacao::disciplinasCurriculo($curso['codcur'], $curso['codhab']);
+        $codpes = auth()->user()->codpes;
 
-        #dd(Graduacao::listarDisciplinasGradeCurricular(8040,103));
-        $disciplinas = ['Disciplina 1', 'Disciplina 2'];
+        $curso = Graduacao::curso($codpes,8);
+        
+        $graduaçoes = Graduacao::listarDisciplinasGradeCurricular($curso['codcur'], $curso['codhab']);     
+        
+        $disciplinas = collect($graduaçoes)
+        ->pluck('coddis')
+        ->toArray();
 
         return view('pedidos.show',[
             'pedido' => $pedido,
             'disciplinas' => $disciplinas
         ]);
+
+        
     }
 
     public function edit(Pedido $pedido)
@@ -84,5 +89,12 @@ class PedidoController extends Controller
     {
         $pedido->delete();
         return redirect('/pedidos');
+    }
+
+    public function index_type(Pedido $pedido)
+    {
+    return view('pedidos.index_type',[
+        '$pedido' => $pedido
+    ]);
     }
 }

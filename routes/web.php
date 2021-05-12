@@ -31,3 +31,19 @@ Route::get('/pedidos/{pedido}/retornar_analise', [WorkflowController::class, 're
 Route::get('/pedidos/{pedido}/finalizado', [WorkflowController::class, 'finalizado']);
 
 // Rotas do workflow da Disciplina
+
+Route::get('/disciplinas/{disciplina}/analise_disciplina', [WorkflowController::class, 'analise_disciplina']);
+Route::get('/disciplinas/{disciplina}/comissao_graduacao', [WorkflowController::class, 'comissao_graduacao']);
+Route::get('/disciplinas/{disciplina}/servico_graduacao', [WorkflowController::class, 'servico_graduacao']);
+Route::get('/disciplinas/{disciplina}/docente', [WorkflowController::class, 'docente']);
+Route::get('/disciplinas/{disciplina}/finalizacao', [WorkflowController::class, 'finalizacao']);
+
+Route::get('/disciplinas/{disciplina}/retornar_analise_disciplina', [WorkflowController::class, 'retornar_analise_disciplina']);
+Route::get('/disciplinas/{disciplina}/retornar_comissao_graduacao', [WorkflowController::class, 'retornar_comissao_graduacao']);
+Route::get('/disciplinas/{disciplina}/retornar_servico_graduacao', [WorkflowController::class, 'retornar_servico_graduacao']);
+Route::get('/disciplinas/{disciplina}/retornar_docente', [WorkflowController::class, 'retornar_docente']);
+
+
+// Rota provisoria dos tipos
+
+Route::get('/pedidos/{pedido}/index_type', [PedidoController::class, 'index_type']);

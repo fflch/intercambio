@@ -1,7 +1,7 @@
 @extends('main')
 @section('content')
 
-<b> Status: </b>  {{ $disciplina->status ?? '' }}
+<b> Status: </b> 
 
 {!! $stepper !!}
 
