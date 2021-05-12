@@ -49,4 +49,9 @@ class User extends Authenticatable
         $curso = Graduacao::curso($this->codpes, 8);
         return $curso['nomcur'];
     }
+
+    public function pedidos()
+    {
+        return $this->hasMany(App\Models\Pedido::class);
+    }
 }

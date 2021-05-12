@@ -3,27 +3,30 @@
 $aproveitamento = [
     [
         'text' => 'Nova solicitação',
-        'url' => config('app.url') . '/pedidos/create',
+        'url'  =>  config('app.url') . '/pedidos/create',
+        'can'  => 'logado'
     ],
 ];
 $menu = [
     [
         'text' => 'Aproveitamento de Créditos',
         'submenu' => $aproveitamento,
+        'can' => 'logado'
     ],
     [
         'text' => 'Pedidos',
         'url' => config('app.url') . '/pedidos',
+        'can' => 'admin'
     ],
 ];
 
 $right_menu = [
     [
-        'text' => '<i class="fas fa-cog"></i>',
-        'title' => 'Configurações',
-        'target' => '_blank',
-        'url' => config('app.url') . '/item1',
+        'text' => '<i class="fas fa-user-secret"></i>',
+        'title' => 'Login As',
+        'url' => config('app.url') . '/loginas',
         'align' => 'right',
+        'can'   => 'admin'
     ],
 ];
 

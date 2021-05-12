@@ -47,3 +47,10 @@ Route::get('/disciplinas/{disciplina}/retornar_docente', [WorkflowController::cl
 // Rota provisoria dos tipos
 
 Route::get('/pedidos/{pedido}/index_type', [PedidoController::class, 'index_type']);
+
+# loginAs
+Route::get('loginas', [LoginController::class, 'loginAsForm']);
+Route::post('loginas', [LoginController::class, 'loginAs']);
+
+
+

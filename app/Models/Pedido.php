@@ -39,11 +39,12 @@ class Pedido extends Model
     }
 
     public function getNomeAttribute($value){
-        return Pessoa::nomeCompleto($this->codpes);
+        return Pessoa::nomeCompleto($this->user->codpes);
     }
 
     public function getCursoAttribute($value){
-        $curso = Graduacao::curso($this->codpes, 8);
+
+        $curso = Graduacao::curso($this->user->codpes, 8);
         if($curso['nomcur']) return $curso['nomcur'];
         return 'Não matriculado em nenhum curso de Graduação';
     }
@@ -57,4 +58,7 @@ class Pedido extends Model
         return $this->hasMany('App\Models\Disciplina');
     }
     
+    public function user(){
+        return $this->belongsTo(\App\Models\User::class);
+    }
 }

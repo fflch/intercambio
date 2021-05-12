@@ -74,21 +74,13 @@ function Desabilitar() {
                     <select id="codigo" class="form-select" aria-label="Default select example" disabled>
 
                         @foreach($disciplinas as $disciplina)
-                         <option value="{{$disciplina}}">{{$disciplina}}</option>
+                         <option value="{{$disciplina['coddis']}}">{{ $disciplina['coddis'] }} - {{ $disciplina['nomdis'] }}</option>
                         @endforeach
                     </select>
                     <br>
-
-                    <small> Exemplo: FLM1988 </small>
                 </div>
             </div> 
-            
-
-            <div class="col-sm form-group">
-                <div class="form-group">
-                    <label for="nome_usp" class="required"><b>Nome: </b></label>
-               </div>
-            </div>
+        
         </div>
 
         <div class="row">

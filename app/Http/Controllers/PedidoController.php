@@ -11,6 +11,7 @@ class PedidoController extends Controller
 {
     public function index(Request $request)
     {
+        $this->authorize('admin');
         #Campo de busca
 
         if ($request->buscastatus != null && $request->search != null){
@@ -35,6 +36,7 @@ class PedidoController extends Controller
 
     public function create()
     {
+        $this->authorize('logado');
         return view('pedidos.create',[
         'pedido' => new Pedido,
         ]);
@@ -42,9 +44,10 @@ class PedidoController extends Controller
 
     public function store(PedidoRequest $request)
     {
+        $this->authorize('logado');
         $validated = $request->validated();
         $validated['status'] = 'Em elaboração';
-        $validated['codpes'] = auth()->user()->codpes;
+        $validated['user_id'] = auth()->user()->id;
         $pedido = Pedido::create($validated);
         request()->session()->flash('alert-info','Cadastro com sucesso');
         return redirect("/pedidos/$pedido->id");
@@ -52,15 +55,12 @@ class PedidoController extends Controller
 
     public function show(Pedido $pedido)
     {
+        $this->authorize('owner',$pedido);
         $codpes = auth()->user()->codpes;
 
         $curso = Graduacao::curso($codpes,8);
         
-        $graduaçoes = Graduacao::listarDisciplinasGradeCurricular($curso['codcur'], $curso['codhab']);     
-        
-        $disciplinas = collect($graduaçoes)
-        ->pluck('coddis')
-        ->toArray();
+        $disciplinas = Graduacao::listarDisciplinasGradeCurricular($curso['codcur'], $curso['codhab']); 
 
         return view('pedidos.show',[
             'pedido' => $pedido,
@@ -72,6 +72,7 @@ class PedidoController extends Controller
 
     public function edit(Pedido $pedido)
     {
+        $this->authorize('owner',$pedido);
         return view('pedidos.edit',[
             'pedido' => $pedido
         ]);
@@ -79,6 +80,7 @@ class PedidoController extends Controller
 
     public function update(PedidoRequest $request, Pedido $pedido)
     {
+        $this->authorize('owner',$pedido);
         $validated = $request->validated();
         $pedido->update($validated);
         request()->session()->flash('alert-info','atualizado com sucesso');
@@ -87,6 +89,7 @@ class PedidoController extends Controller
 
     public function destroy(Pedido $pedido)
     {
+        $this->authorize('owner',$pedido);
         $pedido->delete();
         return redirect('/pedidos');
     }

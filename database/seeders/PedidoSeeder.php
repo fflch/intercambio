@@ -15,7 +15,6 @@ class PedidoSeeder extends Seeder
     public function run()
     {
         $pedido = [   
-            'codpes' => 11838478,
             'status' => Pedido::status[0],
             'instituicao'=> 'FFLCH',   
         ];
