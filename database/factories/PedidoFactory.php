@@ -27,6 +27,7 @@ class PedidoFactory extends Factory
             'codpes'      => $this->faker->graduacao,
             'status'      => Pedido::status[$status_key],
             'instituicao' => $this->faker->sentence($nbWords = 10, $variableNbWords = true),
+            'user_id'     => $this->faker->numberBetween($min = 1, $max = 10),
         ];
     }
 }

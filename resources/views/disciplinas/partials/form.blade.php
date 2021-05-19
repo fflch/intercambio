@@ -4,11 +4,11 @@
 <script>
 
 function Habilitar() {
-    document.getElementById("codigo").disabled = false;
+    document.getElementById("codigo").style = true;
 }
 
 function Desabilitar() {
-    document.getElementById("codigo").disabled = true;
+    document.getElementById("codigo").style = "display: none;";
 }
 </script>
 
@@ -55,45 +55,32 @@ function Desabilitar() {
                 <div class="form-group">
                     <label for="carga_horaria" class="required"><b>Carga horaria: </b></label>
                     <input type="text" class="form-control" id="carga_horaria" name="carga_horaria" value="">
-                
-            </div>  
+                </div>  
+            </div>
 
-        </div>  
-    </div>
-</div>
-
-<div class="card-header" ><b>Disciplina equivalante na USP</b></div>
-    <div class="card-body" >
-
-        <div class="row" >
-            <div class="col-sm form-group col-sm-3">
+            <div class="col-sm form-group col-sm-2">
                 <div class="form-group">
-                    <label for="codigo" class="required"><b>Código: </b></label>
-                    <br>
-
-                    <select id="codigo" class="form-select" aria-label="Default select example" disabled>
-
-                        @foreach($disciplinas as $disciplina)
-                         <option value="{{$disciplina['coddis']}}">{{ $disciplina['coddis'] }} - {{ $disciplina['nomdis'] }}</option>
-                        @endforeach
-                    </select>
-                    <br>
-                </div>
-            </div> 
-        
-        </div>
-
-        <div class="row">
-            <div class="col-sm form-group col-sm-3">
-                <div class="form-group">
-                    <button type="submit" class="btn btn-success">Adicionar Disciplina</button>
+                <label for="carga_horaria" class="required"><b>Finalizar: </b></label>
+                    <button type="submit" class="btn btn-success" >Adicionar Disciplina</button>
                     <input class="form-control" type="hidden" name="pedido_id" value="{{ $pedido->id }}">
                 </div>
+             </div>   
+
+             <div class="col-sm form-group col-sm-3">
+                <div class="form-group">
+                
+                    <select id="codigo" name="codigo" style="display: none;">
+                    @foreach($disciplinas as $disciplina)
+                         <option id="codigo" name="codigo" value="{{ $disciplina['coddis'] }}">{{ $disciplina['coddis'] }} - {{ $disciplina['nomdis'] }}</option>
+                    @endforeach
+                    </select>
+                    
+                </div>
             </div>
-</form>
         </div>
     </div>
 
+</form>
 
 
 

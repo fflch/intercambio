@@ -26,9 +26,9 @@ class DisciplinaRequest extends FormRequest
         return [
             'tipo' => 'required',
             'nome' => 'required',
-            'nota' => 'required',
-            'creditos' => 'required',
-            'carga_horaria' => 'required',
+            'nota' => 'required|integer',
+            'creditos' => 'required|integer',
+            'carga_horaria' => 'required|integer',
             'pedido_id' => 'required'
         ];
     }
