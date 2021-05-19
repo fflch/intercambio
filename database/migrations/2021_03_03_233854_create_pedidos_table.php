@@ -19,8 +19,7 @@ class CreatePedidosTable extends Migration
 
             $table->string('status');
             $table->string('instituicao');
-
-            $table->foreignId('user_id')->constrained();
+            $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
         });
     }
 
