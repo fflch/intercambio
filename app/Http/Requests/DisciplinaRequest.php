@@ -22,8 +22,8 @@ class DisciplinaRequest extends FormRequest
      * @return array
      */
     public function rules()
-    {
-        return [
+    {   
+        $data = [
             'tipo' => 'required',
             'nome' => 'required',
             'nota' => 'required|integer',
@@ -31,5 +31,12 @@ class DisciplinaRequest extends FormRequest
             'carga_horaria' => 'required|integer',
             'pedido_id' => 'required'
         ];
+
+        if($this->tipo == "Obrigatória"){
+            $data = array_merge($data,['codigo' => 'required']);
+        }
+        return $data;
+       
     }
+    
 }
