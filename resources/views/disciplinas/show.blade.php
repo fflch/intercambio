@@ -1,16 +1,15 @@
 @extends('main')
 @section('content')
 
-<b><a href="/pedidos/{{$disciplina->pedido_id}}">voltar</a></b><br>
 
-<b> Status: </b> 
+<b><a href="/pedidos/{{$disciplina->pedido_id}}" class="btn btn-primary">Voltar</a></b><br>
+
+<br>
+<div class="card">
+<div class="card-header"><b>Status:</b></div>
 
 {!! $stepper !!}
 
-<br>
-<br>
-
-<div class="card">
 <div class="card-header"><b>Dados da disciplina cursada</b></div>
     <div class="card-body">
 
