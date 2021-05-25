@@ -1,6 +1,5 @@
         <div class="form-group col-sm-3">
             <b>Arquivos cadastrados</b>
-            <br><br>
 
         <ul>
             @forelse($pedido->files as $file)

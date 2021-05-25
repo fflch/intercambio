@@ -3,6 +3,7 @@
 namespace Database\Factories;
 
 use App\Models\Pedido;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class PedidoFactory extends Factory
@@ -24,10 +25,9 @@ class PedidoFactory extends Factory
         $status_key = array_rand(Pedido::status);
 
         return [
-            'codpes'      => $this->faker->graduacao,
             'status'      => Pedido::status[$status_key],
             'instituicao' => $this->faker->sentence($nbWords = 10, $variableNbWords = true),
-            'user_id'     => $this->faker->numberBetween($min = 1, $max = 10),
+            'user_id'     => User::inRandomOrder()->pluck('id')->first(),
         ];
     }
 }

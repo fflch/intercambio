@@ -23,7 +23,8 @@ class UserFactory extends Factory
      */
     public function definition()
     {
-    
+        $codpes = $this->faker->unique()->graduacao;
+
         return [
             'codpes' => $codpes,
             'name'   => Pessoa::nomeCompleto($codpes),

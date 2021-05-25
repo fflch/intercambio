@@ -14,7 +14,7 @@
 
         <div class="row">
 
-        <div class="col-sm form-group">
+            <div class="col-sm form-group">
                 <div class="form-group">
                     <label for="nome" class="required"><b>Nome da Disciplina: </b></label>
                     <br>  {{ $disciplina->nome ?? '' }} 
@@ -38,15 +38,29 @@
             <div class="col-sm form-group">
                 <div class="form-group">
                     <label for="carga_horaria" class="required"><b>Carga horaria: </b></label>
-                    <br>  {{ $disciplina->carga_horaria ?? '' }} 
-                
+                    <br>  {{ $disciplina->carga_horaria ?? '' }}
+                </div>  
             </div>  
-        </div>  
-    </div>
+        </div>
 
+        <div class="row">
+            @if($disciplina->tipo == "Obrigatória")
+            <div class="col-sm form-group">
+                <div class="form-group">
+                    <label for="codigos" class="required"><b>Código equivalente: </b></label>
+                    <br>  {{ $disciplina->codigo ?? '' }} 
+                </div>  
+            </div>
+            @endif
 
-{{ $disciplina->codigo ?? '' }} 
-               
+            <div class="col-sm form-group">
+                <div class="form-group">
+                <label for="ementa" class="required"><b>Ementa vinculada: </b></label>
+                <br>  <a href="/disciplinas/{{$disciplina->file}}">{{ $disciplina->original_name ?? '' }}</a>
+                </div>  
+            </div>
+        </div>
+
     <div class="form-group">
         <form method="POST" action="/disciplinas/{{$disciplina->id}}"> 
             @csrf

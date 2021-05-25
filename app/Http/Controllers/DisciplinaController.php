@@ -6,14 +6,22 @@ use App\Models\Disciplina;
 use Illuminate\Http\Request;
 use App\Http\Requests\DisciplinaRequest;
 use App\Service\DisciplinaStatus;
+use Illuminate\Support\Facades\Storage;
 
 class DisciplinaController extends Controller
 {
     public function store(DisciplinaRequest $request)
     {
+        
+
         $validated = $request->validated();
         $disciplina = Disciplina::create($validated);
         $disciplina->setStatus('Em elaboração');
+
+        $disciplina->original_name = $request->file('file')->getClientOriginalName();
+        $disciplina->path = $request->file('file')->store('.');
+        $disciplina->save();
+
         request()->session()->flash('alert-info','Disciplina adicionada com sucesso');
         return redirect("/disciplinas/{$disciplina->id}");    
     }
@@ -33,6 +41,7 @@ class DisciplinaController extends Controller
             'disciplina' => $disciplina,
             'stepper' => $stepper->render()
         ]);
+        return Storage::download($disciplina->path, $disciplina->original_name);
     }
 
     public function edit(Disciplina $disciplina)
