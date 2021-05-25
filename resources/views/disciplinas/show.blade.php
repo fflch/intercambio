@@ -1,6 +1,8 @@
 @extends('main')
 @section('content')
 
+<b><a href="/pedidos/{{$disciplina->pedido_id}}">voltar</a></b><br>
+
 <b> Status: </b> 
 
 {!! $stepper !!}
@@ -56,22 +58,19 @@
             <div class="col-sm form-group">
                 <div class="form-group">
                 <label for="ementa" class="required"><b>Ementa vinculada: </b></label>
-                <br>  <a href="/disciplinas/{{$disciplina->file}}">{{ $disciplina->original_name ?? '' }}</a>
+                <br>  <a href="/disciplinas/{{$disciplina->id}}/showfile">{{ $disciplina->original_name ?? '' }}</a>
                 </div>  
             </div>
         </div>
 
-    <div class="form-group">
-        <form method="POST" action="/disciplinas/{{$disciplina->id}}"> 
-            @csrf
-            @method('delete')
-            <a href="/disciplinas/{{$disciplina->id}}/edit"><i class="fas fa-pencil-alt"></a></i>
-        <button type="submit" onclick="return confirm('Tem certeza que deseja excluir?');" style="background-color: transparent;border: none;"><i class="far fa-trash-alt" color="#007bff"></i></button>  
-        </form>
+        <div class="form-group">
+            <form method="POST" action="/disciplinas/{{$disciplina->id}}"> 
+                @csrf
+                @method('delete')
+                <a href="/disciplinas/{{$disciplina->id}}/edit"><i class="fas fa-pencil-alt"></a></i>
+            <button type="submit" onclick="return confirm('Tem certeza que deseja excluir?');" style="background-color: transparent;border: none;"><i class="far fa-trash-alt" color="#007bff"></i></button>  
+            </form>
+        </div>
     </div>
 </div>
-
-@include('filesdisciplina.partials.form')
-
-
 @endsection

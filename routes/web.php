@@ -6,7 +6,6 @@ use App\Http\Controllers\PedidoController;
 use App\Http\Controllers\IndexController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\FileController;
-use App\Http\Controllers\FileDisciplinaController;
 use App\Http\Controllers\DisciplinaController;
 use App\Http\Controllers\WorkflowController;
 
@@ -23,7 +22,7 @@ Route::resource('/disciplinas', DisciplinaController::class);
 
 // files
 Route::resource('files', FileController::class);
-Route::resource('filesdisciplina', FileDisciplinaController::class);
+Route::get('/disciplinas/{disciplina}/showfile', [DisciplinaController::class, 'showfile']);
 
 // Rotas do workflow do projeto
 Route::get('/pedidos/{pedido}/analise', [WorkflowController::class, 'analise']);

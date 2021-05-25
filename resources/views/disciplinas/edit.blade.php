@@ -5,7 +5,7 @@
   <form method="POST" action="/disciplinas/{{$disciplina->id}}">
     @csrf
     @method('patch')
-    @include('disciplinas.partials.form')
+    @include('disciplinas.partials.formedit')
    
   </form> 
 @endsections

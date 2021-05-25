@@ -12,8 +12,6 @@ class DisciplinaController extends Controller
 {
     public function store(DisciplinaRequest $request)
     {
-        
-
         $validated = $request->validated();
         $disciplina = Disciplina::create($validated);
         $disciplina->setStatus('Em elaboração');
@@ -41,7 +39,6 @@ class DisciplinaController extends Controller
             'disciplina' => $disciplina,
             'stepper' => $stepper->render()
         ]);
-        return Storage::download($disciplina->path, $disciplina->original_name);
     }
 
     public function edit(Disciplina $disciplina)
@@ -51,5 +48,10 @@ class DisciplinaController extends Controller
         ]);
     }
 
+    public function showfile(Disciplina $disciplina)
+    {
+    return Storage::download($disciplina->path, $disciplina->original_name);
+    }
+    
     
 }
