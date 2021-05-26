@@ -3,6 +3,7 @@
 namespace Database\Factories;
 
 use App\Models\Disciplina;
+use App\Models\Pedido;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class DisciplinaFactory extends Factory
@@ -31,10 +32,8 @@ class DisciplinaFactory extends Factory
             'nota'          => $this->faker->numberBetween(0, 10),
             'creditos'      => $this->faker->numberBetween(0, 99999999), 
             'carga_horaria' => $this->faker->numberBetween(0, 99999999),
-            'codigo'        => $this->faker->sentence($nbWords = 1, $variableNbWords = true),
-            #'status'        => Disciplina::status[$status_key],
-            #pq desse user_id?
-            #'user_id'     => $this->faker->numberBetween($min = 1, $max = 10),
+            #'codigo'        => $this->faker->sentence($nbWords = 1, $variableNbWords = true),
+            'pedido_id'     => Pedido::factory()->create()->id,
         ];
     }
 }

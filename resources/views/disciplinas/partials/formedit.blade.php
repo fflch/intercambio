@@ -64,7 +64,6 @@ function Desabilitar() {
                 <div class="form-group">
                 <label for="carga_horaria" class="required"><b>Finalizar: </b></label> <br>
                     <button type="submit" class="btn btn-success" >Adicionar</button>
-                    <input class="form-control" type="hidden" name="pedido_id" value="{{ $pedido->id }}">
                 </div>
              </div>   
         </div>

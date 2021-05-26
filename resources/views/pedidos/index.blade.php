@@ -45,7 +45,7 @@
     <tbody>
       @foreach ($pedidos as $pedido)
         <tr>
-          <td><a href="/pedidos/{{$pedido->id}}">{{$pedido->codpes}}</a></td>
+          <td><a href="/pedidos/{{$pedido->id}}">{{$pedido->user->codpes}}</a></td>
           <td>{{$pedido->nome}}</td>
           <td>{{$pedido->curso}}</td>
           <td>{{$pedido->instituicao}}</td>

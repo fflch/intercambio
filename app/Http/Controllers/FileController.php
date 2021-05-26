@@ -43,11 +43,13 @@ class FileController extends Controller
             'file'     => 'required|mimes:pdf|max:10000',
             'pedido_id' => 'required|integer|exists:pedidos,id'
         ]);
+
         $file = new File;
         $file->pedido_id = $request->pedido_id;
         $file->original_name = $request->file('file')->getClientOriginalName();
         $file->path = $request->file('file')->store('.');
         $file->save();
+
         return back();
     }
 
