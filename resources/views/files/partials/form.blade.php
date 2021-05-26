@@ -1,5 +1,5 @@
 
-<div class="card-header"><b>Se necessário indexe arquivos para compravação</b></div>
+<div class="card-header"><b>Se necessário anexe arquivos para comprovação</b></div>
     <div class="card-body">
     
 

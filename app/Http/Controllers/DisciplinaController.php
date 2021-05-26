@@ -21,7 +21,7 @@ class DisciplinaController extends Controller
         $disciplina->save();
 
         request()->session()->flash('alert-info','Disciplina adicionada com sucesso');
-        return redirect("/disciplinas/{$disciplina->id}");    
+        return redirect("/pedidos/{$disciplina->pedido->id}");    
     }
    
     public function destroy(Disciplina $disciplina)
@@ -41,16 +41,9 @@ class DisciplinaController extends Controller
         ]);
     }
 
-    public function edit(Disciplina $disciplina)
-    {
-    return view('disciplinas.edit',[
-        'disciplina' => $disciplina
-        ]);
-    }
-
     public function showfile(Disciplina $disciplina)
     {
-    return Storage::download($disciplina->path, $disciplina->original_name);
+        return Storage::download($disciplina->path, $disciplina->original_name);
     }
     
     

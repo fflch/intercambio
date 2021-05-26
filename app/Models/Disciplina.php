@@ -14,20 +14,18 @@ class Disciplina extends Model
 
     protected $guarded = ['id'];
 
-    public function record(){
+    public function pedido(){
         return $this->belongsTo(Pedido::class);
     }
 
     const status = [
         'Em elaboração',
         'Análise',
-        'Comissão de Graduação',
-        'Serviço de Graduação',
-        'Docente',
-        'Finalização ccint'
+        'Deferido',
+        'Indeferido'
     ];
 
-    const tipo = [
+    const tipos = [
         'Obrigatória',
         'Optativa Livre',
         'Optativa Eletiva',

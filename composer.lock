@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "ceba8b3f0c2881ad3d20e12646d74a72",
+    "content-hash": "bf4b6301bfc8249541bdd50601148362",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -60,11 +60,17 @@
         },
         {
             "name": "axn/laravel-stepper",
-            "version": "dev-master",
+            "version": "1.5.0",
             "source": {
                 "type": "git",
-                "url": "https://github.com/fflch/laravel-stepper.git",
-                "reference": "11af2570bb2ab667e26bb36cd5221e41eda770e6"
+                "url": "https://github.com/AXN-Informatique/laravel-stepper.git",
+                "reference": "81160b5367a7477c822ddb8db53676944e1b8314"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/AXN-Informatique/laravel-stepper/zipball/81160b5367a7477c822ddb8db53676944e1b8314",
+                "reference": "81160b5367a7477c822ddb8db53676944e1b8314",
+                "shasum": ""
             },
             "require": {
                 "illuminate/support": "~5.0 || ^6.0 || ^7.0 || ^8.0"
@@ -82,6 +88,7 @@
                     "Axn\\LaravelStepper\\": "src/"
                 }
             },
+            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "MIT"
             ],
@@ -93,10 +100,7 @@
             ],
             "description": "Step by step Laravel 5 helper.",
             "homepage": "https://github.com/AXN-Informatique/laravel-stepper",
-            "support": {
-                "issues": "https://github.com/AXN-Informatique/laravel-stepper/issues"
-            },
-            "time": "2021-05-05T21:51:09+00:00"
+            "time": "2021-05-23T10:15:19+00:00"
         },
         {
             "name": "brick/math",
@@ -7518,9 +7522,7 @@
     ],
     "aliases": [],
     "minimum-stability": "dev",
-    "stability-flags": {
-        "axn/laravel-stepper": 20
-    },
+    "stability-flags": [],
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {

@@ -17,6 +17,10 @@ Status do pedido: <b>{{ $pedido->status }}</b>
 
 @if($pedido-> status == 'Em elaboração' && !$pedido->disciplinas->isEmpty() )
 
+TROCAR PARA UM FORM: 
+
+textarea com name=comentario
+
 <a href="/pedidos/{{$pedido->id}}/analise" onclick="return confirm('Enviar para análise? Depois de enviado o pedido não pode ser alterado');" class="btn btn-success"> Enviar para Análise </a>
 
 @endif

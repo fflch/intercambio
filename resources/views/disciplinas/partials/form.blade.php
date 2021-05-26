@@ -3,15 +3,14 @@
 
 <script>
 
-function Habilitar() {
-    document.getElementById("codigo").style = true;
-    document.getElementById("textocodigo").style = true;
+function flip(clicado) {
+    if(clicado == 'Obrigatória'){
+        document.getElementById("lista_obrigatorias").style = true;
+    } else {
+        document.getElementById("lista_obrigatorias").style = "display: none;";
+    }
 }
 
-function Desabilitar() {
-    document.getElementById("codigo").style = "display: none;";
-    document.getElementById("textocodigo").style = "display: none;";
-}
 </script>
 
 <div class="card-header"><b>Adicione as informações da disciplina</b></div>
@@ -19,75 +18,81 @@ function Desabilitar() {
     <div class="card-body">
         <div class="row">
 
-            <div class="col-sm form-group sm-4">
-                <div class="form-group">
-                    <label for="tipo" class="required"><b>Tipo: </b></label>
-                    <br>
-                    <input type="radio" onclick="Habilitar()" id="Obrigatória" name="tipo" value="Obrigatória">
-                    <label for="Obrigatória">Obrigatória</label><br>
-                    <input type="radio" onclick="Desabilitar()" id="Optativa Livre" name="tipo" value="Optativa Livre">
-                    <label for="Optativa Livre ">Optativa Livre </label><br>
-                    <input type="radio" onclick="Desabilitar()" id="Optativa Eletiva" name="tipo" value="Optativa Eletiva">
-                    <label for="Optativa Eletiva">Optativa Eletiva</label> 
-                </div>  
-            </div>
-
             <div class="col-sm form-group">
                 <div class="form-group">
                     <label for="nome" class="required"><b>Nome: </b></label>
-                    <input type="text" class="form-control" id="nome" name="nome" value="">
+                    <input type="text" class="form-control" id="nome" name="nome" value="{{ old('nome') }}">
                 </div>  
             </div>
 
-            <div class="col-sm form-group">
+            <div class="col-sm form-group sm-1">
                 <div class="form-group">
                     <label for="nota" class="required"><b>Nota: </b></label>
-                    <input type="text" class="form-control" id="nota" name="nota" value="">
+                    <input type="text" class="form-control" id="nota" name="nota" value="{{ old('nota') }}">
                 </div>
             </div> 
         
             <div class="col-sm form-group">
                 <div class="form-group">
                     <label for="creditos" class="required"><b>Créditos obtidos: </b></label>
-                    <input type="text" class="form-control" id="creditos" name="creditos" value="">
+                    <input type="text" class="form-control" id="creditos" name="creditos" value="{{ old('creditos') }}">
                 </div>
             </div>
 
             <div class="col-sm form-group">
                 <div class="form-group">
-                    <label for="carga_horaria" class="required"><b>Carga horaria: </b></label>
-                    <input type="text" class="form-control" id="carga_horaria" name="carga_horaria" value="">
+                    <label for="carga_horaria" class="required"><b>Carga horária: </b></label>
+                    <input type="text" class="form-control" id="carga_horaria" name="carga_horaria" value="{{ old('carga_horaria') }}">
                 </div>  
             </div>
 
-            <div class="col-sm form-group">
+            <div class="col-sm form-group sm-4">
                 <div class="form-group">
-                <label for="carga_horaria" class="required"><b>Finalizar: </b></label> <br>
-                    <button type="submit" class="btn btn-success" >Adicionar</button>
-                    <input class="form-control" type="hidden" name="pedido_id" value="{{ $pedido->id }}">
-                </div>
-             </div>   
+                    <label for="tipo" class="required"><b>Tipo: </b></label>
+                    <br>
+                    @foreach(\App\Models\Disciplina::tipos as $tipo)
+                        <input type="radio" onclick="flip(this.value)" name="tipo" value="{{$tipo}}" 
+                        @if($tipo == old('tipo')) checked @endif>
+                        <label>{{$tipo}}</label>
+                    @endforeach
+                </div>  
+            </div>
+
         </div>
 
-        <div class="row">
+        {{-- Fazer essa parte do @if com javascript --}}
+        <div class="row" id="lista_obrigatorias" @if(old('tipo') == 'Obrigatória') style="display: block;" @else style="display: none;" @endif>
 
              <div class="col-sm form-group">
                 <div class="form-group">
-                <label id="textocodigo" for="codigo" class="required" style="display: none;"><b>Selecione o código equivalente </b></label>
-                   <select id="codigo" name="codigo" style="display: none;">
+                <label id="textocodigo" for="codigo" class="required"><b>Selecione o código equivalente </b></label>
+                   <select id="codigo" name="codigo">
                     @foreach($disciplinas as $disciplina)
-                         <option id="codigo" name="codigo" value="{{ $disciplina['coddis'] }}">{{ $disciplina['coddis'] }} - {{ $disciplina['nomdis'] }}</option>
+                         <option id="codigo" name="codigo" value="{{ $disciplina['coddis'] }}" 
+                            @if(old('codigo') == $disciplina['coddis']) selected @endif>
+                            {{ $disciplina['coddis'] }} - {{ $disciplina['nomdis'] }}
+                        </option>
                     @endforeach
                     </select> 
                 </div>
             </div>
+        </div>
 
-            <div class="col-sm form-group">
+        <div class="row">
+            <div class="form-group sm-4">
                 <div class="form-group">
-                    <label for="file" class="required"><b>Adcione a ementa: </b></label> <br>
+                    <label for="file" class="required"><b>Adicione a ementa: </b></label> <br>
                     <input type="file" name="file">
+                    
                 </div>
             </div>
+            <div class="col-sm form-group sm-4">
+                <br>
+                <div class="form-group">
+                    <button type="submit" class="btn btn-success" >Adicionar</button>
+                    <input class="form-control" type="hidden" name="pedido_id" value="{{ $pedido->id }}">
+                </div>
+             </div>  
         </div>
     </div>
 

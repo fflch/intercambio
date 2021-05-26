@@ -14,6 +14,12 @@ class CreateStatusesTable extends Migration
             $table->text('reason')->nullable();
             $table->morphs('model');
             $table->timestamps();
+
+            # usuário que está mudando o status
+            #$table->unsignedBigInteger('user_id')->nullable();
+            #$table->foreign('user_id')->references('id')->on('users')->onDelete('set null');
+
+            $table->foreignId('user_id')->nullable()->constrained();
         });
     }
 

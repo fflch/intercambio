@@ -27,10 +27,16 @@ class WorkflowController extends Controller
 
 //Rotas Pedidos
 
-    public function analise(Pedido $pedido){
-        $pedido->status = 'Análise';
+    public function analise(Request $request, Pedido $pedido){
 
-        # Disparar um email
+        # Mudar o status das disciplinas desse pedido para 'Análise'
+        foreach($pedido->disciplinas as $disciplina) {
+            $disciplina->setStatus('Análise', $request->comentario);
+            $status = $disciplina->status();
+            $status->user_id = auth()->user()->id;
+            $status->save();
+        }
+       
         Mail::queue(new AnaliseMail($pedido));
 
         $pedido->save();

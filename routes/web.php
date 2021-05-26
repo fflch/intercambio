@@ -25,7 +25,7 @@ Route::resource('files', FileController::class);
 Route::get('/disciplinas/{disciplina}/showfile', [DisciplinaController::class, 'showfile']);
 
 // Rotas do workflow do projeto
-Route::get('/pedidos/{pedido}/analise', [WorkflowController::class, 'analise']);
+Route::post('/pedidos/{pedido}/analise', [WorkflowController::class, 'analise']);
 Route::get('/pedidos/{pedido}/retornar_analise', [WorkflowController::class, 'retornar_analise']);
 Route::get('/pedidos/{pedido}/finalizado', [WorkflowController::class, 'finalizado']);
 

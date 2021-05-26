@@ -66,7 +66,6 @@
             <form method="POST" action="/disciplinas/{{$disciplina->id}}"> 
                 @csrf
                 @method('delete')
-                <a href="/disciplinas/{{$disciplina->id}}/edit"><i class="fas fa-pencil-alt"></a></i>
             <button type="submit" onclick="return confirm('Tem certeza que deseja excluir?');" style="background-color: transparent;border: none;"><i class="far fa-trash-alt" color="#007bff"></i></button>  
             </form>
         </div>
