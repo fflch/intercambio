@@ -1,27 +1,33 @@
 <div class="card">
-<div class="card-header"><h5><b>À COMISSÃO DE GRADUAÇÃO DA FACULDADE DE FILOSOFIA LETRAS E CIÊNCIAS HUMANAS DA USP.</b></h5></div>
-
-<div class="card-body">
-Eu, <b>{{ $pedido->nome ?? '' }}</b> aluno(a) regularmente 
-matriculado(a) nesta Faculdade, N° USP <b>{{ $pedido->codpes ?? '' }}</b>, 
-no Curso de <b>{{ $pedido->curso ?? '' }}</b>,
-venho requerer o aproveitamento de estudos (dispensa de disciplina):
-Na instituição: <b>{{ $pedido->instituicao ?? '' }}</b>
-
-<br>
-<br>
-
-Status do pedido: <b>{{ $pedido->status }}</b>                
-</div>
+    <div class="card-header"><h5><b>À COMISSÃO DE GRADUAÇÃO DA FACULDADE DE FILOSOFIA LETRAS E CIÊNCIAS HUMANAS DA USP.</b></h5></div>
+        <div class="card-body">
+        Eu, <b>{{ $pedido->nome ?? '' }}</b> aluno(a) regularmente 
+        matriculado(a) nesta Faculdade, N° USP <b>{{ $pedido->codpes ?? '' }}</b>, 
+        no Curso de <b>{{ $pedido->curso ?? '' }}</b>,
+        venho requerer o aproveitamento de estudos (dispensa de disciplina):
+        Na instituição: <b>{{ $pedido->instituicao ?? '' }}</b>
+        <br>
+        <br>
+        Status do pedido: <b>{{ $pedido->status }}</b>                
+        </div>
 
 
 @if($pedido-> status == 'Em elaboração' && !$pedido->disciplinas->isEmpty() )
 
-TROCAR PARA UM FORM: 
-
-textarea com name=comentario
-
-<a href="/pedidos/{{$pedido->id}}/analise" onclick="return confirm('Enviar para análise? Depois de enviado o pedido não pode ser alterado');" class="btn btn-success"> Enviar para Análise </a>
+<form method="POST" action="/pedidos/{pedido}/analise">
+    <div class="row">
+        <div class="form-group">
+            <label for="comentario"><b> Adcione um comentário ao seu pedido </b></label>
+            <br>
+            <textarea name="comentario" rows="4" value=""></textarea>
+        </div>
+        <div class="form-group">
+            <a href="/pedidos/{{$pedido->id}}" onclick="return confirm('Enviar para análise? Depois de enviado o pedido não pode ser alterado');" class="btn btn-success p-4">
+            Enviar para Análise 
+            </a>
+        </div>
+    </div>
+</form>
 
 @endif
 

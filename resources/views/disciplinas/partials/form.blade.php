@@ -18,35 +18,7 @@ function flip(clicado) {
     <div class="card-body">
         <div class="row">
 
-            <div class="col-sm form-group">
-                <div class="form-group">
-                    <label for="nome" class="required"><b>Nome: </b></label>
-                    <input type="text" class="form-control" id="nome" name="nome" value="{{ old('nome') }}">
-                </div>  
-            </div>
-
-            <div class="col-sm form-group sm-1">
-                <div class="form-group">
-                    <label for="nota" class="required"><b>Nota: </b></label>
-                    <input type="text" class="form-control" id="nota" name="nota" value="{{ old('nota') }}">
-                </div>
-            </div> 
-        
-            <div class="col-sm form-group">
-                <div class="form-group">
-                    <label for="creditos" class="required"><b>Créditos obtidos: </b></label>
-                    <input type="text" class="form-control" id="creditos" name="creditos" value="{{ old('creditos') }}">
-                </div>
-            </div>
-
-            <div class="col-sm form-group">
-                <div class="form-group">
-                    <label for="carga_horaria" class="required"><b>Carga horária: </b></label>
-                    <input type="text" class="form-control" id="carga_horaria" name="carga_horaria" value="{{ old('carga_horaria') }}">
-                </div>  
-            </div>
-
-            <div class="col-sm form-group sm-4">
+            <div class="form-group col-sm">
                 <div class="form-group">
                     <label for="tipo" class="required"><b>Tipo: </b></label>
                     <br>
@@ -58,14 +30,42 @@ function flip(clicado) {
                 </div>  
             </div>
 
+            <div class="form-group col-sm-3">
+                <div class="form-group">
+                    <label for="nome" class="required"><b>Nome: </b></label>
+                    <input type="text" class="form-control" id="nome" name="nome" value="{{ old('nome') }}">
+                </div>  
+            </div>
+
+            <div class="form-group col-sm-1">
+                <div class="form-group">
+                    <label for="nota" class="required"><b>Nota: </b></label>
+                    <input type="text" class="form-control" id="nota" name="nota" value="{{ old('nota') }}">
+                </div>
+            </div> 
+        
+            <div class="form-group col-sm-2">
+                <div class="form-group">
+                    <label for="creditos" class="required"><b>Créditos obtidos: </b></label>
+                    <input type="text" class="form-control" id="creditos" name="creditos" value="{{ old('creditos') }}">
+                </div>
+            </div>
+
+            <div class="form-group col-sm-2">
+                <div class="form-group">
+                    <label for="carga_horaria" class="required"><b>Carga horária: </b></label>
+                    <input type="text" class="form-control" id="carga_horaria" name="carga_horaria" value="{{ old('carga_horaria') }}">
+                </div>  
+            </div>
+
         </div>
 
         {{-- Fazer essa parte do @if com javascript --}}
         <div class="row" id="lista_obrigatorias" @if(old('tipo') == 'Obrigatória') style="display: block;" @else style="display: none;" @endif>
-
-             <div class="col-sm form-group">
+            <div class="form-group col-sm">
                 <div class="form-group">
-                <label id="textocodigo" for="codigo" class="required"><b>Selecione o código equivalente </b></label>
+                <label id="textocodigo" for="codigo" class="required"><b>Selecione o código equivalente na USP </b></label>
+                <br>
                    <select id="codigo" name="codigo">
                     @foreach($disciplinas as $disciplina)
                          <option id="codigo" name="codigo" value="{{ $disciplina['coddis'] }}" 
@@ -79,22 +79,24 @@ function flip(clicado) {
         </div>
 
         <div class="row">
-            <div class="form-group sm-4">
+            <div class="form-group col-sm-3">
                 <div class="form-group">
                     <label for="file" class="required"><b>Adicione a ementa: </b></label> <br>
                     <input type="file" name="file">
                     
                 </div>
             </div>
-            <div class="col-sm form-group sm-4">
+
+            <div class="form-group col-sm-2">
                 <br>
                 <div class="form-group">
                     <button type="submit" class="btn btn-success" >Adicionar</button>
                     <input class="form-control" type="hidden" name="pedido_id" value="{{ $pedido->id }}">
                 </div>
-             </div>  
+            </div>  
         </div>
     </div>
+</div>
 
 </form>
 

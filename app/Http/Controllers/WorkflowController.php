@@ -30,6 +30,7 @@ class WorkflowController extends Controller
     public function analise(Request $request, Pedido $pedido){
 
         # Mudar o status das disciplinas desse pedido para 'Análise'
+        
         foreach($pedido->disciplinas as $disciplina) {
             $disciplina->setStatus('Análise', $request->comentario);
             $status = $disciplina->status();

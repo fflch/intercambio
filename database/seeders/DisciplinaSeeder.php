@@ -15,7 +15,7 @@ class DisciplinaSeeder extends Seeder
     public function run()
     {
         $disciplina = [   
-            'tipo'          => Disciplina::tipo[0],
+            'tipo'          => Disciplina::tipos[0],
             'nome'          => 'Progamação II',
             'nota'          => '10',
             'creditos'      => '40', 

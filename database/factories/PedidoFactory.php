@@ -25,7 +25,6 @@ class PedidoFactory extends Factory
         $status_key = array_rand(Pedido::status);
 
         return [
-            'status'      => Pedido::status[$status_key],
             'instituicao' => $this->faker->sentence($nbWords = 10, $variableNbWords = true),
             'user_id'     => User::inRandomOrder()->pluck('id')->first(),
         ];
