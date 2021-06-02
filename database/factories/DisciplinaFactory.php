@@ -24,10 +24,10 @@ class DisciplinaFactory extends Factory
     {
 
         $status_key = array_rand(Disciplina::status);
-        $status_key = array_rand(Disciplina::tipo);
+        $status_key = array_rand(Disciplina::tipos);
 
         return [
-            'tipo'          => Disciplina::tipo[$status_key],
+            'tipo'          => Disciplina::tipos[$status_key],
             'nome'          => $this->faker->sentence($nbWords = 8, $variableNbWords = true),
             'nota'          => $this->faker->numberBetween(0, 10),
             'creditos'      => $this->faker->numberBetween(0, 99999999), 

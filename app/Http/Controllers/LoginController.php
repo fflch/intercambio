@@ -44,6 +44,7 @@ class LoginController extends Controller
         $user->name = $userSenhaUnica->nompes;
         $user->save();
         Auth::login($user, true);
+
         return redirect('/');
     }
 

@@ -10,6 +10,11 @@
 
 {!! $stepper !!}
 
+<h2>Histórico</h2>
+@foreach($disciplina->statuses as $status)
+    {{ $status->name }} {{ $status->reason }} {{ $status->created_at }} {{ $status->user_id }} <br>
+@endforeach
+
 <div class="card-header"><b>Dados da disciplina cursada</b></div>
     <div class="card-body">
 
