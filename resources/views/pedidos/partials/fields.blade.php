@@ -13,7 +13,8 @@
 
 @if($pedido-> status == 'Em elaboração' && !$pedido->disciplinas->isEmpty() )
 
-    <form method="POST" action="analise">
+    <form method="POST" action="/analise/{{$pedido->id}}">
+    @csrf 
     <br>
         <div class="row">
             <div class="col">

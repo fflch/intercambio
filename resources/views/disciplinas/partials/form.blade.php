@@ -20,12 +20,12 @@ function flip(clicado) {
 
             <div class="form-group col-sm">
                 <div class="form-group">
-                    <label for="tipo" class="required"><b>Tipo: </b></label>
+                    <label class="required"><b>Tipo: </b></label>
                     <br>
                     @foreach(\App\Models\Disciplina::tipos as $tipo)
-                        <input type="radio" onclick="flip(this.value)" name="tipo" value="{{$tipo}}" 
+                        <input type="radio" onclick="flip(this.value)" id="{{ $tipo }}" name="tipo" value="{{$tipo}}" 
                         @if($tipo == old('tipo')) checked @endif>
-                        <label>{{$tipo}}</label>
+                        <label for="{{ $tipo }}">{{$tipo}}</label>
                     @endforeach
                 </div>  
             </div>

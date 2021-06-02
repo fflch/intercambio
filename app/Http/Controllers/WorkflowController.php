@@ -28,7 +28,6 @@ class WorkflowController extends Controller
 //Rotas Pedidos
 
     public function analise(Request $request, Pedido $pedido){
-
         # Mudar o status das disciplinas desse pedido para 'Análise'
         
         $request->validate([
