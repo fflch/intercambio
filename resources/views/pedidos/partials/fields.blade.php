@@ -17,7 +17,7 @@
     <br>
         <div class="row">
             <div class="col">
-                <textarea name="comentario" cols="100" rows="3" name="reason" value="{{ old('reason') }}" placeholder="Se necessario adcione um comentário ao seu pedido"></textarea> 
+                <textarea name="reason" cols="100" rows="3" value="{{ old('reason') }}" placeholder="Se necessario adcione um comentário ao seu pedido"></textarea> 
             </div>
             <div class="form-group col-sm">
                     <button type="submit" onclick="return confirm('Enviar para análise? Depois de enviado o pedido não pode ser alterado');" class="btn btn-success p-4">
