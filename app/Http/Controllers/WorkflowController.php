@@ -31,8 +31,12 @@ class WorkflowController extends Controller
 
         # Mudar o status das disciplinas desse pedido para 'Análise'
         
+        $request->validate([
+            'reason' => 'required',
+        ]);
+
         foreach($pedido->disciplinas as $disciplina) {
-            $disciplina->setStatus('Análise', $request->comentario);
+            $disciplina->setStatus('Análise', $request->reason);
             $status = $disciplina->status();
             $status->user_id = auth()->user()->id;
             $status->save();

@@ -16,7 +16,7 @@
                 <input type="file" name="file">
                 <br>
                 <br>
-                <button type="submit" class="btn btn-success"> Enviar Arquivos</button>
+                <button type="submit" id="enviar" class="btn btn-success"> Enviar Arquivos</button>
                 </form>
             </div>
         </div>

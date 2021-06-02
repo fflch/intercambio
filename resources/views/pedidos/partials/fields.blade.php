@@ -9,27 +9,27 @@
         <br>
         <br>
         Status do pedido: <b>{{ $pedido->status }}</b>                
-        </div>
-
+       
 
 @if($pedido-> status == 'Em elaboração' && !$pedido->disciplinas->isEmpty() )
 
-<form method="POST" action="/pedidos/{pedido}/analise">
-    <div class="row">
-        <div class="form-group">
-            <label for="comentario"><b> Adcione um comentário ao seu pedido </b></label>
-            <br>
-            <textarea name="comentario" rows="4" value=""></textarea>
+    <form method="POST" action="analise">
+    <br>
+        <div class="row">
+            <div class="col">
+                <textarea name="comentario" cols="100" rows="3" name="reason" value="{{ old('reason') }}" placeholder="Se necessario adcione um comentário ao seu pedido"></textarea> 
+            </div>
+            <div class="form-group col-sm">
+                    <button type="submit" onclick="return confirm('Enviar para análise? Depois de enviado o pedido não pode ser alterado');" class="btn btn-success p-4">
+                    Enviar para Análise 
+                    </button>
+            </div>
         </div>
-        <div class="form-group">
-            <a href="/pedidos/{{$pedido->id}}" onclick="return confirm('Enviar para análise? Depois de enviado o pedido não pode ser alterado');" class="btn btn-success p-4">
-            Enviar para Análise 
-            </a>
-        </div>
-    </div>
 </form>
 
 @endif
+
+    </div>
 
 @if($pedido-> status == 'Análise')
 
