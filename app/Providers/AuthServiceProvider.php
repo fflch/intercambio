@@ -25,9 +25,10 @@ class AuthServiceProvider extends ServiceProvider
     {
         $this->registerPolicies();
 
-        # admin
+        # admin 
         Gate::define('admin', function ($user) {
-            return true;
+            $admins = explode(',', env('ADMINS'));
+            return ( in_array($user->codpes, $admins) and $user->codpes );
         });
 
         # logado
@@ -37,6 +38,7 @@ class AuthServiceProvider extends ServiceProvider
 
         # owner
         Gate::define('owner', function ($user, $model) {
+            if(Gate::allows('admin')) return true;
             return $model->user_id == $user->id;
         });
         

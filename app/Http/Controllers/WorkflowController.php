@@ -29,6 +29,7 @@ class WorkflowController extends Controller
 
     public function analise(Request $request, Pedido $pedido){
         # Mudar o status das disciplinas desse pedido para 'Análise'
+        $this->authorize('owner',$pedido);
         
         $request->validate([
             'reason' => 'required',
@@ -48,6 +49,7 @@ class WorkflowController extends Controller
     }
 
     public function retornar_analise(Pedido $pedido){
+        $this->authorize('admin');
         
         foreach($pedido->disciplinas as $disciplina) {
             $disciplina->setStatus('Em elaboração');

@@ -7,7 +7,6 @@
 
     @if($pedido->status == 'Em elaboração')
         @include('disciplinas.partials.form')
-        
     @endif
     
 @endsection

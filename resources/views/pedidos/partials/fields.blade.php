@@ -8,6 +8,7 @@
         Na instituição: <b>{{ $pedido->instituicao ?? '' }}</b>
         <br>
         <br>
+
 @if($pedido-> status == 'Análise')
 
         Comentario do pedido: {{ $pedido->reason }}
@@ -37,8 +38,9 @@
 
     </div>
 
-@if($pedido-> status == 'Análise')
 
+@can('admin')
+@if($pedido-> status == 'Análise')
 <div class="card-body">
     <div class="row">
         <div class="form-group col-sm-5">
@@ -50,10 +52,8 @@
         </div>
     </div> 
 </div> 
-
-
 @endif
-
+@endcan
 
 <hr>
 

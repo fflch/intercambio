@@ -46,12 +46,11 @@ class PedidoController extends Controller
     {
         $this->authorize('logado');
         $validated = $request->validated();
-        $validated['status'] = 'Em elaboração';
+        $validated['status'] = 'Em elaboração'; # ?
         $validated['user_id'] = auth()->user()->id;
+        $validated['original_name'] = $request->file('file')->getClientOriginalName();
+        $validated['path'] = $request->file('file')->store('.');
         $pedido = Pedido::create($validated);
-        $pedido->original_name = $request->file('file')->getClientOriginalName();
-        $pedido->path = $request->file('file')->store('.');
-        $pedido-save();
         request()->session()->flash('alert-info','Cadastro com sucesso');
         return redirect("/pedidos/$pedido->id");
     }
@@ -62,9 +61,12 @@ class PedidoController extends Controller
         $codpes = auth()->user()->codpes;
 
         $curso = Graduacao::curso($codpes,8);
-        
-        $disciplinas = Graduacao::listarDisciplinasGradeCurricular($curso['codcur'], $curso['codhab']); 
-       
+        if(!empty($curso)) {
+            $disciplinas = Graduacao::listarDisciplinasGradeCurricular($curso['codcur'], $curso['codhab']);
+        } else {
+            $disciplinas = [];
+        }
+
         return view('pedidos.show',[
             'pedido' => $pedido,
             'disciplinas' => $disciplinas

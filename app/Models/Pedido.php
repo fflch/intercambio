@@ -44,7 +44,7 @@ class Pedido extends Model
     public function getCursoAttribute($value){
 
         $curso = Graduacao::curso($this->user->codpes, 8);
-        if($curso['nomcur']) return $curso['nomcur'];
+        if(!empty($curso)) return $curso['nomcur'];
         return 'Não matriculado em nenhum curso de Graduação';
     }
    
