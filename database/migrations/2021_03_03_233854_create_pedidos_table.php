@@ -17,6 +17,8 @@ class CreatePedidosTable extends Migration
             $table->id();
             $table->timestamps();
             $table->string('instituicao');
+            $table->string('original_name');
+            $table->string('path');
             $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
         });
     }

@@ -49,6 +49,9 @@ class PedidoController extends Controller
         $validated['status'] = 'Em elaboração';
         $validated['user_id'] = auth()->user()->id;
         $pedido = Pedido::create($validated);
+        $pedido->original_name = $request->file('file')->getClientOriginalName();
+        $pedido->path = $request->file('file')->store('.');
+        $pedido-save();
         request()->session()->flash('alert-info','Cadastro com sucesso');
         return redirect("/pedidos/$pedido->id");
     }
@@ -92,12 +95,5 @@ class PedidoController extends Controller
         $this->authorize('owner',$pedido);
         $pedido->delete();
         return redirect('/pedidos');
-    }
-
-    public function index_type(Pedido $pedido)
-    {
-    return view('pedidos.index_type',[
-        '$pedido' => $pedido
-    ]);
     }
 }

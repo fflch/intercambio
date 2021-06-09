@@ -2,12 +2,13 @@
             <div class="form-group">
                 <b>Arquivos cadastrados</b>
             <ul>
-                @forelse($pedido->files as $file)
+            @forelse($pedido->files as $file)
                 <li><a href="/files/{{$file->id}}">{{ $file->original_name ?? '' }} </a></li>
-                @empty
+            @empty
                 <li>Não há nenhum cadastrado</li>
-                @endforelse
+            @endforelse
             </div>
+            @if($pedido-> status == 'Em elaboração')
             <div class="form-group">
             <br>
                 <form method="post" enctype="multipart/form-data" action="/files">
@@ -18,6 +19,7 @@
                 <br>
                 <button type="submit" id="enviar" class="btn btn-success"> Enviar Arquivos</button>
                 </form>
+            @endif
             </div>
         </div>
     </div>

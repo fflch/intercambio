@@ -2,18 +2,13 @@
 @section('content')
 
 
-<b><a href="/pedidos/{{$disciplina->pedido_id}}" class="btn btn-primary">Voltar</a></b><br>
-
+<b><a href="/pedidos/{{$disciplina->pedido_id}}" class="btn btn-primary">Voltar</a></b>
+<br>
 <br>
 <div class="card">
 <div class="card-header"><b>Status:</b></div>
 
 {!! $stepper !!}
-
-<h2>Histórico</h2>
-@foreach($disciplina->statuses as $status)
-    {{ $status->name }} {{ $status->reason }} {{ $status->created_at }} {{ $status->user_id }} <br>
-@endforeach
 
 <div class="card-header"><b>Dados da disciplina cursada</b></div>
     <div class="card-body">
@@ -57,14 +52,14 @@
                     <br>  {{ $disciplina->codigo ?? '' }} 
                 </div>  
             </div>
-            @endif
-
+            
             <div class="col-sm form-group">
                 <div class="form-group">
                 <label for="ementa" class="required"><b>Ementa vinculada: </b></label>
                 <br>  <a href="/disciplinas/{{$disciplina->id}}/showfile">{{ $disciplina->original_name ?? '' }}</a>
                 </div>  
             </div>
+            @endif
         </div>
 
         <div class="form-group">

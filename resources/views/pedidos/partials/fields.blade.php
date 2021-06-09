@@ -8,8 +8,13 @@
         Na instituição: <b>{{ $pedido->instituicao ?? '' }}</b>
         <br>
         <br>
-        Status do pedido: <b>{{ $pedido->status }}</b>                
-       
+@if($pedido-> status == 'Análise')
+
+        Comentario do pedido: {{ $pedido->reason }}
+        <br>
+        <br>
+@endif  
+        Status do pedido: <b>{{ $pedido->status }}</b>                    
 
 @if($pedido-> status == 'Em elaboração' && !$pedido->disciplinas->isEmpty() )
 

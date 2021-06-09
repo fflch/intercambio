@@ -7,7 +7,7 @@ use App\Models\Disciplina;
 
 class DisciplinaStatus extends Stepper
 {
-    protected $view = 'stepper::arrows';
+    protected $view = 'laravel-fflch-stepper::main';
 
     public function register()
     {
