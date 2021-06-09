@@ -48,7 +48,13 @@ class WorkflowController extends Controller
     }
 
     public function retornar_analise(Pedido $pedido){
-        $pedido->status = 'Em elaboração';
+        
+        foreach($pedido->disciplinas as $disciplina) {
+            $disciplina->setStatus('Em elaboração');
+            $status = $disciplina->status();
+            $status->user_id = auth()->user()->id;
+            $status->save();
+        }
 
         # Disparar um email
         Mail::queue(new RetornarAnaliseMail($pedido));

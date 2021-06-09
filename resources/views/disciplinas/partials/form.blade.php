@@ -76,10 +76,8 @@ function flip(clicado) {
                     </select> 
                 </div>
             </div>
-        </div>
 
-        <div class="row">
-            <div class="form-group col-sm-3">
+            <div class="form-group col-sm">
                 <div class="form-group">
                     <label for="file" class="required"><b>Adicione a ementa: </b></label> <br>
                     <input type="file" name="file">
@@ -87,6 +85,9 @@ function flip(clicado) {
                 </div>
             </div>
 
+        </div>
+
+        <div class="row">
             <div class="form-group col-sm-2">
                 <br>
                 <div class="form-group">

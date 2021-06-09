@@ -30,11 +30,15 @@ class DisciplinaRequest extends FormRequest
             'creditos' => 'required|integer',
             'carga_horaria' => 'required|integer',
             'pedido_id' => 'required',
-            'file'     => 'required|mimes:pdf|max:10000',
+            
         ];
 
         if($this->tipo == "Obrigatória"){
-            $data = array_merge($data,['codigo' => 'required']);
+            $obg = [
+            'codigo' => 'required',
+            'file'     => 'required|mimes:pdf|max:10000',
+        ];
+            $data = array_merge($data,$obg);
         }
         return $data;
        

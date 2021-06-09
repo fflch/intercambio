@@ -43,7 +43,7 @@
     </thead>
 
     <tbody>
-      @foreach ($pedidos as $pedido)
+      @foreach($pedidos as $pedido)
         <tr>
           <td><a href="/pedidos/{{$pedido->id}}">{{$pedido->user->codpes}}</a></td>
           <td>{{$pedido->nome}}</td>

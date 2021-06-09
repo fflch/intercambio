@@ -16,10 +16,12 @@ class DisciplinaController extends Controller
         $disciplina = Disciplina::create($validated);
         $disciplina->setStatus('Em elaboração');
 
-        $disciplina->original_name = $request->file('file')->getClientOriginalName();
-        $disciplina->path = $request->file('file')->store('.');
-        $disciplina->save();
+        if($request->tipo == "Obrigatória"){
+            $disciplina->original_name = $request->file('file')->getClientOriginalName();
+            $disciplina->path = $request->file('file')->store('.');
+        }
 
+        $disciplina->save();
         request()->session()->flash('alert-info','Disciplina adicionada com sucesso');
         return redirect("/pedidos/{$disciplina->pedido->id}");    
     }

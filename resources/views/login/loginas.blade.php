@@ -4,7 +4,7 @@
     @csrf
     
     <div class="form-group row">
-        <label for="codpes" class="col-sm-4 col-form-label text-md-right">número usp</label>
+        <label for="codpes" class="col-sm-4 col-form-label text-md-right">Número Usp</label>
         <div class="col-md-6">
             <input type="text" name="codpes" value="{{ old('codpes') }}" required>
         </div>
