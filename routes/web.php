@@ -8,6 +8,7 @@ use App\Http\Controllers\LoginController;
 use App\Http\Controllers\FileController;
 use App\Http\Controllers\DisciplinaController;
 use App\Http\Controllers\WorkflowController;
+use App\Http\Controllers\GeneralSettingsController;
 
 Route::get('/', [IndexController::class,'index']);
 
@@ -47,9 +48,12 @@ Route::get('/disciplinas/{disciplina}/retornar_docente', [WorkflowController::cl
 
 Route::get('/pedidos/{pedido}/index_type', [PedidoController::class, 'index_type']);
 
-# loginAs
+// loginAs
 Route::get('loginas', [LoginController::class, 'loginAsForm']);
 Route::post('loginas', [LoginController::class, 'loginAs']);
 
+# settings
+Route::get('/settings', [GeneralSettingsController::class, 'show']);
+Route::post('/settings', [GeneralSettingsController::class, 'update']);
 
 

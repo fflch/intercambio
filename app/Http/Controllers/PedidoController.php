@@ -46,7 +46,6 @@ class PedidoController extends Controller
     {
         $this->authorize('logado');
         $validated = $request->validated();
-        $validated['status'] = 'Em elaboração'; # ?
         $validated['user_id'] = auth()->user()->id;
         $validated['original_name'] = $request->file('file')->getClientOriginalName();
         $validated['path'] = $request->file('file')->store('.');
