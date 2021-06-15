@@ -18,6 +18,7 @@ $menu = [
         'url' => config('app.url') . '/pedidos',
         'can' => 'admin'
     ],
+   
 ];
 
 $right_menu = [

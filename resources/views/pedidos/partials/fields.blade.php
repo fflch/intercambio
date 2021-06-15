@@ -50,6 +50,11 @@
         <div class="form-group col-sm-5">
         <a href="/pedidos/{{$pedido->id}}/finalizado" onclick="return confirm('Finalizar o pedido? ao confirmar não poderão ser feitas mais mudanças');" class="btn btn-success"> Finalizar Pedido Completamente </a>        
         </div>
+
+        <div class="form-group col-sm-5">
+        <a href="/settings" class="fas fa-pencil-alt btn btn-success"> </a>        
+        </div>
+        
     </div> 
 </div> 
 @endif
