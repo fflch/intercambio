@@ -12,11 +12,6 @@ use App\Http\Controllers\GeneralSettingsController;
 
 Route::get('/', [IndexController::class,'index']);
 
-//login
-Route::post('logout', [LoginController::class, 'logout']);
-Route::get('/login', [LoginController::class, 'redirectToProvider']);
-Route::get('/callback', [LoginController::class, 'handleProviderCallback']);
-
 //Rotas Obrigatoria
 Route::resource('/pedidos', PedidoController::class);
 Route::resource('/disciplinas', DisciplinaController::class);
