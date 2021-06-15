@@ -3133,26 +3133,26 @@
         },
         {
             "name": "socialiteproviders/manager",
-            "version": "v3.6",
+            "version": "4.0.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/SocialiteProviders/Manager.git",
-                "reference": "fc8dbcf0061f12bfe0cc347e9655af932860ad36"
+                "reference": "0f5e82af0404df0080bdc5c105cef936c1711524"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/SocialiteProviders/Manager/zipball/fc8dbcf0061f12bfe0cc347e9655af932860ad36",
-                "reference": "fc8dbcf0061f12bfe0cc347e9655af932860ad36",
+                "url": "https://api.github.com/repos/SocialiteProviders/Manager/zipball/0f5e82af0404df0080bdc5c105cef936c1711524",
+                "reference": "0f5e82af0404df0080bdc5c105cef936c1711524",
                 "shasum": ""
             },
             "require": {
                 "illuminate/support": "^6.0|^7.0|^8.0",
                 "laravel/socialite": "~4.0|~5.0",
-                "php": "^7.2"
+                "php": "^7.2 || ^8.0"
             },
             "require-dev": {
                 "mockery/mockery": "^1.2",
-                "phpunit/phpunit": "^8.0"
+                "phpunit/phpunit": "^9.0"
             },
             "type": "library",
             "extra": {
@@ -3194,9 +3194,9 @@
             "homepage": "https://socialiteproviders.com/",
             "support": {
                 "issues": "https://github.com/SocialiteProviders/Manager/issues",
-                "source": "https://github.com/SocialiteProviders/Manager/tree/master"
+                "source": "https://github.com/SocialiteProviders/Manager/tree/4.0.1"
             },
-            "time": "2020-09-08T10:41:06+00:00"
+            "time": "2020-12-01T23:09:06+00:00"
         },
         {
             "name": "spatie/data-transfer-object",
@@ -6022,23 +6022,23 @@
         },
         {
             "name": "uspdev/senhaunica-socialite",
-            "version": "3.0.1",
+            "version": "3.0.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/uspdev/senhaunica-socialite.git",
-                "reference": "51babdf70065e9a44ae561c66e998e74aac074cc"
+                "reference": "9789090896268a862ea107ea0acaa3e19a2ca319"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/uspdev/senhaunica-socialite/zipball/51babdf70065e9a44ae561c66e998e74aac074cc",
-                "reference": "51babdf70065e9a44ae561c66e998e74aac074cc",
+                "url": "https://api.github.com/repos/uspdev/senhaunica-socialite/zipball/9789090896268a862ea107ea0acaa3e19a2ca319",
+                "reference": "9789090896268a862ea107ea0acaa3e19a2ca319",
                 "shasum": ""
             },
             "require": {
                 "doctrine/dbal": "^3.1",
                 "laravel/socialite": "^5.0",
                 "php": ">=7.1.3",
-                "socialiteproviders/manager": "^3.4.2",
+                "socialiteproviders/manager": "^3.4.2 | ^4.0",
                 "spatie/laravel-permission": "^4.2"
             },
             "type": "library",
@@ -6069,9 +6069,9 @@
             "homepage": "https://github.com/uspdev/senhaunica-socialite",
             "support": {
                 "issues": "https://github.com/uspdev/senhaunica-socialite/issues",
-                "source": "https://github.com/uspdev/senhaunica-socialite/tree/3.0.1"
+                "source": "https://github.com/uspdev/senhaunica-socialite/tree/3.0.2"
             },
-            "time": "2021-06-09T01:04:16+00:00"
+            "time": "2021-06-15T18:01:38+00:00"
         },
         {
             "name": "vlucas/phpdotenv",
