@@ -54,7 +54,6 @@
               <form method="POST" action="/pedidos/{{$pedido->id}}"> 
                 @csrf
                 @method('delete')
-                <a href="/pedidos/{{$pedido->id}}/edit"><i class="fas fa-pencil-alt"></a></i>
                 <button type="submit" onclick="return confirm('Tem certeza que deseja excluir?');" style="background-color: transparent;border: none;"><i class="far fa-trash-alt" color="#007bff"></i></button>  
             </form>
           </td>

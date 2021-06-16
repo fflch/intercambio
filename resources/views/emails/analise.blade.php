@@ -1,10 +1,15 @@
-Prezados(as) CCint,
+Prezado(a) aluno(a),<br>
 
-Chegou um novo pedido de análise de aproveitamento de créditos:
-do aluno: {{ $pedido->codpes }}
+Seu pedido de aproveitamento de créditos foi enviado com sucesso. A CCInt-FFLCH irá analisar
+as informações e os documentos inseridos por você no sistema. Caso haja alguma
+inconsistência ou falta de documento, entraremos em contato.<br>
 
-Universidade: {{ $pedido->instituicao }}
+Caso esteja tudo certo com as informações e documentos enviados, seu pedido será
+encaminhado para as instâncias competentes e o resultado do aproveitamento de créditos
+será lançado no sistema júpiter.<br>
 
-@foreach($pedido->disciplinas as $disciplina)
-    {{ $disciplina->nome }} <br>
-@endforeach
+Qualquer dúvida entre em contato conosco através do endereço international.fflch@usp.br.<br>
+
+Atenciosamente,<br>
+
+Equipe CCInt-FFLCH
