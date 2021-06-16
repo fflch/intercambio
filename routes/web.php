@@ -20,24 +20,24 @@ Route::resource('/disciplinas', DisciplinaController::class);
 Route::resource('files', FileController::class);
 Route::get('/disciplinas/{disciplina}/showfile', [DisciplinaController::class, 'showfile']);
 
-// Rotas do workflow do projeto
+// Rotas: Em Elaboração -> Análise
 Route::post('/analise/{pedido}', [WorkflowController::class, 'analise']);
-Route::get('/pedidos/{pedido}/retornar_analise', [WorkflowController::class, 'retornar_analise']);
+Route::patch('/deferimento/{pedido}', [WorkflowController::class, 'deferimento']);
+
+
+/*
+
 Route::get('/pedidos/{pedido}/finalizado', [WorkflowController::class, 'finalizado']);
-
-// Rotas do workflow da Disciplina
-
 Route::get('/disciplinas/{disciplina}/analise_disciplina', [WorkflowController::class, 'analise_disciplina']);
 Route::get('/disciplinas/{disciplina}/comissao_graduacao', [WorkflowController::class, 'comissao_graduacao']);
 Route::get('/disciplinas/{disciplina}/servico_graduacao', [WorkflowController::class, 'servico_graduacao']);
 Route::get('/disciplinas/{disciplina}/docente', [WorkflowController::class, 'docente']);
 Route::get('/disciplinas/{disciplina}/finalizacao', [WorkflowController::class, 'finalizacao']);
-
 Route::get('/disciplinas/{disciplina}/retornar_analise_disciplina', [WorkflowController::class, 'retornar_analise_disciplina']);
 Route::get('/disciplinas/{disciplina}/retornar_comissao_graduacao', [WorkflowController::class, 'retornar_comissao_graduacao']);
 Route::get('/disciplinas/{disciplina}/retornar_servico_graduacao', [WorkflowController::class, 'retornar_servico_graduacao']);
 Route::get('/disciplinas/{disciplina}/retornar_docente', [WorkflowController::class, 'retornar_docente']);
-
+*/
 
 // Rota provisoria dos tipos
 

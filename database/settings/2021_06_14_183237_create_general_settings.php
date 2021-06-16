@@ -6,6 +6,7 @@ class CreateGeneralSettings extends SettingsMigration
 {
     public function up(): void
     {
-        $this->migrator->add('general.email', 'O Email');
+        $default = file_get_contents(__DIR__ . "/emails_defaults/analise_disciplina.txt");
+        $this->migrator->add('general.email_analise_disciplina', $default);
     }
 }

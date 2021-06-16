@@ -10,12 +10,11 @@
         <br>
 
 @if($pedido-> status == 'Análise')
-
-        Comentario do pedido: {{ $pedido->reason }}
-        <br>
-        <br>
+    Comentario do pedido: {{ $pedido->disciplinas[0]->status()->reason }}
+    <br>
 @endif  
-        Status do pedido: <b>{{ $pedido->status }}</b>                    
+
+Status do pedido: <b>{{ $pedido->status }}</b>                    
 
 @if($pedido-> status == 'Em elaboração' && !$pedido->disciplinas->isEmpty() )
 
@@ -40,27 +39,21 @@
 
 
 @can('admin')
-@if($pedido-> status == 'Análise')
+
 <div class="card-body">
     <div class="row">
-        <div class="form-group col-sm">
-            <a href="/pedidos/{{$pedido->id}}/retornar_analise" onclick="return confirm('Finalizar o pedido?');" class="btn btn-success"> Finalizar como Deferido </a>
-        </div>  
-    
-        <div class="form-group col-sm">
-            <a href="/pedidos/{{$pedido->id}}/finalizado" onclick="return confirm('Finalizar o pedido?');" class="btn btn-success"> Finalizar como Indeferido </a>        
-        </div>
-
-        <div class="form-group col-sm">
-            <div class="offset-sm-9">
-            <a href="/settings" class="btn btn-success"><i class="far fa-edit"></i> Email </a>        
-            </div>
-        </div>
-        
+    <form method="POST" action="/deferimento/{{ $pedido->id }}">
+        @csrf
+        @method('patch')
+        @include('pedidos.partials.disciplinas_checkbox')
+        @if($pedido-> status == 'Análise')
+        <button type="submit" class="btn btn-success" name="deferimento" value="Deferido">Deferir</button>
+        <button type="submit" class="btn btn-danger" name="deferimento" value="Indeferido">Indeferir</button>
+        @endif
+    </form>
     </div> 
 </div> 
-@endif
-@endcan
 
+@endcan
 <hr>
 

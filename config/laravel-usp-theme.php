@@ -29,6 +29,13 @@ $right_menu = [
         'align' => 'right',
         'can'   => 'admin'
     ],
+    [
+        'text' => '<i class="fas fa-cogs"></i>',
+        'title' => 'Configurações',
+        'url' => config('app.url') . '/settings',
+        'align' => 'right',
+        'can'   => 'admin'
+    ],
 ];
 
 # dashboard_url renomeado para app_url
