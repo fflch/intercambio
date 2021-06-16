@@ -9,7 +9,7 @@ class GeneralSettingsController extends Controller
 {
     public function show(GeneralSettings $settings){
         return view('settings.show', [
-            'email' => $settings->email,   
+            'email' => $settings->email,  
         ]);
     }
     public function update(Request $request, GeneralSettings $settings){

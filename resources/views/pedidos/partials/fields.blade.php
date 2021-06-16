@@ -43,16 +43,18 @@
 @if($pedido-> status == 'Análise')
 <div class="card-body">
     <div class="row">
-        <div class="form-group col-sm-5">
-        <a href="/pedidos/{{$pedido->id}}/retornar_analise" onclick="return confirm('Retornar para o aluno?');" class="btn btn-success"> Retornar para Elaboração </a>
+        <div class="form-group col-sm">
+            <a href="/pedidos/{{$pedido->id}}/retornar_analise" onclick="return confirm('Finalizar o pedido?');" class="btn btn-success"> Finalizar como Deferido </a>
         </div>  
     
-        <div class="form-group col-sm-5">
-        <a href="/pedidos/{{$pedido->id}}/finalizado" onclick="return confirm('Finalizar o pedido? ao confirmar não poderão ser feitas mais mudanças');" class="btn btn-success"> Finalizar Pedido Completamente </a>        
+        <div class="form-group col-sm">
+            <a href="/pedidos/{{$pedido->id}}/finalizado" onclick="return confirm('Finalizar o pedido?');" class="btn btn-success"> Finalizar como Indeferido </a>        
         </div>
 
-        <div class="form-group col-sm-5">
-        <a href="/settings" class="fas fa-pencil-alt btn btn-success"> </a>        
+        <div class="form-group col-sm">
+            <div class="offset-sm-9">
+            <a href="/settings" class="btn btn-success"><i class="far fa-edit"></i> Email </a>        
+            </div>
         </div>
         
     </div> 
