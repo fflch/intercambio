@@ -19,7 +19,7 @@ class CreateFilesTable extends Migration
             $table->string('original_name');
             $table->string('path');
             $table->unsignedBigInteger('pedido_id')->nullable();
-            $table->foreign('pedido_id')->references('id')->on('pedidos')->onDelete('set null');
+            $table->foreign('pedido_id')->references('id')->on('pedidos')->onDelete('cascade');
         });
     }
 

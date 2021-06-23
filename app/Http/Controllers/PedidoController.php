@@ -13,18 +13,19 @@ class PedidoController extends Controller
     {
         $this->authorize('admin');
         #Campo de busca
+        
 
         if ($request->buscastatus != null && $request->search != null){
 
-            $pedidos = Pedido::where('codpes','LIKE',"%{$request->search}%")
-              ->where('status', $request->buscastatus)->paginate(10);
+            $pedidos = Pedido::where($this->user->codpes == 'user_id','LIKE',"%{$request->search}%")
+              ->where(Pedido::getStatus(), $request->buscastatus)->paginate(10);
             
         } else if(isset($request->search)) {
-            $pedidos = Pedido::where('codpes','LIKE',"%{$request->search}%")->paginate(10);
+            $pedidos = Pedido::where($this->user->codpes == 'user_id','LIKE',"%{$request->search}%")->paginate(10);
         }
             
         else if(isset($request->buscastatus)){
-            $pedidos = Pedido::where('status', $request->buscastatus)->paginate(10);
+            $pedidos = Pedido::where(Pedido::getStatus(), $request->buscastatus)->paginate(10);
         } else {
             $pedidos = Pedido::paginate(10);
         }

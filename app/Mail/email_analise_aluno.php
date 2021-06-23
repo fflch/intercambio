@@ -9,7 +9,7 @@ use Illuminate\Queue\SerializesModels;
 use App\Models\Pedido;
 use App\Service\GeneralSettings;
 
-class AnaliseMail extends Mailable
+class email_analise_aluno extends Mailable
 {
     use Queueable, SerializesModels;
     private $pedido;
@@ -31,12 +31,12 @@ class AnaliseMail extends Mailable
      */
     public function build()
     {
-        $text = str_replace('%nome_aluno',$this->pedido->nome,app(GeneralSettings::class)->email_analise_disciplina);
+        $text = str_replace('%nome_aluno',$this->pedido->nome,app(GeneralSettings::class)->email_analise_aluno);
         
-        return $this->view('emails.analise')
+        return $this->view('emails.email_analise_aluno')
             ->to('ccint@usp.br')
             ->from('sti@usp.br')
-            ->subject('Novo pedido de aproveitamento de créditos para análise')
+            ->subject('Confirmação do envio do pedido de aproveitamento')
             ->with([
                 'text' => $text,
                 'pedido' => $this->pedido,

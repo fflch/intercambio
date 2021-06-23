@@ -1,8 +1,4 @@
-Prezados(as) Comissão,
-
-O seu pedido de aproveitamento de créditos foi finalizado:
-
-do aluno: {{ $pedido->codpes }}
+{!! $text !!}
 
 Universidade: {{ $pedido->instituicao }}
 

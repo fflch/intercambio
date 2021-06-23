@@ -9,14 +9,23 @@ class GeneralSettingsController extends Controller
 {
     public function show(GeneralSettings $settings){
         return view('settings.show', [
-            'email_analise_disciplina' => $settings->email_analise_disciplina,  
+            'email_analise_aluno' => $settings->email_analise_aluno,  
+            'email_analise_ccint' => $settings->email_analise_ccint, 
+            'email_deferido' => $settings->email_deferido, 
+            'email_indeferido' => $settings->email_indeferido, 
         ]);
     }
     public function update(Request $request, GeneralSettings $settings){
         $request -> validate ([
-            'email_analise_disciplina' => 'required',
+            'email_analise_aluno' => 'required',
+            'email_analise_ccint' => 'required',
+            'email_deferido'    => 'required',
+            'email_indeferido'  => 'required',
         ]);
-        $settings->email_analise_disciplina = $request->input('email_analise_disciplina');
+        $settings->email_analise_aluno = $request->input('email_analise_aluno');
+        $settings->email_analise_ccint = $request->input('email_analise_ccint');
+        $settings->email_deferido = $request->input('email_deferido');
+        $settings->email_indeferido = $request->input('email_indeferido');
         $settings->save();
         return redirect()->back();
     }

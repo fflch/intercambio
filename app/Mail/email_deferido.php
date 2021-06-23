@@ -7,12 +7,13 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 use App\Models\Pedido;
+use App\Service\GeneralSettings;
 
-
-class RetornarAnaliseMail extends Mailable
+class email_deferido extends Mailable
 {
     use Queueable, SerializesModels;
     private $pedido;
+
     /**
      * Create a new message instance.
      *
@@ -30,11 +31,14 @@ class RetornarAnaliseMail extends Mailable
      */
     public function build()
     {
-        return $this->view('emails.retornar')
+        $text = str_replace('%nome_aluno',$this->pedido->nome,app(GeneralSettings::class)->email_deferido);
+        
+        return $this->view('emails.email_deferido')
             ->to('ccint@usp.br')
             ->from('sti@usp.br')
-            ->subject('Pedido de aproveitamento de créditos para análise recusado')
+            ->subject('Finalização do pedido de aproveitamento de créditos')
             ->with([
+                'text' => $text,
                 'pedido' => $this->pedido,
             ]);
     }

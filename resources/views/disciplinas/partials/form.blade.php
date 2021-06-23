@@ -97,8 +97,7 @@ function flip(clicado) {
             </div>  
         </div>
     </div>
-</div>
-
+    <hr>
 </form>
 
 
