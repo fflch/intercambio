@@ -7,12 +7,13 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 use App\Models\Pedido;
+use App\Service\GeneralSettings;
 
-
-class FinalizadoMail extends Mailable
+class email_indeferido extends Mailable
 {
     use Queueable, SerializesModels;
     private $pedido;
+
     /**
      * Create a new message instance.
      *
@@ -30,11 +31,15 @@ class FinalizadoMail extends Mailable
      */
     public function build()
     {
-        return $this->view('emails.finalizado')
+        //colocar um campo motivo
+        $text = str_replace('%motivo',$this->pedido->nome,app(GeneralSettings::class)->email_indeferido);
+        
+        return $this->view('emails.email_indeferido')
             ->to('ccint@usp.br')
             ->from('sti@usp.br')
-            ->subject('Pedido de aproveitamento de créditos para Comissão de Graduação')
+            ->subject('Novo pedido de aproveitamento de créditos para análise')
             ->with([
+                'text' => $text,
                 'pedido' => $this->pedido,
             ]);
     }

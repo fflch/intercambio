@@ -45,8 +45,8 @@ Status do pedido: <b>{{ $pedido->status }}</b>
     <form method="POST" action="/deferimento/{{ $pedido->id }}">
         @csrf
         @method('patch')
-        @include('pedidos.partials.disciplinas_checkbox')
         @if($pedido-> status == 'Análise')
+        @include('pedidos.partials.disciplinas_checkbox')
         <button type="submit" class="btn btn-success" name="deferimento" value="Deferido">Deferir</button>
         <button type="submit" class="btn btn-danger" name="deferimento" value="Indeferido">Indeferir</button>
         @endif
@@ -55,5 +55,5 @@ Status do pedido: <b>{{ $pedido->status }}</b>
 </div> 
 
 @endcan
-<hr>
+
 

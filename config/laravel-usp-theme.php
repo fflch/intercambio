@@ -18,7 +18,11 @@ $menu = [
         'url' => config('app.url') . '/pedidos',
         'can' => 'admin'
     ],
-   
+    [
+        'text' => 'Meus Pedidos',
+        'url' => config('app.url') . '/pedidos',
+        
+    ],
 ];
 
 $right_menu = [
