@@ -7,6 +7,12 @@ use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
 use Illuminate\Support\Facades\Event;
 
+use App\Models\Pedido;
+use App\Observers\PedidoObserver;
+
+use App\Models\Disciplina;
+use App\Observers\DisciplinaObserver;
+
 class EventServiceProvider extends ServiceProvider
 {
     /**
@@ -27,6 +33,7 @@ class EventServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        Pedido::observe(PedidoObserver::class);
+        Disciplina::observe(DisciplinaObserver::class);
     }
 }

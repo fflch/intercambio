@@ -2,6 +2,6 @@
 
 @section('content')
 
-Em construção 
+Sistema para solicitação de aproveitamento de créditos (intercâmbio)
 
 @endsection

@@ -22,30 +22,19 @@ class Pedido extends Model
 
     public function getStatus(){
 
-    $status = [
-            'Em elaboração' => [
-                'name' => "Em Elaboração",
-            ],
-            'Análise' => [
-                'name' => "Análise",       
-            ],
-            'Finalizado' => [
-                'name' => "Finalizado",       
-            ],
-        ];
-        
-        return $status;
-    }
-
-    public function getNomeAttribute($value){
-        return Pessoa::nomeCompleto($this->user->codpes);
-    }
-
-    public function getCursoAttribute($value){
-
-        $curso = Graduacao::curso($this->user->codpes, 8);
-        if(!empty($curso)) return $curso['nomcur'];
-        return 'Não matriculado em nenhum curso de Graduação';
+        $status = [
+                'Em elaboração' => [
+                    'name' => "Em Elaboração",
+                ],
+                'Análise' => [
+                    'name' => "Análise",       
+                ],
+                'Finalizado' => [
+                    'name' => "Finalizado",       
+                ],
+            ];
+            
+            return $status;
     }
    
     public function files()
@@ -59,24 +48,5 @@ class Pedido extends Model
     
     public function user(){
         return $this->belongsTo(\App\Models\User::class);
-    }
-
-    # status do pedidos: 'Em elaboração', 'Análise' e 'Finalizado'
-    public function getStatusAttribute(){
-
-        $disciplinas = Disciplina::where('pedido_id',$this->id)->get();
-        # Se nesse pedido não tem nenhum disciplina: 'Em elaboração'
-        if($disciplinas->isEmpty()) {
-            return 'Em elaboração';
-        }
-
-        foreach($disciplinas as $disciplina){
-            # Se nesse pedido existir alguma disciplina em elaboração: 'Em elaboração'
-            if($disciplina->status=='Em elaboração') return 'Em elaboração';
-
-            # Se alguma disciplina estiver em análise: 'Análise'
-            if($disciplina->status=='Análise') return 'Análise';
-        }
-        return 'Finalizado';
     }
 }

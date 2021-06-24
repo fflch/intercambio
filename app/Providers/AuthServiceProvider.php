@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 use Illuminate\Support\Facades\Gate;
+use Uspdev\Replicado\Graduacao;
 
 class AuthServiceProvider extends ServiceProvider
 {
@@ -29,6 +30,12 @@ class AuthServiceProvider extends ServiceProvider
         Gate::define('admin', function ($user) {
             $admins = explode(',', env('ADMINS'));
             return ( in_array($user->codpes, $admins) and $user->codpes );
+        });
+
+        # alunos de graduação
+        Gate::define('grad', function ($user) {
+            if(Graduacao::curso($user->codpes, env('REPLICADO_CODUNDCLG'))) return true;
+            return false;
         });
 
         # logado

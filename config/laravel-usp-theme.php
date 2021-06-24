@@ -1,17 +1,10 @@
 <?php
 
-$aproveitamento = [
+$menu = [
     [
         'text' => 'Nova solicitação',
         'url'  =>  config('app.url') . '/pedidos/create',
-        'can'  => 'logado'
-    ],
-];
-$menu = [
-    [
-        'text' => 'Aproveitamento de Créditos',
-        'submenu' => $aproveitamento,
-        'can' => 'logado'
+        'can'  => 'grad'
     ],
     [
         'text' => 'Pedidos',
@@ -20,8 +13,8 @@ $menu = [
     ],
     [
         'text' => 'Meus Pedidos',
-        'url' => config('app.url') . '/pedidos',
-        
+        'url' => config('app.url') . '/meus_pedidos',
+        'can' => 'grad'
     ],
 ];
 

@@ -1,5 +1,6 @@
 Prezado(a) %nome_aluno,
-Seu aproveitamento de créditos foi finalizado e já está registrado no seu histórico escolar do Sistema Júpiter, no semestre correspondente ao período do intercâmbio.
+<br>
+Seu aproveitamento de créditos para a disciplina <b>%disciplina</b> foi finalizado e já está registrado no seu histórico escolar do Sistema Júpiter, no semestre correspondente ao período do intercâmbio.
 Por favor, confira as informações registradas no seu histórico e caso haja qualquer problema ou divergência, por favor, entre em contato conosco através do e-mail international.fflch@usp.br.
 Atenciosamente,
 Equipe CCInt-FFLCH

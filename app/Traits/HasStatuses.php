@@ -3,6 +3,7 @@ namespace App\Traits;
 
 use Illuminate\Support\Facades\Auth;
 use Spatie\ModelStatus\Events\StatusUpdated;
+use App\Models\User;
 
 trait HasStatuses {
     use \Spatie\ModelStatus\HasStatuses;

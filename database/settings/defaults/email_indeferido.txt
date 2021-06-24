@@ -1,0 +1,7 @@
+Prezado(a) %nome_aluno,
+<br>
+Sua solicitação de aproveitamento de créditos para a disciplina <b>%disciplina</b> foi devolvida.
+Por favor, acesse novamente o sistema e anexe as informações/os documentos solicitados.
+
+Atenciosamente,
+Equipe CCInt-FFLCH

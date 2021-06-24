@@ -1,6 +1,0 @@
-Prezado(a) aluno(a),
-Sua solicitação de aproveitamento de créditos foi devolvida pelo seguinte motivo:
-%motivo
-Por favor, acesse novamente o sistema e anexe as informações/os documentos solicitados.
-Atenciosamente,
-Equipe CCInt-FFLCH

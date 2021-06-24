@@ -3,15 +3,15 @@
 namespace App\Service;
 
 use Axn\LaravelStepper\Stepper;
-use App\Models\Disciplina;
+use App\Models\Pedido;
 
-class DisciplinaStatus extends Stepper
+class PedidoStatus extends Stepper
 {
     protected $view = 'laravel-fflch-stepper::main';
 
     public function register()
     {
-        foreach(Disciplina::status as $status){
+        foreach(Pedido::status as $status){
             $this->addStep($status);
         }
     }

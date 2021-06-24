@@ -32,10 +32,10 @@ class email_analise_ccint extends Mailable
     public function build()
     {
         $text = str_replace('%nome_aluno',$this->pedido->nome,app(GeneralSettings::class)->email_analise_ccint);
-        
+        $to = explode(',',env('EMAILS_CCINT'));
+
         return $this->view('emails.email_analise_ccint')
-            ->to('ccint@usp.br')
-            ->from('sti@usp.br')
+            ->to($to)
             ->subject('Aviso de recebimento de pedido de aproveitamento de créditos')
             ->with([
                 'text' => $text,

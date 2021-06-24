@@ -12,36 +12,20 @@ use App\Http\Controllers\GeneralSettingsController;
 
 Route::get('/', [IndexController::class,'index']);
 
-//Rotas Obrigatoria
+// pedidos
 Route::resource('/pedidos', PedidoController::class);
+Route::get('/meus_pedidos', [PedidoController::class,'meus_pedidos']);
+
+// disciplinas
 Route::resource('/disciplinas', DisciplinaController::class);
 
 // files
-Route::resource('files', FileController::class);
 Route::get('/disciplinas/{disciplina}/showfile', [DisciplinaController::class, 'showfile']);
+Route::get('/pedidos/{pedido}/showfile', [PedidoController::class, 'showfile']);
 
 // Rotas: Em Elaboração -> Análise
 Route::post('/analise/{pedido}', [WorkflowController::class, 'analise']);
 Route::patch('/deferimento/{pedido}', [WorkflowController::class, 'deferimento']);
-
-
-/*
-
-Route::get('/pedidos/{pedido}/finalizado', [WorkflowController::class, 'finalizado']);
-Route::get('/disciplinas/{disciplina}/analise_disciplina', [WorkflowController::class, 'analise_disciplina']);
-Route::get('/disciplinas/{disciplina}/comissao_graduacao', [WorkflowController::class, 'comissao_graduacao']);
-Route::get('/disciplinas/{disciplina}/servico_graduacao', [WorkflowController::class, 'servico_graduacao']);
-Route::get('/disciplinas/{disciplina}/docente', [WorkflowController::class, 'docente']);
-Route::get('/disciplinas/{disciplina}/finalizacao', [WorkflowController::class, 'finalizacao']);
-Route::get('/disciplinas/{disciplina}/retornar_analise_disciplina', [WorkflowController::class, 'retornar_analise_disciplina']);
-Route::get('/disciplinas/{disciplina}/retornar_comissao_graduacao', [WorkflowController::class, 'retornar_comissao_graduacao']);
-Route::get('/disciplinas/{disciplina}/retornar_servico_graduacao', [WorkflowController::class, 'retornar_servico_graduacao']);
-Route::get('/disciplinas/{disciplina}/retornar_docente', [WorkflowController::class, 'retornar_docente']);
-*/
-
-// Rota provisoria dos tipos
-
-Route::get('/pedidos/{pedido}/index_type', [PedidoController::class, 'index_type']);
 
 // loginAs
 Route::get('loginas', [LoginController::class, 'loginAsForm']);
@@ -50,5 +34,4 @@ Route::post('loginas', [LoginController::class, 'loginAs']);
 # settings
 Route::get('/settings', [GeneralSettingsController::class, 'show']);
 Route::post('/settings', [GeneralSettingsController::class, 'update']);
-
 

@@ -20,6 +20,12 @@ class CreatePedidosTable extends Migration
             $table->string('original_name');
             $table->string('path');
             $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
+
+            # Campos gerenciados pelo observer
+            $table->string('status');
+            $table->string('curso');
+            $table->string('nome');
+            $table->string('codpes');
         });
     }
 

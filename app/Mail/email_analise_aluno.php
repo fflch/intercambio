@@ -32,10 +32,10 @@ class email_analise_aluno extends Mailable
     public function build()
     {
         $text = str_replace('%nome_aluno',$this->pedido->nome,app(GeneralSettings::class)->email_analise_aluno);
+        $to = [auth()->user()->email];
         
         return $this->view('emails.email_analise_aluno')
-            ->to('ccint@usp.br')
-            ->from('sti@usp.br')
+            ->to($to)
             ->subject('Confirmação do envio do pedido de aproveitamento')
             ->with([
                 'text' => $text,

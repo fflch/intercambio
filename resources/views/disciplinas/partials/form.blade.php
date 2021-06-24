@@ -88,6 +88,11 @@ function flip(clicado) {
         </div>
 
         <div class="row">
+            Comentário adicional para essa disciplina que julgar importante (opcional):
+            <textarea  class="form-control" rows="3" name="comentario"></textarea>
+        </div>
+
+        <div class="row">
             <div class="form-group col-sm-2">
                 <br>
                 <div class="form-group">
@@ -96,6 +101,8 @@ function flip(clicado) {
                 </div>
             </div>  
         </div>
+
+
     </div>
     <hr>
 </form>

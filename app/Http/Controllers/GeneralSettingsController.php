@@ -8,6 +8,8 @@ use App\Service\GeneralSettings;
 class GeneralSettingsController extends Controller
 {
     public function show(GeneralSettings $settings){
+        $this->authorize('admin');
+
         return view('settings.show', [
             'email_analise_aluno' => $settings->email_analise_aluno,  
             'email_analise_ccint' => $settings->email_analise_ccint, 
@@ -16,6 +18,7 @@ class GeneralSettingsController extends Controller
         ]);
     }
     public function update(Request $request, GeneralSettings $settings){
+        $this->authorize('admin');
         $request -> validate ([
             'email_analise_aluno' => 'required',
             'email_analise_ccint' => 'required',

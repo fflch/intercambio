@@ -6,22 +6,23 @@ use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
-use App\Models\Pedido;
+use App\Models\Disciplina;
+use App\Models\User;
 use App\Service\GeneralSettings;
 
 class email_deferido extends Mailable
 {
     use Queueable, SerializesModels;
-    private $pedido;
+    private $disciplina;
 
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct(Pedido $pedido)
+    public function __construct(Disciplina $disciplina)
     {
-        $this->pedido = $pedido;
+        $this->disciplina = $disciplina;
     }
 
     /**
@@ -31,15 +32,17 @@ class email_deferido extends Mailable
      */
     public function build()
     {
-        $text = str_replace('%nome_aluno',$this->pedido->nome,app(GeneralSettings::class)->email_deferido);
+        $text = str_replace('%nome_aluno',$this->disciplina->pedido->nome,app(GeneralSettings::class)->email_deferido);
+        $text = str_replace('%disciplina',$this->disciplina->nome,$text);
+
+        $to = [User::where('id',$this->disciplina->pedido->user_id)->first()->email];
         
         return $this->view('emails.email_deferido')
-            ->to('ccint@usp.br')
-            ->from('sti@usp.br')
-            ->subject('Finalização do pedido de aproveitamento de créditos')
+            ->to($to)
+            ->subject('Deferimento do pedido de créditos')
             ->with([
                 'text' => $text,
-                'pedido' => $this->pedido,
+                'disciplina' => $this->disciplina,
             ]);
     }
 }

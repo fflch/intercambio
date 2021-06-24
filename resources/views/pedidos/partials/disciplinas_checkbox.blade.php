@@ -6,11 +6,11 @@
         <thead>
           <tr>
             <th scope="col">
-              @if($pedido->status != "Análise")
-                Status
-              @else
+              @can('admin')
                 Selecionar
-              @endif
+              @else
+                Status
+              @endcan
             </th>
             <th scope="col">Nome</th>
             <th scope="col">Tipo</th>
@@ -19,22 +19,31 @@
             <th scope="col">Carga horária</th>
             <th scope="col">Código USP</th>
             <th scope="col">Ementa</th>
+            <th scope="col">Comentários</th>
             @if($pedido->status != "Em elaboração")
             <th scope="col" style="display: none;"></th>
             @else
             <th scope="col">Excluir Disciplina</th>
             @endif
+
           </tr>
         </thead>
         <tbody>
           @foreach($pedido->disciplinas->sortBy('tipo') as $disciplina)  
           <tr>
             <td>
-                @if($disciplina->status() == 'Análise')
+                @can('admin')
+                  @if( $disciplina->status == "Análise" )
                     <input type="checkbox" name="disciplinas[]" value="{{ $disciplina->id }}">
+                  @else
+                    <i>{{ $disciplina->status }}</i>
+                  @endif
                 @else
-                    {{ $disciplina->status() }}
-                @endif
+                    <i>{{ $disciplina->status }}</i>
+                    @if($disciplina->status == 'Indeferido')
+                      (<a href="/disciplinas/{{ $disciplina->id }}/edit">solicitar revisão</a>)
+                    @endif
+                @endcan
             </td>
             <td>{{ $disciplina->nome }}</td>
             <td>{{ $disciplina->tipo }}</td>
@@ -46,6 +55,14 @@
                 @if($disciplina->tipo =="Obrigatória")
                 <a href="/disciplinas/{{ $disciplina->id }}/showfile"><i class="far fa-file-pdf"></i></a> 
                 @endif
+            </td>
+            <td>
+                @foreach($disciplina->statuses as $status)
+                  @if(!empty($status->reason))
+                    {{-- TODO: Colocar data do comentário e deixar colapsado --}}
+                    {{ \App\Models\User::find($status->user_id)->name }}: {{ $status->reason }}
+                  @endif
+                @endforeach
             </td>
             @if($pedido->status == "Em elaboração")
             <td>
@@ -64,5 +81,4 @@
       </table>
     </div>
   </div>
-  @include('files.index') 
 </div>
