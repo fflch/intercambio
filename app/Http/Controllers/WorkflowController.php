@@ -11,7 +11,7 @@ use App\Mail\email_analise_aluno;
 use App\Mail\email_analise_ccint;
 use App\Mail\email_indeferido;
 use App\Mail\email_deferido;
-
+use App\Service\Utils;
 
 class WorkflowController extends Controller
 {
@@ -24,7 +24,7 @@ class WorkflowController extends Controller
         foreach($pedido->disciplinas as $disciplina) {
             $disciplina->setStatus('Análise');
         }
-        $this->updatePedidoStatus($pedido);
+        Utils::updatePedidoStatus($pedido);
        
         Mail::queue(new email_analise_aluno($pedido));
         Mail::queue(new email_analise_ccint($pedido));
@@ -57,40 +57,11 @@ class WorkflowController extends Controller
             }
 
         }
-        $this->updatePedidoStatus($pedido);
+        Utils::updatePedidoStatus($pedido);
         return redirect("/pedidos/$pedido->id");
     }
 
 
     // Método auxiliar para automatizar a configuração do status do pedido
-    private function updatePedidoStatus(Pedido $pedido){
-        # Se nesse pedido não tem nenhum disciplina: 'Em elaboração'
-        $disciplinas = $pedido->disciplinas;
-
-        if($disciplinas->isEmpty()) {
-            $pedido->status = 'Em elaboração';
-            $pedido->save();
-            return;
-        } 
-        
-        foreach($disciplinas as $disciplina){
-            # Se nesse pedido existir alguma disciplina em elaboração status do pedido será em 'Em elaboração'
-            if($disciplina->status=='Em elaboração') {
-                $pedido->status = 'Em elaboração';
-                $pedido->save();
-                return;
-            }
-
-            # Se nesse pedido existir alguma disciplina em análise status do pedido será em 'Em elaboração'
-            if($disciplina->status=='Análise') {
-                $pedido->status = 'Análise';
-                $pedido->save();
-                return;
-            }
-        }
-
-        $pedido->status = 'Finalizado';
-        $pedido->save();
-        return;
-    }
+    
 }
