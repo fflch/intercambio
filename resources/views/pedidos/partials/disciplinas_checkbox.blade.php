@@ -60,7 +60,7 @@
                 @foreach($disciplina->statuses as $status)
                   @if(!empty($status->reason))
                     {{-- TODO: Colocar data do comentário e deixar colapsado --}}
-                    {{ \App\Models\User::find($status->user_id)->name }}: {{ $status->reason }}
+                    <b>{{ \App\Models\User::find($status->user_id)->name }}:</b> {{ $status->reason }} <br>
                   @endif
                 @endforeach
             </td>

@@ -1,4 +1,4 @@
-<form method="POST" enctype="multipart/form-data" action="/disciplinas/">
+<form method="POST" enctype="multipart/form-data" action="/disciplinas">
 @csrf
 
 <script>
