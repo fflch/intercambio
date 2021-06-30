@@ -38,9 +38,7 @@
 
           @if($pedido->status == "Análise")
             <th scope="col">Créditos Convertidos</th>
-            <th scope="col">Converter créditos</th>
           @else
-            <th scope="col" style="display: none;"></th>
             <th scope="col" style="display: none;"></th>
           @endif
 
@@ -86,22 +84,14 @@
               <form method="POST" action="/disciplinas/{{$disciplina->id}}"> 
                   @csrf
                   @method('delete')
-              <button type="submit" onclick="return confirm('Tem certeza que deseja excluir?');" style="background-color: transparent;border: none;"><i class="far fa-trash-alt" color="#007bff"></i></button>  
+                  <button type="submit" onclick="return confirm('Tem certeza que deseja excluir?');" style="background-color: transparent;border: none;"><i class="far fa-trash-alt" color="#007bff"></i></button>  
               </form>  
             </td>
           @else
             <td style="display: none;"></td>
           @endif
           @if($pedido->status == "Análise" && $disciplina->tipo != "Obrigatória")
-              <form method="POST" action="/disciplinas/{{$disciplina->id}}">
-                @csrf
-                @method('patch')
-            <td scope="col">{{ $disciplina->conversao }}</td>
-            <td scope="col">
-            <input class="form-control" name="conversao" value="">
-            <button type="submit" class="btn btn-success"><i class="fas fa-check"></i></button>  
-            </td>
-          </form>
+                <td scope="col">{{ $disciplina->conversao }}</td>
           @else
             <td scope="col" style="display: none;"></td>
             <td scope="col" style="display: none;"></td>

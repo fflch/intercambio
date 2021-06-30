@@ -28,6 +28,9 @@
 
     </div>
     @can('admin')
+
+        @include('pedidos.partials.conversao')
+
         @if($pedido->status == 'Análise' && !$pedido->disciplinas->isEmpty() )
             <div class="card-body">
                 <div class="row">

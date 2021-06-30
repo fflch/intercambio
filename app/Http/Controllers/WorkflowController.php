@@ -43,12 +43,16 @@ class WorkflowController extends Controller
         foreach($request->disciplinas as $id){
             $disciplina = Disciplina::where('id',$id)->first();
             if($request->deferimento == 'Deferido'){
-                if($disciplina->where('tipo','NOT LIKE','Obrigatória')->where('conversao','IS NOT NULL'))
-                $disciplina->setStatus('Deferido',$request->comentario);
-                Mail::queue(new email_deferido($disciplina));
-            } else {
-                request()->session()->flash('alert-info','Converta os valores das disciplinas Optatitva');
-            }
+
+                # não vamos deferir disciplinas optativas sem conversão
+                if($disciplina->tipo != 'Obrigatória' && empty($disciplina->conversao)){
+                    request()->session()->flash('alert-danger',"A disciplina {$disciplina->nome}
+                    não foi deferida porque os créditos não foram convertidos");
+                } else {
+                    $disciplina->setStatus('Deferido',$request->comentario);
+                    Mail::queue(new email_deferido($disciplina));
+                }
+            } 
 
             if($request->deferimento == 'Indeferido'){
                 # Se inferido, o motivo é obrigatório

@@ -44,18 +44,6 @@ class DisciplinaController extends Controller
 
     public function update(Request $request, Disciplina $disciplina)
     {
-        /*
-        if($disciplina->status == "Análise"){
-            
-            $request->validate([
-                'conversao' => 'required',
-            ]);
-            $disciplina->conversao = $request;
-            $disciplina->save();
-        }else{
-            */
-
-
         $this->authorize('owner',$disciplina->pedido);
 
         $request->validate([
@@ -83,8 +71,6 @@ class DisciplinaController extends Controller
         return redirect("/pedidos/{$disciplina->pedido->id}");
         
     }
-
-    
    
     public function destroy(Disciplina $disciplina)
     {
@@ -109,4 +95,17 @@ class DisciplinaController extends Controller
         $this->authorize('owner',$disciplina->pedido);
         return Storage::download($disciplina->path, $disciplina->original_name);
     }
+
+    public function converte(Request $request)
+    {
+        $this->authorize('admin');
+        $disciplina = Disciplina::find($request->disciplina_id);
+
+        if($disciplina){
+            $disciplina->conversao = $request->conversao;
+            $disciplina->save();
+        }
+        return back();
+    }
+  
 }

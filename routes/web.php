@@ -31,7 +31,9 @@ Route::patch('/deferimento/{pedido}', [WorkflowController::class, 'deferimento']
 Route::get('loginas', [LoginController::class, 'loginAsForm']);
 Route::post('loginas', [LoginController::class, 'loginAs']);
 
-# settings
+// settings
 Route::get('/settings', [GeneralSettingsController::class, 'show']);
 Route::post('/settings', [GeneralSettingsController::class, 'update']);
 
+// Rotas genéricas
+Route::post('/converte', [DisciplinaController::class, 'converte']);

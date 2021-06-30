@@ -32,8 +32,8 @@ class PedidoRequest extends FormRequest
     public function messages()
     {
         return [
-            'instituicao' => 'Insira algo no campo: Instiuição',
-            'file' => 'Insira algo no campo: Arquivos',
+            'instituicao.required' => 'Insira algo no campo: Instiuição',
+            'file.mimes' => 'Somente arquivos PDFs são aceitos',
         ];
     }
 }
