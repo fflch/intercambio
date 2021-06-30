@@ -43,9 +43,13 @@ class WorkflowController extends Controller
         foreach($request->disciplinas as $id){
             $disciplina = Disciplina::where('id',$id)->first();
             if($request->deferimento == 'Deferido'){
+                if($disciplina->where('tipo','NOT LIKE','Obrigatória')->where('conversao','IS NOT NULL'))
                 $disciplina->setStatus('Deferido',$request->comentario);
                 Mail::queue(new email_deferido($disciplina));
+            } else {
+                request()->session()->flash('alert-info','Converta os valores das disciplinas Optatitva');
             }
+
             if($request->deferimento == 'Indeferido'){
                 # Se inferido, o motivo é obrigatório
                 $request->validate([

@@ -41,7 +41,20 @@ class DisciplinaRequest extends FormRequest
             $data = array_merge($data,$obg);
         }
         return $data;
-       
+    }
+
+    public function messages()
+    {
+        return [
+            'tipo' => 'Insira algo no campo: Tipo da Disciplina',
+            'nome' => 'Insira algo no campo: Nome da Disciplina',
+            'nota' => 'Insira algo no campo: Nota',
+            'creditos' => 'Insira algo no campo: Créditos',
+            'carga_horaria' => 'Insira algo no campo: Carga Horaria',
+            'codigo' => 'Insira algo no campo: Código USP',
+            'file' => 'Insira algo no campo: Arquivo da Disciplina obrigatória',          
+
+        ];
     }
     
 }

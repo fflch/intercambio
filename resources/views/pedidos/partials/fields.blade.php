@@ -1,6 +1,8 @@
 <div class="card">
 
-<div class="card-header"><h5>Requerimento de Aproveitamento de Créditos</b></h5></div>
+<div class="card-header"><h5><b>Requerimento de Aproveitamento de Créditos</b></h5>
+
+</div>
     <div class="card-body">
     <b>Nome:</b> {{ $pedido->nome ?? '' }}<br>
     <b>Número USP:</b> {{ $pedido->codpes ?? '' }}<br>
@@ -35,11 +37,11 @@
                     @if($pedido-> status == 'Análise')
                     @include('pedidos.partials.disciplinas_checkbox')
                     
-                    Comentário opcional (será enviado ao aluno):
-                    <textarea  class="form-control" rows="3" name="comentario"></textarea>
+                    Comentário (Obrigatório caso seja indeferido):
+                    <textarea  class="form-control" rows="3" name="comentario" placeholder="Este comentário será enviado ao aluno"></textarea>
                     <br>
-                    <button type="submit" class="btn btn-success" name="deferimento" value="Deferido">Deferir</button>
-                    <button type="submit" class="btn btn-danger" name="deferimento" value="Indeferido">Indeferir</button>
+                    <button type="submit" onclick="return confirm('Certeza que deseja deferir essa(s) disciplina(s)');" class="btn btn-success" name="deferimento" value="Deferido">Deferir</button>
+                    <button type="submit" onclick="return confirm('Certeza que deseja indeferir essa(s) disciplina(s)');" class="btn btn-danger" name="deferimento" value="Indeferido">Indeferir</button>
                     @endif
                 </form>
                 </div> 
