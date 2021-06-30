@@ -44,6 +44,18 @@ class DisciplinaController extends Controller
 
     public function update(Request $request, Disciplina $disciplina)
     {
+        /*
+        if($disciplina->status == "Análise"){
+            
+            $request->validate([
+                'conversao' => 'required',
+            ]);
+            $disciplina->conversao = $request;
+            $disciplina->save();
+        }else{
+            */
+
+
         $this->authorize('owner',$disciplina->pedido);
 
         $request->validate([
@@ -69,6 +81,7 @@ class DisciplinaController extends Controller
         Utils::updatePedidoStatus($disciplina->pedido);
 
         return redirect("/pedidos/{$disciplina->pedido->id}");
+        
     }
 
     

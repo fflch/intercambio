@@ -67,19 +67,9 @@ class PedidoController extends Controller
         ]);
     }
 
-    public function edit(Pedido $pedido)
-    {
-        # TODO: Esse método não está sendo usado, vamos usar?
-        /*
-        $this->authorize('owner',$pedido);
-        return view('pedidos.edit',[
-            'pedido' => $pedido
-        ]);
-        */
-    }
-
     public function update(PedidoRequest $request, Pedido $pedido)
     {
+        Storage::delete($pedido->path);
         $this->authorize('owner',$pedido);
         $validated = $request->validated();
         $pedido->update($validated);

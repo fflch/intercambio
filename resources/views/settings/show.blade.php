@@ -27,7 +27,7 @@
     <br>
         <div class="row">
             <div class="col">
-                <label for="email_deferido" ><b>MENSAGEM PARA ALUNO – Finalização do pedido de aproveitamento de créditos</b></label><br>
+                <label for="email_deferido" ><b>MENSAGEM PARA ALUNO – Email de deferimento para o aluno</b></label><br>
                 <textarea name="email_deferido" cols="130" rows="15">{{ $email_deferido }}</textarea> 
             </div>
         </div>

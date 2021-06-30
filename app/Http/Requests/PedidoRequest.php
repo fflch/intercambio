@@ -28,4 +28,12 @@ class PedidoRequest extends FormRequest
             'file'        => 'mimes:pdf|max:10000|required',
         ];
     }
+
+    public function messages()
+    {
+        return [
+            'instituicao' => 'Insira algo no campo: Instiuição',
+            'file' => 'Insira algo no campo: Arquivos',
+        ];
+    }
 }
