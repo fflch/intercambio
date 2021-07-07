@@ -17,12 +17,8 @@ class DisciplinaController extends Controller
         $validated = $request->validated();
         $disciplina = Disciplina::create($validated);
         $disciplina->setStatus('Em elaboração',request()->comentario);
-        
-        if($request->tipo == "Obrigatória"){
-            $disciplina->original_name = $request->file('file')->getClientOriginalName();
-            $disciplina->path = $request->file('file')->store('.');
-        }
-
+        $disciplina->original_name = $request->file('file')->getClientOriginalName();
+        $disciplina->path = $request->file('file')->store('.');
         $disciplina->save();
         request()->session()->flash('alert-info','Disciplina adicionada com sucesso');
         return redirect("/pedidos/{$disciplina->pedido->id}");  
@@ -75,6 +71,7 @@ class DisciplinaController extends Controller
     public function destroy(Disciplina $disciplina)
     {
         $this->authorize('owner',$disciplina->pedido);
+        Storage::delete($disciplina->path);
         $pedido_id = $disciplina->pedido_id;
         $disciplina->delete();
         request()->session()->flash('alert-info','Disciplina excluída com sucesso.');
@@ -98,6 +95,10 @@ class DisciplinaController extends Controller
 
     public function converte(Request $request)
     {
+        $request->validate([
+            'conversao' => 'required|integer',
+        ]);
+
         $this->authorize('admin');
         $disciplina = Disciplina::find($request->disciplina_id);
 

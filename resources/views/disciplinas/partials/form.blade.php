@@ -53,7 +53,7 @@ function flip(clicado) {
 
             <div class="form-group col-sm-2">
                 <div class="form-group">
-                    <label for="carga_horaria" class="required"><b>Carga horária: </b></label>
+                    <label for="carga_horaria" class="required"><b>Carga Horária Semestral: </b></label>
                     <input type="text" class="form-control" id="carga_horaria" name="carga_horaria" value="{{ old('carga_horaria') }}">
                 </div>  
             </div>
@@ -76,15 +76,14 @@ function flip(clicado) {
                     </select> 
                 </div>
             </div>
-
+        </div>
+        <div class="row">
             <div class="form-group col-sm">
                 <div class="form-group">
-                    <label for="file" class="required"><b>Adicione a ementa: </b></label> <br>
+                    <label for="file" class="required"><b>Ementa (Necessário se Obrigatória): </b></label> <br>
                     <input type="file" name="file">
-                    
                 </div>
             </div>
-
         </div>
 
         <div class="row">

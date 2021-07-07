@@ -1,6 +1,3 @@
-@extends('main')
-
-@section('content')
 
 <div class="card">
 <div class="card-header"><h5><b>À COMISSÃO DE GRADUAÇÃO DA FACULDADE DE FILOSOFIA LETRAS E CIÊNCIAS HUMANAS DA USP.</b></h5></div>
@@ -27,6 +24,5 @@
             </div>
     </form>
 </div>
-
-@endsection
+</div>
 

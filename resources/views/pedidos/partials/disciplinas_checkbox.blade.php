@@ -26,7 +26,7 @@
               Créditos
             @endif
             </th>
-            <th scope="col">Carga horária</th>
+            <th scope="col">Carga Horária Semestral</th>
             <th scope="col">Código USP</th>
             <th scope="col">Ementa</th>
             <th scope="col">Comentários (passar o mouse para ver o texto)</th>
@@ -36,10 +36,10 @@
             <th scope="col">Excluir Disciplina</th>
           @endif
 
-          @if($pedido->status == "Análise")
-            <th scope="col">Créditos Convertidos</th>
+          @if($pedido->status == "Em elaboração")
+            <th scope="col" style="display: none;"></th> 
           @else
-            <th scope="col" style="display: none;"></th>
+            <th scope="col">Créditos Convertidos</th>
           @endif
 
           </tr>
@@ -68,14 +68,14 @@
             <td>{{ $disciplina->carga_horaria }}</td>
             <td>{{ $disciplina->codigo }}</td>
             <td>
-                @if($disciplina->tipo =="Obrigatória")
+                @if(!empty($disciplina->path))
                 <a href="/disciplinas/{{ $disciplina->id }}/showfile"><i class="far fa-file-pdf"></i></a> 
                 @endif
             </td>
             <td class="expandir">
                 @foreach($disciplina->statuses as $status)
                   @if(!empty($status->reason))
-                    <b>{{ \App\Models\User::find($status->user_id)->name }}:</b><br> {{ $status->reason }} <br>
+                    <b>{{ \App\Models\User::find($status->user_id)->name }} ( {{ $status->created_at }} ):</b><br> {{ $status->reason }} <br>
                   @endif
                 @endforeach
             </td>
@@ -90,11 +90,11 @@
           @else
             <td style="display: none;"></td>
           @endif
-          @if($pedido->status == "Análise" && $disciplina->tipo != "Obrigatória")
-                <td scope="col">{{ $disciplina->conversao }}</td>
+
+          @if($pedido->status == "Em elaboração")
+            <td scope="col" style="display: none;"></td>      
           @else
-            <td scope="col" style="display: none;"></td>
-            <td scope="col" style="display: none;"></td>
+            <td scope="col">{{ $disciplina->conversao }}</td>
           @endif
 
           </tr>
