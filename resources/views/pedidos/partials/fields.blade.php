@@ -1,7 +1,9 @@
 <div class="card">
 
 <div class="card-header"><h5><b>Requerimento de Aproveitamento de Créditos</b></h5>
-
+@if($pedido->status == 'Em elaboração')
+<a href="/pedidos/{{ $pedido->id }}/edit" class="btn btn-info">Alterar Pedido</a>
+@endif
 </div>
     <div class="card-body">
     <b>Nome:</b> {{ $pedido->nome ?? '' }}<br>
@@ -28,11 +30,9 @@
 
     </div>
     @can('admin')
-
-        @include('pedidos.partials.conversao')
-
         @if($pedido->status == 'Análise' && !$pedido->disciplinas->isEmpty() )
             <div class="card-body">
+            @include('pedidos.partials.conversao')
                 <div class="row">
                 <form method="POST" action="/deferimento/{{ $pedido->id }}">
                     @csrf

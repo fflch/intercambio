@@ -66,13 +66,21 @@ class PedidoController extends Controller
             'stepper' => $stepper->render()
         ]);
     }
+    public function edit(Pedido $pedido)
+    {
+        $this->authorize('owner',$pedido);
+        return view('pedidos.edit',[
+            'pedido' => $pedido,
+        ]);
+    }
 
     public function update(PedidoRequest $request, Pedido $pedido)
     {
-        Storage::delete($pedido->path);
+
         $this->authorize('owner',$pedido);
         $validated = $request->validated();
         $pedido->update($validated);
+        Storage::delete($pedido->path);
         request()->session()->flash('alert-info','atualizado com sucesso');
         return redirect("/pedidos/{$pedido->id}");
     }

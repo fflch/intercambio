@@ -39,21 +39,31 @@ class DisciplinaRequest extends FormRequest
             'file'     => 'required|mimes:pdf|max:10000',
         ];
             $data = array_merge($data,$obg);
+        } else{
+            $opt= [
+            'file' => 'nullable'
+        ];
+            $data = array_merge($data,$opt);
         }
+
         return $data;
     }
 
     public function messages()
     {
         return [
-            'tipo' => 'Insira algo no campo: Tipo da Disciplina',
-            'nome' => 'Insira algo no campo: Nome da Disciplina',
-            'nota' => 'Insira algo no campo: Nota',
-            'creditos' => 'Insira algo no campo: Créditos',
-            'carga_horaria' => 'Insira algo no campo: Carga Horaria',
-            'codigo' => 'Insira algo no campo: Código USP',
-            'file' => 'Insira algo no campo: Arquivo da Disciplina obrigatória',          
-
+            'tipo.required' => 'Insira algo no campo: Tipo da Disciplina',
+            'nome.required' => 'Insira algo no campo: Nome da Disciplina',
+            'nota.required' => 'Insira algo no campo: Nota',
+            'nota.integer' => 'Campo nota deve ser apenas números',
+            'creditos.required' => 'Insira algo no campo: Créditos',
+            'creditos.integer' => 'Campo créditos deve ser apenas números',
+            'carga_horaria.required' => 'Insira algo no campo: Carga Horaria',
+            'carga_horaria.integer' => 'Campo carga horaria deve ser apenas números',
+            'codigo.required' => 'Insira algo no campo: Código USP',
+            'file.required' => 'Insira um arquivo na disciplina obrigatória',          
+            'file.max' => 'Tamanho do arquivo não suportado',
+            'file.mimes' => 'Somente arquivos PDFs são aceitos',
         ];
     }
     
