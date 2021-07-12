@@ -17,6 +17,7 @@
         "laravel/framework": "^8.12",
         "laravel/tinker": "^2.5",
         "laravel/ui": "^3.2",
+        "rap2hpoutre/laravel-log-viewer": "^1.7",
         "spatie/laravel-model-status": "^1.10",
         "spatie/laravel-settings": "^2.1",
         "uspdev/laravel-usp-faker": "^1.0",
