@@ -9,6 +9,8 @@ use App\Http\Controllers\FileController;
 use App\Http\Controllers\DisciplinaController;
 use App\Http\Controllers\WorkflowController;
 use App\Http\Controllers\GeneralSettingsController;
+use App\Http\Controllers\PaisController;
+use App\Http\Controllers\InstituicaoController;
 
 Route::get('/', [IndexController::class,'index']);
 
@@ -18,6 +20,12 @@ Route::get('/meus_pedidos', [PedidoController::class,'meus_pedidos']);
 
 // disciplinas
 Route::resource('/disciplinas', DisciplinaController::class);
+
+//País
+Route::resource('/pais', PaisController::class);
+
+//Instituicao
+Route::resource('/instituicao', InstituicaoController::class);
 
 // files
 Route::get('/disciplinas/{disciplina}/showfile', [DisciplinaController::class, 'showfile']);

@@ -33,6 +33,13 @@ $right_menu = [
         'align' => 'right',
         'can'   => 'admin'
     ],
+    [
+        'text' => '<i class="fas fa-flag"></i>',
+        'title' => 'Países',
+        'url' => config('app.url') . '/pais',
+        'align' => 'right',
+        'can'   => 'admin'
+    ],
 ];
 
 # dashboard_url renomeado para app_url

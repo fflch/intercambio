@@ -33,9 +33,11 @@ class email_analise_aluno extends Mailable
     {
         $text = str_replace('%nome_aluno',$this->pedido->nome,app(GeneralSettings::class)->email_analise_aluno);
         $to = [auth()->user()->email];
+        $ccint = explode(',',env('EMAILS_CCINT'));
         
         return $this->view('emails.email_analise_aluno')
             ->to($to)
+            ->bcc($ccint)
             ->subject('Confirmação do envio do pedido de aproveitamento')
             ->with([
                 'text' => $text,
