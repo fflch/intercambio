@@ -21,9 +21,8 @@ class DisciplinaController extends Controller
         if(!empty($request->file)){
             $disciplina->original_name = $request->file('file')->getClientOriginalName();
             $disciplina->path = $request->file('file')->store('.');
-            $disciplina->save();
         }
-        
+        $disciplina->save();
         request()->session()->flash('alert-info','Disciplina adicionada com sucesso');
         return redirect("/pedidos/{$disciplina->pedido->id}");  
     }

@@ -1,17 +1,3 @@
-@extends('main')
-
-@section('content')
-
-<center> 
-  <form method="POST" action="/pais"> 
-  @csrf 
-    <label for="nome"><b>Adcionar um País</b></label>
-    <br>  
-    <input name="nome" value="" style="width:800px"></input>
-    <button name="submit" class="btn btn-success"><i class="fas fa-check"></i></button> 
-  </form>
-</center> 
-<br> 
 
 <div class="container" >
   <div class="row">  
@@ -23,18 +9,19 @@
             <th scope="col" style="width:15px"><h3>Alterações</h3></th>
           </tr>
         </thead>
-        
-        <tbody>
-        @foreach($paises->sortBy('nome') as $pais)  
+        <tbody>  
           <tr>
-            <td> <a href="pais/{{ $pais->id }}/"> {{ $pais->nome }} </td>
+
+        @foreach($pais->instituicao->sortBy('nome_instituicao') as $insti)
+            <td> {{ $insti->nome_instituicao }} </td>
             <td> 
                 <center>
-                <a href="pais/{{ $pais->id }}/edit" style="background-color: transparent;border: none;">
-                    <i class="fas fa-pencil-alt" color="#007bff"></i>
-                  </button>
-                </a>  
-                    <form method="POST" action="/pais/{{$pais->id}}"> 
+                    <button type="update" style="background-color: transparent;border: none;">
+                        <i class="fas fa-pencil-alt" color="#007bff">
+                            <a href="">
+                        </i>
+                    </button>  
+                    <form method="POST" action="/pais"> 
                         @csrf
                         @method('delete')
                         <button type="submit" onclick="return confirm('Tem certeza que deseja excluir?');" style="background-color: transparent;border: none;"><i class="far fa-trash-alt" color="#007bff"></i></button>   
@@ -48,5 +35,3 @@
     </div>
   </div>
 </div>
-
-@endsection

@@ -25,12 +25,14 @@ class InstituicaoController extends Controller
         ]);
         $instituicao = Instituicao::create($validated);
         $instituicao->save();
-        return redirect("/pais");  
+        return redirect("/pais/{{ $instituicao->pais_id }}");  
     }
     
     public function show(Instituicao $instituicao)
     {
-        //
+        return view('instituicao.show',[
+            'instituicao' => $instituicao
+        ]);
     }
 
     public function edit(Instituicao $instituicao)

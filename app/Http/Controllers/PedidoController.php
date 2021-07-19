@@ -43,10 +43,12 @@ class PedidoController extends Controller
     {
         $this->authorize('grad');
         $validated = $request->validated();
-        $validated['user_id'] = auth()->user()->id;
-        $validated['original_name'] = $request->file('file')->getClientOriginalName();
-        $validated['path'] = $request->file('file')->store('.');
         $pedido = Pedido::create($validated);
+        dd($pedido);
+        $pedido->user_id = auth()->user()->id;
+        $pedido->original_name = $request->file('file')->getClientOriginalName();
+        $pedido->path = $request->file('file')->store('.');
+        
         $pedido->save();
 
         request()->session()->flash('alert-info','Cadastro com sucesso');

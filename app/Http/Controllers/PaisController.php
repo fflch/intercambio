@@ -11,38 +11,53 @@ class PaisController extends Controller
     {
         $paises = Pais::all();
         return view('pais.index',[
-            'paises' => $paises,
-            'pais' => $pais,
+            'paises' => $paises
         ]);
     }
 
     public function create()
     {
-       
+         
     }
 
     public function store(Request $request)
     {
-      
+        $validated = $request->validate([
+            'nome' => 'required',
+        ]);
+        $pais = Pais::create($validated);
+        $pais->save();
+        return redirect("/pais"); 
     }
 
     public function show(Pais $pais)
     {
-        
+        return view('pais.show',[
+            'pais' => $pais,
+        ]); 
     }
 
-    public function edit(Livro $livro)
+    public function edit(Pais $pais)
     {
         
+        return view('pais.edit',[
+            'pais' => $pais,
+        ]); 
+    }
+    public function update(Request $request, Pais $pais)
+    {
+        $validated = $request->validate([
+            'nome' => 'required',
+        ]);
+        $pais->update($validated);
+        $pais->save();
+        return redirect("/pais"); 
     }
 
-    public function update(Request $request, Livro $livro)
+    public function destroy(Pais $pais)
     {
-        
-    }
-
-    public function destroy(Livro $livro)
-    {
-        
+        $pais->delete();
+        request()->session()->flash('alert-info','País excluído com sucesso.');
+        return redirect("/pais"); 
     }
 }
