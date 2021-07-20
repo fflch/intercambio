@@ -5,7 +5,7 @@
 <form method="get">
 <div class="row">
     <div class=" col-sm input-group">
-    <input type="text" class="form-control" name="search" value="{{ request()->search }}" placeholder="Busca somente por número USP do/a aluno/a">
+    <input type="text" class="form-control" name="search" value="{{ request()->search }}" placeholder="[ Busca somente por número USP do/a aluno/a ]">
 
     @inject('pedido','App\Models\Pedido')
 
@@ -21,17 +21,15 @@
     </select>
 
     <span class="input-group-btn">
-        <button type="submit" class="btn btn-success"> Buscar </button>
+        <button type="submit" class="btn btn-success">Buscar</button>
     </span>
 
     </div>
 </div>
 </form>
 <br>
-
 <div class="card">
 <br> @include('pedidos.partials.index_table')
 </div>
 <br>
-
 @endsection

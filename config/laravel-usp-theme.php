@@ -38,6 +38,7 @@ $right_menu = [
         'text' => '<i class="fas fa-flag"></i>',
         'title' => 'Países',
         'url' => config('app.url') . '/pais',
+        'can' => 'admin',
     ],
     [
         'text' => '<i class="fas fa-hard-hat"></i>',

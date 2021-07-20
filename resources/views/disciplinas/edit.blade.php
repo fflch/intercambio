@@ -2,7 +2,7 @@
 
 @section('content')
 
-<b>Solicitação de Revisão de Indeferimento</b><br><br>
+<h2>Solicitação de Revisão de Indeferimento</h2><br>
 
 <b>Disciplina:</b> {{ $disciplina->nome }} <br>
 <b>Tipo:</b> {{ $disciplina->tipo }}<br>
@@ -10,8 +10,6 @@
 <b>Créditos:</b> {{ $disciplina->creditos }}<br>
 <b>Carga Horária:</b> {{ $disciplina->carga_horaria }}<br>
 <b>Código equivalente USP (quando houver):</b> {{ $disciplina->codigo }}<br>
-
-<br>
 <br>
  <form method="POST" action="/disciplinas/{{$disciplina->id}}" enctype="multipart/form-data">
     @csrf
@@ -19,14 +17,14 @@
 
     <div class="row">
         <div class="form-group col-sm">
-          <label for="file"><b>Motivo para solicitação de revisão:</b></label> <br>
+          <label for="file"><b>Motivo:</b></label> <br>
           <textarea class="form-control" rows="3" name="comentario"></textarea>
       </div>
     </div>
 
     <div class="form-group col-sm">
         <div class="form-group">
-            <label for="file"><b>Substituir arquivo com a ementa (opcional): </b></label> <br>
+            <label for="file"><b>Substituir arquivo com a ementa (Opcional): </b></label> <br>
             <input type="file" name="file">
         </div>
     </div>

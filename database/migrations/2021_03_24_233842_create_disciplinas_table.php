@@ -24,7 +24,7 @@ class CreateDisciplinasTable extends Migration
             $table->string('codigo')->nullable();
             $table->string('original_name')->nullable();
             $table->string('path')->nullable();
-            $table->Integer('conversao')->nullable();
+            $table->integer('conversao')->nullable();
             $table->foreignId('pedido_id')->constrained('pedidos')->onDelete('cascade');
         });
     }
