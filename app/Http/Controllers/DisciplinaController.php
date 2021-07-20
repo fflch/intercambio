@@ -17,8 +17,11 @@ class DisciplinaController extends Controller
         $validated = $request->validated();
         $disciplina = Disciplina::create($validated);
         $disciplina->setStatus('Em elaboração',request()->comentario);
-        $disciplina->original_name = $request->file('file')->getClientOriginalName();
-        $disciplina->path = $request->file('file')->store('.');
+
+        if(!empty($request->file)){
+            $disciplina->original_name = $request->file('file')->getClientOriginalName();
+            $disciplina->path = $request->file('file')->store('.');
+        }
         $disciplina->save();
         request()->session()->flash('alert-info','Disciplina adicionada com sucesso');
         return redirect("/pedidos/{$disciplina->pedido->id}");  
@@ -82,6 +85,9 @@ class DisciplinaController extends Controller
     {
         $this->authorize('owner',$disciplina->pedido);
         $stepper->setCurrentStepName($disciplina->status);
+        
+        //$disciplina->format('Y-m-d H:i:s');
+      
         return view('disciplinas.show',[
             'disciplina' => $disciplina
         ]);

@@ -7,6 +7,7 @@
           <th><h4>Curso</h4></th>
           <th><h4>Instituição</h4></th>
           <th><h4>Status</h4></th>
+          <th><h4>Data que foi para Análise<th><h4>
         </tr>
     </thead>
 
@@ -18,6 +19,11 @@
           <td>{{$pedido->curso}}</td>
           <td>{{$pedido->instituicao}}</td>
           <td>{{$pedido->status}}</td>
+          <td>
+          @if($pedido->status != 'Em elaboração')
+            alterar
+          @endif
+          </td>
           <td>
               <form method="POST" action="/pedidos/{{$pedido->id}}"> 
                 @csrf

@@ -2,8 +2,6 @@
 
 @section('content')
 
-  <form method="POST" action="/pedidos">
-    @csrf
-    @include('pedidos.form')
-  </form>
+  @include('pedidos.form')
+
 @endsection
