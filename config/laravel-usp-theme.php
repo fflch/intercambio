@@ -34,9 +34,16 @@ $right_menu = [
         'can'   => 'admin'
     ],
     [
+
         'text' => '<i class="fas fa-flag"></i>',
         'title' => 'Países',
         'url' => config('app.url') . '/pais',
+    ],
+    [
+        'text' => '<i class="fas fa-hard-hat"></i>',
+        'title' => 'Logs',
+        'target' => '_blank',
+        'url' => config('app.url') . '/logs',
         'align' => 'right',
         'can'   => 'admin'
     ],
