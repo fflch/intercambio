@@ -23,7 +23,7 @@ class DisciplinaController extends Controller
             $disciplina->path = $request->file('file')->store('.');
         }
         $disciplina->save();
-        request()->session()->flash('alert-info','Disciplina adicionada com sucesso');
+        request()->session()->flash('alert-info','Disciplina adicionada com sucesso.');
         return redirect("/pedidos/{$disciplina->pedido->id}");  
     }
 
@@ -32,7 +32,7 @@ class DisciplinaController extends Controller
         $this->authorize('owner',$disciplina->pedido);
 
         if($disciplina->status != 'Indeferido') {
-            request()->session()->flash('alert-info','Só é possível realizar revisão de disciplinas indeferidas');
+            request()->session()->flash('alert-info','Só é possível realizar a revisão de Disciplinas indeferidas.');
             return redirect("/pedidos/$disciplina->pedido->id");
         }
 
@@ -51,7 +51,7 @@ class DisciplinaController extends Controller
         ]);
 
         if($disciplina->status != 'Indeferido') {
-            request()->session()->flash('alert-info','Só é possível realizar revisão de disciplinas indeferidas');
+            request()->session()->flash('alert-info','Só é possível realizar a revisão de Disciplinas indeferidas.');
             return redirect("/pedidos/$disciplina->pedido->id");
         }
 
@@ -68,7 +68,6 @@ class DisciplinaController extends Controller
         Utils::updatePedidoStatus($disciplina->pedido);
 
         return redirect("/pedidos/{$disciplina->pedido->id}");
-        
     }
    
     public function destroy(Disciplina $disciplina)

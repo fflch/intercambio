@@ -43,15 +43,12 @@ class PedidoController extends Controller
     {
         $this->authorize('grad');
         $validated = $request->validated();
+        $validated['user_id'] = auth()->user()->id;
+        $validated['original_name'] = $request->file('file')->getClientOriginalName();
+        $validated['path'] = $request->file('file')->store('.');
         $pedido = Pedido::create($validated);
-        dd($pedido);
-        $pedido->user_id = auth()->user()->id;
-        $pedido->original_name = $request->file('file')->getClientOriginalName();
-        $pedido->path = $request->file('file')->store('.');
-        
-        $pedido->save();
 
-        request()->session()->flash('alert-info','Cadastro com sucesso');
+        request()->session()->flash('alert-info','Pedido cadastrado com sucesso.');
         return redirect("/pedidos/$pedido->id");
     }
 
@@ -78,12 +75,14 @@ class PedidoController extends Controller
 
     public function update(PedidoRequest $request, Pedido $pedido)
     {
-
         $this->authorize('owner',$pedido);
-        $validated = $request->validated();
-        $pedido->update($validated);
         Storage::delete($pedido->path);
-        request()->session()->flash('alert-info','atualizado com sucesso');
+        $validated = $request->validated();
+        $validated['original_name'] = $request->file('file')->getClientOriginalName();
+        $validated['path'] = $request->file('file')->store('.');
+        $pedido->update($validated);
+        
+        request()->session()->flash('alert-info','Pedido atualizado com sucesso.');
         return redirect("/pedidos/{$pedido->id}");
     }
 
@@ -93,7 +92,7 @@ class PedidoController extends Controller
 
         # o aluno só pode deletar enquanto estiver em elaboração
         if($pedido->status != 'Em elaboração' & !Gate::allows('admin')){
-            request()->session()->flash('alert-danger','Esse pedido não pode ser deletado 
+            request()->session()->flash('alert-danger','O Pedido não pode ser excluído 
                 porque não está mais em elaboração');
             return redirect('/meus_pedidos');
         }

@@ -2,6 +2,6 @@
 
 @section('content')
 
-Sistema para solicitação de aproveitamento de créditos (intercâmbio)
+Sistema para Solicitação de Aproveitamento de Créditos (Intercâmbio)
 
 @endsection

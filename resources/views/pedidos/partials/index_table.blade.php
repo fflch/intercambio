@@ -7,7 +7,7 @@
           <th><h4>Curso</h4></th>
           <th><h4>Instituição</h4></th>
           <th><h4>Status</h4></th>
-          <th><h4>Data que foi para Análise<th><h4>
+          <th><h4>Enviado para Análise em<th><h4>
         </tr>
     </thead>
 

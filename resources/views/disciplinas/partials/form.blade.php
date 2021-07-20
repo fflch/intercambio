@@ -2,7 +2,6 @@
 @csrf
 
 <script>
-
 function flip(clicado) {
     if(clicado == 'Obrigatória'){
         document.getElementById("lista_obrigatorias").style = true;
@@ -10,14 +9,11 @@ function flip(clicado) {
         document.getElementById("lista_obrigatorias").style = "display: none;";
     }
 }
-
 </script>
 
-<div class="card-header"><b>Adicione as informações da disciplina</b></div>
-
+<div class="card-header"><b>Adicione as informações da Disciplina</b></div>
     <div class="card-body">
         <div class="row">
-
             <div class="form-group col-sm">
                 <div class="form-group">
                     <label class="required"><b>Tipo: </b></label>
@@ -40,21 +36,21 @@ function flip(clicado) {
             <div class="form-group col-sm-1">
                 <div class="form-group">
                     <label for="nota" class="required"><b>Nota: </b></label>
-                    <input type="text" class="form-control" id="nota" name="nota" value="{{ old('nota') }}">
+                    <input type="text" class="form-control" id="nota" name="nota" value="{{ old('nota') }}" maxlength="3">
                 </div>
             </div> 
         
             <div class="form-group col-sm-2">
                 <div class="form-group">
                     <label for="creditos" class="required"><b>Créditos obtidos: </b></label>
-                    <input type="text" class="form-control" id="creditos" name="creditos" value="{{ old('creditos') }}">
+                    <input type="text" class="form-control" id="creditos" name="creditos" value="{{ old('creditos') }}" maxlength="3">
                 </div>
             </div>
 
             <div class="form-group col-sm-2">
                 <div class="form-group">
                     <label for="carga_horaria" class="required"><b>Carga Horária Semestral: </b></label>
-                    <input type="text" class="form-control" id="carga_horaria" name="carga_horaria" value="{{ old('carga_horaria') }}">
+                    <input type="text" class="form-control" id="carga_horaria" name="carga_horaria" value="{{ old('carga_horaria') }}" maxlength="3">
                 </div>  
             </div>
 
@@ -87,7 +83,7 @@ function flip(clicado) {
         </div>
 
         <div class="row">
-            Comentário adicional para essa disciplina que julgar importante (opcional):
+        <b>Comentário adicional para a Disciplina (Opcional):</b>
             <textarea  class="form-control" rows="3" name="comentario"></textarea>
         </div>
 
@@ -102,7 +98,3 @@ function flip(clicado) {
         </div>
     </div>
 </form>
-
-
-
-
