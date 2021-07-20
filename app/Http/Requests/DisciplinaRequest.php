@@ -41,7 +41,7 @@ class DisciplinaRequest extends FormRequest
             $data = array_merge($data,$obg);
         } else{
             $opt= [
-            'file' => 'nullable'
+            'file' => 'nullable|mimes:pdf|max:10000'
         ];
             $data = array_merge($data,$opt);
         }

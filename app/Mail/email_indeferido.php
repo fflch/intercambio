@@ -35,11 +35,13 @@ class email_indeferido extends Mailable
         //colocar um campo motivo
         $text = str_replace('%nome_aluno',$this->disciplina->pedido->nome,app(GeneralSettings::class)->email_indeferido);
         $text = str_replace('%disciplina',$this->disciplina->nome,$text);
+        $ccint = explode(',',env('EMAILS_CCINT'));
 
         $to = [User::where('id',$this->disciplina->pedido->user_id)->first()->email];
 
         return $this->view('emails.email_indeferido')
             ->to($to)
+            ->bcc($ccint)
             ->subject('Indeferimento do pedido de créditos')
             ->with([
                 'text' => $text,

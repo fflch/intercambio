@@ -34,11 +34,13 @@ class email_deferido extends Mailable
     {
         $text = str_replace('%nome_aluno',$this->disciplina->pedido->nome,app(GeneralSettings::class)->email_deferido);
         $text = str_replace('%disciplina',$this->disciplina->nome,$text);
+        $ccint = explode(',',env('EMAILS_CCINT'));
 
         $to = [User::where('id',$this->disciplina->pedido->user_id)->first()->email];
         
         return $this->view('emails.email_deferido')
             ->to($to)
+            ->bcc($ccint)
             ->subject('Deferimento do pedido de créditos')
             ->with([
                 'text' => $text,

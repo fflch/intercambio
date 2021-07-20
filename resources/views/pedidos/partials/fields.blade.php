@@ -1,6 +1,6 @@
 <div class="card">
 
-<div class="card-header"><h5><b>Requerimento de Aproveitamento de Créditos</b></h5>
+<div class="card-header"><h5><b>Requerimento de Aproveitamento de Créditos</b></h5> 
 @if($pedido->status == 'Em elaboração')
 <a href="/pedidos/{{ $pedido->id }}/edit" class="btn btn-info">Alterar Pedido</a>
 @endif
