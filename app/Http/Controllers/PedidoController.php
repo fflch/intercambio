@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Pedido;
+use App\Models\Country;
+use App\Models\Instituicao;
 use Illuminate\Http\Request;
 use App\Http\Requests\PedidoRequest;
 use Uspdev\Replicado\Graduacao;
@@ -27,15 +29,21 @@ class PedidoController extends Controller
         }
 
         return view ('pedidos.index',[
-            'pedidos' => $pedidos->get()
+            'pedidos' => $pedidos->paginate(10),
+            
         ]);
     }
-
+    
+        
     public function create()
     {
         $this->authorize('grad');
+        $countries = Country::all();
+        $instituicao = Instituicao::all();
+        
         return view('pedidos.create',[
         'pedido' => new Pedido,
+        'countries' => $countries,
         ]);
     }
 
@@ -119,4 +127,5 @@ class PedidoController extends Controller
         $this->authorize('owner',$pedido);
         return Storage::download($pedido->path, $pedido->original_name);
     }
+
 }

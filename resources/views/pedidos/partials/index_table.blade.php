@@ -25,10 +25,10 @@
           @endif
           </td>
           <td>
-              <form method="POST" action="/pedidos/{{$pedido->id}}"> 
-                @csrf
-                @method('delete')
-                <button type="submit" onclick="return confirm('Tem certeza que deseja excluir?');" style="background-color: transparent;border: none;"><i class="far fa-trash-alt" color="#007bff"></i></button>  
+            <form method="POST" action="/pedidos/{{$pedido->id}}"> 
+              @csrf
+              @method('delete')
+              <button type="submit" onclick="return confirm('Tem certeza que deseja excluir?');" style="background-color: transparent;border: none;"><i class="far fa-trash-alt" color="#007bff"></i></button>  
             </form>
           </td>
         </tr>

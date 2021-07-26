@@ -2,17 +2,17 @@
 
 namespace Database\Factories;
 
-use App\Models\Pais;
+use App\Models\Country;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
-class PaisFactory extends Factory
+class CountryFactory extends Factory
 {
     /**
      * The name of the factory's corresponding model.
      *
      * @var string
      */
-    protected $model = Pais::class;
+    protected $model = Country::class;
 
     /**
      * Define the model's default state.

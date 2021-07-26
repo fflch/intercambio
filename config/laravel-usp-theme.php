@@ -16,6 +16,11 @@ $menu = [
         'url' => config('app.url') . '/meus_pedidos',
         'can' => 'grad'
     ],
+    [
+        'text' => 'Alterações dos países',
+        'url' => config('app.url') . '/country',
+        'can' => 'admin',
+    ],
 ];
 
 $right_menu = [
@@ -32,13 +37,6 @@ $right_menu = [
         'url' => config('app.url') . '/settings',
         'align' => 'right',
         'can'   => 'admin'
-    ],
-    [
-
-        'text' => '<i class="fas fa-flag"></i>',
-        'title' => 'Países',
-        'url' => config('app.url') . '/pais',
-        'can' => 'admin',
     ],
     [
         'text' => '<i class="fas fa-hard-hat"></i>',

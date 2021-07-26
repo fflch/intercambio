@@ -61,9 +61,9 @@
             </td>
             <td>{{ $disciplina->nome }}</td>
             <td align="center">{{ $disciplina->tipo }}</td>
-            <td align="right">{{ $disciplina->nota }}</td>
-            <td align="right">{{ $disciplina->creditos }}</td>
-            <td align="right">{{ $disciplina->carga_horaria }}</td>
+            <td align="center">{{ $disciplina->nota }}</td>
+            <td align="center">{{ $disciplina->creditos }}</td>
+            <td align="center">{{ $disciplina->carga_horaria }}</td>
             <td align="center">{{ $disciplina->codigo }}</td>
             <td align="center">
                 @if(!empty($disciplina->path))

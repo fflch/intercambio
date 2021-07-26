@@ -3,9 +3,9 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
-use App\Models\Pais;
+use App\Models\Country;
 
-class PaisSeeder extends Seeder
+class CountrySeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -14,11 +14,11 @@ class PaisSeeder extends Seeder
      */
     public function run()
     {
-        $pais = [   
+        $country = [   
             'nome'=> 'Australia',
         ];
         
-        Pais::create($pais);
-        Pais::factory(10)->create();
+        Country::create($country);
+        Country::factory(10)->create();
     }
 }
