@@ -17,7 +17,7 @@ class CreateInstituicaosTable extends Migration
             $table->id();
             $table->string('nome_instituicao');
             $table->timestamps();
-            $table->foreignId('pais_id')->constrained('pais')->onDelete('cascade');
+            $table->foreignId('country_id')->constrained('countries')->onDelete('cascade');
         });
     }
 

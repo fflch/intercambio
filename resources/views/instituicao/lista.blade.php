@@ -9,24 +9,17 @@
             <th scope="col" style="width:15px"><h3>Alterações</h3></th>
           </tr>
         </thead>
-        <tbody>  
+        <tbody> 
+        @foreach($country->instituicao->sortBy('nome_instituicao') as $insti) 
           <tr>
-
-        @foreach($pais->instituicao->sortBy('nome_instituicao') as $insti)
-            <td> {{ $insti->nome_instituicao }} </td>
-            <td> 
-                <center>
-                    <button type="update" style="background-color: transparent;border: none;">
-                        <i class="fas fa-pencil-alt" color="#007bff">
-                            <a href="">
-                        </i>
-                    </button>  
-                    <form method="POST" action="/pais"> 
-                        @csrf
-                        @method('delete')
-                        <button type="submit" onclick="return confirm('Tem certeza que deseja excluir?');" style="background-color: transparent;border: none;"><i class="far fa-trash-alt" color="#007bff"></i></button>   
-                    </form>  
-                </center>
+            <td>{{$insti->nome_instituicao}}</td>
+            <td align="center">
+              <a href="/instituicao/{{$insti->id}}/edit"><i class="fas fa-pencil-alt" color="#007bff"></i></a>
+              <form method="POST" action="/instituicao/{{$insti->id}}"> 
+                  @csrf
+                  @method('delete')
+                  <button type="submit" onclick="return confirm('Tem certeza que deseja excluir a Disciplina?');" style="background-color: transparent;border: none;"><i class="far fa-trash-alt" color="#007bff"></i></button>  
+              </form>   
             </td>
           </tr>
         @endforeach

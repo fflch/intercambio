@@ -16,11 +16,10 @@ class CreatePedidosTable extends Migration
         Schema::create('pedidos', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
-            $table->string('instituicao');
+            $table->foreignId('instituicao_id')->constrained('instituicaos')->onDelete('cascade');
             $table->string('original_name');
             $table->string('path');
             $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
-
             # Campos gerenciados pelo observer
             $table->string('status');
             $table->string('curso');

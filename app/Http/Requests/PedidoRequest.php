@@ -24,8 +24,9 @@ class PedidoRequest extends FormRequest
     public function rules()
     {
         return [
-            'instituicao' => 'required',
+            'instituicao_id' => 'required',
             'file'     => 'required|mimes:pdf|max:10000',
+            
         ];
     }
 

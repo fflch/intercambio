@@ -5,14 +5,14 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Instituicao;
-use App\Models\Pais;
+use App\Models\Country;
 
 class Instituicao extends Model
 {
     use HasFactory;
     protected $guarded = ['id'];
 
-    public function pais(){
-        return $this->belongsTo(Pais::class);
+    public function country(){
+        return $this->belongsTo(Country::class);
     }
 }
