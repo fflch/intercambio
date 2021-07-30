@@ -3,6 +3,8 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
+use App\Models\Country;
+use App\Models\Instituicao;
 
 class InstituicaoSeeder extends Seeder
 {
@@ -13,6 +15,12 @@ class InstituicaoSeeder extends Seeder
      */
     public function run()
     {
-        //
+        $instituicao = [   
+            'nome_instituicao' => 'PUC',
+            'country_id'       => Country::factory()->create()->id,
+        ];
+        
+        Instituicao::create($instituicao);
+        Instituicao::factory(10)->create();
     }
 }

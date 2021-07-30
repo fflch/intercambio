@@ -7,7 +7,7 @@
 <form method="get">
 <div class="row" >
   <div class=" col-sm input-group">
-      <input type="text" style="Weight: 50px;" name="search" value="{{ request()->search }}" placeholder="Procurar Países">
+      <input type="text" style="Weight: 50px;" name="search" value="{{ request()->search }}" placeholder="[Procurar Países]">
       <span class="input-group-btn">
           <button type="submit" class="btn btn-success">Buscar</button>
       </span>

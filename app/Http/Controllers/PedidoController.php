@@ -38,19 +38,22 @@ class PedidoController extends Controller
     public function create()
     {
         $this->authorize('grad');
-        $countries = Country::all();
-        $instituicao = Instituicao::all();
+        $countries = Country::all()->sortBy('nome');
+        $instituicoes = Instituicao::all()->sortBy('nome_instituicao');
         
         return view('pedidos.create',[
         'pedido' => new Pedido,
         'countries' => $countries,
+        'instituicoes' => $instituicoes,
         ]);
     }
 
     public function store(PedidoRequest $request)
     {
         $this->authorize('grad');
+        //dd($request);
         $validated = $request->validated();
+        //dd($validated);
         $validated['user_id'] = auth()->user()->id;
         $validated['original_name'] = $request->file('file')->getClientOriginalName();
         $validated['path'] = $request->file('file')->store('.');
