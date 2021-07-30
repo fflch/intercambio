@@ -3,6 +3,7 @@
 namespace Database\Factories;
 
 use App\Models\Instituicao;
+use App\Models\Country;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class InstituicaoFactory extends Factory
@@ -22,7 +23,8 @@ class InstituicaoFactory extends Factory
     public function definition()
     {
         return [
-            //
+            'nome_instituicao' => $this->faker->sentence($nbWords = 2, $variableNbWords = true),
+            'country_id'       => Country::factory()->create()->id,
         ];
     }
 }

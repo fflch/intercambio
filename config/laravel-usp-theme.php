@@ -17,7 +17,7 @@ $menu = [
         'can' => 'grad'
     ],
     [
-        'text' => 'Alterações dos países',
+        'text' => 'Países',
         'url' => config('app.url') . '/country',
         'can' => 'admin',
     ],
