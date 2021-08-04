@@ -1,17 +1,52 @@
+@section('javascripts_bottom')
+  <script type="text/javascript">
+    // CSRF Token
+    var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
+      $(document).ready(function(){
+        $("#id_country").change(function () {
+          if( $(this).val() ) {
+            $.ajax({
+              url:"{{ route('pedidos.getinstituicao') }}",
+              type: 'post',
+              dataType: "json",
+              data: {
+                 _token: CSRF_TOKEN,
+                 search: $(this).val(),
+              },
+              beforeSend: function() {
+                $('#id_instituicao').html('<option value="">Aguarde... </option>');
+              },
+              success: function( data ) {
+                 var options = '<option value="">Selecione a Área</option>';
+                 for (var i = 0; i < data.length; i++) {
+                  options += '<option value="' + data[i].id + '">'
+                     +data[i].nome_instituicao + '</option>';
+                 }
+                 $("#id_instituicao").html(options);
+              }
+            });
+          }
+          else {
+            $('#id_instituicao').html('<option value="">Selecione um País</option>');
+          }
+        });
+      });
+  </script>
+@endsection
 
 <div class="card">
 <div class="card-header"><h5><b>À Comissão de Graduação da Faculdade de Filosofia Letras e Ciências Humanas da USP.</b></h5></div>
 <div class="card-body">
     
-    <form method="GET" action="<?php echo $_SERVER['PHP_SELF']; ?>" >
+<form method="POST" action="/pedidos" enctype="multipart/form-data">
      <div class="row">
             <div class="form-group col-sm-6">
                 <div class="form-group">
                 <label id="id_pais" for="id_pais" class="required"><b>Selecione o país da Instituição</b></label>
                 <br>
-                   <select id="id_pais" name="id_pais" onchange="this.form.submit()">
+                   <select id="id_country" name="id_country">
                     @foreach($countries as $country)
-                         <option id="country_selected" name="country_selected" value="{{ $country['id'] }}" 
+                         <option value="{{ $country['id'] }}" 
                             @if(old('nome') == $country['nome']) selected @endif>
                             {{ $country['nome'] }}
                         </option>
@@ -20,25 +55,21 @@
                 </div>
             </div>
         </div>
-    </form>
 
-<form method="POST" action="/pedidos" enctype="multipart/form-data">
         @csrf        
         <div class="row">
             <div class="form-group col-sm-6">
                 <div class="form-group">
                 <label id="instituicao" for="instituicao" class="required"><b>Selecione a Instituição </b></label>
                 <br>
-                   <select id="instituicao_id" name="instituicao_id">
-                    @foreach($instituicoes as $instituicao)
-
-                         <option id="instituicao_id" name="instituicao_id" value="{{ $instituicao['id'] }}" 
-                        @if(old('nome') == $instituicao['nome']) selected @endif>
-                            {{ $instituicao['nome_instituicao'] }}
+                <select id="id_instituicao" name="id_instituicao">
+                    @foreach($instituicoes as $insti)
+                         <option value="{{ $insti['id'] }}" 
+                            @if(old('nome_instituicao') == $insti['nome_instituicao']) selected @endif>
+                            {{ $insti['nome_instituicao'] }}
                         </option>
-
                     @endforeach
-                    </select> 
+                    </select>  
                 </div>
             </div>
         </div>

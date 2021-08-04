@@ -35,17 +35,32 @@ class PedidoController extends Controller
     }
     
         
-    public function create()
+    public function create(Country $country)
     {
         $this->authorize('grad');
         $countries = Country::all()->sortBy('nome');
-        $instituicoes = Instituicao::all()->sortBy('nome_instituicao');
         
         return view('pedidos.create',[
         'pedido' => new Pedido,
         'countries' => $countries,
-        'instituicoes' => $instituicoes,
+        'instituicoes' => array(),
         ]);
+    }
+
+    public function getinstituicao(Request $request)
+    {
+        if($request->has('search')) {
+            $instituicoes = Instituicao::where('pais_id', $request->search)
+                      ->orderby('nome_instituicao','asc')->get();
+        }
+        $response = array();
+        foreach($instituicoes as $insti){
+            $response[] = array(
+                "id" => $insti->id,
+                "nome_instituicao" => $insti->nome_instituicao,
+            );
+        }
+        return response()->json($response);
     }
 
     public function store(PedidoRequest $request)
