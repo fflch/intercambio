@@ -17,6 +17,8 @@ Route::get('/', [IndexController::class,'index']);
 // pedidos
 Route::resource('/pedidos', PedidoController::class);
 Route::get('/meus_pedidos', [PedidoController::class,'meus_pedidos']);
+Route::post('/pedidos/getinstituicao',[PedidoController::class,'getinstituicao'])
+    ->name('pedidos.getinstituicao');
 
 // disciplinas
 Route::resource('/disciplinas', DisciplinaController::class);
