@@ -30,16 +30,16 @@ class PedidoController extends Controller
 
         return view ('pedidos.index',[
             'pedidos' => $pedidos->paginate(10),
-            
+
         ]);
     }
-    
-        
+
+
     public function create(Country $country)
     {
         $this->authorize('grad');
         $countries = Country::all()->sortBy('nome');
-        
+
         return view('pedidos.create',[
         'pedido' => new Pedido,
         'countries' => $countries,
@@ -50,7 +50,7 @@ class PedidoController extends Controller
     public function getinstituicao(Request $request)
     {
         if($request->has('search')) {
-            $instituicoes = Instituicao::where('pais_id', $request->search)
+            $instituicoes = Instituicao::where('country_id', $request->search)
                       ->orderby('nome_instituicao','asc')->get();
         }
         $response = array();
@@ -107,7 +107,7 @@ class PedidoController extends Controller
         $validated['original_name'] = $request->file('file')->getClientOriginalName();
         $validated['path'] = $request->file('file')->store('.');
         $pedido->update($validated);
-        
+
         request()->session()->flash('alert-info','Pedido atualizado com sucesso.');
         return redirect("/pedidos/{$pedido->id}");
     }
@@ -118,11 +118,11 @@ class PedidoController extends Controller
 
         # o aluno só pode deletar enquanto estiver em elaboração
         if($pedido->status != 'Em elaboração' & !Gate::allows('admin')){
-            request()->session()->flash('alert-danger','O Pedido não pode ser excluído 
+            request()->session()->flash('alert-danger','O Pedido não pode ser excluído
                 porque não está mais em elaboração');
             return redirect('/meus_pedidos');
         }
-        
+
         Storage::delete($pedido->path);
         foreach($pedido->disciplinas as $disciplina){
             Storage::delete($disciplina->path);
