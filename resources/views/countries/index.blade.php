@@ -37,7 +37,7 @@
               <form method="POST" action="/country/{{$country->id}}"> 
                   @csrf
                   @method('delete')
-                  <button type="submit" onclick="return confirm('Tem certeza que deseja excluir a Disciplina?');" style="background-color: transparent;border: none;"><i class="far fa-trash-alt" color="#007bff"></i></button>  
+                  <button type="submit" onclick="return confirm('Tem certeza que deseja excluir o País?');" style="background-color: transparent;border: none;"><i class="far fa-trash-alt" color="#007bff"></i></button>  
               </form>   
             </td>
           </tr>
