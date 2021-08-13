@@ -2,6 +2,7 @@
   <script type="text/javascript">
     // CSRF Token
     var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
+    console.log(CSRF_TOKEN);
       $(document).ready(function(){
         $("#id_country").change(function () {
           if( $(this).val() ) {
@@ -39,30 +40,13 @@
 <div class="card-body">
     
 <form method="POST" action="/pedidos" enctype="multipart/form-data">
-     <div class="row">
-            <div class="form-group col-sm-6">
-                <div class="form-group">
-                <label id="id_pais" for="id_pais" class="required"><b>Selecione o país da Instituição</b></label>
-                <br>
-                   <select id="id_country" name="id_country">
-                    @foreach($countries as $country)
-                         <option value="{{ $country['id'] }}" 
-                            @if(old('nome') == $country['nome']) selected @endif>
-                            {{ $country['nome'] }}
-                        </option>
-                    @endforeach
-                    </select> 
-                </div>
-            </div>
-        </div>
-
         @csrf        
         <div class="row">
             <div class="form-group col-sm-6">
                 <div class="form-group">
                 <label id="instituicao" for="instituicao" class="required"><b>Selecione a Instituição </b></label>
                 <br>
-                <select id="id_instituicao" name="id_instituicao">
+                <select id="instituicao_id" name="instituicao_id">
                     @foreach($instituicoes as $insti)
                          <option value="{{ $insti['id'] }}" 
                             @if(old('nome_instituicao') == $insti['nome_instituicao']) selected @endif>

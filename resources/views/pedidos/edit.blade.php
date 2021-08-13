@@ -7,13 +7,21 @@
     @method('patch')
     <div class="card">
         <div class="card-body">
-                <div class="row">
-                    <div class="form-group col-sm-6">
-                        <div class="form-group">
-                            <label for="instituicao" class="required"><b>Altere a Instituicao de Ensino no exterior:</b></label>
-                            <input type="text" class="form-control" id="instituicao" name="instituicao" value="{{old('instituicao', $pedido->instituicao )}}">
-                        </div>
+            <div class="row">
+                <div class="form-group col-sm-6">
+                    <div class="form-group">
+                    <label id="instituicao" for="instituicao" class="required"><b>Selecione a Instituição </b></label>
+                    <br>
+                    <select id="instituicao_id" name="instituicao_id">
+                        @foreach($instituicoes as $insti)
+                            <option value="{{ $insti['id'] }}" 
+                                @if(old('nome_instituicao') == $insti['nome_instituicao']) selected @endif>
+                                {{ $insti['nome_instituicao'] }}
+                            </option>
+                        @endforeach
+                        </select>  
                     </div>
+                </div>
                     <div class="form-group col-sm-4">
                         <div class="form-group">
                             <label for="file" class="required"><b>Altere o boletim das matérias cursadas:</b></label> <br>

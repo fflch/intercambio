@@ -74,7 +74,9 @@
               <td class="expandir">
                   @foreach($disciplina->statuses as $status)
                     @if(!empty($status->reason))
-                      <b>{{ \App\Models\User::find($status->user_id)->name }} ({{ $status->created_at }}):</b><br> {{ $status->reason }} <br>
+                      <b>{{ \App\Models\User::find($status->user_id)->name }}
+                         ({{\Carbon\Carbon::parse( $status->created_at)->format('d/m/Y H:i') }}):
+                      </b><br> {{ $status->reason }} <br>
                     @endif
                   @endforeach
               </td>
@@ -93,7 +95,7 @@
             @if($pedido->status == "Em elaboração")
               <td scope="col" style="display: none;"></td>      
             @else
-              <td scope="col" align="right">{{ $disciplina->conversao }}</td>
+              <td scope="col" align="center">{{ $disciplina->conversao }}</td>
             @endif
 
             </tr>

@@ -39,16 +39,18 @@ class PedidoController extends Controller
     {
         $this->authorize('grad');
         $countries = Country::all()->sortBy('nome');
+        $instituicoes = Instituicao::all();
 
         return view('pedidos.create',[
         'pedido' => new Pedido,
         'countries' => $countries,
-        'instituicoes' => array(),
+        'instituicoes' => $instituicoes,
         ]);
     }
 
     public function getinstituicao(Request $request)
     {
+        dd("teste");
         if($request->has('search')) {
             $instituicoes = Instituicao::where('country_id', $request->search)
                       ->orderby('nome_instituicao','asc')->get();
@@ -62,6 +64,7 @@ class PedidoController extends Controller
         }
         return response()->json($response);
     }
+
 
     public function store(PedidoRequest $request)
     {
@@ -94,8 +97,10 @@ class PedidoController extends Controller
     public function edit(Pedido $pedido)
     {
         $this->authorize('owner',$pedido);
+        $instituicoes = Instituicao::all();
         return view('pedidos.edit',[
             'pedido' => $pedido,
+            'instituicoes' => $instituicoes,
         ]);
     }
 

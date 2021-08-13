@@ -9,7 +9,7 @@
     <b>Nome:</b> {{ $pedido->nome ?? '' }}<br>
     <b>Número USP:</b> {{ $pedido->codpes ?? '' }}<br>
     <b>Curso:</b> {{ $pedido->curso ?? '' }}</br>
-    <b>Instituição:</b> {{ $pedido->instituicao ?? '' }}<br>
+    <b>Instituição:</b> {{ $pedido->instituicao->nome_instituicao ?? '' }}<br>
     <b>Boletim:</b> <a href="/pedidos/{{ $pedido->id }}/showfile"><i class="far fa-file-pdf"></i></a> <br>           
 
     @if($pedido->status == 'Em elaboração' && !$pedido->disciplinas->isEmpty() )

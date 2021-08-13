@@ -49,4 +49,8 @@ class Pedido extends Model
     public function user(){
         return $this->belongsTo(\App\Models\User::class);
     }
+
+    public function instituicao(){
+        return $this->belongsTo(\App\Models\Instituicao::class);
+    }
 }
