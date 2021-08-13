@@ -97,8 +97,10 @@ class PedidoController extends Controller
     public function edit(Pedido $pedido)
     {
         $this->authorize('owner',$pedido);
+        $instituicoes = Instituicao::all();
         return view('pedidos.edit',[
             'pedido' => $pedido,
+            'instituicoes' => $instituicoes,
         ]);
     }
 
