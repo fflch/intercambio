@@ -119,6 +119,7 @@ class PedidoController extends Controller
 
     public function destroy(Pedido $pedido)
     {
+        //desabilitado no form
         $this->authorize('owner',$pedido);
 
         # o aluno só pode deletar enquanto estiver em elaboração

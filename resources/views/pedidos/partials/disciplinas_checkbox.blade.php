@@ -82,11 +82,7 @@
               </td>
             @if($pedido->status == "Em elaboração")
               <td align="center">
-                <form method="POST" action="/disciplinas/{{$disciplina->id}}"> 
-                    @csrf
-                    @method('delete')
-                    <button type="submit" onclick="return confirm('Tem certeza que deseja excluir a Disciplina?');" style="background-color: transparent;border: none;"><i class="far fa-trash-alt" color="#007bff"></i></button>  
-                </form>  
+                
               </td>
             @else
               <td style="display: none;"></td>

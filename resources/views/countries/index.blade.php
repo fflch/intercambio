@@ -34,11 +34,7 @@
             <td><a href="/country/{{$country->id}}">{{$country->nome}}</a></td>
             <td align="center">
               <a href="/country/{{$country->id}}/edit"><i class="fas fa-pencil-alt" color="#007bff"></i></a>
-              <form method="POST" action="/country/{{$country->id}}"> 
-                  @csrf
-                  @method('delete')
-                  <button type="submit" onclick="return confirm('Tem certeza que deseja excluir o País?');" style="background-color: transparent;border: none;"><i class="far fa-trash-alt" color="#007bff"></i></button>  
-              </form>   
+                 
             </td>
           </tr>
         @endforeach

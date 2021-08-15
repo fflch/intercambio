@@ -58,6 +58,7 @@ class InstituicaoController extends Controller
 
     public function destroy(Instituicao $instituicao)
     {
+        //desabilitado no form
         $this->authorize('admin');
         $instituicao->delete();
         request()->session()->flash('alert-info','País excluído com sucesso.');

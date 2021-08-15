@@ -72,6 +72,7 @@ class DisciplinaController extends Controller
    
     public function destroy(Disciplina $disciplina)
     {
+        //desabilitado no form
         $this->authorize('owner',$disciplina->pedido);
         Storage::delete($disciplina->path);
         $pedido_id = $disciplina->pedido_id;
