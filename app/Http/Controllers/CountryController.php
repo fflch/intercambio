@@ -64,6 +64,7 @@ class CountryController extends Controller
 
     public function destroy(Country $country)
     {
+        //desabilitado no form
         $this->authorize('admin');
         $country->delete();
         request()->session()->flash('alert-info','País excluído com sucesso.');
