@@ -1,6 +1,6 @@
 {!! $text !!}
 
-Universidade: {{ $pedido->instituicao }}
+Universidade: {{ $pedido->instituicao->nome }}
 
 @foreach($pedido->disciplinas as $disciplina)
     {{ $disciplina->nome }} <br>
