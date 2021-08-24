@@ -1,8 +1,14 @@
 <div class="card">
 
 <div class="card-header"><h5><b>Requerimento de Aproveitamento de Créditos</b></h5> 
-@if($pedido->status == 'Em elaboração' )
-<a href="/pedidos/{{ $pedido->id }}/edit" class="btn btn-info">Alterar Pedido</a>
+@if($pedido->status == 'Em elaboração')
+    <a href="/pedidos/{{ $pedido->id }}/edit" class="btn btn-info">Alterar Pedido</a>
+@elseif($pedido->status == 'Finalizado')
+    @foreach($pedido->disciplinas->sortBy('tipo') as $disciplina)
+        @if($disciplina->status == 'Indeferido')
+        <a href="/pedidos/{{ $pedido->id }}/edit" class="btn btn-info">Alterar Pedido</a>
+        @endif
+    @endforeach 
 @endif
 </div>
     <div class="card-body">
