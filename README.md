@@ -1,10 +1,10 @@
 ### Models:
 
-- **<b>Country</b>
-- **<b>Instituição</b>
-- **<b>Pedido</b>
-- **<b>File</b>
-- **<b>Disciplina</b>
+- **<b>[Country]</b>
+- **<b>[Instituição]</b>
+- **<b>[Pedido]</b>
+- **<b>[File]</b>
+- **<b>[Disciplina]</b>
 <br>
 
 ## Country
@@ -22,7 +22,8 @@ Ainda nos pedidos, podemos notar que possuímos duas abas de index, a “Pedidos
 
 ## File: Este model serve somente para salvar e vincular os arquivos à um pedido.<br>
 
-## Disciplinas: A segunda parte mais importante de todo o workflow são as disciplinas, estas que estarão sempre vinculadas a um <b>Pedido</b>. Seu formulário de cadastro só aparecerá no momento em que o Pedido estiver com status “Em elaboração”, neste mesmo form poderá ser guardada informações como nome da matéria no exterior, nota, carga horária, tipo da disciplina (Obrigatória, Optativa Eletiva, Optativa Livre), que dependente da escolha poderá alterar o cadastro de informações, pois as Disciplinas Obrigatórias necessitam de uma ementa que comprove as informações passadas, enquanto o anexo desta ementa seria optativa para os outros tipos, além do campo Codigo USP que é único para Obrigatórias, já que o aluno deverá corresponder a matéria do exterior para alguma da USP.<br>
+## Disciplinas
+A segunda parte mais importante de todo o workflow são as disciplinas, estas que estarão sempre vinculadas a um <b>Pedido</b>. Seu formulário de cadastro só aparecerá no momento em que o Pedido estiver com status “Em elaboração”, neste mesmo form poderá ser guardada informações como nome da matéria no exterior, nota, carga horária, tipo da disciplina (Obrigatória, Optativa Eletiva, Optativa Livre), que dependente da escolha poderá alterar o cadastro de informações, pois as Disciplinas Obrigatórias necessitam de uma ementa que comprove as informações passadas, enquanto o anexo desta ementa seria optativa para os outros tipos, além do campo Codigo USP que é único para Obrigatórias, já que o aluno deverá corresponder a matéria do exterior para alguma da USP.<br>
 Por fim ainda temos mais o campo do Comentário e os Status que estão atrelados a biblioteca <b>Statuses</b>, eles serão a forma de prosseguir e corrigir qualquer erro futuro na disciplina.<br>
 Para exemplificar vemos que as disciplinas começam todas em status de “Em elaboração” onde poderão somente ser excluídas de um pedido pelo aluno.<br>
 Quando o aluno enviar o <b>.Pedido</b> as disciplinas irão receber o mesmo status que será “Análise”, onde poderão ser alteradas somente pelos admins, assim caso ocorra de alguma incongruência a CCINT poderá alterar o status para “Indeferido”, tendo que obrigatoriamente atualizar o campo comentário, explicando o motivo, esse comentário que poderá ser visualizado pelo aluno e respondido pelo mesmo para a possibilidade de correção do problema.<br>
