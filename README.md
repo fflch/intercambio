@@ -1,10 +1,10 @@
 ### Models:
 
-- **<b>[Country]</b>
-- **<b>[Instituição]</b>
-- **<b>[Pedido]</b>
-- **<b>[File]</b>
-- **<b>[Disciplina]</b>
+- <b>[Country]</b>
+- <b>[Instituição]</b>
+- <b>[Pedido]</b>
+- <b>[File]</b>
+- <b>[Disciplina]</b>
 <br>
 
 ## Country
@@ -20,7 +20,8 @@ O status “Em análise" é quando o aluno não consegue mais interagir com o pe
 O último status é  “Finalizado”, ele será alterado quando todas as <b>Disciplinas</b> tiverem sido avaliadas independente do sucesso ou não da avaliação. Caso, ocorra algum indeferimento e finalize o pedido o aluno poderá novamente alterá-lo para algum tipo de correção.<br>
 Ainda nos pedidos, podemos notar que possuímos duas abas de index, a “Pedidos” que aparecerá somente para os admins, listando todos os pedidos do sistema que poderão ser pesquisados por status e codpes do aluno. A aba “Meus Pedidos” somente aparecerá caso a pessoa seja um aluno e somente listará os pedidos daquele que logou no sistema.<br>
 
-## File: Este model serve somente para salvar e vincular os arquivos à um pedido.<br>
+## File
+Este model serve somente para salvar e vincular os arquivos à um pedido.<br>
 
 ## Disciplinas
 A segunda parte mais importante de todo o workflow são as disciplinas, estas que estarão sempre vinculadas a um <b>Pedido</b>. Seu formulário de cadastro só aparecerá no momento em que o Pedido estiver com status “Em elaboração”, neste mesmo form poderá ser guardada informações como nome da matéria no exterior, nota, carga horária, tipo da disciplina (Obrigatória, Optativa Eletiva, Optativa Livre), que dependente da escolha poderá alterar o cadastro de informações, pois as Disciplinas Obrigatórias necessitam de uma ementa que comprove as informações passadas, enquanto o anexo desta ementa seria optativa para os outros tipos, além do campo Codigo USP que é único para Obrigatórias, já que o aluno deverá corresponder a matéria do exterior para alguma da USP.<br>
