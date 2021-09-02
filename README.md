@@ -1,10 +1,10 @@
 ### Models:
 
-- <b>[Country]</b>
-- <b>[Instituição]</b>
-- <b>[Pedido]</b>
-- <b>[File]</b>
-- <b>[Disciplina]</b>
+- <b>Country</b>
+- <b>Instituição</b>
+- <b>Pedido</b>
+- <b>File</b>
+- <b>Disciplina</b>
 <br>
 
 ## Country
