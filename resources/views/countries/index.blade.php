@@ -2,21 +2,21 @@
 
 @section('content')
 
-{{-- $countries->appends(request()->query())->links() --}}
-
-<form method="get">
-<div class="row" >
-  <div class=" col-sm input-group">
-      <input type="text" style="Weight: 50px;" name="search" value="{{ request()->search }}" placeholder="[Procurar Países]">
-      <span class="input-group-btn">
-          <button type="submit" class="btn btn-success">Buscar</button>
-      </span>
+<div class="container">
+  <div class="row justify-content-md-center">
+    <div class="col-sm">
+      @include('countries.partials.form')
     </div>
+    <div class="col-sm">
+      <form method="get">
+        <input type="text" style="width: 400px" name="search" value="{{ request()->search }}" placeholder="[Procurar País]">
+        <button type="submit" class="btn btn-success">Buscar</button>
+      </form>
+    </div>
+  </div>
+  <br>
+  {{ $countries->appends(request()->query())->links() }}
 </div>
-</form>
-
-@include('countries.partials.form')
-
 <div class="container" >
   <div class="row">  
     <div class="col-12" >

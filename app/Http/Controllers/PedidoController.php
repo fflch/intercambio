@@ -30,7 +30,6 @@ class PedidoController extends Controller
 
         return view ('pedidos.index',[
             'pedidos' => $pedidos->paginate(10),
-
         ]);
     }
 
@@ -44,13 +43,12 @@ class PedidoController extends Controller
         return view('pedidos.create',[
         'pedido' => new Pedido,
         'countries' => $countries,
-        'instituicoes' => $instituicoes,
+        'instituicoes' => array(),
         ]);
     }
 
     public function getinstituicao(Request $request)
     {
-        dd("teste");
         if($request->has('search')) {
             $instituicoes = Instituicao::where('country_id', $request->search)
                       ->orderby('nome_instituicao','asc')->get();

@@ -12,7 +12,7 @@ class CountryController extends Controller
         $this->authorize('admin');
         $countries = new Country;
         if(isset($request->search)) {
-            $countries =  $countries->where('nome',$request->buscastatus);
+            $countries =  $countries->where('nome','LIKE',"%{$request->search}%");
         }
 
         return view ('countries.index',[
