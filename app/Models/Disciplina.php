@@ -30,9 +30,4 @@ class Disciplina extends Model
         'Optativa Livre',
         'Optativa Eletiva',
     ];
-
-    public function files()
-    {
-        return $this->hasMany('App\Models\FileDisciplina');
-    }
 }

@@ -4,6 +4,13 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 use App\Models\Pedido;
+use App\Models\Instituicao;
+use App\Models\User;
+use Faker\Factory;
+
+use Uspdev\Replicado\Pessoa;
+use Uspdev\Replicado\Graduacao;
+use Illuminate\Http\UploadedFile;
 
 class PedidoSeeder extends Seeder
 {
@@ -14,12 +21,32 @@ class PedidoSeeder extends Seeder
      */
     public function run()
     {
+        $faker = Factory::create();
+
+        $user = User::factory()->create();
+
         $pedido = [   
-            'instituicao'=> 'FFLCH',   
-            'user_id'  => 1,
+            'instituicao_id' => Instituicao::factory()->create()->id,
+            'user_id'        => $user->id,
         ];
-        
-        Pedido::create($pedido);
-        Pedido::factory(10)->create();
+
+        $file = UploadedFile::fake()->create($faker->text(20) .'pdf');
+        $pedido['original_name'] = $file->getClientOriginalName();
+        $pedido['path'] = $file->store('.');
+
+        /* Código do Observer */
+        $pedido['status'] = 'Em elaboração';
+        $pedido['codpes'] = $user->codpes;
+        $pedido['nome'] = Pessoa::nomeCompleto($user->codpes);
+        $pedido['curso'] = Graduacao::curso($user->codpes, env('REPLICADO_CODUNDCLG'))['nomcur'];
+
+        // mutar o Observer
+        Pedido::withoutEvents(function () use ($pedido) {
+
+            Pedido::create($pedido);
+            /*Pedido::factory(10)->create();*/
+
+        });
+
     }
 }

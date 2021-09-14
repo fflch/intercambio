@@ -22,11 +22,12 @@ class PedidoFactory extends Factory
      */
     public function definition()
     {
-        $status_key = array_rand(Pedido::status);
-
+        /*$status_key = array_rand(Pedido::status);
         return [
-            'instituicao' => $this->faker->sentence($nbWords = 10, $variableNbWords = true),
+            'instituicao' => 
             'user_id'     => User::inRandomOrder()->pluck('id')->first(),
+
         ];
+        */
     }
 }

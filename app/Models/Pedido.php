@@ -37,10 +37,6 @@ class Pedido extends Model
             return $status;
     }
    
-    public function files()
-    {
-        return $this->hasMany('App\Models\File');
-    }
     public function disciplinas()
     {
         return $this->hasMany('App\Models\Disciplina');
