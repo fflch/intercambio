@@ -23,13 +23,15 @@
     <span class="input-group-btn">
         <button type="submit" class="btn btn-success">Buscar</button>
     </span>
-
     </div>
 </div>
 </form>
 <br>
-<div class="card">
-<br> @include('pedidos.partials.index_table')
-</div>
+{{ $pedidos->appends(request()->query())->links() }}
 <br>
+    <div class="card">
+        @include('pedidos.partials.index_table')
+    </div>
+<br>
+{{ $pedidos->appends(request()->query())->links() }}
 @endsection

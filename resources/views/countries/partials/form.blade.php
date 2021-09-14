@@ -1,10 +1,5 @@
-<center> 
-  <form method="POST" action="/country"> 
+<form method="POST" action="/country"> 
   @csrf 
-    <label for="nome"><b>Adcionar um País</b></label>
-    <br>  
-    <input name="nome" value="" style="width:800px"></input>
+    <input name="nome" placeholder="Adcionar um País" style="width: 400px" value="">
     <button name="submit" class="btn btn-success"><i class="fas fa-check"></i></button> 
-  </form>
-</center> 
-<br> 
+</form>

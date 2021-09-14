@@ -15,10 +15,10 @@ use App\Http\Controllers\InstituicaoController;
 Route::get('/', [IndexController::class,'index']);
 
 // pedidos
-Route::post('/getinstituicao',[PedidoController::class,'getinstituicao'])
-    ->name('pedidos.getinstituicao');
 Route::resource('/pedidos', PedidoController::class);
 Route::get('/meus_pedidos', [PedidoController::class,'meus_pedidos']);
+Route::post('/getinstituicao',[PedidoController::class,'getinstituicao'])
+    ->name('pedidos.getinstituicao');
 
 // disciplinas
 Route::resource('/disciplinas', DisciplinaController::class);

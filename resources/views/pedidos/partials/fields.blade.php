@@ -47,10 +47,12 @@
                     @include('pedidos.partials.disciplinas_checkbox')
                     
                     Comentário (Obrigatório caso seja indeferido):
-                    <textarea  class="form-control" rows="3" name="comentario" placeholder="[ Este comentário será enviado ao aluno ]"></textarea>
+                    <textarea  class="form-control" rows="3" name="comentario" placeholder="[ Este comentário será enviado ao aluno ]"></textarea>                  
+                    <div class="form-group">
                     <br>
-                    <button type="submit" onclick="return confirm('Tem certeza que deseja deferir a(s) disciplina(s)');" class="btn btn-success" name="deferimento" value="Deferido">Deferir</button>
-                    <button type="submit" onclick="return confirm('Tem certeza que deseja indeferir a(s) disciplina(s)');" class="btn btn-danger" name="deferimento" value="Indeferido">Indeferir</button>
+                        <button type="submit" onclick="return confirm('Tem certeza que deseja deferir a(s) disciplina(s)');" class="btn btn-success" name="deferimento" value="Deferido">Deferir</button>
+                        <button type="submit" onclick="return confirm('Tem certeza que deseja indeferir a(s) disciplina(s)');" class="btn btn-danger" name="deferimento" value="Indeferido">Indeferir</button>
+                    </div>
                     @endif
                 </form>
                 </div> 
@@ -61,4 +63,3 @@
     @else
         @include('pedidos.partials.disciplinas_checkbox')
     @endcan
-</div> 
