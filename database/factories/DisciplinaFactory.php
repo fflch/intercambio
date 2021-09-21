@@ -5,6 +5,7 @@ namespace Database\Factories;
 use App\Models\Disciplina;
 use App\Models\Pedido;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Http\UploadedFile;
 
 class DisciplinaFactory extends Factory
 {
@@ -22,18 +23,30 @@ class DisciplinaFactory extends Factory
      */
     public function definition()
     {
+        $tipos_key = array_rand(Disciplina::tipos);
+        $file = UploadedFile::fake()->create($this->faker->text(20) .'pdf');
 
-        $status_key = array_rand(Disciplina::status);
-        $status_key = array_rand(Disciplina::tipos);
-
-        return [
-            'tipo'          => Disciplina::tipos[$status_key],
+        $disciplina = [  
+            'tipo'          => Disciplina::tipos[$tipos_key],
             'nome'          => $this->faker->sentence($nbWords = 8, $variableNbWords = true),
-            'nota'          => $this->faker->numberBetween(0, 10),
-            'creditos'      => $this->faker->numberBetween(0, 99999999), 
-            'carga_horaria' => $this->faker->numberBetween(0, 99999999),
-            #'codigo'        => $this->faker->sentence($nbWords = 1, $variableNbWords = true),
-            'pedido_id'     => Pedido::factory()->create()->id,
+            'nota'          => $this->faker->randomFloat($nbMaxDecimals = 2, $min = 0, $max = 1000), 
+            'creditos'      => $this->faker->numberBetween(0, 1000), 
+            'carga_horaria' => $this->faker->numberBetween(0, 1000),
+            'original_name' => $file->getClientOriginalName(),
+            'path'          => $file->store('.'),
+            'conversao'     => $this->faker->randomFloat($nbMaxDecimals = 2, $min = 0, $max = 1000),
+            'pedido_id'     => Pedido::inRandomOrder()->pluck('id')->first(),
         ];
+
+    
+        if(Disciplina::tipos[$tipos_key] == "Obrigatória")
+        {
+            $obg = [
+                'codigo' => $this->faker->sentence($nbWords = 1, $variableNbWords = true),
+                //TODO nome aleatorio, fazer uma busca pelo replicado
+        ];
+            $disciplina = array_merge($disciplina,$obg);
+        } 
+        return $disciplina;
     }
 }

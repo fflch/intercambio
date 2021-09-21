@@ -24,7 +24,7 @@ class InstituicaoFactory extends Factory
     {
         return [
             'nome_instituicao' => $this->faker->sentence($nbWords = 2, $variableNbWords = true),
-            'country_id'       => Country::factory()->create()->id,
+            'country_id'       => Country::inRandomOrder()->pluck('id')->first()
         ];
     }
 }

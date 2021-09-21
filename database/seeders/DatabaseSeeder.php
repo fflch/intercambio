@@ -19,7 +19,7 @@ class DatabaseSeeder extends Seeder
             CountrySeeder::class,
             InstituicaoSeeder::class,
             PedidoSeeder::class,
-            /*DisciplinaSeeder::class,*/
+            DisciplinaSeeder::class,
          
         ]);
     }

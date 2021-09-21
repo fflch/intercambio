@@ -17,7 +17,7 @@ class InstituicaoSeeder extends Seeder
     {
         $instituicao = [   
             'nome_instituicao' => 'PUC',
-            'country_id'       => Country::factory()->create()->id,
+            'country_id'       => Country::inRandomOrder()->pluck('id')->first(),
         ];
         
         Instituicao::create($instituicao);
