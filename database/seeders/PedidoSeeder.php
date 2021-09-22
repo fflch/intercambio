@@ -22,29 +22,26 @@ class PedidoSeeder extends Seeder
     public function run()
     {
         $faker = Factory::create();
-
-        $user = User::factory()->create();
+        $user = User::inRandomOrder()->first();
+        $file = UploadedFile::fake()->create($faker->text(20) .'pdf');
 
         $pedido = [   
-            'instituicao_id' => Instituicao::factory()->create()->id,
+            'instituicao_id' => Instituicao::inRandomOrder()->pluck('id')->first(),
             'user_id'        => $user->id,
+            'original_name'  => $file->getClientOriginalName(),
+            'path'           => $file->store('.'),
+            // Código do Observer 
+            'status'         => 'Em elaboração',
+            'codpes'         => $user->codpes,
+            'nome'           => Pessoa::nomeCompleto($user->codpes),
+            'curso'          => Graduacao::curso($user->codpes, env('REPLICADO_CODUNDCLG'))['nomcur'],
         ];
-
-        $file = UploadedFile::fake()->create($faker->text(20) .'pdf');
-        $pedido['original_name'] = $file->getClientOriginalName();
-        $pedido['path'] = $file->store('.');
-
-        /* Código do Observer */
-        $pedido['status'] = 'Em elaboração';
-        $pedido['codpes'] = $user->codpes;
-        $pedido['nome'] = Pessoa::nomeCompleto($user->codpes);
-        $pedido['curso'] = Graduacao::curso($user->codpes, env('REPLICADO_CODUNDCLG'))['nomcur'];
 
         // mutar o Observer
         Pedido::withoutEvents(function () use ($pedido) {
 
             Pedido::create($pedido);
-            /*Pedido::factory(10)->create();*/
+            Pedido::factory(10)->create();
 
         });
 

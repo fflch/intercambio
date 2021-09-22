@@ -2,32 +2,34 @@
 
 namespace Database\Factories;
 
-use App\Models\Pedido;
-use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use App\Models\Pedido;
+use App\Models\Instituicao;
+use App\Models\User;
+use Uspdev\Replicado\Pessoa;
+use Uspdev\Replicado\Graduacao;
+use Illuminate\Http\UploadedFile;
+
 
 class PedidoFactory extends Factory
 {
-    /**
-     * The name of the factory's corresponding model.
-     *
-     * @var string
-     */
     protected $model = Pedido::class;
 
-    /**
-     * Define the model's default state.
-     *
-     * @return array
-     */
     public function definition()
     {
-        /*$status_key = array_rand(Pedido::status);
-        return [
-            'instituicao' => 
-            'user_id'     => User::inRandomOrder()->pluck('id')->first(),
+        $user = User::inRandomOrder()->first();
+        $file = UploadedFile::fake()->create($this->faker->text(20) .'pdf');
 
+        return [
+            'instituicao_id' => Instituicao::inRandomOrder()->pluck('id')->first(),
+            'user_id'        => $user->id,
+            'original_name'  => $file->getClientOriginalName(),
+            'path'           => $file->store('.'),
+            // Código do Observer 
+            'status'         => 'Em elaboração',
+            'codpes'         => $user->codpes,
+            'nome'           => Pessoa::nomeCompleto($user->codpes),
+            'curso'          => Graduacao::curso($user->codpes, env('REPLICADO_CODUNDCLG'))['nomcur'],
         ];
-        */
     }
 }
