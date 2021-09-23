@@ -8,7 +8,7 @@ use App\Models\Instituicao;
 use Illuminate\Http\Request;
 use App\Http\Requests\PedidoRequest;
 use Uspdev\Replicado\Graduacao;
-use App\Service\PedidoStatus;
+use Fflch\LaravelFflchStepper\Stepper;
 use App\Service\Utils;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Storage;
@@ -79,7 +79,7 @@ class PedidoController extends Controller
         return redirect("/pedidos/$pedido->id");
     }
 
-    public function show(Pedido $pedido, PedidoStatus $stepper)
+    public function show(Pedido $pedido, Stepper $stepper)
     {
         $this->authorize('owner',$pedido);
 
@@ -92,6 +92,7 @@ class PedidoController extends Controller
             'stepper' => $stepper->render()
         ]);
     }
+
     public function edit(Pedido $pedido)
     {
         $this->authorize('owner',$pedido);
