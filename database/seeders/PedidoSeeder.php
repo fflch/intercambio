@@ -33,16 +33,14 @@ class PedidoSeeder extends Seeder
             // Código do Observer 
             'status'         => 'Em elaboração',
             'codpes'         => $user->codpes,
-            'nome'           => Pessoa::nomeCompleto($user->codpes),
-            'curso'          => Graduacao::curso($user->codpes, env('REPLICADO_CODUNDCLG'))['nomcur'],
+            'nome'           => $user->name,
+            'curso'          => 'História',
         ];
 
         // mutar o Observer
         Pedido::withoutEvents(function () use ($pedido) {
-
             Pedido::create($pedido);
             Pedido::factory(10)->create();
-
         });
 
     }

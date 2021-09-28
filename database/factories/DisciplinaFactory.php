@@ -4,8 +4,10 @@ namespace Database\Factories;
 
 use App\Models\Disciplina;
 use App\Models\Pedido;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Http\UploadedFile;
+use App\Service\Utils;
 
 class DisciplinaFactory extends Factory
 {
@@ -23,8 +25,10 @@ class DisciplinaFactory extends Factory
      */
     public function definition()
     {
+
         $tipos_key = array_rand(Disciplina::tipos);
         $file = UploadedFile::fake()->create($this->faker->text(20) .'pdf');
+        $pedido = Pedido::inRandomOrder()->first();
 
         $disciplina = [  
             'tipo'          => Disciplina::tipos[$tipos_key],
@@ -35,16 +39,15 @@ class DisciplinaFactory extends Factory
             'original_name' => $file->getClientOriginalName(),
             'path'          => $file->store('.'),
             'conversao'     => $this->faker->randomFloat($nbMaxDecimals = 2, $min = 0, $max = 1000),
-            'pedido_id'     => Pedido::inRandomOrder()->pluck('id')->first(),
+            'pedido_id'     => $pedido->id,
         ];
-
-    
+   
         if(Disciplina::tipos[$tipos_key] == "Obrigatória")
         {
-            $obg = [
-                'codigo' => $this->faker->sentence($nbWords = 1, $variableNbWords = true),
-                //TODO nome aleatorio, fazer uma busca pelo replicado
-        ];
+            $user = User::where('id',$pedido->user_id)->first();
+            $disciplinas = Utils::disciplinas($user->codpes);
+            
+            $obg = ['codigo' => $disciplinas[array_rand($disciplinas)]['coddis']];
             $disciplina = array_merge($disciplina,$obg);
         } 
         return $disciplina;

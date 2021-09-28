@@ -28,7 +28,7 @@ class PedidoFactory extends Factory
             // Código do Observer 
             'status'         => 'Em elaboração',
             'codpes'         => $user->codpes,
-            'nome'           => Pessoa::nomeCompleto($user->codpes),
+            'nome'           => $user->name,
             'curso'          => Graduacao::curso($user->codpes, env('REPLICADO_CODUNDCLG'))['nomcur'],
         ];
     }
