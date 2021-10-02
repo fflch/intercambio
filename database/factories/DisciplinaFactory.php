@@ -38,18 +38,21 @@ class DisciplinaFactory extends Factory
             'carga_horaria' => $this->faker->numberBetween(0, 1000),
             'original_name' => $file->getClientOriginalName(),
             'path'          => $file->store('.'),
-            'conversao'     => $this->faker->randomFloat($nbMaxDecimals = 2, $min = 0, $max = 1000),
             'pedido_id'     => $pedido->id,
         ];
    
-        if(Disciplina::tipos[$tipos_key] == "Obrigatória")
-        {
+        if(Disciplina::tipos[$tipos_key] == "Obrigatória"){
+
             $user = User::where('id',$pedido->user_id)->first();
             $disciplinas = Utils::disciplinas($user->codpes);
             
             $obg = ['codigo' => $disciplinas[array_rand($disciplinas)]['coddis']];
             $disciplina = array_merge($disciplina,$obg);
-        } 
+        } else{
+            
+            $opts = ['conversao' => $this->faker->randomFloat($nbMaxDecimals = 2, $min = 0, $max = 1000)];
+            $disciplina = array_merge($disciplina,$opts);
+        }
         return $disciplina;
     }
 }
