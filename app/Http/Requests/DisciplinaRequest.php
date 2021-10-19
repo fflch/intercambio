@@ -26,10 +26,10 @@ class DisciplinaRequest extends FormRequest
         $data = [
             'tipo' => 'required',
             'nome' => 'required',
-            'nota' => 'required|integer',
+            'nota' => 'nullable',
             'creditos' => 'required|integer',
             'carga_horaria' => 'required|integer',
-            'pedido_id' => 'required',
+            'pedido_id' => 'nullable',
             
         ];
 
@@ -54,8 +54,6 @@ class DisciplinaRequest extends FormRequest
         return [
             'tipo.required' => 'Insira algo no campo: Tipo da Disciplina',
             'nome.required' => 'Insira algo no campo: Nome da Disciplina',
-            'nota.required' => 'Insira algo no campo: Nota',
-            'nota.integer' => 'Campo nota deve ser apenas números',
             'creditos.required' => 'Insira algo no campo: Créditos',
             'creditos.integer' => 'Campo créditos deve ser apenas números',
             'carga_horaria.required' => 'Insira algo no campo: Carga Horaria',

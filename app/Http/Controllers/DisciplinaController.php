@@ -12,7 +12,6 @@ class DisciplinaController extends Controller
 {
     public function store(DisciplinaRequest $request)
     {
-        # TODO: Disciplinas só podem ser inseridas quando o pedido está em elaboração
         $this->authorize('grad');
         $validated = $request->validated();
         $disciplina = Disciplina::create($validated);
@@ -30,42 +29,45 @@ class DisciplinaController extends Controller
     public function edit(Disciplina $disciplina)
     {
         $this->authorize('owner',$disciplina->pedido);
-
-        if($disciplina->status != 'Indeferido') {
-            request()->session()->flash('alert-info','Só é possível realizar a revisão de Disciplinas indeferidas.');
-            return redirect("/pedidos/$disciplina->pedido->id");
-        }
-
+        if($disciplina->status == "Análise" ){
+            $this->authorize('admin');
+        } 
         return view('disciplinas.edit',[
             'disciplina' => $disciplina,
+            'materias' => Utils::disciplinas(auth()->user()->codpes),
         ]);
     }
 
-    public function update(Request $request, Disciplina $disciplina)
+    public function update(DisciplinaRequest $request, Disciplina $disciplina)
     {
         $this->authorize('owner',$disciplina->pedido);
-
-        $request->validate([
-            'comentario' => 'required',
-            'file'     => 'nullable|mimes:pdf|max:10000',
-        ]);
-
-        if($disciplina->status != 'Indeferido') {
-            request()->session()->flash('alert-info','Só é possível realizar a revisão de Disciplinas indeferidas.');
-            return redirect("/pedidos/$disciplina->pedido->id");
+        if($disciplina->status == "Análise" ){
+            $this->authorize('admin');
+        } 
+        $validated = $request->validated();
+        $disciplina->update($validated);
+        
+        if($disciplina->status == 'Indeferido'){
+            $disciplina->setStatus('Análise',$request->comentario);
+            Utils::updatePedidoStatus($disciplina->pedido);
+        } elseif ($disciplina->status == 'Análise'){
+            $disciplina->setStatus('Análise',$request->comentario);
+        } else{
+            $disciplina->setStatus('Em elaboração',request()->comentario);
         }
-
-        $disciplina->setStatus('Análise',$request->comentario);
-
-        if($request->file){
+        if($request->tipo == "Obrigatória"){
             # Apagar arquivo antigo
             Storage::delete($disciplina->path);
             # troca o arquivo
             $disciplina->original_name = $request->file('file')->getClientOriginalName();
             $disciplina->path = $request->file('file')->store('.');
+        } else {
+            Storage::delete($disciplina->path);
+            $disciplina->original_name = NULL;
+            $disciplina->path = NULL;
         }
         $disciplina->save();
-        Utils::updatePedidoStatus($disciplina->pedido);
+        
 
         return redirect("/pedidos/{$disciplina->pedido->id}");
     }
@@ -79,18 +81,6 @@ class DisciplinaController extends Controller
         $disciplina->delete();
         request()->session()->flash('alert-info','Disciplina excluída com sucesso.');
         return redirect("/pedidos/{$pedido_id}"); 
-    }
-
-    public function show(Disciplina $disciplina)
-    {
-        $this->authorize('owner',$disciplina->pedido);
-        $stepper->setCurrentStepName($disciplina->status);
-        
-        //$disciplina->format('Y-m-d H:i:s');
-      
-        return view('disciplinas.show',[
-            'disciplina' => $disciplina
-        ]);
     }
 
     public function showfile(Disciplina $disciplina)

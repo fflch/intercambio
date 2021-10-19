@@ -97,9 +97,11 @@ class PedidoController extends Controller
     {
         $this->authorize('owner',$pedido);
         $instituicoes = Instituicao::all();
+        $countries = Country::all()->sortBy('nome');
         return view('pedidos.edit',[
             'pedido' => $pedido,
-            'instituicoes' => $instituicoes,
+            'countries' => $countries,
+            'instituicoes' => array(),
         ]);
     }
 

@@ -15,4 +15,9 @@ class Instituicao extends Model
     public function country(){
         return $this->belongsTo(Country::class);
     }
+
+    public function pedidos()
+    {
+        return $this->hasMany('App\Models\Pedido');
+    }
 }
