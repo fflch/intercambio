@@ -25,18 +25,22 @@
       <th scope="col">Código USP</th>
       <th scope="col">Ementa</th>
       <th scope="col">Comentários (passe o mouse para ver o texto completo)</th>
-    @if($pedido->status != "Em elaboração")
-      <th scope="col" style="display: none;"></th>
-    @else
-      <th scope="col">Excluir Disciplina</th>
-    @endif
-
-    @if($pedido->status == "Em elaboração")
+      
+      @if($pedido->status == "Em elaboração")
       <th scope="col" style="display: none;"></th> 
-    @else
+      @else
       <th scope="col">Créditos Convertidos</th>
-    @endif
-
+      @endif
+      
+      @if($pedido->status == "Em elaboração")
+        <th scope="col">Alterar Disciplina</th>
+      @elseif($pedido->status == "Análise")
+        @can('admin')
+        <th scope="col">Alterar Disciplina</th>
+        @endcan
+      @else
+        <th scope="col" style="display: none;"></th>
+      @endif
     </tr>
   </thead>
   <tbody>
@@ -76,20 +80,31 @@
             @endif
           @endforeach
       </td>
-    @if($pedido->status == "Em elaboração")
-      <td align="center">
-        
-      </td>
-    @else
-      <td style="display: none;"></td>
-    @endif
-
-    @if($pedido->status == "Em elaboração")
+      
+      @if($pedido->status == "Em elaboração")
       <td scope="col" style="display: none;"></td>      
-    @else
+      @else
       <td scope="col" align="center">{{ $disciplina->conversao }}</td>
-    @endif
-
+      @endif
+    
+      @if($pedido->status == "Em elaboração")
+        <td align="center">
+          <a href="/disciplinas/{{$disciplina->id}}/edit"><i class="fas fa-pencil-alt" color="#007bff"></i></a>
+          <form method="POST" action="/disciplinas/{{$disciplina->id}}"> 
+            @csrf
+            @method('delete')
+            <button type="submit" onclick="return confirm('Tem certeza que deseja excluir a Disciplina?');" style="background-color: transparent;border: none;"><i class="far fa-trash-alt" color="#007bff"></i></button>  
+          </form> 
+        </td>
+      @elseif($pedido->status == "Análise")
+        @can('admin')
+        <td align="center">
+          <a href="/disciplinas/{{$disciplina->id}}/edit"><i class="fas fa-pencil-alt" color="#007bff"></i></a>
+        </td>
+        @endcan
+      @else
+        <td style="display: none;"></td>
+      @endif
     </tr>
     @endforeach
   </tbody>

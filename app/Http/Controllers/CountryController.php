@@ -66,6 +66,14 @@ class CountryController extends Controller
     {
         //desabilitado no form
         $this->authorize('admin');
+
+        if($country->instituicao->isNotEmpty()){
+            $instituicoes = implode(', ', $country->instituicao->pluck('nome_instituicao')->toArray());
+            request()->session()->flash('alert-danger',"País não pode ser deletado, 
+            pois existem as seguintes instituições cadastradas nele: {$instituicoes}");
+            return redirect("/country"); 
+        }
+
         $country->delete();
         request()->session()->flash('alert-info','País excluído com sucesso.');
         return redirect("/country"); 

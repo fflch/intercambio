@@ -36,21 +36,21 @@ function flip(clicado) {
             <div class="form-group col-sm-1">
                 <div class="form-group">
                     <label for="nota" class="required"><b>Nota: </b></label>
-                    <input type="text" class="form-control" id="nota" name="nota" value="{{ old('nota') }}" maxlength="3">
+                    <input type="text" class="form-control" id="nota" name="nota" value="{{ old('nota') }}" >
                 </div>
             </div> 
         
             <div class="form-group col-sm-2">
                 <div class="form-group">
                     <label for="creditos" class="required"><b>Créditos obtidos: </b></label>
-                    <input type="text" class="form-control" id="creditos" name="creditos" value="{{ old('creditos') }}" maxlength="3">
+                    <input type="text" class="form-control" id="creditos" name="creditos" value="{{ old('creditos') }}">
                 </div>
             </div>
 
             <div class="form-group col-sm-2">
                 <div class="form-group">
                     <label for="carga_horaria" class="required"><b>Carga Horária Semestral: </b></label>
-                    <input type="text" class="form-control" id="carga_horaria" name="carga_horaria" value="{{ old('carga_horaria') }}" maxlength="3">
+                    <input type="text" class="form-control" id="carga_horaria" name="carga_horaria" value="{{ old('carga_horaria') }}" >
                 </div>  
             </div>
 
@@ -76,7 +76,7 @@ function flip(clicado) {
         <div class="row">
             <div class="form-group col-sm">
                 <div class="form-group">
-                    <label for="file" class="required"><b>Ementa (Necessário se Obrigatória): </b></label> <br>
+                    <label for="file" class="required"><b>Ementa: </b></label> <br>
                     <input type="file" name="file">
                 </div>
             </div>

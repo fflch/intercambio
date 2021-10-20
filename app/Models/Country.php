@@ -14,9 +14,4 @@ class Country extends Model
     {
         return $this->hasMany('App\Models\Instituicao');
     }
-
-    public function pedido()
-    {
-        return $this->hasMany('App\Models\Pedido');
-    }
 }

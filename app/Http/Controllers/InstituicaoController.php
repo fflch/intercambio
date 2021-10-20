@@ -60,8 +60,16 @@ class InstituicaoController extends Controller
     {
         //desabilitado no form
         $this->authorize('admin');
+        
+        if($instituicao->pedidos->isNotEmpty()){
+            $pedidos = implode(', ', $instituicao->pedidos->pluck('nome')->toArray());
+            request()->session()->flash('alert-danger',"Instituição não pode ser deletada, 
+            pois existem os seguintes pedidos cadastradas dos(as): {$pedidos}");
+            return redirect("/country/$instituicao->country_id"); 
+        }
+
         $instituicao->delete();
-        request()->session()->flash('alert-info','País excluído com sucesso.');
+        request()->session()->flash('alert-info','Instituição excluída com sucesso.');
         return redirect("/country/$instituicao->country_id"); 
     }
 }

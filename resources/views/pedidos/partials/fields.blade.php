@@ -7,6 +7,7 @@
     @foreach($pedido->disciplinas->sortBy('tipo') as $disciplina)
         @if($disciplina->status == 'Indeferido')
         <a href="/pedidos/{{ $pedido->id }}/edit" class="btn btn-info">Alterar Pedido</a>
+        @break
         @endif
     @endforeach 
 @endif
@@ -40,21 +41,21 @@
             <div class="card-body">
             @include('pedidos.partials.conversao')
                 <div class="row">
-                <form method="POST" action="/deferimento/{{ $pedido->id }}">
+                    <form method="POST" action="/deferimento/{{ $pedido->id }}">
                     @csrf
                     @method('patch')
-                    @if($pedido-> status == 'Análise')
-                    @include('pedidos.partials.disciplinas_checkbox')
-                    
-                    Comentário (Obrigatório caso seja indeferido):
-                    <textarea  class="form-control" rows="3" name="comentario" placeholder="[ Este comentário será enviado ao aluno ]"></textarea>                  
-                    <div class="form-group">
-                    <br>
-                        <button type="submit" onclick="return confirm('Tem certeza que deseja deferir a(s) disciplina(s)');" class="btn btn-success" name="deferimento" value="Deferido">Deferir</button>
-                        <button type="submit" onclick="return confirm('Tem certeza que deseja indeferir a(s) disciplina(s)');" class="btn btn-danger" name="deferimento" value="Indeferido">Indeferir</button>
-                    </div>
-                    @endif
-                </form>
+                        @if($pedido-> status == 'Análise')
+                        @include('pedidos.partials.disciplinas_checkbox')
+                        
+                        Comentário (Obrigatório caso seja indeferido):
+                        <textarea  class="form-control" rows="3" name="comentario" placeholder="[ Este comentário será enviado ao aluno ]"></textarea>                  
+                        <div class="form-group">
+                        <br>
+                            <button type="submit" onclick="return confirm('Tem certeza que deseja deferir a(s) disciplina(s)');" class="btn btn-success" name="deferimento" value="Deferido">Deferir</button>
+                            <button type="submit" onclick="return confirm('Tem certeza que deseja indeferir a(s) disciplina(s)');" class="btn btn-danger" name="deferimento" value="Indeferido">Indeferir</button>
+                        </div>
+                        @endif
+                    </form>
                 </div> 
             </div> 
         @else 

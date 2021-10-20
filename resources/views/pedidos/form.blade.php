@@ -42,6 +42,7 @@
   </div>
 <div class="card-body">
   <form method="POST" action="/pedidos" enctype="multipart/form-data">
+  @csrf
     <div class="form-group">
       <label id="id_pais" for="id_pais" class="required"><b>Selecione o país da Instituição</b></label>
       <br>
@@ -55,9 +56,6 @@
           @endforeach
         </select>
     </div>
-  </form>
-  <form method="POST" action="/pedidos" enctype="multipart/form-data">
-    @csrf
     <div class="form-group">
       <label id="instituicao" for="instituicao" class="required"><b>Selecione a Instituição </b></label>
       <br>
