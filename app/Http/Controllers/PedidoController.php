@@ -38,7 +38,6 @@ class PedidoController extends Controller
     {
         $this->authorize('grad');
         $countries = Country::all()->sortBy('nome');
-        $instituicoes = Instituicao::all();
 
         return view('pedidos.create',[
         'pedido' => new Pedido,
@@ -96,8 +95,8 @@ class PedidoController extends Controller
     public function edit(Pedido $pedido)
     {
         $this->authorize('owner',$pedido);
-        $instituicoes = Instituicao::all();
         $countries = Country::all()->sortBy('nome');
+        
         return view('pedidos.edit',[
             'pedido' => $pedido,
             'countries' => $countries,
