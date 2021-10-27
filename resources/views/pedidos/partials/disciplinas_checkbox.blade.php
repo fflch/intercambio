@@ -11,8 +11,7 @@
           Status
         @endcan
       </th>
-      <th scope="col">Nome</th>
-      <th scope="col">Tipo</th>
+      <th scope="col">Nome</th>   
       <th scope="col">Nota</th>
       <th scope="col">
       @if($pedido->status != "Em elaboração")
@@ -25,7 +24,7 @@
       <th scope="col">Código USP</th>
       <th scope="col">Ementa</th>
       <th scope="col">Comentários (passe o mouse para ver o texto completo)</th>
-      
+      <th scope="col">Tipo</th>
       @if($pedido->status == "Em elaboração")
       <th scope="col" style="display: none;"></th> 
       @else
@@ -61,7 +60,6 @@
           @endcan
       </td>
       <td>{{ $disciplina->nome }}</td>
-      <td align="center">{{ $disciplina->tipo }}</td>
       <td align="center">{{ $disciplina->nota }}</td>
       <td align="center">{{ $disciplina->creditos }}</td>
       <td align="center">{{ $disciplina->carga_horaria }}</td>
@@ -80,7 +78,7 @@
             @endif
           @endforeach
       </td>
-      
+      <td align="center">{{ $disciplina->tipo }}</td>
       @if($pedido->status == "Em elaboração")
       <td scope="col" style="display: none;"></td>      
       @else

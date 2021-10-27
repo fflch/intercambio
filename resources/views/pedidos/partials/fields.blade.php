@@ -46,7 +46,8 @@
                     @method('patch')
                         @if($pedido-> status == 'Análise')
                         @include('pedidos.partials.disciplinas_checkbox')
-                        
+                        @include('pedidos.partials.soma_conversao')
+
                         Comentário (Obrigatório caso seja indeferido):
                         <textarea  class="form-control" rows="3" name="comentario" placeholder="[ Este comentário será enviado ao aluno ]"></textarea>                  
                         <div class="form-group">
@@ -60,6 +61,7 @@
             </div> 
         @else 
             @include('pedidos.partials.disciplinas_checkbox')
+            @include('pedidos.partials.soma_conversao')
         @endif
     @else
         @include('pedidos.partials.disciplinas_checkbox')
