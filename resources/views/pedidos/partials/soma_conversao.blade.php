@@ -8,8 +8,8 @@
   </thead>
   <tbody>
     <tr>
-      <td align="center">{{ $pedido->disciplinas->where('tipo', 'LIKE', 'Optativa Livre')->sum('conversao') }}</td>
-      <td align="center">{{ $pedido->disciplinas->where('tipo', 'LIKE', 'Optativa Eletiva')->sum('conversao') }}</td>
+      <td align="center">{{ $pedido->disciplinas->where('tipo', 'Optativa Livre')->sum('conversao') }}</td>
+      <td align="center">{{ $pedido->disciplinas->where('tipo', 'Optativa Eletiva')->sum('conversao') }}</td>
       <td align="center">{{ $pedido->disciplinas->sum('conversao') }}</td>
     </tr>
   </tbody>
