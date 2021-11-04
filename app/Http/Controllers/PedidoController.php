@@ -18,14 +18,16 @@ class PedidoController extends Controller
     public function index(Request $request)
     {
         $this->authorize('admin');
-        $pedidos = new Pedido;
+        $pedidos = Pedido::orderBy('id', 'DESC');
         if(isset($request->buscastatus)) {
-            $pedidos =  $pedidos->where('status',$request->buscastatus);
+            $pedidos =  $pedidos->where('status',$request->buscastatus)
+                                ->orderBy('id', 'DESC');
         }
 
         if(isset($request->search)) {
             $pedidos =  $pedidos->where('codpes','LIKE',"%{$request->search}%")
-                                ->orWhere('nome','LIKE',"%{$request->search}%");
+                                ->orWhere('nome','LIKE',"%{$request->search}%")
+                                ->orderBy('id', 'DESC');
         }
 
         return view ('pedidos.index',[
