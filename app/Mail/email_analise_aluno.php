@@ -8,6 +8,7 @@ use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 use App\Models\Pedido;
 use App\Service\GeneralSettings;
+use App\Models\User;
 
 class email_analise_aluno extends Mailable
 {
@@ -32,9 +33,9 @@ class email_analise_aluno extends Mailable
     public function build()
     {
         $text = str_replace('%nome_aluno',$this->pedido->nome,app(GeneralSettings::class)->email_analise_aluno);
-        $to = [auth()->user()->email];
+        $to = [User::find($this->pedido->user_id)->email];
         $ccint = explode(',',env('EMAILS_CCINT'));
-        
+
         return $this->view('emails.email_analise_aluno')
             ->to($to)
             ->bcc($ccint)
