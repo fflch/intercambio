@@ -98,10 +98,14 @@ class PedidoController extends Controller
     {
         $this->authorize('owner',$pedido);
         $countries = Country::all()->sortBy('nome');
-        
+       
+        $instituicao = Instituicao::where('id', $pedido['instituicao_id'])->first();
+       
+
         return view('pedidos.edit',[
             'pedido' => $pedido,
             'countries' => $countries,
+            'country_id' => $instituicao->country_id,
             'instituicoes' => array(),
         ]);
     }
