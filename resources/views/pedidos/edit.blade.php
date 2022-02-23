@@ -135,7 +135,8 @@
     <div class="form-group">
           <label for="file" class="required">
             <b>Adicione o boletim das matérias cursadas:</b><br>
-            Arquivo salvo: <a href="<?php echo asset('storage/'.$pedido->path); ?>"> {{$pedido->original_name}}</a>
+            Arquivo salvo: 
+            <a href="/pedidos/{{ $pedido->id }}/showfile"><i class="far fa-file-pdf"></i>  {{$pedido->original_name}}</a>
           </label> <br>
           
           <input type="file" name="file">   
