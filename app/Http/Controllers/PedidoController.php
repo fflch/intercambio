@@ -113,12 +113,13 @@ class PedidoController extends Controller
     public function update(PedidoRequest $request, Pedido $pedido)
     {
         $this->authorize('owner',$pedido);
-        Storage::delete($pedido->path);//deletar só se mandar um novo
         $validated = $request->validated();
-        $validated['original_name'] = $request->file('file')->getClientOriginalName();
-        $validated['path'] = $request->file('file')->store('.');
+        if($request->file('file') != null){
+            Storage::delete($pedido->path);//deletar só se mandar um novo
+            $validated['original_name'] = $request->file('file')->getClientOriginalName();
+            $validated['path'] = $request->file('file')->store('.');
+        }
         $pedido->update($validated);
-
         request()->session()->flash('alert-info','Pedido atualizado com sucesso.');
         return redirect("/pedidos/{$pedido->id}");
     }

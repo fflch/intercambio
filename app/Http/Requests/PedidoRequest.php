@@ -23,11 +23,18 @@ class PedidoRequest extends FormRequest
      */
     public function rules()
     {
-        return [
-            'instituicao_id' => 'required',
-            'file'           => 'required|mimes:pdf|max:10000',
-            
+        $rules =  [
+            'instituicao_id' => 'required',            
         ];
+
+        if ($this->method() == 'PATCH' || $this->method() == 'PUT'){
+            $rules['file'] = 'nullable|mimes:pdf|max:10000';
+        }
+        else{
+            $rules['file'] = 'required|mimes:pdf|max:10000';
+        }
+
+        return $rules;
     }
 
     public function messages()
