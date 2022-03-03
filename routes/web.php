@@ -35,6 +35,9 @@ Route::get('/pedidos/{pedido}/showfile', [PedidoController::class, 'showfile']);
 
 // Rotas: Em Elaboração -> Análise
 Route::post('/analise/{pedido}', [WorkflowController::class, 'analise']);
+// Rotas: Análise -> Em Elaboração
+Route::post('/em_elaboracao/{pedido}', [WorkflowController::class, 'emElaboracao']);
+
 Route::patch('/deferimento/{pedido}', [WorkflowController::class, 'deferimento']);
 
 // loginAs

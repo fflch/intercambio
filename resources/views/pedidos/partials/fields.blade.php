@@ -38,6 +38,21 @@
     </div>
     @can('admin')
         @if($pedido->status == 'Análise' && !$pedido->disciplinas->isEmpty() )
+       
+        <div class="card-body">
+            <form method="POST" action="/em_elaboracao/{{$pedido->id}}">
+                @csrf 
+                <br>
+                <div class="row">
+                    <div class="form-group col-sm">
+                        <button type="submit" onclick="return confirm('Tem certeza que deseja retornar o pedido para em elaboração? ');" class="btn btn-warning p-2">
+                        Retornar o pedido para em elaboração
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+
             <div class="card-body">
             @include('pedidos.partials.conversao')
                 <div class="row">

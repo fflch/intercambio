@@ -31,6 +31,23 @@ class WorkflowController extends Controller
         return redirect("/pedidos/$pedido->id");
     }
 
+     // Em Análise -> Elaboração
+     public function emElaboracao(Request $request, Pedido $pedido){
+        # Mudar o status das disciplinas desse pedido para 'Em análise'
+        $this->authorize('owner',$pedido);
+
+        foreach($pedido->disciplinas as $disciplina) {
+            $disciplina->setStatus('Em elaboração');
+        }
+        Utils::updatePedidoStatus($pedido);
+       
+        Mail::queue(new email_em_elaboracao_aluno($pedido));
+        Mail::queue(new email_em_elaboracao_ccint($pedido));
+        return redirect("/pedidos/$pedido->id");
+    }
+
+    
+
     public function deferimento(Request $request, Pedido $pedido){
 
         $this->authorize('admin');
