@@ -8,6 +8,7 @@ use App\Models\Disciplina;
 
 use Mail;
 use App\Mail\email_analise_aluno;
+use App\Mail\email_em_elaboracao_aluno;
 use App\Mail\email_analise_ccint;
 use App\Mail\email_indeferido;
 use App\Mail\email_deferido;
@@ -42,7 +43,7 @@ class WorkflowController extends Controller
         Utils::updatePedidoStatus($pedido);
        
         Mail::queue(new email_em_elaboracao_aluno($pedido));
-        Mail::queue(new email_em_elaboracao_ccint($pedido));
+        //Mail::queue(new email_em_elaboracao_ccint($pedido));
         return redirect("/pedidos/$pedido->id");
     }
 
