@@ -21,8 +21,9 @@
 
     @if($pedido->status == 'Em elaboração' && !$pedido->disciplinas->isEmpty() )
 
-        <form method="POST" action="/analise/{{$pedido->id}}">
+        <form method="POST" action="/update_status_pedido/{{$pedido->id}}">
         @csrf 
+        <input type="hidden" name="status" value="Análise">
         <br>
             <div class="row">
                 <div class="form-group col-sm">
@@ -40,8 +41,9 @@
         @if($pedido->status == 'Análise' && !$pedido->disciplinas->isEmpty() )
        
         <div class="card-body">
-            <form method="POST" action="/em_elaboracao/{{$pedido->id}}">
+            <form method="POST" action="/update_status_pedido/{{$pedido->id}}">
                 @csrf 
+                <input type="hidden" name="status" value="Em elaboração">
                 <br>
                 <div class="row">
                     <div class="form-group col-sm">

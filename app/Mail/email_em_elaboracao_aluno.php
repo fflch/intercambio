@@ -36,8 +36,8 @@ class email_em_elaboracao_aluno extends Mailable
         //dd(app(GeneralSettings::class));
         $to = [User::find($this->pedido->user_id)->email];
         $ccint = explode(',',env('EMAILS_CCINT'));
-
-        return $this->view('emails.email_analise_aluno')
+      
+        return $this->view('emails.email_em_elaboracao_aluno')
             ->to($to)
             ->bcc($ccint)
             ->subject('Pedido de aproveitamento retornado para em elaboração')
