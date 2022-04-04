@@ -68,9 +68,7 @@ class PedidoController extends Controller
     public function store(PedidoRequest $request)
     {
         $this->authorize('grad');
-        //dd($request);
         $validated = $request->validated();
-        //dd($validated);
         $validated['user_id'] = auth()->user()->id;
         $validated['original_name'] = $request->file('file')->getClientOriginalName();
         $validated['path'] = $request->file('file')->store('.');
@@ -97,16 +95,17 @@ class PedidoController extends Controller
     public function edit(Pedido $pedido)
     {
         $this->authorize('owner',$pedido);
-        $countries = Country::all()->sortBy('nome');
-       
-        $instituicao = Instituicao::where('id', $pedido['instituicao_id'])->first();
-       
+        $countries = Country::all()->pluck('nome', 'id')->sortBy('nome');
+        $instituicao = Instituicao::find($pedido->instituicao_id);
+        $instituicoes = Instituicao::where('country_id', $instituicao->country_id)
+                        ->pluck('nome_instituicao', 'id')
+                        ->sortBy('nome_instituicao');
 
         return view('pedidos.edit',[
             'pedido' => $pedido,
             'countries' => $countries,
             'country_id' => $instituicao->country_id,
-            'instituicoes' => array(),
+            'instituicoes' => $instituicoes,
         ]);
     }
 
@@ -115,7 +114,7 @@ class PedidoController extends Controller
         $this->authorize('owner',$pedido);
         $validated = $request->validated();
         if($request->file('file') != null){
-            Storage::delete($pedido->path);//deletar só se mandar um novo
+            Storage::delete($pedido->path);
             $validated['original_name'] = $request->file('file')->getClientOriginalName();
             $validated['path'] = $request->file('file')->store('.');
         }
