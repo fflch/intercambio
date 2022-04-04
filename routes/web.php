@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 
+
 use App\Http\Controllers\PedidoController;
 use App\Http\Controllers\IndexController;
 use App\Http\Controllers\LoginController;
@@ -32,6 +33,9 @@ Route::resource('/instituicao', InstituicaoController::class);
 // files
 Route::get('/disciplinas/{disciplina}/showfile', [DisciplinaController::class, 'showfile']);
 Route::get('/pedidos/{pedido}/showfile', [PedidoController::class, 'showfile']);
+
+// Rotas: Update status do pedido Em Elaboração <-> Análise
+Route::post('/update_status_pedido/{pedido}', [WorkflowController::class, 'updatePedidoStatus']);
 
 // Rotas: Em Elaboração -> Análise
 Route::post('/analise/{pedido}', [WorkflowController::class, 'analise']);
