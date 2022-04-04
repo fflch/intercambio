@@ -62,9 +62,10 @@
                     @csrf
                     @method('patch')
                         @if($pedido-> status == 'Análise')
-                        @include('pedidos.partials.disciplinas_checkbox')
-                        @include('pedidos.partials.soma_conversao')
-
+                        @if(sizeof($pedido->disciplinas) > 0)
+                            @include('pedidos.partials.disciplinas_checkbox')
+                            @include('pedidos.partials.soma_conversao')
+                        @endif
                         Comentário (Obrigatório caso seja indeferido):
                         <textarea  class="form-control" rows="3" name="comentario" placeholder="[ Este comentário será enviado ao aluno ]"></textarea>                  
                         <div class="form-group">
@@ -77,9 +78,13 @@
                 </div> 
             </div> 
         @else 
-            @include('pedidos.partials.disciplinas_checkbox')
-            @include('pedidos.partials.soma_conversao')
+            @if(sizeof($pedido->disciplinas) > 0)
+                @include('pedidos.partials.disciplinas_checkbox')
+                @include('pedidos.partials.soma_conversao')
+            @endif
         @endif
     @else
-        @include('pedidos.partials.disciplinas_checkbox')
+        @if(sizeof($pedido->disciplinas) > 0)
+            @include('pedidos.partials.disciplinas_checkbox')
+        @endif
     @endcan
