@@ -33,13 +33,13 @@
 
 
 ## Notas para desenvolvedores
-</br>
 
 ### Alteração nas mensagens padrões de e-mail
-<p>As mensagens enviadas por e-mail do sistema podem ser editadas na página de configurações, entretanto há as mensagens padrões salvas em .txt na pasta 'database/settings/defaults'. Essas mensagens são gerenciadas através da biblioteca [Spatie/Laravel-Settings] (https://github.com/spatie/laravel-settings).
+As mensagens enviadas por e-mail do sistema podem ser editadas na página de configurações, entretanto há as mensagens padrões salvas em .txt na pasta 'database/settings/defaults'. Essas mensagens são gerenciadas através da biblioteca [Spatie/Laravel-Settings] (https://github.com/spatie/laravel-settings).
 Para adicionar novas mensagens é preciso criar um atributo na classe 'app/Service/GeneralSettings.php', e atribuir um valor para ele através do arquivo .txt dentro da pasta indicada acima, para relacionar o conteúdo do arquivo ao atributo crie uma migration em 'database/settings' 'php artisan make:settings-migration MigrationName' e por fim rodar o comando 
+
 ```
 php artisan vendor:publish --provider="Spatie\LaravelSettings\LaravelSettingsServiceProvider" --tag="migrations"
 php artisan migrate
 ```
-</p><br>
+<br>
