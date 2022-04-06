@@ -24,12 +24,12 @@ class WorkflowController extends Controller
         $request->validate([
             'status' => Rule::in(['Em elaboração', 'Análise']),
         ]);
-       
+
         foreach($pedido->disciplinas as $disciplina) {
             $disciplina->setStatus($request->status);
         }
         Utils::updatePedidoStatus($pedido);
-       
+
         if($request->status =='Em elaboração') {
             Mail::queue(new email_em_elaboracao_aluno($pedido));
         }else if($request->status=='Análise') {
@@ -38,7 +38,7 @@ class WorkflowController extends Controller
         }
         return redirect("/pedidos/$pedido->id");
     }
-    
+
 
     public function deferimento(Request $request, Pedido $pedido){
 
@@ -61,7 +61,7 @@ class WorkflowController extends Controller
                     $disciplina->setStatus('Deferido',$request->comentario);
                     Mail::queue(new email_deferido($disciplina));
                 }
-            } 
+            }
 
             if($request->deferimento == 'Indeferido'){
                 # Se inferido, o motivo é obrigatório
@@ -80,5 +80,5 @@ class WorkflowController extends Controller
 
 
     // Método auxiliar para automatizar a configuração do status do pedido
-    
+
 }

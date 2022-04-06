@@ -14,8 +14,6 @@ class GeneralSettings extends Settings
 
     public static function group(): string
     {
-        // Corpo do email: em elaboração -> análise
-
         return 'general';
     }
 }
