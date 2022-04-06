@@ -3,11 +3,13 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 use App\Models\Pedido;
 use App\Models\Disciplina;
 
 use Mail;
 use App\Mail\email_analise_aluno;
+use App\Mail\email_em_elaboracao_aluno;
 use App\Mail\email_analise_ccint;
 use App\Mail\email_indeferido;
 use App\Mail\email_deferido;
@@ -16,20 +18,27 @@ use App\Service\Utils;
 class WorkflowController extends Controller
 {
 
-    // Em Elaboração -> Análise
-    public function analise(Request $request, Pedido $pedido){
-        # Mudar o status das disciplinas desse pedido para 'Análise'
+    public function updatePedidoStatus(Request $request, Pedido $pedido){
         $this->authorize('owner',$pedido);
 
+        $request->validate([
+            'status' => Rule::in(['Em elaboração', 'Análise']),
+        ]);
+
         foreach($pedido->disciplinas as $disciplina) {
-            $disciplina->setStatus('Análise');
+            $disciplina->setStatus($request->status);
         }
         Utils::updatePedidoStatus($pedido);
-       
-        Mail::queue(new email_analise_aluno($pedido));
-        Mail::queue(new email_analise_ccint($pedido));
+
+        if($request->status =='Em elaboração') {
+            Mail::queue(new email_em_elaboracao_aluno($pedido));
+        }else if($request->status=='Análise') {
+            Mail::queue(new email_analise_aluno($pedido));
+            Mail::queue(new email_analise_ccint($pedido));
+        }
         return redirect("/pedidos/$pedido->id");
     }
+
 
     public function deferimento(Request $request, Pedido $pedido){
 
@@ -52,7 +61,7 @@ class WorkflowController extends Controller
                     $disciplina->setStatus('Deferido',$request->comentario);
                     Mail::queue(new email_deferido($disciplina));
                 }
-            } 
+            }
 
             if($request->deferimento == 'Indeferido'){
                 # Se inferido, o motivo é obrigatório
@@ -71,5 +80,5 @@ class WorkflowController extends Controller
 
 
     // Método auxiliar para automatizar a configuração do status do pedido
-    
+
 }

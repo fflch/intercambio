@@ -1,0 +1,7 @@
+Prezado(a) %nome_aluno,
+
+Seu pedido de aproveitamento de créditos que estava em análise foi retornado para em elaboração. 
+Acesse o nosso sistema e verifique as informações cadastradas.
+Atenciosamente,
+
+Equipe CCInt-FFLCH

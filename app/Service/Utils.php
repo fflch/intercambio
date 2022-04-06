@@ -17,7 +17,7 @@ class Utils
     }
 
     public static function updatePedidoStatus(Pedido $pedido){
-        # Se nesse pedido não tem nenhum disciplina: 'Em elaboração'
+        # Se nesse pedido não tem nenhuma disciplina: 'Em elaboração'
         $disciplinas = $pedido->disciplinas;
 
         if($disciplinas->isEmpty()) {
@@ -34,7 +34,7 @@ class Utils
                 return;
             }
 
-            # Se nesse pedido existir alguma disciplina em análise status do pedido será em 'Em elaboração'
+            # Se nesse pedido existir alguma disciplina em análise status do pedido será em 'Análise'
             if($disciplina->status=='Análise') {
                 $pedido->status = 'Análise';
                 $pedido->save();

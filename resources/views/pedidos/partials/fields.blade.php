@@ -21,8 +21,9 @@
 
     @if($pedido->status == 'Em elaboração' && !$pedido->disciplinas->isEmpty() )
 
-        <form method="POST" action="/analise/{{$pedido->id}}">
+        <form method="POST" action="/update_status_pedido/{{$pedido->id}}">
         @csrf 
+        <input type="hidden" name="status" value="Análise">
         <br>
             <div class="row">
                 <div class="form-group col-sm">
@@ -38,6 +39,22 @@
     </div>
     @can('admin')
         @if($pedido->status == 'Análise' && !$pedido->disciplinas->isEmpty() )
+       
+        <div class="card-body">
+            <form method="POST" action="/update_status_pedido/{{$pedido->id}}">
+                @csrf 
+                <input type="hidden" name="status" value="Em elaboração">
+                <br>
+                <div class="row">
+                    <div class="form-group col-sm">
+                        <button type="submit" onclick="return confirm('Tem certeza que deseja retornar o pedido para em elaboração? ');" class="btn btn-warning p-2">
+                        Retornar o pedido para em elaboração
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+
             <div class="card-body">
             @include('pedidos.partials.conversao')
                 <div class="row">
@@ -45,9 +62,10 @@
                     @csrf
                     @method('patch')
                         @if($pedido-> status == 'Análise')
-                        @include('pedidos.partials.disciplinas_checkbox')
-                        @include('pedidos.partials.soma_conversao')
-
+                        @if(sizeof($pedido->disciplinas) > 0)
+                            @include('pedidos.partials.disciplinas_checkbox')
+                            @include('pedidos.partials.soma_conversao')
+                        @endif
                         Comentário (Obrigatório caso seja indeferido):
                         <textarea  class="form-control" rows="3" name="comentario" placeholder="[ Este comentário será enviado ao aluno ]"></textarea>                  
                         <div class="form-group">
@@ -60,9 +78,13 @@
                 </div> 
             </div> 
         @else 
-            @include('pedidos.partials.disciplinas_checkbox')
-            @include('pedidos.partials.soma_conversao')
+            @if(sizeof($pedido->disciplinas) > 0)
+                @include('pedidos.partials.disciplinas_checkbox')
+                @include('pedidos.partials.soma_conversao')
+            @endif
         @endif
     @else
-        @include('pedidos.partials.disciplinas_checkbox')
+        @if(sizeof($pedido->disciplinas) > 0)
+            @include('pedidos.partials.disciplinas_checkbox')
+        @endif
     @endcan
