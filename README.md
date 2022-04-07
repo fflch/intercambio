@@ -30,3 +30,16 @@
 <p>Quando o aluno enviar o <b>Pedido</b> as disciplinas irão receber o mesmo status que será “Análise”, onde poderão ser alteradas somente pelos admins. Assim caso ocorra alguma incongruência, a CCINT poderá alterar o status para “Indeferido”, tendo que obrigatoriamente atualizar o campo comentário, explicando o motivo. Esse comentário que poderá ser visualizado pelo aluno e respondido pelo mesmo para a possibilidade de correção do problema.</p><br>
 <p>Agora, caso esteja tudo correto o status poderá ser alterado para "Deferido", será obrigatório uma conversão de valores pela CCINT em disciplinas marcadas onde o campo "tipo" seja Optativas (ambas), essa conversão se baseia em passar os valores da nota estrangeira para os da USP.</p><br>
 <p>Quando todas disciplinas forem atualizadas, o <b>Pedido</b> será “Finalizado” e dará fim ao momento atual da etapa virtual para a CCINT.</p>
+
+
+## Notas para desenvolvedores
+
+### Alteração nas mensagens padrões de e-mail
+As mensagens enviadas por e-mail do sistema podem ser editadas na página de configurações, entretanto há as mensagens padrões salvas em .txt na pasta **database/settings/defaults**. Essas mensagens são gerenciadas através da biblioteca [Spatie/Laravel-Settings](https://github.com/spatie/laravel-settings).
+Para adicionar novas mensagens é preciso criar um atributo na classe **app/Service/GeneralSettings.php**, e atribuir um valor para ele através do arquivo .txt dentro da pasta indicada acima, para relacionar o conteúdo do arquivo ao atributo crie uma migration em **database/settings** (**php artisan make:settings-migration MigrationName**) e por fim rode o comando 
+
+```
+php artisan vendor:publish --provider="Spatie\LaravelSettings\LaravelSettingsServiceProvider" --tag="migrations"
+php artisan migrate
+```
+<br>
