@@ -39,7 +39,6 @@ As mensagens enviadas por e-mail do sistema podem ser editadas na página de con
 Para adicionar novas mensagens é preciso criar um atributo na classe **app/Service/GeneralSettings.php**, e atribuir um valor para ele através do arquivo .txt dentro da pasta indicada acima, para relacionar o conteúdo do arquivo ao atributo crie uma migration em **database/settings** (**php artisan make:settings-migration MigrationName**) e por fim rode o comando 
 
 ```
-php artisan vendor:publish --provider="Spatie\LaravelSettings\LaravelSettingsServiceProvider" --tag="migrations"
 php artisan migrate
 ```
 <br>
