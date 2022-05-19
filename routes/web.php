@@ -44,10 +44,6 @@ Route::post('/em_elaboracao/{pedido}', [WorkflowController::class, 'emElaboracao
 
 Route::patch('/deferimento/{pedido}', [WorkflowController::class, 'deferimento']);
 
-// loginAs
-Route::get('loginas', [LoginController::class, 'loginAsForm']);
-Route::post('loginas', [LoginController::class, 'loginAs']);
-
 // settings
 Route::get('/settings', [GeneralSettingsController::class, 'show']);
 Route::post('/settings', [GeneralSettingsController::class, 'update']);
@@ -55,6 +51,6 @@ Route::post('/settings', [GeneralSettingsController::class, 'update']);
 // Rotas genéricas
 Route::post('/converte', [DisciplinaController::class, 'converte']);
 
-# Logs  
+# Logs
 Route::get('logs', '\Rap2hpoutre\LaravelLogViewer\LogViewerController@index')->middleware('can:admin');
 
