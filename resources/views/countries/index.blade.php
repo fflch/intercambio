@@ -9,7 +9,7 @@
     </div>
     <div class="col-sm">
       <form method="get">
-        <input type="text" style="width: 400px" name="search" value="{{ request()->search }}" placeholder="[Procurar País]">
+        <input type="text" style="width: 400px" name="search" value="{{ request()->search }}" placeholder="Procurar País">
         <button type="submit" class="btn btn-success">Buscar</button>
       </form>
     </div>

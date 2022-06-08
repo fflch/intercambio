@@ -28,10 +28,10 @@ class PedidoRequest extends FormRequest
         ];
 
         if ($this->method() == 'PATCH' || $this->method() == 'PUT'){
-            $rules['file'] = 'nullable|mimes:pdf|max:10000';
+            $rules['file'] = 'nullable|mimes:pdf|max:15000';
         }
         else{
-            $rules['file'] = 'required|mimes:pdf|max:10000';
+            $rules['file'] = 'required|mimes:pdf|max:15000';
         }
 
         return $rules;

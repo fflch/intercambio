@@ -28,6 +28,7 @@ class DisciplinaController extends Controller
 
     public function edit(Disciplina $disciplina)
     {
+        
         $this->authorize('owner',$disciplina->pedido);
         if($disciplina->status == "Análise" ){
             $this->authorize('admin');
