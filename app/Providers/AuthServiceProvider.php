@@ -25,8 +25,7 @@ class AuthServiceProvider extends ServiceProvider
     public function boot()
     {
         $this->registerPolicies();
-
-    
+        
         # alunos de graduação
         Gate::define('grad', function ($user) {
             if(Graduacao::curso($user->codpes, env('REPLICADO_CODUNDCLG'))) return true;
@@ -43,6 +42,6 @@ class AuthServiceProvider extends ServiceProvider
             if(Gate::allows('admin')) return true;
             return $model->user_id == $user->id;
         });
-        
+
     }
 }

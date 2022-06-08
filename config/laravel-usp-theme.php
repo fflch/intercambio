@@ -25,11 +25,7 @@ $menu = [
 
 $right_menu = [
     [
-        'text' => '<i class="fas fa-user-secret"></i>',
-        'title' => 'Login As',
-        'url' => config('app.url') . '/loginas',
-        'align' => 'right',
-        'can'   => 'admin'
+        'key' => 'senhaunica-socialite',
     ],
     [
         'text' => '<i class="fas fa-cogs"></i>',
@@ -49,7 +45,7 @@ $right_menu = [
 ];
 
 # dashboard_url renomeado para app_url
-# USPTHEME_SKIN deve ser colocado no .env da aplicação 
+# USPTHEME_SKIN deve ser colocado no .env da aplicação
 
 return [
     'title' => config('app.name'),

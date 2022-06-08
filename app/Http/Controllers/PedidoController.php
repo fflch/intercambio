@@ -67,6 +67,11 @@ class PedidoController extends Controller
 
     public function store(PedidoRequest $request)
     {
+        if (empty(Graduacao::curso(auth()->user()->codpes, env('REPLICADO_CODUNDCLG')))){
+            return back()->with('alert-danger','Esta operação só pode ser executada por um aluno matrículado.');
+        }
+        
+
         $this->authorize('grad');
         $validated = $request->validated();
         $validated['user_id'] = auth()->user()->id;
