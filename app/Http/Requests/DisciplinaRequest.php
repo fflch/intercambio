@@ -22,7 +22,7 @@ class DisciplinaRequest extends FormRequest
      * @return array
      */
     public function rules()
-    {   
+    {
         $data = [
             'tipo' => 'required',
             'nome' => 'required',
@@ -30,18 +30,17 @@ class DisciplinaRequest extends FormRequest
             'creditos' => 'required|integer',
             'carga_horaria' => 'required|integer',
             'pedido_id' => 'nullable',
-            
         ];
 
         if($this->tipo == "Obrigatória"){
             $obg = [
             'codigo' => 'required',
-            'file'     => 'required|mimes:pdf|max:10000',
+            'file'     => 'required|mimes:pdf|max:15000',
         ];
             $data = array_merge($data,$obg);
         } else{
             $opt= [
-            'file' => 'nullable|mimes:pdf|max:10000'
+            'file' => 'nullable|mimes:pdf|max:15000'
         ];
             $data = array_merge($data,$opt);
         }
@@ -59,10 +58,10 @@ class DisciplinaRequest extends FormRequest
             'carga_horaria.required' => 'Insira algo no campo: Carga Horaria',
             'carga_horaria.integer' => 'Campo carga horaria deve ser apenas números',
             'codigo.required' => 'Insira algo no campo: Código USP',
-            'file.required' => 'Insira um arquivo na disciplina obrigatória',          
+            'file.required' => 'Insira um arquivo na disciplina obrigatória',
             'file.max' => 'Tamanho do arquivo não suportado',
             'file.mimes' => 'Somente arquivos PDFs são aceitos',
         ];
     }
-    
+
 }

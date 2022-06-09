@@ -23,7 +23,7 @@ class DisciplinaController extends Controller
         }
         $disciplina->save();
         request()->session()->flash('alert-info','Disciplina adicionada com sucesso.');
-        return redirect("/pedidos/{$disciplina->pedido->id}");  
+        return redirect("/pedidos/{$disciplina->pedido->id}");
     }
 
     public function edit(Disciplina $disciplina)
@@ -31,7 +31,7 @@ class DisciplinaController extends Controller
         $this->authorize('owner',$disciplina->pedido);
         if($disciplina->status == "Análise" ){
             $this->authorize('admin');
-        } 
+        }
         return view('disciplinas.edit',[
             'disciplina' => $disciplina,
             'materias' => Utils::disciplinas(auth()->user()->codpes),
@@ -43,10 +43,10 @@ class DisciplinaController extends Controller
         $this->authorize('owner',$disciplina->pedido);
         if($disciplina->status == "Análise" ){
             $this->authorize('admin');
-        } 
+        }
         $validated = $request->validated();
         $disciplina->update($validated);
-        
+
         if($disciplina->status == 'Indeferido'){
             $disciplina->setStatus('Análise',$request->comentario);
             Utils::updatePedidoStatus($disciplina->pedido);
@@ -67,11 +67,11 @@ class DisciplinaController extends Controller
             $disciplina->path = NULL;
         }
         $disciplina->save();
-        
+
 
         return redirect("/pedidos/{$disciplina->pedido->id}");
     }
-   
+
     public function destroy(Disciplina $disciplina)
     {
         //desabilitado no form
@@ -80,7 +80,7 @@ class DisciplinaController extends Controller
         $pedido_id = $disciplina->pedido_id;
         $disciplina->delete();
         request()->session()->flash('alert-info','Disciplina excluída com sucesso.');
-        return redirect("/pedidos/{$pedido_id}"); 
+        return redirect("/pedidos/{$pedido_id}");
     }
 
     public function showfile(Disciplina $disciplina)
@@ -104,5 +104,5 @@ class DisciplinaController extends Controller
         }
         return back();
     }
-  
+
 }

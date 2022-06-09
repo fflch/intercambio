@@ -8,9 +8,9 @@
   </thead>
   <tbody>
     <tr>
-      <td align="center">{{ $pedido->disciplinas->where('tipo', 'Optativa Livre')->sum('conversao') }}</td>
-      <td align="center">{{ $pedido->disciplinas->where('tipo', 'Optativa Eletiva')->sum('conversao') }}</td>
-      <td align="center">{{ $pedido->disciplinas->sum('conversao') }}</td>
+      <td align="center">{{ $pedido->disciplinas->where('tipo', 'Optativa Livre')->where('status', 'Deferido')->sum('conversao') }}</td>
+      <td align="center">{{ $pedido->disciplinas->where('tipo', 'Optativa Eletiva')->where('status', 'Deferido')->sum('conversao') }}</td>
+      <td align="center">{{ $pedido->disciplinas->where('status', 'Deferido')->sum('conversao') }}</td>
     </tr>
   </tbody>
 </table>
