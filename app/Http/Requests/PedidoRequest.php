@@ -40,10 +40,10 @@ class PedidoRequest extends FormRequest
     public function messages()
     {
         return [
-            'instituicao_id.required' => 'Insira algo no campo: Instituição',
-            'file.mimes' => 'Somente arquivos PDFs são aceitos',
-            'file.max' => 'Tamanho do arquivo não suportado',
-            'file.required' => 'Insira um arquivo'
+            'instituicao_id.required' => 'O campo Instituição é obrigatório.',
+            'file.mimes' => 'Somente arquivos PDFs são aceitos.',
+            'file.max' => 'Tamanho do arquivo não suportad.',
+            'file.required' => 'Insira um arquivo.'
         ];
     }
 }
