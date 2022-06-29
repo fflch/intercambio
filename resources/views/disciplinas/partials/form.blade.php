@@ -35,7 +35,7 @@ function flip(clicado) {
             <div class="form-group col-sm-1">
                 <div class="form-group">
                     <label for="nota" class="required"><b>Nota: </b></label>
-                    <input type="text" class="form-control" id="nota" name="nota"  maxlength="5" value="{{ old('nota') }}" placeholder="Exemplos: 10 ou A+">
+                    <input type="text" class="form-control" id="nota" name="nota"  maxlength="5" value="{{ old('nota') }}" placeholder="Ex.:10 ou A+">
                 </div>
             </div> 
         

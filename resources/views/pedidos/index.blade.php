@@ -5,7 +5,7 @@
 <form method="get">
 <div class="row">
     <div class=" col-sm input-group">
-    <input type="text" class="form-control" name="search" value="{{ request()->search }}" placeholder="[ Busca somente por número USP do/a aluno/a ]">
+    <input type="text" class="form-control" name="search" value="{{ request()->search }}" placeholder="Número USP ou nome do aluno(a)">
 
     @inject('pedido','App\Models\Pedido')
 
