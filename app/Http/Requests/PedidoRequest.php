@@ -42,7 +42,7 @@ class PedidoRequest extends FormRequest
         return [
             'instituicao_id.required' => 'O campo Instituição é obrigatório.',
             'file.mimes' => 'Somente arquivos PDFs são aceitos.',
-            'file.max' => 'Tamanho do arquivo não suportad.',
+            'file.max' => 'Tamanho do arquivo não suportado.',
             'file.required' => 'Insira um arquivo.'
         ];
     }
