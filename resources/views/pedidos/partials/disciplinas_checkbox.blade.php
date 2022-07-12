@@ -32,10 +32,10 @@
       @endif
       
       @if($pedido->status == "Em elaboração")
-        <th scope="col">Alterar Disciplina</th>
+        <th scope="col">Descartar Disciplina</th>
       @elseif($pedido->status == "Análise")
         @can('admin')
-        <th scope="col">Alterar Disciplina</th>
+        <th scope="col">Descartar Disciplina</th>
         @endcan
       @else
         <th scope="col" style="display: none;"></th>
@@ -87,7 +87,6 @@
     
       @if($pedido->status == "Em elaboração")
         <td align="center">
-          <a href="/disciplinas/{{$disciplina->id}}/edit"><i class="fas fa-pencil-alt" color="#007bff"></i></a>
           <form method="POST" action="/disciplinas/{{$disciplina->id}}"> 
             @csrf
             @method('delete')
@@ -95,11 +94,6 @@
           </form> 
         </td>
       @elseif($pedido->status == "Análise")
-        @can('admin')
-        <td align="center">
-          <a href="/disciplinas/{{$disciplina->id}}/edit"><i class="fas fa-pencil-alt" color="#007bff"></i></a>
-        </td>
-        @endcan
       @else
         <td style="display: none;"></td>
       @endif

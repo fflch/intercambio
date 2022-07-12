@@ -39,6 +39,12 @@ class WorkflowController extends Controller
         return redirect("/pedidos/$pedido->id");
     }
 
+    public function sendToCg(Request $request, Pedido $pedido){
+        $this->authorize('owner',$pedido);
+        dd('Chegey');
+    
+    }
+
 
     public function deferimento(Request $request, Pedido $pedido){
 
