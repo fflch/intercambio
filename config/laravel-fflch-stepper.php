@@ -10,7 +10,7 @@ return [
             'icon'     => '<i class="fas fa-glasses"></i>',
             'description' => ''
         ],  
-        'Teste Comissão de Graduação' => [
+        'Comissão de Graduação (Em Desenvolvimento)' => [
             'icon'     => '<i class="fas fa-clipboard-check"></i>',
             'description' => ''
         ],
