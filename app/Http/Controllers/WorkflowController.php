@@ -41,7 +41,7 @@ class WorkflowController extends Controller
 
     public function sendToCg(Request $request, Pedido $pedido){
         $this->authorize('owner',$pedido);
-        dd('Chegey');
+        dd('Teste de Implementação de Status de Envio para Comissão de Graduação');
     
     }
 

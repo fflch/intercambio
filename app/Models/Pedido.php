@@ -17,7 +17,7 @@ class Pedido extends Model
     const status = [
         'Em elaboração',
         'Análise',
-        'Comissão de Graduação',
+        'Teste Comissão de Graduação',
         'Finalizado',
     ];
 
@@ -30,8 +30,8 @@ class Pedido extends Model
                 'Análise' => [
                     'name' => "Análise",       
                 ],
-                'Comissão de Graduação' => [
-                    'name' => "Comissão de Graduação",       
+                'Teste Comissão de Graduação' => [
+                    'name' => "Teste Comissão de Graduação",       
                 ], 
                 'Finalizado' => [
                     'name' => "Finalizado",       

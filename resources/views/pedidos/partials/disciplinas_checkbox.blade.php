@@ -33,10 +33,6 @@
       
       @if($pedido->status == "Em elaboração")
         <th scope="col">Descartar Disciplina</th>
-      @elseif($pedido->status == "Análise")
-        @can('admin')
-        <th scope="col">Descartar Disciplina</th>
-        @endcan
       @else
         <th scope="col" style="display: none;"></th>
       @endif
