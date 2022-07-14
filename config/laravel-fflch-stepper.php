@@ -9,10 +9,14 @@ return [
         'Análise' => [
             'icon'     => '<i class="fas fa-glasses"></i>',
             'description' => ''
+        ],  
+        'Teste Comissão de Graduação' => [
+            'icon'     => '<i class="fas fa-clipboard-check"></i>',
+            'description' => ''
         ],
         'Finalizado' => [
             'icon'     => '<i class="fas fa-clipboard-check"></i>',
-            'description' => 'oooo'
+            'description' => ''
         ],
     ]
 ];
