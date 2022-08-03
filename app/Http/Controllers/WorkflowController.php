@@ -39,9 +39,21 @@ class WorkflowController extends Controller
         return redirect("/pedidos/$pedido->id");
     }
 
-    public function sendToCg(Request $request, Pedido $pedido){
+    public function sendToComissaoDeGraduacao(Request $request, Pedido $pedido){
+        
+        //dd($request->all());
         $this->authorize('owner',$pedido);
-        dd('Teste de Implementação de Status de Envio para Comissão de Graduação');
+
+        $request->validate([
+            'status' => Rule::in(['Análise', 'Comissão de Graduação (Em Desenvolvimento)']),
+        ]);
+
+        foreach($pedido->disciplinas as $disciplina) {
+            $disciplina->setStatus($request->status);
+        }
+        Utils::updatePedidoStatus($pedido);
+
+        return redirect("/pedidos/$pedido->id");
     
     }
 

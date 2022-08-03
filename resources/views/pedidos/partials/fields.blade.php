@@ -39,20 +39,33 @@
     </div>
     @can('admin')
         @if($pedido->status == 'Análise' && !$pedido->disciplinas->isEmpty() )
-       
+        <div class="btn-group" role="group">
         <div class="card-body">
             <form method="POST" action="/update_status_pedido/{{$pedido->id}}">
                 @csrf 
                 <input type="hidden" name="status" value="Em elaboração">
                 <br>
                 <div class="row">
-                    <div class="form-group col-sm">
+                    <div class="form-group">
                         <button type="submit" onclick="return confirm('Tem certeza que deseja retornar o pedido para em elaboração? ');" class="btn btn-warning p-2">
                         Retornar o pedido para em elaboração
                         </button>
                     </div>
                 </div>
             </form>
+            <form method="POST" action="/send_to_comissao_graduacao/{{$pedido->id}}">
+                @csrf 
+                <input type="hidden" name="status" value="Comissão de Graduação (Em Desenvolvimento)">
+                <br>
+                <div class="row">
+                    <div class="form-group">
+                        <button type="submit" onclick="return confirm('Tem certeza que deseja enviar o pedido para comissão de graduação? ');" class="btn btn-info">
+                        Enviar o pedido para comissão de graduação (Em Desenvolvimento)
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
         </div>
 
             <div class="card-body">
