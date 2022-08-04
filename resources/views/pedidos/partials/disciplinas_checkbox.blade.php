@@ -1,6 +1,25 @@
 @section('styles')
 <link rel="stylesheet" type="text/css" href="{{asset('/css/comentario.css')}}"/>
 @endsection
+@can('admin')
+        @if($pedido->status == 'Comissão de Graduação (Em Desenvolvimento)' && !$pedido->disciplinas->isEmpty() )
+        <div class="btn-group" role="group">
+        <div class="card-body">
+            <form method="POST" action="/update_status_pedido/{{$pedido->id}}">
+                @csrf 
+                <input type="hidden" name="status" value="Análise">
+                <br>
+                <div class="row">
+                    <div class="form-group">
+                        <button type="submit" onclick="return confirm('Tem certeza que deseja retornar o pedido para análise? ');" class="btn btn-warning p-2">
+                        Retornar o pedido para análise
+                        </button>
+                    </div>
+                </div>
+            </form>
+            @endcan
+            @endif
+
 <table width=100% class="table table-bordered">
   <thead>
     <tr align="center">
