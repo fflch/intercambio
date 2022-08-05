@@ -88,7 +88,7 @@
       </select>
     </div>
     <div class="form-group">
-          <label for="file" class="required">
+          <label for="file" class="required" enctype="multipart/form-data">
             <b>Adicione o boletim das matérias cursadas:</b><br>
             Arquivo salvo:
             <a href="/pedidos/{{ $pedido->id }}/showfile"><i class="far fa-file-pdf"></i>  {{$pedido->original_name}}</a>

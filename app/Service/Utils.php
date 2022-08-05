@@ -40,7 +40,14 @@ class Utils
                 $pedido->save();
                 return;
             }
+
+            if($disciplina->status=='Comissão de Graduação (Em Desenvolvimento)') {
+                $pedido->status = 'Comissão de Graduação (Em Desenvolvimento)';
+                $pedido->save();
+                return;
+            }
         }
+
 
         $pedido->status = 'Finalizado';
         $pedido->save();
