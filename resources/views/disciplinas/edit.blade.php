@@ -63,30 +63,42 @@ function flip(clicado) {
             </div>
 
         </div>
-        <div class="row" id="lista_obrigatorias" @if(old('tipo') == 'Obrigatória') style="display: block;" @else style="display: none;" @endif>
+        <div class="row" id="lista_obrigatorias" @if(old('tipo') ==
+                    'Obrigatória' || $disciplina->tipo == 'Obrigatória') style="display: block;"
+                    @else style="display: none;" @endif>
             <div class="form-group col-sm">
                 <div class="form-group">
                 <label id="textocodigo" for="codigo" class="required"><b>Selecione o código equivalente na USP </b></label>
                 <br>
                    <select id="codigo" name="codigo">
-                    @foreach($materias as $materia)
-                         <option id="codigo" name="codigo" value="{{ $materia['coddis'] }}"
-                            @if(old('codigo') == $materia['coddis']) selected @endif>
-                            {{ $materia['coddis'] }} - {{ $materia['nomdis'] }}
-                        </option>
-                    @endforeach
-                    </select>
+                   @foreach($materias as $materia)
+                     @if(old('codigo') == '' and isset($disciplina->codigo))
+                     <option value="{{ $materia['coddis'] }}"
+                     {{ ( $disciplina->codigo == $materia['coddis'] ) ? 'selected' : '' }}>
+                     {{ $materia['coddis'] . ' - ' . $materia['nomdis'] }}</option>
+                     @else
+                     <option value="{{ $materia['coddis'] }}"
+                     {{ ( old('codigo') == $materia['coddis'] ) ? 'selected' :
+                     '' }}>{{ $materia['coddis'] . ' - ' . $materia['nomdis'] }}
+                     </option>
+                     @endif
+                   @endforeach
+                   </select>
                 </div>
             </div>
         </div>
+        @if(!empty($disciplina->path))
         <div class="row">
-            <div class="form-group col-sm">
-                <div class="form-group">
-                    <label for="file" class="required"><b>Se necessário insira uma nova ementa: </b></label> <br>
-                    <input type="file" name="file">
-                </div>
+          <div class="form-group col-sm">
+            <div class="form-group">
+              <b>Ementa Salva:</b> <a href="/disciplinas/{{ $disciplina->id }}/showfile">
+              <i class="far fa-file-pdf"></i> {{ $disciplina->original_name }}</a><br /><br />
+              <label for="file" class="required"><b>Alterar ementa: </b></label>
+                <input type="file" name="file">
             </div>
+          </div>
         </div>
+        @endif
 
         <div class="row">
         <b>Comentário adicional para a Disciplina (Opcional):</b>

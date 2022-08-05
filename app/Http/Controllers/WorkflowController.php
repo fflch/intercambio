@@ -40,8 +40,7 @@ class WorkflowController extends Controller
     }
 
     public function sendToComissaoDeGraduacao(Request $request, Pedido $pedido){
-        
-        //dd($request->all());
+        /**
         $this->authorize('owner',$pedido);
 
         $request->validate([
@@ -54,7 +53,8 @@ class WorkflowController extends Controller
         Utils::updatePedidoStatus($pedido);
 
         return redirect("/pedidos/$pedido->id");
-    
+        **/
+
     }
 
 

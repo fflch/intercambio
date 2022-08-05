@@ -67,10 +67,9 @@ class DisciplinaController extends Controller
         }
         $disciplina->save();
 
-
         return redirect("/pedidos/{$disciplina->pedido->id}");
     }
-    
+
     public function destroy(Disciplina $disciplina)
     {
         //desabilitado no form
