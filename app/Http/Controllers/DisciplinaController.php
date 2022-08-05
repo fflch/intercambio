@@ -43,8 +43,7 @@ class DisciplinaController extends Controller
         if($disciplina->status == "Análise" ){
             $this->authorize('admin');
         }
-        $validated = $request->validated();
-        $disciplina->update($validated);
+        $disciplina->update($request->validated());
 
         if($disciplina->status == 'Indeferido'){
             $disciplina->setStatus('Análise',$request->comentario);
@@ -54,12 +53,14 @@ class DisciplinaController extends Controller
         } else{
             $disciplina->setStatus('Em elaboração',request()->comentario);
         }
-        if($request->tipo == "Obrigatória"){
-            # Apagar arquivo antigo
-            Storage::delete($disciplina->path);
-            # troca o arquivo
-            $disciplina->original_name = $request->file('file')->getClientOriginalName();
-            $disciplina->path = $request->file('file')->store('.');
+        if($request->tipo == "Obrigatória" ){
+            if($request->hasFile('file')) {
+                # Apagar arquivo antigo
+                Storage::delete($disciplina->path);
+                # troca o arquivo
+                $disciplina->original_name = $request->file('file')->getClientOriginalName();
+                $disciplina->path = $request->file('file')->store('.');
+            }
         } else {
             Storage::delete($disciplina->path);
             $disciplina->original_name = NULL;

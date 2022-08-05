@@ -6,8 +6,10 @@
 function flip(clicado) {
     if(clicado == 'Obrigatória'){
         document.getElementById("lista_obrigatorias").style = true;
+        document.getElementById("file").style = true;
     } else {
         document.getElementById("lista_obrigatorias").style = "display: none;";
+        document.getElementById("file").style = "display: none;";
     }
 }
 </script>
@@ -88,7 +90,7 @@ function flip(clicado) {
             </div>
         </div>
         @if(!empty($disciplina->path))
-        <div class="row">
+        <div class="row" id="file">
           <div class="form-group col-sm">
             <div class="form-group">
               <b>Ementa Salva:</b> <a href="/disciplinas/{{ $disciplina->id }}/showfile">

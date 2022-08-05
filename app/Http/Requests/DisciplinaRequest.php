@@ -32,11 +32,12 @@ class DisciplinaRequest extends FormRequest
             'pedido_id' => 'nullable',
         ];
 
-        if($this->tipo == "Obrigatória"){
+        if($this->tipo == "Obrigatória" && $this->method() == 'POST'){
             $obg = [
             'codigo' => 'required',
             'file'     => 'required|mimes:pdf|max:15000',
         ];
+
             $data = array_merge($data,$obg);
         } else{
             $opt= [
