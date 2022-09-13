@@ -34,7 +34,7 @@ class DisciplinaFactory extends Factory
             'tipo'          => Disciplina::tipos[$tipos_key],
             'nome'          => $this->faker->sentence($nbWords = 8, $variableNbWords = true),
             'nota'          => $this->faker->randomFloat($nbMaxDecimals = 2, $min = 0, $max = 1000), 
-            'creditos'      => $this->faker->numberBetween(0, 1000), 
+            'creditos'      => $this->faker->randomFloat($nbMaxDecimals = 2, $min = 0, $max = 1000),
             'carga_horaria' => $this->faker->numberBetween(0, 1000),
             'original_name' => $file->getClientOriginalName(),
             'path'          => $file->store('.'),
