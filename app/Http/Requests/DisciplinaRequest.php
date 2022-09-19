@@ -27,7 +27,7 @@ class DisciplinaRequest extends FormRequest
             'tipo' => 'required',
             'nome' => 'required',
             'nota' => 'nullable',
-            'creditos' => 'required|integer',
+            'creditos' => 'required',
             'carga_horaria' => 'required|integer',
             'pedido_id' => 'nullable',
         ];
@@ -56,7 +56,6 @@ class DisciplinaRequest extends FormRequest
             'tipo.required' => 'Insira algo no campo Tipo da Disciplina.',
             'nome.required' => 'Insira algo no campo Nome da Disciplina.',
             'creditos.required' => 'Insira algo no campo Créditos.',
-            'creditos.integer' => 'Campo créditos deve ser apenas números.',
             'carga_horaria.required' => 'Insira algo no campo Carga Horaria.',
             'carga_horaria.integer' => 'Campo carga horaria deve ser apenas números.',
             'codigo.required' => 'Insira algo no campo Código USP.',

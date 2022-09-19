@@ -30,4 +30,14 @@ class Disciplina extends Model
         'Optativa Livre',
         'Optativa Eletiva',
     ];
+    
+    public function setCreditosAttribute($value)
+    {
+        $this->attributes['creditos'] = str_replace(",", ".", $value);
+    }
+
+    public function getCreditosAttribute($value)
+    {
+       return  $this->attributes['creditos'] = str_replace(".", ",", $value);
+    }
 }
