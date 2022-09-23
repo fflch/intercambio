@@ -15,7 +15,6 @@ class ChangeCreditosColumnDisciplinas extends Migration
     {
         Schema::table('disciplinas', function (Blueprint $table) {
             $table->float('creditos')->change();
-            $table->float('conversao')->nullable()->change();
         });
     }
 

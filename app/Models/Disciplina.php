@@ -38,6 +38,6 @@ class Disciplina extends Model
 
     public function getCreditosAttribute($value)
     {
-       return  $this->attributes['creditos'] = str_replace(".", ",", $value);
+        return $this->attributes['creditos'] = str_replace(".", ",", $value);
     }
 }
