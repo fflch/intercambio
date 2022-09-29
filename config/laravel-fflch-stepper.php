@@ -10,7 +10,11 @@ return [
             'icon'     => '<i class="fas fa-glasses"></i>',
             'description' => ''
         ],  
-        'Comissão de Graduação (Em Desenvolvimento)' => [
+        'Comissão de Graduação' => [
+            'icon'     => '<i class="fas fa-clipboard-check"></i>',
+            'description' => ''
+        ],
+        'Serviço de Graduação' => [
             'icon'     => '<i class="fas fa-clipboard-check"></i>',
             'description' => ''
         ],

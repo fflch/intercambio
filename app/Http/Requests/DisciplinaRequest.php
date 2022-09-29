@@ -48,7 +48,6 @@ class DisciplinaRequest extends FormRequest
 
         return $data;
     }
-
     public function messages()
     {
         return [

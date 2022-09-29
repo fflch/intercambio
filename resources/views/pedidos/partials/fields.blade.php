@@ -1,5 +1,4 @@
 <div class="card">
-
 <div class="card-header"><h5><b>Requerimento de Aproveitamento de Créditos</b></h5>
 @if($pedido->status == 'Em elaboração')
     <a href="/pedidos/{{ $pedido->id }}/edit" class="btn btn-info">Alterar Pedido</a>
@@ -53,20 +52,18 @@
                     </div>
                 </div>
             </form>
-            <!--
             <form method="POST" action="/send_to_comissao_graduacao/{{$pedido->id}}">
                 @csrf
-                <input type="hidden" name="status" value="Comissão de Graduação (Em Desenvolvimento)">
+                <input type="hidden" name="status" value="Comissão de Graduação">
                 <br>
                 <div class="row">
                     <div class="form-group">
                         <button type="submit" onclick="return confirm('Tem certeza que deseja enviar o pedido para comissão de graduação? ');" class="btn btn-info">
-                        Enviar o pedido para comissão de graduação (Em Desenvolvimento)
+                        Enviar o pedido para comissão de graduação
                         </button>
                     </div>
                 </div>
             </form>
-            -->
         </div>
         </div>
 

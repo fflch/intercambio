@@ -40,11 +40,10 @@ class WorkflowController extends Controller
     }
 
     public function sendToComissaoDeGraduacao(Request $request, Pedido $pedido){
-        /**
         $this->authorize('owner',$pedido);
 
         $request->validate([
-            'status' => Rule::in(['Análise', 'Comissão de Graduação (Em Desenvolvimento)']),
+            'status' => Rule::in(['Análise', 'Comissão de Graduação']),
         ]);
 
         foreach($pedido->disciplinas as $disciplina) {
@@ -53,7 +52,22 @@ class WorkflowController extends Controller
         Utils::updatePedidoStatus($pedido);
 
         return redirect("/pedidos/$pedido->id");
-        **/
+
+    }
+
+    public function sendToServicoDeGraduacao(Request $request, Pedido $pedido){
+        $this->authorize('owner',$pedido);
+
+        $request->validate([
+            'status' => Rule::in(['Comissão de Graduação', 'Serviço de Graduação']),
+        ]);
+
+        foreach($pedido->disciplinas as $disciplina) {
+            $disciplina->setStatus($request->status);
+        }
+        Utils::updatePedidoStatus($pedido);
+
+        return redirect("/pedidos/$pedido->id");
 
     }
 

@@ -13,14 +13,6 @@ class Pedido extends Model
     use HasFactory;
     protected $guarded = ['id'];
 
-    # talvez não precise ?
-    const status = [
-        'Em elaboração',
-        'Análise',
-        'Comissão de Graduação (Em Desenvolvimento)',
-        'Finalizado',
-    ];
-
     public function getStatus(){
 
         $status = [
@@ -30,9 +22,12 @@ class Pedido extends Model
                 'Análise' => [
                     'name' => "Análise",       
                 ],
-                'Comissão de Graduação (Em Desenvolvimento)' => [
-                    'name' => "Comissão de Graduação (Em Desenvolvimento)",       
+                'Comissão de Graduação' => [
+                    'name' => "Comissão de Graduação",       
                 ], 
+                'Serviço de Graduação'  => [
+                    'name' => "Serviço de Graduação",
+                ],
                 'Finalizado' => [
                     'name' => "Finalizado",       
                 ],

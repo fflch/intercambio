@@ -2,7 +2,7 @@
 <link rel="stylesheet" type="text/css" href="{{asset('/css/comentario.css')}}"/>
 @endsection
 @can('admin')
-        @if($pedido->status == 'Comissão de Graduação (Em Desenvolvimento)' && !$pedido->disciplinas->isEmpty() )
+        @if($pedido->status == 'Comissão de Graduação' && !$pedido->disciplinas->isEmpty() )
         <div class="btn-group" role="group">
         <div class="card-body">
             <form method="POST" action="/update_status_pedido/{{$pedido->id}}">
