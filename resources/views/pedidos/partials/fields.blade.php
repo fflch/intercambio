@@ -36,67 +36,20 @@
     @endif
 
     </div>
+
     @can('admin')
         @if($pedido->status == 'Análise' && !$pedido->disciplinas->isEmpty() )
-        <div class="btn-group" role="group">
-        <div class="card-body">
-            <form method="POST" action="/update_status_pedido/{{$pedido->id}}">
-                @csrf
-                <input type="hidden" name="status" value="Em elaboração">
-                <br>
-                <div class="row">
-                    <div class="form-group">
-                        <button type="submit" onclick="return confirm('Tem certeza que deseja retornar o pedido para em elaboração? ');" class="btn btn-warning p-2">
-                        Retornar o pedido para em elaboração
-                        </button>
-                    </div>
-                </div>
-            </form>
-            <form method="POST" action="/send_to_comissao_graduacao/{{$pedido->id}}">
-                @csrf
-                <input type="hidden" name="status" value="Comissão de Graduação">
-                <br>
-                <div class="row">
-                    <div class="form-group">
-                        <button type="submit" onclick="return confirm('Tem certeza que deseja enviar o pedido para comissão de graduação? ');" class="btn btn-info">
-                        Enviar o pedido para comissão de graduação
-                        </button>
-                    </div>
-                </div>
-            </form>
-        </div>
-        </div>
-
-            <div class="card-body">
-            @include('pedidos.partials.conversao')
-                <div class="row">
-                    <form method="POST" action="/deferimento/{{ $pedido->id }}">
-                    @csrf
-                    @method('patch')
-                        @if($pedido-> status == 'Análise')
-                        @if(sizeof($pedido->disciplinas) > 0)
-                            @include('pedidos.partials.disciplinas_checkbox')
-                            @include('pedidos.partials.soma_conversao')
-                        @endif
-                        Comentário (Obrigatório caso seja indeferido):
-                        <textarea  class="form-control" rows="3" name="comentario" placeholder="Este comentário será enviado ao aluno"></textarea>
-                        <div class="form-group">
-                        <br>
-                            <button type="submit" onclick="return confirm('Tem certeza que deseja deferir a(s) disciplina(s)');" class="btn btn-success" name="deferimento" value="Deferido">Deferir</button>
-                            <button type="submit" onclick="return confirm('Tem certeza que deseja indeferir a(s) disciplina(s)');" class="btn btn-danger" name="deferimento" value="Indeferido">Indeferir</button>
-                        </div>
-                        @endif
-                    </form>
-                </div>
-            </div>
-        @else
-            @if(sizeof($pedido->disciplinas) > 0)
-                @include('pedidos.partials.disciplinas_checkbox')
-                @include('pedidos.partials.soma_conversao')
-            @endif
+            @include('pedidos.etapas.analise')
         @endif
     @else
         @if(sizeof($pedido->disciplinas) > 0)
             @include('pedidos.partials.disciplinas_checkbox')
         @endif
     @endcan
+
+
+    @if($pedido->status == 'Comissão de Graduação')
+        @include('pedidos.etapas.comissaograduacao')
+    @endif
+
+  
