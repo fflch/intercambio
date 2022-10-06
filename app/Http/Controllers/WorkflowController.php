@@ -21,13 +21,31 @@ class WorkflowController extends Controller
     public function updatePedidoStatus(Request $request, Pedido $pedido){
         $this->authorize('owner',$pedido);
 
+
         $request->validate([
-            'status' => Rule::in(['Em elaboração', 'Análise']),
+            'status' => Rule::in(['Em elaboração', 'Análise', 'Comissão de Graduação']),
         ]);
+
+        if($request->status == 'Em elaboração'){
+            $request->validate([
+                'comentario' => 'required',
+            ]);
+        }
+
+        if($request->status == 'Comissão de Graduação'){
+            foreach($pedido->disciplinas as $disciplina) {
+                if($disciplina->tipo != 'Obrigatória' && empty($disciplina->conversao)){
+                    request()->session()->flash('alert-danger',"A disciplina {$disciplina->nome} não teve os créditos convertidos");
+                    return back();
+                }
+            }
+
+        }
 
         foreach($pedido->disciplinas as $disciplina) {
             $disciplina->setStatus($request->status);
         }
+
         Utils::updatePedidoStatus($pedido);
 
         if($request->status =='Em elaboração') {
@@ -39,12 +57,11 @@ class WorkflowController extends Controller
         return redirect("/pedidos/$pedido->id");
     }
 
-    public function sendToComissaoDeGraduacao(Request $request, Pedido $pedido){
-        /**
+    public function sendToServicoDeGraduacao(Request $request, Pedido $pedido){
         $this->authorize('owner',$pedido);
 
         $request->validate([
-            'status' => Rule::in(['Análise', 'Comissão de Graduação (Em Desenvolvimento)']),
+            'status' => Rule::in(['Comissão de Graduação', 'Serviço de Graduação']),
         ]);
 
         foreach($pedido->disciplinas as $disciplina) {
@@ -53,7 +70,6 @@ class WorkflowController extends Controller
         Utils::updatePedidoStatus($pedido);
 
         return redirect("/pedidos/$pedido->id");
-        **/
 
     }
 
@@ -89,6 +105,15 @@ class WorkflowController extends Controller
 
                 $disciplina->setStatus('Indeferido',$request->comentario);
                 Mail::queue(new email_indeferido($disciplina));
+            }
+
+            if($request->deferimento == 'Comissão de Graduação'){
+                # Se inferido, o motivo é obrigatório
+                $request->validate([
+                    'comentario' => 'required',
+                ]);
+
+                $disciplina->setStatus('Comissão de Graduação',$request->comentario);
             }
 
         }

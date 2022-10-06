@@ -37,11 +37,12 @@ Route::get('/pedidos/{pedido}/showfile', [PedidoController::class, 'showfile']);
 // Rotas: Update status do pedido Em Elaboração <-> Análise
 Route::post('/update_status_pedido/{pedido}', [WorkflowController::class, 'updatePedidoStatus']);
 
-//Análise para comissão de graduação
-Route::post('/send_to_comissao_graduacao/{pedido}', [WorkflowController::class, 'sendToComissaoDeGraduacao']);
+//Rotas: Comissão de Graduação -> Serviço de Graduação
+Route::post('/send_to_servico_graduacai/{pedido}', [WorkflowController::class, 'sendToServicoDeGraduacao']);
 
 // Rotas: Em Elaboração -> Análise
 Route::post('/analise/{pedido}', [WorkflowController::class, 'analise']);
+
 // Rotas: Análise -> Em Elaboração
 Route::post('/em_elaboracao/{pedido}', [WorkflowController::class, 'emElaboracao']);
 

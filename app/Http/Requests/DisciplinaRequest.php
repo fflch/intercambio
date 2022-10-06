@@ -35,20 +35,19 @@ class DisciplinaRequest extends FormRequest
         if($this->tipo == "Obrigatória" && $this->method() == 'POST'){
             $obg = [
             'codigo' => 'required',
-            'file'     => 'required|mimes:pdf|max:15000',
+            'file'     => 'required|mimes:pdf|max:85000',
         ];
 
             $data = array_merge($data,$obg);
         } else{
             $opt= [
-            'file' => 'nullable|mimes:pdf|max:15000'
+            'file' => 'nullable|mimes:pdf|max:85000'
         ];
             $data = array_merge($data,$opt);
         }
 
         return $data;
     }
-
     public function messages()
     {
         return [

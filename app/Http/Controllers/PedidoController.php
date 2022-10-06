@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests\PedidoRequest;
 use Uspdev\Replicado\Graduacao;
 use Fflch\LaravelFflchStepper\Stepper;
+use Uspdev\Replicado\Pessoa;
 use App\Service\Utils;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Storage;
@@ -89,8 +90,16 @@ class PedidoController extends Controller
         $stepper->setCurrentStepName($pedido->status);
         $codpes = auth()->user()->codpes;
 
+        if($pedido->status == 'Comissão de Graduação'){
+            $docentes = Pessoa::listarDocentes();
+        } else {
+            $docentes = [];
+        }
+        
+    
         return view('pedidos.show',[
             'pedido' => $pedido,
+            'docentes' => $docentes,
             'disciplinas' => Utils::disciplinas(auth()->user()->codpes),
             'stepper' => $stepper->render()
         ]);
