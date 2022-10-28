@@ -121,6 +121,19 @@ class WorkflowController extends Controller
         return redirect("/pedidos/$pedido->id");
     }
 
+    public function salvardocente(Request $request, Disciplina $disciplina){
+        //dd($disciplina);
+        $request->validate([
+            "codpes_docente" => "required|integer"
+        ]);
+        
+        $disciplina->codpes_docente = $request->codpes_docente;
+        $disciplina->save();
+
+
+
+        return back();
+    }
 
     // Método auxiliar para automatizar a configuração do status do pedido
 
