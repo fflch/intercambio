@@ -8,6 +8,7 @@
                 @include('pedidos.partials.soma_conversao')
             @endif
 
+            @can('admin')
             <form method="POST" action="/update_status_pedido/{{$pedido->id}}">
                 @csrf
                 <input type="hidden" name="status" value="Em elaboração">
@@ -36,6 +37,7 @@
                         </button>
                     </div>
                 </div>
+            @endcan
             </form>
         </div>
     </div>
