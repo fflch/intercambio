@@ -58,3 +58,6 @@ Route::post('/converte', [DisciplinaController::class, 'converte']);
 # Logs
 Route::get('logs', '\Rap2hpoutre\LaravelLogViewer\LogViewerController@index')->middleware('can:admin');
 
+#Rota Deferimento Docente
+Route::post('/salvardocente/{disciplina}', [WorkflowController::class, 'salvardocente']);
+

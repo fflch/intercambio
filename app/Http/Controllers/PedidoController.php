@@ -85,18 +85,16 @@ class PedidoController extends Controller
 
     public function show(Pedido $pedido, Stepper $stepper)
     {
+        if($pedido->status == 'Comissão de Graduação'){
+            $docentes = Pessoa::listarDocentes();
+        } else {
+            $docentes = [1];
+        }
         $this->authorize('owner',$pedido);
 
         $stepper->setCurrentStepName($pedido->status);
         $codpes = auth()->user()->codpes;
 
-        if($pedido->status == 'Comissão de Graduação'){
-            $docentes = Pessoa::listarDocentes();
-        } else {
-            $docentes = [];
-        }
-        
-    
         return view('pedidos.show',[
             'pedido' => $pedido,
             'docentes' => $docentes,

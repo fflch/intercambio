@@ -57,3 +57,21 @@
     @endif
 @endif
 
+
+<form method="post" action="salvardocente/{{ $disciplina->id }}">
+              @csrf
+              <select class="form-control" name="codpes_docente">
+                    <option value="" selected="">- Selecione -</option>
+                    @foreach ($docentes as $docente)
+
+                    @if(old('codpes_docente') == '' and isset($disciplina->codpes_docente))                        
+                    <option value="{{ $docente['codpes'] }}" 
+                    {{ ( $disciplina->codpes_docente == $codpes_docente ) ? 'selected' : ''}}>
+                          {{ $docente['nompes'] }}
+                        </option>
+                    @else
+                    <option value="{{ $codpes_docente }}"
+                    {{ ( old('codpes_docente') == $codpes_docente ) ? 'selected' : '' }}> 
+                    {{ $docente['nompes']}}
+                    </option>
+                    @endif
