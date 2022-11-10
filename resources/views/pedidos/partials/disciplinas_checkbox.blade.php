@@ -22,6 +22,7 @@
       @else
       <th scope="col">Créditos Convertidos</th>
       @endif
+      <th scope="col">Status</th>
       
       @if($pedido->status == "Em elaboração")
         <th scope="col">Alterar Disciplina</th>
@@ -61,6 +62,7 @@
       <td scope="col" style="display: none;"></td>      
       @else
       <td scope="col" align="center">{{ $disciplina->conversao }}</td>
+      <td scope="col" aling="center">{{ $disciplina->status }}</td>
       @endif
     
       @if($pedido->status == "Em elaboração")
