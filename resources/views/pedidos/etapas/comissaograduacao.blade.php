@@ -41,16 +41,14 @@
                   @endforeach
                 </select>
 
-                <div class="row">
-                  <div class="form-group">
-                    <button type="submit" onclick="return confirm('Tem certeza que deseja enviar para docente? ');" class="btn btn-success">
-                      Enviar para docente
-                    </button>
-                  </div>
+                <div class="form-group">
+                  <button type="submit" onclick="return confirm('Tem certeza que deseja enviar para docente? ');" class="btn btn-success">
+                    <br>Enviar para docente
+                  </button>
                 </div>
               </form>
             @else
-                {{ $disciplina->codpes_docente }}
+                {{ $nome_docente[$disciplina->codpes_docente] }}
             @endif
           </td>
         @endif  

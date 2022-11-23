@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 use App\Models\Pedido;
 use App\Models\Disciplina;
+use Uspdev\Replicado\Pessoa;
+use App\Http\Controllers\Redirect;
 
 use Mail;
 use App\Mail\email_analise_aluno;
@@ -129,11 +131,9 @@ class WorkflowController extends Controller
         $disciplina->codpes_docente = $request->codpes_docente;
         $disciplina->save();
 
-
-
-        return back();
-    }
+        return redirect("/pedidos/$disciplina->pedido_id");
 
     // Método auxiliar para automatizar a configuração do status do pedido
 
+    }
 }
