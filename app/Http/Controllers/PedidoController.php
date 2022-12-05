@@ -99,7 +99,8 @@ class PedidoController extends Controller
             'pedido' => $pedido,
             'docentes' => $docentes,
             'disciplinas' => Utils::disciplinas(auth()->user()->codpes),
-            'stepper' => $stepper->render()
+            'stepper' => $stepper->render(),
+            'nome_docente' => Utils::nomeDocente($pedido->id)
         ]);
     }
 
