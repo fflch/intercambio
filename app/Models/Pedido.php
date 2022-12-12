@@ -12,6 +12,13 @@ class Pedido extends Model
 {
     use HasFactory;
     protected $guarded = ['id'];
+    
+    const autorizacoes = [
+        "Sim, com meu nome e contato",
+        "Sim, apenas com meu nome",
+        "Sim, ocultando meu nome e contato",
+        "Não",
+    ];
 
     public function getStatus(){
 

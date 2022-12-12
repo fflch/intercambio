@@ -1,0 +1,7 @@
+Prezado(a) %nome_aluno,
+
+Você foi incluído(a) como docente responsável para realizar o parecer para o/a aluno(a) %nome_aluno. 
+Acesse o nosso sistema e verifique as informações cadastradas.
+Atenciosamente,
+
+Equipe CCInt-FFLCH

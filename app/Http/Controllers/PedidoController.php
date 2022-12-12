@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Pedido;
+use App\Models\Formulario;
 use App\Models\Country;
 use App\Models\Instituicao;
 use Illuminate\Http\Request;
@@ -16,6 +17,8 @@ use Illuminate\Support\Facades\Storage;
 
 class PedidoController extends Controller
 {
+    private $autorizacoes = Pedido::autorizacoes;
+
     public function index(Request $request)
     {
         $this->authorize('admin');
@@ -46,6 +49,7 @@ class PedidoController extends Controller
         'pedido' => new Pedido,
         'countries' => $countries,
         'instituicoes' => array(),
+        'autorizacoes'    => $this->autorizacoes
         ]);
     }
 
@@ -73,11 +77,16 @@ class PedidoController extends Controller
         }
 
         $this->authorize('grad');
-        $validated = $request->validated();
+        $validated = $request->safe()->only(['instituicao_id', 'file']);
         $validated['user_id'] = auth()->user()->id;
         $validated['original_name'] = $request->file('file')->getClientOriginalName();
         $validated['path'] = $request->file('file')->store('.');
         $pedido = Pedido::create($validated);
+        $validatedform = $request->safe()->except(['instituicao_id', 'file']);
+        $validatedform['user_id'] = auth()->user()->id;
+        $validatedform['pedido_id'] = $pedido->id;
+        $validatedform['original_name'] = $request->file('file')->getClientOriginalName();
+        $formularios = Formulario::create($validatedform);
 
         request()->session()->flash('alert-info','Pedido cadastrado com sucesso.');
         return redirect("/pedidos/$pedido->id");

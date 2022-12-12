@@ -52,6 +52,15 @@
             </div>
         </div>
     <br>
+    <br>
+        <div class="row">
+            <div class="col">
+                <label for="add_email_docente" ><b>MENSAGEM PARA DOCENTE – Notificação de inserção do docente para parecer de intercambio </b></label><br>
+                <textarea name="add_email_docente" cols="130" rows="15">{{ $add_email_docente }}</textarea><br> 
+                <span class="badge badge-warning">Token de substituição: %nome_aluno</span> 
+            </div>
+        </div>
+    <br>
         <div class="row">
             <div class="col">
                 <label for="email_deferido" ><b>MENSAGEM PARA ALUNO – Email de deferimento para o aluno</b></label><br>

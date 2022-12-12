@@ -12,6 +12,7 @@ use App\Http\Controllers\Redirect;
 use Mail;
 use App\Mail\email_analise_aluno;
 use App\Mail\email_em_elaboracao_aluno;
+use App\Mail\add_email_docente;
 use App\Mail\email_analise_ccint;
 use App\Mail\email_indeferido;
 use App\Mail\email_deferido;
