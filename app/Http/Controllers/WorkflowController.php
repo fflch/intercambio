@@ -8,6 +8,7 @@ use App\Models\Pedido;
 use App\Models\Disciplina;
 use Uspdev\Replicado\Pessoa;
 use App\Http\Controllers\Redirect;
+use Illuminate\Support\Facades\URL;
 
 use Mail;
 use App\Mail\email_analise_aluno;
@@ -15,6 +16,7 @@ use App\Mail\email_em_elaboracao_aluno;
 use App\Mail\email_analise_ccint;
 use App\Mail\email_indeferido;
 use App\Mail\email_deferido;
+use App\Mail\email_docente;
 use App\Service\Utils;
 
 class WorkflowController extends Controller
@@ -106,16 +108,38 @@ class WorkflowController extends Controller
     }
 
     public function salvardocente(Request $request, Disciplina $disciplina){
+
+        // TODO: Validar se é um docente
         $request->validate([
             "codpes_docente" => "required|integer"
         ]);
+
+        $link = URL::temporarySignedRoute('docente', now()->addMinutes(43200), [
+            'disciplina' => $disciplina->id,
+            'docente' => $request->codpes_docente,
+        ]);
+
+        Mail::queue(new email_docente($disciplina, $request->codpes_docente,$link));
         
         $disciplina->codpes_docente = $request->codpes_docente;
         $disciplina->save();
 
         return redirect("/pedidos/$disciplina->pedido_id");
+    }
 
-    // Método auxiliar para automatizar a configuração do status do pedido
+    public function docente(Request $request)
+    {
+        if (!$request->hasValidSignature()) {
+            $request->session()->flash('alert-danger',
+                "Prazo expirado.");
+            return redirect('/');
+        }
 
+        $disciplina = Disciplina::find($request->disciplina);
+        $codpes_docente = Disciplina::find($request->codpes_docente);
+
+        //dd('continua...');
+
+        //return redirect('/empresa_update');
     }
 }

@@ -1,0 +1,9 @@
+Prezado(a) %docente,
+<br><br>
+
+O(a) aluno(a) %nome_aluno enviou o pedido de equivalência de disciplina obrigatória cursada na %universidade
+<br><br>
+
+Por favor analise o pedido e informe via sistema se o mesmo foi deferido ou indeferido.
+
+Clique no seguinte para acessar a solicitação: %link 

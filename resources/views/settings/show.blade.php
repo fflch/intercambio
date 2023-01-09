@@ -51,7 +51,8 @@
                 <span class="badge badge-warning">Token de substituição: %nome_aluno</span> 
             </div>
         </div>
-    <br>
+        <br>
+    
         <div class="row">
             <div class="col">
                 <label for="email_deferido" ><b>MENSAGEM PARA ALUNO – Email de deferimento para o aluno</b></label><br>
@@ -59,7 +60,17 @@
                 <span class="badge badge-warning">Token de substituição: %nome_aluno, %disciplina </span> 
             </div>
         </div>
-    <br>
+        <br>
+    
+        <div class="row">
+            <div class="col">
+                <label for="email_docente" ><b>MENSAGEM PARA DOCENTE – Email docente</b></label><br>
+                <textarea name="email_docente" cols="130" rows="15">{{ $email_docente }}</textarea><br> 
+                <span class="badge badge-warning">Token de substituição: %docente, %disciplina, %link, %nome_aluno, %universidade  </span> 
+            </div>
+        </div>
+        <br>
+        
         <div class="row">
             <div class="form-group col-sm">
                     <button type="submit" onclick="return confirm('Mudar o Email?');" class="btn btn-success">

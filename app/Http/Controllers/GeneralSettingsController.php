@@ -16,6 +16,7 @@ class GeneralSettingsController extends Controller
             'email_em_elaboracao_aluno' => $settings->email_em_elaboracao_aluno,
             'email_deferido' => $settings->email_deferido,
             'email_indeferido' => $settings->email_indeferido,
+            'email_docente' => $settings->email_docente,
         ]);
     }
     public function update(Request $request, GeneralSettings $settings){
@@ -26,12 +27,14 @@ class GeneralSettingsController extends Controller
             'email_em_elaboracao_aluno' => 'required',
             'email_deferido'    => 'required',
             'email_indeferido'  => 'required',
+            'email_docente'  => 'required',
         ]);
         $settings->email_analise_aluno = $request->input('email_analise_aluno');
         $settings->email_analise_ccint = $request->input('email_analise_ccint');
         $settings->email_em_elaboracao_aluno = $request->input('email_em_elaboracao_aluno');
         $settings->email_deferido = $request->input('email_deferido');
         $settings->email_indeferido = $request->input('email_indeferido');
+        $settings->email_docente = $request->input('email_docente');
         $settings->save();
         return redirect()->back();
     }

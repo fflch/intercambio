@@ -29,7 +29,6 @@
           </td>
 
           <td align="center">
-            @if(empty ($disciplina->codpes_docente))
               <form method="post" action="salvardocente/{{ $disciplina->id }}">
                 @csrf
                 <select class="form-control" name="codpes_docente">
@@ -41,14 +40,17 @@
                   @endforeach
                 </select>
                 <div class="form-group">
-                  <button type="submit" onclick="return confirm('Tem certeza que deseja enviar para docente? ');" class="btn btn-success">
-                    Enviar para docente
-                  </button>
+                    @if(empty ($disciplina->codpes_docente))
+                      Enviar para docente
+                    @else
+                      Enviado para: {{ $nome_docente[$disciplina->codpes_docente] }}
+                      <button type="submit" onclick="return confirm('Tem certeza que deseja enviar para docente? ');" class="btn btn-success">Enviar para docente</button>
+                    @endif
+              
+                  
                 </div>
               </form>
-            @else
-                {{ $nome_docente[$disciplina->codpes_docente] }}
-            @endif
+
           </td>
         @endif  
       </tr>
