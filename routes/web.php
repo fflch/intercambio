@@ -37,9 +37,6 @@ Route::get('/pedidos/{pedido}/showfile', [PedidoController::class, 'showfile']);
 // Rotas: Update status do pedido Em Elaboração <-> Análise
 Route::post('/update_status_pedido/{pedido}', [WorkflowController::class, 'updatePedidoStatus']);
 
-//Rotas: Comissão de Graduação -> Serviço de Graduação
-Route::post('/send_to_servico_graduacai/{pedido}', [WorkflowController::class, 'sendToServicoDeGraduacao']);
-
 // Rotas: Em Elaboração -> Análise
 Route::post('/analise/{pedido}', [WorkflowController::class, 'analise']);
 

@@ -7,12 +7,9 @@
     white-space: nowrap;
     transition: width 0.3s ease-in-out;
     -webkit-transition: width 0.3s ease-in-out;
-   
-    
 }
 
 .expandir:hover{
-
     overflow: auto;
     text-overflow: ellipsis;
     white-space: initial;

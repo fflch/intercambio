@@ -8,6 +8,7 @@ use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 use App\Models\Pedido;
 use App\Service\GeneralSettings;
+use Illuminate\Support\Facades\Storage;
 
 class email_analise_ccint extends Mailable
 {
@@ -31,12 +32,23 @@ class email_analise_ccint extends Mailable
      */
     public function build()
     {
-        $text = str_replace('%nome_aluno',$this->pedido->nome,app(GeneralSettings::class)->email_analise_ccint);
-        $to = explode(',',env('EMAILS_CCINT'));
+        $subject = 'Aviso de recebimento de pedido de aproveitamento de créditos';
+        if(config('app.debug')){
+            $to = explode(',',env('EMAILS_CCINT'));
+            $subject = '(Teste) ' . $subject;
+        } else {
+            $to = explode(',',env('EMAILS_CCINT'));
+        }
 
+        $text = str_replace('%nome_aluno',$this->pedido->nome,app(GeneralSettings::class)->email_analise_ccint);
+        
         return $this->view('emails.email_analise_ccint')
             ->to($to)
-            ->subject('Aviso de recebimento de pedido de aproveitamento de créditos')
+            ->subject($subject)
+            ->attach(Storage::disk('local')->path($this->pedido->path), [
+                'as' => $this->pedido->original_name,
+                'mime' => 'application/pdf'
+                ])
             ->with([
                 'text' => $text,
                 'pedido' => $this->pedido,

@@ -2,4 +2,4 @@
 
 <br>
 
-{{ $disciplina->status()->reason }}
+@include('emails.partials.comments')

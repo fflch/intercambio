@@ -37,19 +37,11 @@
 
     </div>
 
-    @can('admin')
-        @if($pedido->status == 'Análise' && !$pedido->disciplinas->isEmpty() )
-            @include('pedidos.etapas.analise')
-        @endif
-    @else
-        @if(sizeof($pedido->disciplinas) > 0)
-            @include('pedidos.partials.disciplinas_checkbox')
-        @endif
-    @endcan
 
+    @if($pedido->status == 'Análise' && !$pedido->disciplinas->isEmpty() )
+        @include('pedidos.etapas.analise')
+    @endif
 
     @if($pedido->status == 'Comissão de Graduação')
         @include('pedidos.etapas.comissaograduacao')
     @endif
-
-  

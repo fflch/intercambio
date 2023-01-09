@@ -23,7 +23,6 @@ class WorkflowController extends Controller
     public function updatePedidoStatus(Request $request, Pedido $pedido){
         $this->authorize('owner',$pedido);
 
-
         $request->validate([
             'status' => Rule::in(['Em elaboração', 'Análise', 'Comissão de Graduação']),
         ]);
@@ -45,10 +44,10 @@ class WorkflowController extends Controller
         }
 
         foreach($pedido->disciplinas as $disciplina) {
-            $disciplina->setStatus($request->status);
+            $disciplina->setStatus($request->status, $request->comentario);
         }
 
-        Utils::updatePedidoStatus($pedido);
+        Utils::updatePedidoStatus($pedido, $request->comentario);
 
         if($request->status =='Em elaboração') {
             Mail::queue(new email_em_elaboracao_aluno($pedido));
@@ -58,23 +57,6 @@ class WorkflowController extends Controller
         }
         return redirect("/pedidos/$pedido->id");
     }
-
-    public function sendToServicoDeGraduacao(Request $request, Pedido $pedido){
-        $this->authorize('owner',$pedido);
-
-        $request->validate([
-            'status' => Rule::in(['Comissão de Graduação', 'Serviço de Graduação']),
-        ]);
-
-        foreach($pedido->disciplinas as $disciplina) {
-            $disciplina->setStatus($request->status);
-        }
-        Utils::updatePedidoStatus($pedido);
-
-        return redirect("/pedidos/$pedido->id");
-
-    }
-
 
     public function deferimento(Request $request, Pedido $pedido){
 

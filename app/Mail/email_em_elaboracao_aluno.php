@@ -9,6 +9,7 @@ use Illuminate\Queue\SerializesModels;
 use App\Models\Pedido;
 use App\Service\GeneralSettings;
 use App\Models\User;
+use Illuminate\Support\Facades\Storage;
 
 class email_em_elaboracao_aluno extends Mailable
 {
@@ -32,12 +33,24 @@ class email_em_elaboracao_aluno extends Mailable
      */
     public function build()
     {
+        $subject = 'Pedido de aproveitamento retornado para em elaboração';
+        if(config('app.debug')){
+            $to = explode(',',env('EMAILS_CCINT'));
+            $subject = '(Teste) ' . $subject;
+        } else {
+            $to = [User::find($this->pedido->user_id)->email];
+        }
+
         $text = str_replace('%nome_aluno',$this->pedido->nome,app(GeneralSettings::class)->email_em_elaboracao_aluno);
 
         return $this->view('emails.email_em_elaboracao_aluno')
-            ->to([User::find($this->pedido->user_id)->email])
+            ->to($to)
             ->bcc(explode(',',env('EMAILS_CCINT')))
-            ->subject('Pedido de aproveitamento retornado para em elaboração')
+            ->subject($subject)
+            ->attach(Storage::disk('local')->path($this->pedido->path), [
+                'as' => $this->pedido->original_name,
+                'mime' => 'application/pdf'
+                ])
             ->with([
                 'text' => $text,
                 'pedido' => $this->pedido,

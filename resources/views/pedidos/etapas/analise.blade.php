@@ -3,7 +3,7 @@
     <div class="row">
         <div class="col-sm">
             @if(sizeof($pedido->disciplinas) > 0)
-                @include('pedidos.partials.conversao')
+                @can('admin') @include('pedidos.partials.conversao') @endcan
                 @include('pedidos.partials.disciplinas_checkbox')
                 @include('pedidos.partials.soma_conversao')
             @endif

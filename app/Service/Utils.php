@@ -30,6 +30,7 @@ class Utils
         } 
         
         foreach($disciplinas as $disciplina){
+
             # Se nesse pedido existir alguma disciplina em elaboração status do pedido será em 'Em elaboração'
             if($disciplina->status=='Em elaboração') {
                 $pedido->status = 'Em elaboração';
@@ -55,7 +56,6 @@ class Utils
                 return;
             }
         }
-
 
         $pedido->status = 'Finalizado';
         $pedido->save();

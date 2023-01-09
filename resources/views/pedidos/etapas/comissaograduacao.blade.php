@@ -40,10 +40,9 @@
                     </option>
                   @endforeach
                 </select>
-
                 <div class="form-group">
                   <button type="submit" onclick="return confirm('Tem certeza que deseja enviar para docente? ');" class="btn btn-success">
-                    <br>Enviar para docente
+                    Enviar para docente
                   </button>
                 </div>
               </form>
@@ -89,8 +88,15 @@
   </tbody>
 </table>
 
-<button class="btn btn-success" type="submit"> Deferir todas as disciplinas</button>
+<br>
 
+<form method="POST" action="/update_status_pedido/{{$pedido->id}}">
+  @csrf
+  <input type="hidden" name="status" value="Serviço de Graduação">
+  <button type="submit" onclick="return confirm('Tem certeza que deseja enviar para comissão de graduação? ');" class="btn btn-success p-2">
+    Enviar TODAS disciplinas para cadastro no Serviço de Graduação
+  </button>
+</form>
 
 
 <form method="POST" action="/update_status_pedido/{{$pedido->id}}">
@@ -98,15 +104,12 @@
     <input type="hidden" name="status" value="Análise">
     <br>
     Comentário (Obrigatório)
+
     <textarea  class="form-control" rows="3" name="comentario"></textarea>
     <br>    
-    <div class="row">
-        <div class="form-group">
-            <button type="submit" onclick="return confirm('Tem certeza que deseja retornar o pedido para análise (ccint)? ');" class="btn btn-danger p-2">
-            Retornar o pedido para análise (ccint)
-            </button>
-        </div>
-    </div>
+    <button type="submit" onclick="return confirm('Tem certeza que deseja retornar o pedido para análise (ccint)? ');" class="btn btn-danger p-2">
+      Retornar o pedido para análise (ccint)
+    </button>
 </form>
 
 @endsection

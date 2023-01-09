@@ -43,9 +43,9 @@ class PedidoController extends Controller
         $countries = Country::all()->sortBy('nome');
 
         return view('pedidos.create',[
-        'pedido' => new Pedido,
-        'countries' => $countries,
-        'instituicoes' => array(),
+            'pedido' => new Pedido,
+            'countries' => $countries,
+            'instituicoes' => array(),
         ]);
     }
 

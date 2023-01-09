@@ -15,24 +15,21 @@
       <th scope="col">Carga Horária Semestral</th>
       <th scope="col">Código USP</th>
       <th scope="col">Ementa</th>
-      <th scope="col">Comentários (passe o mouse para ver o texto completo)</th>
+      <th scope="col">Comentários</th>
       <th scope="col">Tipo</th>
-      @if($pedido->status == "Em elaboração")
-      <th scope="col" style="display: none;"></th> 
-      @else
       <th scope="col">Créditos Convertidos</th>
-      @endif
       <th scope="col">Status</th>
-      
+
       @if($pedido->status == "Em elaboração")
         <th scope="col">Alterar Disciplina</th>
-      @elseif($pedido->status == "Análise")
-        @can('admin')
-        <th scope="col">Alterar Disciplina</th>
-        @endcan
       @else
-        <th scope="col" style="display: none;"></th>
+        @can('admin')
+          <th scope="col">Alterar Disciplina</th>
+        @else
+          <th scope="col" style="display: none;"></th>
+        @endcan
       @endif
+
     </tr>
   </thead>
   <tbody>
@@ -51,19 +48,15 @@
       <td class="expandir">
           @foreach($disciplina->statuses as $status)
             @if(!empty($status->reason))
-              <b>{{ \App\Models\User::find($status->user_id)->name }}
-                  ({{\Carbon\Carbon::parse( $status->created_at)->format('d/m/Y H:i') }}):
-              </b><br> {{ $status->reason }} <br>
+              <b> {{\Carbon\Carbon::parse( $status->created_at)->format('d/m/Y H:i') }} - 
+                {{ explode(' ', \App\Models\User::find($status->user_id)->name)[0] }}:
+              </b> {{ $status->reason }} <br>
             @endif
           @endforeach
       </td>
       <td align="center">{{ $disciplina->tipo }}</td>
-      @if($pedido->status == "Em elaboração")
-      <td scope="col" style="display: none;"></td>      
-      @else
       <td scope="col" align="center">{{ $disciplina->conversao }}</td>
       <td scope="col" aling="center">{{ $disciplina->status }}</td>
-      @endif
     
       @if($pedido->status == "Em elaboração")
         <td align="center">
