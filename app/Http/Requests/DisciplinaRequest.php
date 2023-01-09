@@ -28,13 +28,13 @@ class DisciplinaRequest extends FormRequest
             'nome' => 'required',
             'nota' => 'nullable',
             'creditos' => 'required',
+            'codigo' => 'nullable',
             'carga_horaria' => 'required|integer',
             'pedido_id' => 'nullable',
         ];
 
         if($this->tipo == "Obrigatória" && $this->method() == 'POST'){
             $obg = [
-            'codigo' => 'required',
             'file'     => 'required|mimes:pdf|max:85000',
         ];
 

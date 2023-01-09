@@ -33,7 +33,7 @@ class DisciplinaController extends Controller
         }
         return view('disciplinas.edit',[
             'disciplina' => $disciplina,
-            'materias' => Utils::disciplinas(auth()->user()->codpes),
+            'materias' => Utils::disciplinas($disciplina->pedido->codpes),
         ]);
     }
 

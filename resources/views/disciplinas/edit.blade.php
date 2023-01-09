@@ -75,14 +75,15 @@ function flip(clicado) {
                    <select id="codigo" name="codigo">
                    @foreach($materias as $materia)
                      @if(old('codigo') == '' and isset($disciplina->codigo))
-                     <option value="{{ $materia['coddis'] }}"
-                     {{ ( $disciplina->codigo == $materia['coddis'] ) ? 'selected' : '' }}>
-                     {{ $materia['coddis'] . ' - ' . $materia['nomdis'] }}</option>
-                     @else
-                     <option value="{{ $materia['coddis'] }}"
-                     {{ ( old('codigo') == $materia['coddis'] ) ? 'selected' :
-                     '' }}>{{ $materia['coddis'] . ' - ' . $materia['nomdis'] }}
-                     </option>
+                        <option value="{{ $materia['coddis'] }}"
+                        {{ ( $disciplina->codigo == $materia['coddis'] ) ? 'selected' : '' }}>
+                        {{ $materia['coddis'] . ' - ' . $materia['nomdis'] }}
+                        </option>
+                        @else
+                        <option value="{{ $materia['coddis'] }}"
+                        {{ ( old('codigo') == $materia['coddis'] ) ? 'selected' :
+                        '' }}>{{ $materia['coddis'] . ' - ' . $materia['nomdis'] }}
+                        </option>
                      @endif
                    @endforeach
                    </select>
