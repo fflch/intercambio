@@ -59,5 +59,5 @@ Route::get('logs', '\Rap2hpoutre\LaravelLogViewer\LogViewerController@index')->m
 Route::post('salvardocente/{disciplina}', [WorkflowController::class, 'salvardocente']);
 Route::get('docente', [WorkflowController::class,'docente']);
 Route::get('show_parecer/{disciplina}', [WorkflowController::class,'show_parecer']);
-Route::get('store_parecer/{disciplina}', [WorkflowController::class,'store_parecer']);
+Route::post('store_parecer/{disciplina}', [WorkflowController::class,'store_parecer']);
 

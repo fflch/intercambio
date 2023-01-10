@@ -11,6 +11,7 @@
     <th scope="col">Nota</th>
     <th scope="col">Carga Horária Semestral</th>
     <th scope="col">Ementa</th>
+    <th scope="col">Comentários</th>
     <th scope="col">Parecer</th>
     </tr>
   </thead>
@@ -28,7 +29,23 @@
             @endif
           </td>
 
+          <td class="expandir">
+            @foreach($disciplina->statuses as $status)
+              @if(!empty($status->reason))
+                <b> {{\Carbon\Carbon::parse( $status->created_at)->format('d/m/Y H:i') }} - 
+                  {{ explode(' ', \App\Models\User::find($status->user_id)->name)[0] }}:
+                </b> {{ $status->reason }} <br>
+              @endif
+            @endforeach
+          </td>
+
           <td align="center">
+            @if($disciplina->deferimento_docente == 'Sim')
+              Parecer favorável realizado por: <i>{{ \Uspdev\Replicado\Pessoa::nomeCompleto($disciplina->codpes_docente) }} </i>
+            @else
+              @if(!empty($disciplina->codpes_docente))
+                <b>Aguardando parecer de:</b> {{ \Uspdev\Replicado\Pessoa::nomeCompleto($disciplina->codpes_docente) }} <br>
+              @endif
               <form method="post" action="salvardocente/{{ $disciplina->id }}">
                 @csrf
                 <select class="form-control" name="codpes_docente">
@@ -40,17 +57,16 @@
                   @endforeach
                 </select>
                 <div class="form-group">
-                    @if(empty ($disciplina->codpes_docente))
-                      Enviar para docente
-                    @else
-                      Enviado para: {{ $nome_docente[$disciplina->codpes_docente] }}
+                    @if(empty($disciplina->codpes_docente))
                       <button type="submit" onclick="return confirm('Tem certeza que deseja enviar para docente? ');" class="btn btn-success">Enviar para docente</button>
+                    @else
+                      @if($disciplina->deferimento_docente != 'Sim')
+                        <br><button type="submit" onclick="return confirm('Tem certeza que deseja enviar para docente? ');" class="btn btn-success">Substituir parecerista</button>
+                      @endif
                     @endif
-              
-                  
                 </div>
               </form>
-
+            @endif 
           </td>
         @endif  
       </tr>
@@ -66,6 +82,7 @@
       <th scope="col">Nota</th>
       <th scope="col">Carga Horária Semestral</th>
       <th scope="col">Ementa</th>
+      <th scope="col">Comentários</th>
       <th scope="col">Tipo</th>
       <th scope="col">Créditos</th>
     </tr>
@@ -81,6 +98,15 @@
                 @if(!empty($disciplina->path))
                 <a href="/disciplinas/{{ $disciplina->id }}/showfile"><i class="far fa-file-pdf"></i></a> 
                 @endif
+            </td>
+            <td class="expandir">
+              @foreach($disciplina->statuses as $status)
+                @if(!empty($status->reason))
+                  <b> {{\Carbon\Carbon::parse( $status->created_at)->format('d/m/Y H:i') }} - 
+                    {{ explode(' ', \App\Models\User::find($status->user_id)->name)[0] }}:
+                  </b> {{ $status->reason }} <br>
+                @endif
+              @endforeach
             </td>
             <td align="center">{{ $disciplina->tipo }}</td>
             <td align="center">{{ $disciplina->conversao}}</td>

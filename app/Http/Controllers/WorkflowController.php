@@ -41,7 +41,6 @@ class WorkflowController extends Controller
                     return back();
                 }
             }
-
         }
 
         foreach($pedido->disciplinas as $disciplina) {
@@ -114,10 +113,9 @@ class WorkflowController extends Controller
             "codpes_docente" => "required|integer"
         ]);
 
-        Mail::queue(new email_docente($disciplina, $request->codpes_docente));
-        
         $disciplina->codpes_docente = $request->codpes_docente;
         $disciplina->save();
+        Mail::queue(new email_docente($disciplina, $request->codpes_docente));
 
         return redirect("/pedidos/$disciplina->pedido_id");
     }
@@ -145,12 +143,39 @@ class WorkflowController extends Controller
 
     public function store_parecer(Disciplina $disciplina, Request $request)
     {
+        // verificar se o docente em questão é o owner do parecer
         $this->authorize('docente');  
-        $disciplinas = Disciplina::where('codpes_docente',auth()->user()->codpes)
-                                  ->whereNull('deferimento_docente')->get();
 
-        return view('disciplinas.docente',[
-            'disciplinas' => $disciplinas,
+        $request->validate([
+            "comentario" => "required"
         ]);
+
+        $disciplina->setStatus('Comissão de Graduação', $request->comentario);
+        $disciplina->save();
+
+        if($request->parecer == 'indicar'){
+            $request->validate([
+                "codpes" => "required"
+            ]);
+            $disciplina->codpes_docente = $request->codpes;
+            $disciplina->save();
+            Mail::queue(new email_docente($disciplina, $request->codpes));
+            request()->session()->flash('alert-info',"Obrigado pela indicação");
+            return redirect("/docente");
+        }
+
+        if($request->parecer == 'indeferir'){
+
+
+            request()->session()->flash('alert-info',"Indeferimento realizado com sucesso");
+            return redirect("/docente");
+        }
+
+        $disciplina->deferimento_docente = 'Sim';
+        $disciplina->setStatus('Comissão de Graduação', $request->comentario);
+        $disciplina->save();
+
+        request()->session()->flash('alert-info',"Parecer realizado com sucesso");
+        return redirect("/docente");
     }
 }

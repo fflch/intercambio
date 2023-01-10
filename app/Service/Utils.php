@@ -61,19 +61,4 @@ class Utils
         $pedido->save();
         return;
     }
-    
-    public static function nomeDocente(int $pedido_id){
-        $obrigatorias = Disciplina::select('codpes_docente')
-                                   ->where('tipo', 'Obrigatória')
-                                   ->whereNotNull('codpes_docente')
-                                   ->where('pedido_id', $pedido_id)
-                                   ->get();
-        $nome_docente = [];
-        if(!empty($obrigatorias)){
-            foreach($obrigatorias as $obrigatoria){
-                $nome_docente[$obrigatoria->codpes_docente] = Pessoa::nomeCompleto($obrigatoria->codpes_docente);
-            };
-        };
-        return $nome_docente;
-    }
 }

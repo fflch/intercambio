@@ -17,20 +17,15 @@
         </div>
 
         <div class="col-sm">
-            <b> Parecer: </b><br>
+            <b> Comentário do parecer: </b><br>
 
             <form method="POST" enctype="multipart/form-data" action="/store_parecer/{{ $disciplina->id }}">
-                <textarea  class="form-control" rows="3" name="comentario"></textarea>
+                @csrf
+                <textarea  class="form-control" rows="3" name="comentario">{{ old('comentario') }}</textarea>
                 <br>
-                <button type="submit" class="btn btn-success" name="parecer" value="deferir" onclick="return confirm('Tem certeza que deseja deferir?');">
-                    Deferir
-                </button>
-                <button type="submit" class="btn btn-danger" name="parecer" value="indeferir" onclick="return confirm('Tem certeza que deseja indeferir?');">Indeferir </button>
-
-                <br><br>
-                <p><b>Indicar outro(a) docente para realização do parecer:</b></p>
+                <p><b>Se desejar, indique outro(a) docente para realização do parecer:</b></p>
                 
-                <select class="form-control" name="codpes_docente">
+                <select class="form-control" name="codpes">
                   <option value="" selected="">- Selecione -</option>
                   @foreach ($docentes as $docente)
                     <option value="{{ $docente['codpes'] }}" @if(old('codpes') == $docente['codpes']) ) selected @endif>
@@ -39,8 +34,9 @@
                   @endforeach
                 </select>
                 <br>
-                <button type="submit" class="btn btn-success" name="parecer" value="indicar" onclick="return confirm('Tem certeza que deseja indeferir?');">Indicar</button>
-
+                <button type="submit" class="btn btn-success" name="parecer" value="deferir" onclick="return confirm('Tem certeza que deseja deferir?');"> Deferir</button>
+                <button type="submit" class="btn btn-success" name="parecer" value="indicar" onclick="return confirm('Tem certeza que deseja indicar outro(a) docente?');">Apenas encaminhar para outro docente</button>
+                <button type="submit" class="btn btn-danger" name="parecer" value="indeferir" onclick="return confirm('Tem certeza que deseja indeferir?');"> Indeferir</button>
             </form>
         </div>
     </div>
