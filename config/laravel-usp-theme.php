@@ -21,6 +21,11 @@ $menu = [
         'url' => config('app.url') . '/country',
         'can' => 'admin',
     ],
+    [
+        'text' => 'Meus Pareceres',
+        'url' => config('app.url') . '/docente',
+        'can' => 'docente',
+    ],
 ];
 
 $right_menu = [

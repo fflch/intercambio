@@ -6,4 +6,5 @@ O(a) aluno(a) %nome_aluno enviou o pedido de equivalência de disciplina obrigat
 
 Por favor analise o pedido e informe via sistema se o mesmo foi deferido ou indeferido.
 
-Clique no seguinte para acessar a solicitação: %link 
+Acesse o sistema https://intercambio.fflch.usp.br/ com sua senha única USP e na opção "Meus Pareceres"
+forneça seu parecer.

@@ -30,6 +30,11 @@ class Disciplina extends Model
         'Optativa Livre',
         'Optativa Eletiva',
     ];
+
+    const deferimento_docente = [
+        'Sim',
+        'Não'
+    ];
     
     public function setCreditosAttribute($value)
     {

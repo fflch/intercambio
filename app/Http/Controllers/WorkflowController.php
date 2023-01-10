@@ -21,7 +21,6 @@ use App\Service\Utils;
 
 class WorkflowController extends Controller
 {
-
     public function updatePedidoStatus(Request $request, Pedido $pedido){
         $this->authorize('owner',$pedido);
 
@@ -107,19 +106,15 @@ class WorkflowController extends Controller
         return redirect("/pedidos/$pedido->id");
     }
 
-    public function salvardocente(Request $request, Disciplina $disciplina){
-
+    public function salvardocente(Request $request, Disciplina $disciplina)
+    {
+        $this->authorize('admin');
         // TODO: Validar se é um docente
         $request->validate([
             "codpes_docente" => "required|integer"
         ]);
 
-        $link = URL::temporarySignedRoute('docente', now()->addMinutes(43200), [
-            'disciplina' => $disciplina->id,
-            'docente' => $request->codpes_docente,
-        ]);
-
-        Mail::queue(new email_docente($disciplina, $request->codpes_docente,$link));
+        Mail::queue(new email_docente($disciplina, $request->codpes_docente));
         
         $disciplina->codpes_docente = $request->codpes_docente;
         $disciplina->save();
@@ -129,17 +124,33 @@ class WorkflowController extends Controller
 
     public function docente(Request $request)
     {
-        if (!$request->hasValidSignature()) {
-            $request->session()->flash('alert-danger',
-                "Prazo expirado.");
-            return redirect('/');
-        }
+        $this->authorize('docente');  
+        $disciplinas = Disciplina::where('codpes_docente',auth()->user()->codpes)
+                                  ->whereNull('deferimento_docente')->get();
 
-        $disciplina = Disciplina::find($request->disciplina);
-        $codpes_docente = Disciplina::find($request->codpes_docente);
+        return view('disciplinas.docente',[
+            'disciplinas' => $disciplinas,
+        ]);
+    }
 
-        //dd('continua...');
+    public function show_parecer(Disciplina $disciplina, Request $request)
+    {
+        // verificar se o docente em questão é o owner do parecer
+        $this->authorize('docente');
+        return view('disciplinas.parecer',[
+            'docentes'   =>  $docentes = Pessoa::listarDocentes(),
+            'disciplina' => $disciplina,
+        ]);
+    }
 
-        //return redirect('/empresa_update');
+    public function store_parecer(Disciplina $disciplina, Request $request)
+    {
+        $this->authorize('docente');  
+        $disciplinas = Disciplina::where('codpes_docente',auth()->user()->codpes)
+                                  ->whereNull('deferimento_docente')->get();
+
+        return view('disciplinas.docente',[
+            'disciplinas' => $disciplinas,
+        ]);
     }
 }

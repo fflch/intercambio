@@ -17,18 +17,16 @@ class email_docente extends Mailable
     use Queueable, SerializesModels;
     private $disciplina;
     private $docente;
-    private $link;
 
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct(Disciplina $disciplina, $docente, $link)
+    public function __construct(Disciplina $disciplina, $docente)
     {
         $this->disciplina = $disciplina;
         $this->docente = $docente;
-        $this->link = $link;
     }
 
     /**
@@ -52,7 +50,6 @@ class email_docente extends Mailable
         $text = str_replace('%nome_aluno',$nome_aluno,app(GeneralSettings::class)->email_docente);
         $text = str_replace('%disciplina',$this->disciplina->nome,$text);
         $text = str_replace('%docente',$docente,$text);
-        $text = str_replace('%link',$this->link,$text);
         $text = str_replace('%universidade',$this->disciplina->pedido->instituicao->nome_instituicao,$text);
 
         $ccint = explode(',',env('EMAILS_CCINT'));

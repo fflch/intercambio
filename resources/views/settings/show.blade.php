@@ -66,7 +66,7 @@
             <div class="col">
                 <label for="email_docente" ><b>MENSAGEM PARA DOCENTE – Email docente</b></label><br>
                 <textarea name="email_docente" cols="130" rows="15">{{ $email_docente }}</textarea><br> 
-                <span class="badge badge-warning">Token de substituição: %docente, %disciplina, %link, %nome_aluno, %universidade  </span> 
+                <span class="badge badge-warning">Token de substituição: %docente, %disciplina, %nome_aluno, %universidade  </span> 
             </div>
         </div>
         <br>

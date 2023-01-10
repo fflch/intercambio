@@ -5,6 +5,7 @@ namespace App\Providers;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 use Illuminate\Support\Facades\Gate;
 use Uspdev\Replicado\Graduacao;
+use Uspdev\Replicado\Pessoa;
 
 class AuthServiceProvider extends ServiceProvider
 {
@@ -32,6 +33,13 @@ class AuthServiceProvider extends ServiceProvider
             return false;
         });
 
+        # docente
+        Gate::define('docente', function ($user) {
+            if(Gate::allows('admin')) return true;
+            $vinculos = Pessoa::obterSiglasVinculosAtivos($user->codpes);
+            return in_array("SERVIDOR", $vinculos);
+        });
+
         # logado
         Gate::define('logado', function ($user) {
             return true;
@@ -40,6 +48,7 @@ class AuthServiceProvider extends ServiceProvider
         # owner
         Gate::define('owner', function ($user, $model) {
             if(Gate::allows('admin')) return true;
+            if(Gate::allows('docente')) return true;
             return $model->user_id == $user->id;
         });
 

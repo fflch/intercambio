@@ -57,5 +57,7 @@ Route::get('logs', '\Rap2hpoutre\LaravelLogViewer\LogViewerController@index')->m
 
 // Rotas para avaliação do Deferimento Docente
 Route::post('salvardocente/{disciplina}', [WorkflowController::class, 'salvardocente']);
-Route::get('docente', [WorkflowController::class,'docente'])->name('docente');
+Route::get('docente', [WorkflowController::class,'docente']);
+Route::get('show_parecer/{disciplina}', [WorkflowController::class,'show_parecer']);
+Route::get('store_parecer/{disciplina}', [WorkflowController::class,'store_parecer']);
 
