@@ -45,3 +45,11 @@
     @if($pedido->status == 'Comissão de Graduação')
         @include('pedidos.etapas.comissaograduacao')
     @endif
+
+    @if($pedido->status == 'Serviço de Graduação')
+        @include('pedidos.etapas.servicograduacao')
+    @endif
+
+    @if($pedido->status == 'Finalizado')
+        @include('pedidos.etapas.finalizado')
+    @endif

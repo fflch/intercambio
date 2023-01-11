@@ -91,7 +91,7 @@ class DisciplinaController extends Controller
     public function converte(Request $request)
     {
         $request->validate([
-            'conversao' => 'required',
+            'conversao' => 'required|integer',
         ]);
 
         $this->authorize('admin');

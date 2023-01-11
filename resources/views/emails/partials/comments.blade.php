@@ -1,7 +1,7 @@
 <br>
 
 <b>Histórico dos comentários</b>
-<br><br>
+<br>
 
 @foreach($pedido->disciplinas as $disciplina)
     <br><hr><br>

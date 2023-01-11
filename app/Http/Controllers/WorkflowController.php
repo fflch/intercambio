@@ -25,7 +25,7 @@ class WorkflowController extends Controller
         $this->authorize('owner',$pedido);
 
         $request->validate([
-            'status' => Rule::in(['Em elaboração', 'Análise', 'Comissão de Graduação']),
+            'status' => Rule::in(['Em elaboração', 'Análise', 'Comissão de Graduação','Serviço de Graduação','Deferido']),
         ]);
 
         if($request->status == 'Em elaboração'){
@@ -35,12 +35,28 @@ class WorkflowController extends Controller
         }
 
         if($request->status == 'Comissão de Graduação'){
+            $this->authorize('admin');
             foreach($pedido->disciplinas as $disciplina) {
                 if($disciplina->tipo != 'Obrigatória' && empty($disciplina->conversao)){
                     request()->session()->flash('alert-danger',"A disciplina {$disciplina->nome} não teve os créditos convertidos");
                     return back();
                 }
             }
+        }
+
+        if($request->status == 'Serviço de Graduação'){
+            $this->authorize('admin');
+            foreach($pedido->disciplinas as $disciplina) {
+                if($disciplina->status == 'Indeferido'){
+                    request()->session()->flash('alert-danger',"A disciplina {$disciplina->nome} foi indeferida e não pode ser enviada para o Serviço de Graduação");
+                    return back();
+                }
+            }
+        }
+
+        if($request->status == 'Deferido'){
+            $this->authorize('admin');
+            Mail::queue(new email_deferido($pedido));
         }
 
         foreach($pedido->disciplinas as $disciplina) {
@@ -55,53 +71,6 @@ class WorkflowController extends Controller
             Mail::queue(new email_analise_aluno($pedido));
             Mail::queue(new email_analise_ccint($pedido));
         }
-        return redirect("/pedidos/$pedido->id");
-    }
-
-    public function deferimento(Request $request, Pedido $pedido){
-
-        $this->authorize('admin');
-        $request->validate([
-            # TODO: Rule:in para o campo $request->deferimento e ids das disciplinas
-            'deferimento' => 'required',
-            'disciplinas' => 'required'
-        ]);
-
-        foreach($request->disciplinas as $id){
-            $disciplina = Disciplina::where('id',$id)->first();
-            if($request->deferimento == 'Deferido'){
-
-                # não vamos deferir disciplinas optativas sem conversão
-                if($disciplina->tipo != 'Obrigatória' && empty($disciplina->conversao)){
-                    request()->session()->flash('alert-danger',"A disciplina {$disciplina->nome}
-                    não foi deferida porque os créditos não foram convertidos");
-                } else {
-                    $disciplina->setStatus('Deferido',$request->comentario);
-                    Mail::queue(new email_deferido($disciplina));
-                }
-            }
-
-            if($request->deferimento == 'Indeferido'){
-                # Se inferido, o motivo é obrigatório
-                $request->validate([
-                    'comentario' => 'required',
-                ]);
-
-                $disciplina->setStatus('Indeferido',$request->comentario);
-                Mail::queue(new email_indeferido($disciplina));
-            }
-
-            if($request->deferimento == 'Comissão de Graduação'){
-                # Se inferido, o motivo é obrigatório
-                $request->validate([
-                    'comentario' => 'required',
-                ]);
-
-                $disciplina->setStatus('Comissão de Graduação',$request->comentario);
-            }
-
-        }
-        Utils::updatePedidoStatus($pedido);
         return redirect("/pedidos/$pedido->id");
     }
 
@@ -150,13 +119,11 @@ class WorkflowController extends Controller
             "comentario" => "required"
         ]);
 
-        $disciplina->setStatus('Comissão de Graduação', $request->comentario);
-        $disciplina->save();
-
         if($request->parecer == 'indicar'){
             $request->validate([
                 "codpes" => "required"
             ]);
+            $disciplina->setStatus('Comissão de Graduação', $request->comentario);
             $disciplina->codpes_docente = $request->codpes;
             $disciplina->save();
             Mail::queue(new email_docente($disciplina, $request->codpes));
@@ -165,8 +132,9 @@ class WorkflowController extends Controller
         }
 
         if($request->parecer == 'indeferir'){
-
-
+            $disciplina->setStatus('Indeferido', $request->comentario);
+            $disciplina->save();
+            Mail::queue(new email_indeferido($disciplina));
             request()->session()->flash('alert-info',"Indeferimento realizado com sucesso");
             return redirect("/docente");
         }

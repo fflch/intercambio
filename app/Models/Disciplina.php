@@ -22,7 +22,9 @@ class Disciplina extends Model
         'Em elaboração',
         'Análise',
         'Deferido',
-        'Indeferido'
+        'Indeferido',
+        'Comissão de Graduação',
+        'Serviço de Graduação'
     ];
 
     const tipos = [

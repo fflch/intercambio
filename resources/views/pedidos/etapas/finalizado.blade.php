@@ -69,15 +69,6 @@
 <br>
 
 <form method="POST" action="/update_status_pedido/{{$pedido->id}}">
-  @csrf
-  <input type="hidden" name="status" value="Deferido">
-  <button type="submit" onclick="return confirm('Tem certeza que deseja enviar para comissão de graduação? ');" class="btn btn-success p-2">
-    Disciplinas já cadastradas no Jupiterweb. Finalizar pedido!
-  </button>
-</form>
-
-
-<form method="POST" action="/update_status_pedido/{{$pedido->id}}">
     @csrf
     <input type="hidden" name="status" value="Análise">
     <br>

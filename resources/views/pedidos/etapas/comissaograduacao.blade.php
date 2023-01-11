@@ -7,10 +7,12 @@
 <table width=100% class="table table-bordered">
   <thead>
     <tr align="center">
-    <th scope="col">Nome</th>   
+    <th scope="col">Nome</th>
+    <th scope="col">Código USP</th>   
     <th scope="col">Nota</th>
     <th scope="col">Carga Horária Semestral</th>
     <th scope="col">Ementa</th>
+    <th scope="col">Status</th>
     <th scope="col">Comentários</th>
     <th scope="col">Parecer</th>
     </tr>
@@ -21,6 +23,7 @@
       <tr>
         @if($disciplina->tipo == 'Obrigatória')
           <td>{{ $disciplina->nome }}</td>
+          <td>{{ $disciplina->codigo }}</td>
           <td align="center">{{ $disciplina->nota }}</td>
           <td align="center">{{ $disciplina->carga_horaria }}</td>
           <td align="center">
@@ -28,7 +31,7 @@
               <a href="/disciplinas/{{ $disciplina->id }}/showfile"><i class="far fa-file-pdf"></i></a> 
             @endif
           </td>
-
+          <td align="center">{{ $disciplina->status }}</td>
           <td class="expandir">
             @foreach($disciplina->statuses as $status)
               @if(!empty($status->reason))
@@ -44,7 +47,11 @@
               Parecer favorável realizado por: <i>{{ \Uspdev\Replicado\Pessoa::nomeCompleto($disciplina->codpes_docente) }} </i>
             @else
               @if(!empty($disciplina->codpes_docente))
-                <b>Aguardando parecer de:</b> {{ \Uspdev\Replicado\Pessoa::nomeCompleto($disciplina->codpes_docente) }} <br>
+                @if($disciplina->status == 'Indeferido')
+                  <b>Indeferido por: </b> {{ \Uspdev\Replicado\Pessoa::nomeCompleto($disciplina->codpes_docente) }} <br>
+                @else
+                  <b>Aguardando parecer de:</b> {{ \Uspdev\Replicado\Pessoa::nomeCompleto($disciplina->codpes_docente) }} <br>
+                @endif
               @endif
               <form method="post" action="salvardocente/{{ $disciplina->id }}">
                 @csrf
@@ -82,6 +89,7 @@
       <th scope="col">Nota</th>
       <th scope="col">Carga Horária Semestral</th>
       <th scope="col">Ementa</th>
+      <th scope="col">Status</th>
       <th scope="col">Comentários</th>
       <th scope="col">Tipo</th>
       <th scope="col">Créditos</th>
@@ -99,6 +107,7 @@
                 <a href="/disciplinas/{{ $disciplina->id }}/showfile"><i class="far fa-file-pdf"></i></a> 
                 @endif
             </td>
+            <td align="center">{{ $disciplina->status }}</td>
             <td class="expandir">
               @foreach($disciplina->statuses as $status)
                 @if(!empty($status->reason))

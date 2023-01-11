@@ -10,6 +10,7 @@
           <th><b>Curso</b></th>
           <th><b>Instituição</b></th>
           <th><b>Disciplina</b></th>
+          <th><b>Status</b></th>
           <th><b>Parecer</b></th>
         </tr>
     </thead>
@@ -22,7 +23,16 @@
           <td>{{ $disciplina->pedido->curso }}</td>
           <td>{{ $disciplina->pedido->instituicao->nome_instituicao }}</td>
           <td>{{ $disciplina->codigo }} - {{ $disciplina->nome }}</td>
-          <td> <a href="/show_parecer/{{ $disciplina->id }}" class="btn btn-success"> Dar parecer </a></td>
+          <td>{{ $disciplina->status }}</td>
+          <td>
+            <a href="/show_parecer/{{ $disciplina->id }}" class="btn btn-success"> 
+              @if($disciplina->status == 'Indeferido') 
+                Reenviar parecer 
+              @else 
+                Realizar parecer
+              @endif
+            </a>
+          </td>
         </tr>
       @endforeach
     </tbody>

@@ -6,7 +6,7 @@ use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
-use App\Models\Disciplina;
+use App\Models\Pedido;
 use App\Models\User;
 use App\Service\GeneralSettings;
 use Illuminate\Support\Facades\Storage;
@@ -14,16 +14,16 @@ use Illuminate\Support\Facades\Storage;
 class email_deferido extends Mailable
 {
     use Queueable, SerializesModels;
-    private $disciplina;
+    private $pedido;
 
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct(Disciplina $disciplina)
+    public function __construct(Pedido $pedido)
     {
-        $this->disciplina = $disciplina;
+        $this->pedido = $pedido;
     }
 
     /**
@@ -38,11 +38,10 @@ class email_deferido extends Mailable
             $to = explode(',',env('EMAILS_CCINT'));
             $subject = '(Teste) ' . $subject;
         } else {
-            $to = [User::where('id',$this->disciplina->pedido->user_id)->first()->email];
+            $to = [User::where('id',$this->pedido->user_id)->first()->email];
         }
 
-        $text = str_replace('%nome_aluno',$this->disciplina->pedido->nome,app(GeneralSettings::class)->email_deferido);
-        $text = str_replace('%disciplina',$this->disciplina->nome,$text);
+        $text = str_replace('%nome_aluno',$this->pedido->nome,app(GeneralSettings::class)->email_deferido);
         $ccint = explode(',',env('EMAILS_CCINT'));
        
         return $this->view('emails.email_deferido')
@@ -55,7 +54,7 @@ class email_deferido extends Mailable
                 ])
             ->with([
                 'text' => $text,
-                'disciplina' => $this->disciplina,
+                'pedido' => $this->pedido
             ]);
     }
 }

@@ -50,13 +50,14 @@ class email_indeferido extends Mailable
             ->to($to)
             ->bcc($ccint)
             ->subject($subject)
-            ->attach(Storage::disk('local')->path($this->pedido->path), [
-                'as' => $this->pedido->original_name,
+            ->attach(Storage::disk('local')->path($this->disciplina->pedido->path), [
+                'as' => $this->disciplina->pedido->original_name,
                 'mime' => 'application/pdf'
                 ])
             ->with([
                 'text' => $text,
                 'disciplina' => $this->disciplina,
+                'pedido' => $this->disciplina->pedido,
             ]);
     }
 }
