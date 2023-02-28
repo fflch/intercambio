@@ -52,5 +52,15 @@ class AuthServiceProvider extends ServiceProvider
             return $model->user_id == $user->id;
         });
 
+        # cg - comissão de graduação 
+        Gate::define('cg', function ($user) {
+            return in_array($user->codpes, explode(',', trim(env('CG'))));
+        });
+
+        # cg - serviço de graduação 
+        Gate::define('sg', function ($user) {
+            return in_array($user->codpes, explode(',', trim(env('SG'))));
+        });
+
     }
 }
