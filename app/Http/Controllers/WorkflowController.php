@@ -22,12 +22,35 @@ use App\Service\Utils;
 class WorkflowController extends Controller
 {
     public function updatePedidoStatus(Request $request, Pedido $pedido){
-        $this->authorize('owner',$pedido);
+
+        if($pedido->status == 'Análise') {
+            $this->authorize('admin');
+        }
+
+        if($pedido->status == 'Comissão de Graduação') {
+            $this->authorize('cg');
+        }
+     
+        if($pedido->status == 'Serviço de Graduação') {
+            $this->authorize('sg');
+        }
+
+        if($pedido->status == 'Finalizado') {
+            $this->authorize('admin');
+        }
 
         $request->validate([
             'status' => Rule::in(['Em elaboração', 'Análise', 'Comissão de Graduação','Serviço de Graduação','Deferido']),
         ]);
 
+        // se tiver comentário, a disciplina referente ao comentário deve ser especificada
+        if(!is_null($request->comentario) && !empty($request->comentario)){
+            $request->validate([
+                'comentario_disciplina' => 'required',
+            ]);
+        }
+
+        // Obrigatório comentário quando devolve-se para o aluno/a
         if($request->status == 'Em elaboração'){
             $request->validate([
                 'comentario' => 'required',
@@ -45,7 +68,7 @@ class WorkflowController extends Controller
         }
 
         if($request->status == 'Serviço de Graduação'){
-            $this->authorize('admin');
+            $this->authorize('cg');
             foreach($pedido->disciplinas as $disciplina) {
                 if($disciplina->status == 'Indeferido'){
                     request()->session()->flash('alert-danger',"A disciplina {$disciplina->nome} foi indeferida e não pode ser enviada para o Serviço de Graduação");
@@ -54,16 +77,23 @@ class WorkflowController extends Controller
             }
         }
 
+        // Finalizado é deferido
         if($request->status == 'Deferido'){
-            $this->authorize('admin');
+            $this->authorize('sg');
             Mail::queue(new email_deferido($pedido));
         }
 
+        // troca o status de todas disciplinas
         foreach($pedido->disciplinas as $disciplina) {
-            $disciplina->setStatus($request->status, $request->comentario);
+            if(!empty($request->comentario_disciplina) && $disciplina->id == $request->comentario_disciplina) {
+                $disciplina->setStatus($request->status, $request->comentario);
+            } else {
+                $disciplina->setStatus($request->status);
+            }
+            
         }
 
-        Utils::updatePedidoStatus($pedido, $request->comentario);
+        Utils::updatePedidoStatus($pedido);
 
         if($request->status =='Em elaboração') {
             Mail::queue(new email_em_elaboracao_aluno($pedido));

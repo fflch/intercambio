@@ -123,7 +123,7 @@
 </table>
 
 <br>
-@can('admin')
+@can('cg')
   <form method="POST" action="/update_status_pedido/{{$pedido->id}}">
     @csrf
     <input type="hidden" name="status" value="Serviço de Graduação">
@@ -132,12 +132,20 @@
     </button>
   </form>
 
-
+  <br><br>
   <form method="POST" action="/update_status_pedido/{{$pedido->id}}">
       @csrf
       <input type="hidden" name="status" value="Análise">
       <br>
-      Comentário (Obrigatório)
+      <div class="form-group">
+          <label for="comentario_disciplina"> <b>Comentário</b> (Obrigatório caso seja devolvido para análise): </label>
+          <select class="form-control" id="comentario_disciplina" name="comentario_disciplina">
+          <option value="" selected=""> Selecione a disciplina a qual o comentário se refere</option>
+          @foreach($pedido->disciplinas as $disciplina)
+              <option value="{{ $disciplina->id }}">{{ $disciplina->nome }}</option>
+          @endforeach
+          </select>
+      </div>
 
       <textarea  class="form-control" rows="3" name="comentario"></textarea>
       <br>    
@@ -145,4 +153,4 @@
         Retornar o pedido para análise (ccint)
       </button>
   </form>
-@endcan('admin')
+@endcan('cg')
