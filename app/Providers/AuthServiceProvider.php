@@ -37,6 +37,7 @@ class AuthServiceProvider extends ServiceProvider
         Gate::define('docente', function ($user) {
             if(Gate::allows('admin')) return true;
             $vinculos = Pessoa::obterSiglasVinculosAtivos($user->codpes);
+            if(is_null($vinculos)) return false;
             return in_array("SERVIDOR", $vinculos);
         });
 
@@ -46,9 +47,11 @@ class AuthServiceProvider extends ServiceProvider
         });
 
         # owner
-        Gate::define('owner', function ($user, $model) {
+        Gate::define('owner', function ($user, $model) {           
             if(Gate::allows('admin')) return true;
             if(Gate::allows('docente')) return true;
+            if(Gate::allows('cg')) return true;
+            if(Gate::allows('sg')) return true;
             return $model->user_id == $user->id;
         });
 

@@ -1,8 +1,3 @@
-@extends('main')
-@section('content')
-
-{!! $stepper !!}
-
 <h2>Obrigatórias</h2>
 <table width=100% class="table table-bordered">
   <thead>
@@ -68,17 +63,17 @@
 
 <br>
 
-<form method="POST" action="/update_status_pedido/{{$pedido->id}}">
-    @csrf
-    <input type="hidden" name="status" value="Análise">
-    <br>
-    Comentário (Obrigatório)
+@can('admin')
+  <form method="POST" action="/update_status_pedido/{{$pedido->id}}">
+      @csrf
+      <input type="hidden" name="status" value="Análise">
+      <br>
+      Comentário (Obrigatório)
 
-    <textarea class="form-control" rows="3" name="comentario" required></textarea>
-    <br>    
-    <button type="submit" onclick="return confirm('Tem certeza que deseja retornar o pedido para análise (ccint)? ');" class="btn btn-danger p-2">
-      Retornar o pedido para análise (ccint)
-    </button>
-</form>
-
-@endsection
+      <textarea class="form-control" rows="3" name="comentario" required></textarea>
+      <br>    
+      <button type="submit" onclick="return confirm('Tem certeza que deseja retornar o pedido para análise (ccint)? ');" class="btn btn-danger p-2">
+        Retornar o pedido para análise (ccint)
+      </button>
+  </form>
+@endcan('admin')

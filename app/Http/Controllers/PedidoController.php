@@ -90,7 +90,8 @@ class PedidoController extends Controller
         } else {
             $docentes = [1];
         }
-        $this->authorize('owner',$pedido);
+
+        $this->authorize('owner', $pedido);
 
         $stepper->setCurrentStepName($pedido->status);
         $codpes = auth()->user()->codpes;

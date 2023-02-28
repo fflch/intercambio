@@ -26,6 +26,16 @@ $menu = [
         'url' => config('app.url') . '/docente',
         'can' => 'docente',
     ],
+    [
+        'text' => 'Serviço de Graduação',
+        'url' => config('app.url') . '/sg',
+        'can' => 'sg',
+    ],
+    [
+        'text' => 'Comissão de Graduação',
+        'url' => config('app.url') . '/cg',
+        'can' => 'cg',
+    ],
 ];
 
 $right_menu = [
@@ -54,7 +64,7 @@ $right_menu = [
 
 return [
     'title' => config('app.name'),
-    'skin' => env('USP_THEME_SKIN', 'uspdev'),
+    'skin' => env('USP_THEME_SKIN', 'fflch'),
     'app_url' => config('app.url'),
     'logout_method' => 'POST',
     'logout_url' => config('app.url') . '/logout',

@@ -61,3 +61,6 @@ Route::get('docente', [WorkflowController::class,'docente']);
 Route::get('show_parecer/{disciplina}', [WorkflowController::class,'show_parecer']);
 Route::post('store_parecer/{disciplina}', [WorkflowController::class,'store_parecer']);
 
+Route::get('sg', [WorkflowController::class,'sg']);
+Route::get('cg', [WorkflowController::class,'cg']);
+

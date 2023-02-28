@@ -1,8 +1,3 @@
-@extends('main')
-@section('content')
-
-{!! $stepper !!}
-
 <h2>Obrigatórias</h2>
 <table width=100% class="table table-bordered">
   <thead>

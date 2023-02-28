@@ -1,8 +1,3 @@
-@extends('main')
-@section('content')
-
-{!! $stepper !!}
-
 <h2>Obrigatórias</h2>
 <table width=100% class="table table-bordered">
   <thead>
@@ -53,26 +48,28 @@
                   <b>Aguardando parecer de:</b> {{ \Uspdev\Replicado\Pessoa::nomeCompleto($disciplina->codpes_docente) }} <br>
                 @endif
               @endif
-              <form method="post" action="salvardocente/{{ $disciplina->id }}">
-                @csrf
-                <select class="form-control" name="codpes_docente">
-                  <option value="" selected="">- Selecione -</option>
-                  @foreach ($docentes as $docente)
-                    <option value="{{ $docente['codpes'] }}" @if(old('codpes') == $docente['codpes']) ) selected @endif>
-                      {{ $docente['nompes'] }}
-                    </option>
-                  @endforeach
-                </select>
-                <div class="form-group">
-                    @if(empty($disciplina->codpes_docente))
-                      <button type="submit" onclick="return confirm('Tem certeza que deseja enviar para docente? ');" class="btn btn-success">Enviar para docente</button>
-                    @else
-                      @if($disciplina->deferimento_docente != 'Sim')
-                        <br><button type="submit" onclick="return confirm('Tem certeza que deseja enviar para docente? ');" class="btn btn-success">Substituir parecerista</button>
+              @can('cg')
+                <form method="post" action="salvardocente/{{ $disciplina->id }}">
+                  @csrf
+                  <select class="form-control" name="codpes_docente">
+                    <option value="" selected="">- Selecione -</option>
+                    @foreach ($docentes as $docente)
+                      <option value="{{ $docente['codpes'] }}" @if(old('codpes') == $docente['codpes']) ) selected @endif>
+                        {{ $docente['nompes'] }}
+                      </option>
+                    @endforeach
+                  </select>
+                  <div class="form-group">
+                      @if(empty($disciplina->codpes_docente))
+                        <button type="submit" onclick="return confirm('Tem certeza que deseja enviar para docente? ');" class="btn btn-success">Enviar para docente</button>
+                      @else
+                        @if($disciplina->deferimento_docente != 'Sim')
+                          <br><button type="submit" onclick="return confirm('Tem certeza que deseja enviar para docente? ');" class="btn btn-success">Substituir parecerista</button>
+                        @endif
                       @endif
-                    @endif
-                </div>
-              </form>
+                  </div>
+                </form>
+              @endcan('cg')
             @endif 
           </td>
         @endif  
@@ -126,27 +123,26 @@
 </table>
 
 <br>
-
-<form method="POST" action="/update_status_pedido/{{$pedido->id}}">
-  @csrf
-  <input type="hidden" name="status" value="Serviço de Graduação">
-  <button type="submit" onclick="return confirm('Tem certeza que deseja enviar para comissão de graduação? ');" class="btn btn-success p-2">
-    Enviar TODAS disciplinas para cadastro no Serviço de Graduação
-  </button>
-</form>
-
-
-<form method="POST" action="/update_status_pedido/{{$pedido->id}}">
+@can('admin')
+  <form method="POST" action="/update_status_pedido/{{$pedido->id}}">
     @csrf
-    <input type="hidden" name="status" value="Análise">
-    <br>
-    Comentário (Obrigatório)
-
-    <textarea  class="form-control" rows="3" name="comentario"></textarea>
-    <br>    
-    <button type="submit" onclick="return confirm('Tem certeza que deseja retornar o pedido para análise (ccint)? ');" class="btn btn-danger p-2">
-      Retornar o pedido para análise (ccint)
+    <input type="hidden" name="status" value="Serviço de Graduação">
+    <button type="submit" onclick="return confirm('Tem certeza que deseja enviar para comissão de graduação? ');" class="btn btn-success p-2">
+      Enviar TODAS disciplinas para cadastro no Serviço de Graduação
     </button>
-</form>
+  </form>
 
-@endsection
+
+  <form method="POST" action="/update_status_pedido/{{$pedido->id}}">
+      @csrf
+      <input type="hidden" name="status" value="Análise">
+      <br>
+      Comentário (Obrigatório)
+
+      <textarea  class="form-control" rows="3" name="comentario"></textarea>
+      <br>    
+      <button type="submit" onclick="return confirm('Tem certeza que deseja retornar o pedido para análise (ccint)? ');" class="btn btn-danger p-2">
+        Retornar o pedido para análise (ccint)
+      </button>
+  </form>
+@endcan('admin')

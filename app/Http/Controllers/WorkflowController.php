@@ -146,4 +146,23 @@ class WorkflowController extends Controller
         request()->session()->flash('alert-info',"Parecer realizado com sucesso");
         return redirect("/docente");
     }
+
+    public function cg(Request $request)
+    {
+        $this->authorize('cg');
+
+        $pedidos = Pedido::where('status','Comissão de Graduação');
+        return view ('pedidos.cg',[
+            'pedidos' => $pedidos->get(),
+        ]);
+    }
+
+    public function sg(Request $request)
+    {
+        $this->authorize('sg');
+        $pedidos = Pedido::where('status','Serviço de Graduação');
+        return view ('pedidos.sg',[
+            'pedidos' => $pedidos->get(),
+        ]);
+    }
 }
