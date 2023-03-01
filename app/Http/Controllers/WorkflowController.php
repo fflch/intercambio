@@ -106,7 +106,7 @@ class WorkflowController extends Controller
 
     public function salvardocente(Request $request, Disciplina $disciplina)
     {
-        $this->authorize('admin');
+        $this->authorize('cg');
         // TODO: Validar se é um docente
         $request->validate([
             "codpes_docente" => "required|integer"
