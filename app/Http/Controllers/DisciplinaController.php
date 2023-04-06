@@ -21,6 +21,9 @@ class DisciplinaController extends Controller
             $disciplina->original_name = $request->file('file')->getClientOriginalName();
             $disciplina->path = $request->file('file')->store('.');
         }
+        
+        if($disciplina->tipo != 'Obrigatória') $disciplina->codigo = '';
+
         $disciplina->save();
         request()->session()->flash('alert-info','Disciplina adicionada com sucesso.');
         return redirect("/pedidos/{$disciplina->pedido->id}");
@@ -43,7 +46,10 @@ class DisciplinaController extends Controller
         if($disciplina->status == "Análise" ){
             $this->authorize('admin');
         }
-        $disciplina->update($request->validated());
+        $validated = $request->validated();
+        if($disciplina->tipo != 'Obrigatória') $validated['codigo'] = '';
+
+        $disciplina->update($validated);
 
         if($disciplina->status == 'Indeferido'){
             $disciplina->setStatus('Análise',$request->comentario);

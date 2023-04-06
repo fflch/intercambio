@@ -34,12 +34,7 @@ class email_indeferido extends Mailable
     public function build()
     {
         $subject = 'Indeferimento do pedido de créditos';
-        if(config('app.debug')){
-            $to = explode(',',env('EMAILS_CCINT'));
-            $subject = '(Teste) ' . $subject;
-        } else {
-            $to = [User::where('id',$this->disciplina->pedido->user_id)->first()->email];
-        }
+        $to = [User::where('id',$this->disciplina->pedido->user_id)->first()->email];
 
         //colocar um campo motivo
         $text = str_replace('%nome_aluno',$this->disciplina->pedido->nome,app(GeneralSettings::class)->email_indeferido);

@@ -5,19 +5,14 @@
 
       <th scope="col">Nome</th>   
       <th scope="col">Nota</th>
-      <th scope="col">
-      @if($pedido->status != "Em elaboração")
-        Créditos do aluno
-      @else
-        Créditos
-      @endif
-      </th>
+      <th scope="col">Créditos</th>
+      <th scope="col">Créditos Convertidos</th>
       <th scope="col">Carga Horária Semestral</th>
       <th scope="col">Código USP</th>
       <th scope="col">Ementa</th>
       <th scope="col">Comentários</th>
       <th scope="col">Tipo</th>
-      <th scope="col">Créditos Convertidos</th>
+      
       <th scope="col">Status</th>
 
       @if($pedido->status == "Em elaboração")
@@ -38,6 +33,18 @@
       <td>{{ $disciplina->nome }}</td>
       <td align="center">{{ $disciplina->nota }}</td>
       <td align="center">{{ $disciplina->creditos }}</td>
+      <td scope="col" align="center">
+        @if( $disciplina->conversao === null)
+          Não convertido
+        @else
+          @if($disciplina->conversao == 0) 
+            <font color="red">Não será considerada - créditos zero</font>
+          @else
+            {{ $disciplina->conversao }}
+          @endif  
+        @endif
+      </td>
+
       <td align="center">{{ $disciplina->carga_horaria }}</td>
       <td align="center">{{ $disciplina->codigo }}</td>
       <td align="center">
@@ -55,7 +62,7 @@
           @endforeach
       </td>
       <td align="center">{{ $disciplina->tipo }}</td>
-      <td scope="col" align="center">{{ $disciplina->conversao }}</td>
+
       <td scope="col" aling="center">{{ $disciplina->status }}</td>
     
       @if($pedido->status == "Em elaboração")

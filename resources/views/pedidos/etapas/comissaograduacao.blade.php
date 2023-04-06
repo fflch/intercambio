@@ -89,7 +89,7 @@
       <th scope="col">Status</th>
       <th scope="col">Comentários</th>
       <th scope="col">Tipo</th>
-      <th scope="col">Créditos</th>
+      <th scope="col">Créditos Convertidos</th>
     </tr>
   </thead>
   <tbody>
@@ -115,7 +115,17 @@
               @endforeach
             </td>
             <td align="center">{{ $disciplina->tipo }}</td>
-            <td align="center">{{ $disciplina->conversao}}</td>
+            <td align="center">
+              @if( $disciplina->conversao === null)
+                Não convertido
+              @else
+                @if($disciplina->conversao == 0) 
+                  <font color="red">Não será considerada - créditos zero</font>
+                @else
+                  {{ $disciplina->conversao }}
+                @endif  
+              @endif
+            </td>
           @endif  
       </tr>
     @endforeach

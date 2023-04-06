@@ -60,7 +60,7 @@ class WorkflowController extends Controller
         if($request->status == 'Comissão de Graduação'){
             $this->authorize('admin');
             foreach($pedido->disciplinas as $disciplina) {
-                if($disciplina->tipo != 'Obrigatória' && empty($disciplina->conversao)){
+                if($disciplina->tipo != 'Obrigatória' && !is_numeric($disciplina->conversao)){
                     request()->session()->flash('alert-danger',"A disciplina {$disciplina->nome} não teve os créditos convertidos");
                     return back();
                 }

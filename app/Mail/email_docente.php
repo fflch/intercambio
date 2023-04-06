@@ -40,12 +40,7 @@ class email_docente extends Mailable
         $docente = Pessoa::nomeCompleto($this->docente);
 
         $subject = 'Pedido de equivalência de disciplina obrigatória ' . $nome_aluno;
-        if(config('app.debug')){
-            $to = explode(',',env('EMAILS_CCINT'));
-            $subject = '(Teste) ' . $subject;
-        } else {
-            $to = [Pessoa::email($this->docente)];
-        }
+        $to = [Pessoa::email($this->docente)];
 
         $text = str_replace('%nome_aluno',$nome_aluno,app(GeneralSettings::class)->email_docente);
         $text = str_replace('%disciplina',$this->disciplina->nome,$text);

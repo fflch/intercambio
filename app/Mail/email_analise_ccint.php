@@ -33,12 +33,7 @@ class email_analise_ccint extends Mailable
     public function build()
     {
         $subject = 'Aviso de recebimento de pedido de aproveitamento de créditos';
-        if(config('app.debug')){
-            $to = explode(',',env('EMAILS_CCINT'));
-            $subject = '(Teste) ' . $subject;
-        } else {
-            $to = explode(',',env('EMAILS_CCINT'));
-        }
+        $to = explode(',',env('EMAILS_CCINT'));
 
         $text = str_replace('%nome_aluno',$this->pedido->nome,app(GeneralSettings::class)->email_analise_ccint);
         

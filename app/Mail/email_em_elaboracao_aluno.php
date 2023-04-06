@@ -34,12 +34,7 @@ class email_em_elaboracao_aluno extends Mailable
     public function build()
     {
         $subject = 'Pedido de aproveitamento retornado para em elaboração';
-        if(config('app.debug')){
-            $to = explode(',',env('EMAILS_CCINT'));
-            $subject = '(Teste) ' . $subject;
-        } else {
-            $to = [User::find($this->pedido->user_id)->email];
-        }
+        $to = [User::find($this->pedido->user_id)->email];
 
         $text = str_replace('%nome_aluno',$this->pedido->nome,app(GeneralSettings::class)->email_em_elaboracao_aluno);
 

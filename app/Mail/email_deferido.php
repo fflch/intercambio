@@ -34,12 +34,7 @@ class email_deferido extends Mailable
     public function build()
     {
         $subject = 'Deferimento do pedido de créditos';
-        if(config('app.debug')){
-            $to = explode(',',env('EMAILS_CCINT'));
-            $subject = '(Teste) ' . $subject;
-        } else {
-            $to = [User::where('id',$this->pedido->user_id)->first()->email];
-        }
+        $to = [User::where('id',$this->pedido->user_id)->first()->email];
 
         $text = str_replace('%nome_aluno',$this->pedido->nome,app(GeneralSettings::class)->email_deferido);
         $ccint = explode(',',env('EMAILS_CCINT'));
