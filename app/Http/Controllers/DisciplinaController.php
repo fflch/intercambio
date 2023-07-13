@@ -43,14 +43,20 @@ class DisciplinaController extends Controller
     public function update(DisciplinaRequest $request, Disciplina $disciplina)
     {
         $this->authorize('owner',$disciplina->pedido);
+
+        // somente administradores podem enviar a disciplina para análise
         if($disciplina->status == "Análise" ){
             $this->authorize('admin');
         }
         $validated = $request->validated();
+
+        // Somente disiciplinas obrigatórias tem código usp 
         if($disciplina->tipo != 'Obrigatória') $validated['codigo'] = '';
 
+        // Salvar dados
         $disciplina->update($validated);
 
+        /**** INICIO - ACHO QUE ESSE TRECHO NÃO É MAIS USADO ****/
         if($disciplina->status == 'Indeferido'){
             $disciplina->setStatus('Análise',$request->comentario);
             Utils::updatePedidoStatus($disciplina->pedido);
@@ -59,18 +65,14 @@ class DisciplinaController extends Controller
         } else{
             $disciplina->setStatus('Em elaboração',request()->comentario);
         }
-        if($request->tipo == "Obrigatória" ){
-            if($request->hasFile('file')) {
-                # Apagar arquivo antigo
-                Storage::delete($disciplina->path);
-                # troca o arquivo
-                $disciplina->original_name = $request->file('file')->getClientOriginalName();
-                $disciplina->path = $request->file('file')->store('.');
-            }
-        } else {
+        /**** FIM - ACHO QUE ESSE TRECHO NÃO É MAIS USADO ****/
+
+        if($request->hasFile('file')) {
+            # Apagar arquivo antigo
             Storage::delete($disciplina->path);
-            $disciplina->original_name = NULL;
-            $disciplina->path = NULL;
+            # troca o arquivo
+            $disciplina->original_name = $request->file('file')->getClientOriginalName();
+            $disciplina->path = $request->file('file')->store('.');
         }
         $disciplina->save();
 
