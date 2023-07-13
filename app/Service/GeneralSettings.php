@@ -12,6 +12,8 @@ class GeneralSettings extends Settings
     public string $email_deferido;
     public string $email_indeferido;
     public string $email_docente;
+    public string $email_cg;
+    public string $email_sg;
 
     public static function group(): string
     {

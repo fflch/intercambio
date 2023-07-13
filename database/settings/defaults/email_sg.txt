@@ -1,0 +1,6 @@
+Prezada Equipe do Serviço de Graduação,
+<br>
+Há um novo pedido de aproveitamento de crédito enviado pela 
+<i>Comissão de Cooperação Internacional</i> referente à %nome_aluno.
+<br>
+Acessem https://intercambio.fflch.usp.br/ para mais informações.

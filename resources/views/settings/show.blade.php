@@ -64,13 +64,31 @@
     
         <div class="row">
             <div class="col">
-                <label for="email_docente" ><b>MENSAGEM PARA DOCENTE – Email docente</b></label><br>
+                <label for="email_docente" ><b>E-mail docente</b></label><br>
                 <textarea name="email_docente" cols="130" rows="15">{{ $email_docente }}</textarea><br> 
                 <span class="badge badge-warning">Token de substituição: %docente, %disciplina, %nome_aluno, %universidade  </span> 
             </div>
         </div>
         <br>
         
+        <div class="row">
+            <div class="col">
+                <label for="email_cg" ><b>E-mail Comissão de Graduação</b></label><br>
+                <textarea name="email_cg" cols="130" rows="15">{{ $email_cg }}</textarea><br> 
+                <span class="badge badge-warning">Token de substituição: %nome_aluno </span> 
+            </div>
+        </div>
+        <br>
+
+        <div class="row">
+            <div class="col">
+                <label for="email_sg" ><b>E-mail Serviço de Graduação</b></label><br>
+                <textarea name="email_sg" cols="130" rows="15">{{ $email_sg }}</textarea><br> 
+                <span class="badge badge-warning">Token de substituição: %nome_aluno </span> 
+            </div>
+        </div>
+        <br>
+
         <div class="row">
             <div class="form-group col-sm">
                     <button type="submit" onclick="return confirm('Mudar o Email?');" class="btn btn-success">

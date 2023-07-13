@@ -8,9 +8,10 @@ use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 use App\Models\Disciplina;
 use App\Models\User;
+use Uspdev\Replicado\Pessoa;
 use App\Service\GeneralSettings;
 use Illuminate\Support\Facades\Storage;
-use Uspdev\Replicado\Pessoa;
+
 
 class email_docente extends Mailable
 {

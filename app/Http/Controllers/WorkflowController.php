@@ -17,6 +17,8 @@ use App\Mail\email_analise_ccint;
 use App\Mail\email_indeferido;
 use App\Mail\email_deferido;
 use App\Mail\email_docente;
+use App\Mail\email_cg;
+use App\Mail\email_sg;
 use App\Service\Utils;
 
 class WorkflowController extends Controller
@@ -65,6 +67,7 @@ class WorkflowController extends Controller
                     return back();
                 }
             }
+            Mail::queue(new email_cg($pedido));
         }
 
         if($request->status == 'Serviço de Graduação'){
@@ -75,6 +78,7 @@ class WorkflowController extends Controller
                     return back();
                 }
             }
+            Mail::queue(new email_sg($pedido));
         }
 
         // Finalizado é deferido
