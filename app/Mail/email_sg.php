@@ -35,7 +35,7 @@ class email_sg extends Mailable
     public function build()
     {
         $subject = 'Novo pedido de aproveitamento de créditos para SG: ' . $this->pedido->nome;
-        $to = explode(',',env('EMAILS_COMISSAO_GRADUACAO'));
+        $to = explode(',',env('EMAILS_SERVICO_GRADUACAO'));
 
         $text = str_replace('%nome_aluno',$this->pedido->nome, app(GeneralSettings::class)->email_sg);
         $ccint = explode(',',env('EMAILS_CCINT'));
