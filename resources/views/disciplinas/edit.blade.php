@@ -91,17 +91,22 @@ function flip(clicado) {
             </div>
         </div>
         @if(!empty($disciplina->path))
+            <b>Ementa Salva:</b> 
+                <a href="/disciplinas/{{ $disciplina->id }}/showfile">
+                    <i class="far fa-file-pdf"></i> {{ $disciplina->original_name }}
+                </a><br />
+        @endif
         <div class="row" id="file">
           <div class="form-group col-sm">
             <div class="form-group">
-              <b>Ementa Salva:</b> <a href="/disciplinas/{{ $disciplina->id }}/showfile">
-              <i class="far fa-file-pdf"></i> {{ $disciplina->original_name }}</a><br /><br />
-              <label for="file" class="required"><b>Alterar ementa: </b></label>
+              
+              
+              <label for="file" class="required"><b>Nova Ementa: </b></label>
                 <input type="file" name="file">
             </div>
           </div>
         </div>
-        @endif
+        
 
         <div class="row">
         <b>Comentário adicional para a Disciplina (Opcional):</b>
