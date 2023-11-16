@@ -136,7 +136,7 @@ class WorkflowController extends Controller
 
     public function show_parecer(Disciplina $disciplina, Request $request)
     {
-        // verificar se o docente em questão é o owner do parecer
+        // TODO: verificar se o docente em questão é o owner do parecer
         $this->authorize('docente');
         return view('disciplinas.parecer',[
             'docentes'   =>  $docentes = Pessoa::listarDocentes(),
@@ -146,18 +146,14 @@ class WorkflowController extends Controller
 
     public function store_parecer(Disciplina $disciplina, Request $request)
     {
-        // verificar se o docente em questão é o owner do parecer
-        $this->authorize('docente');  
-
-        $request->validate([
-            "comentario" => "required"
-        ]);
+        // TODO: verificar se o docente em questão é o owner do parecer
+        $this->authorize('docente'); 
 
         if($request->parecer == 'indicar'){
             $request->validate([
                 "codpes" => "required"
             ]);
-            $disciplina->setStatus('Comissão de Graduação', $request->comentario);
+            $disciplina->setStatus('Comissão de Graduação');
             $disciplina->codpes_docente = $request->codpes;
             $disciplina->save();
             Mail::queue(new email_docente($disciplina, $request->codpes));
@@ -166,6 +162,10 @@ class WorkflowController extends Controller
         }
 
         if($request->parecer == 'indeferir'){
+            $request->validate([
+                "comentario" => "required"
+            ]);
+
             $disciplina->setStatus('Indeferido', $request->comentario);
             $disciplina->save();
             Mail::queue(new email_indeferido($disciplina));
