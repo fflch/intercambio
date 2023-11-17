@@ -90,12 +90,21 @@
         <br>
 
         <div class="row">
-            <div class="form-group col-sm">
-                    <button type="submit" onclick="return confirm('Mudar o Email?');" class="btn btn-success">
-                    Salvar
-                    </button>
+            <div class="col">
+                <label for="tipos_pedido" ><b>Tipos de Pedidos (um em cada linha)</b></label><br>
+                <textarea name="tipos_pedido" cols="130" rows="5">{{ $tipos_pedido }}</textarea><br> 
+                <span class="badge badge-warning">um em cada linha</span> 
             </div>
         </div>
+        <br>
+        <div class="row">
+            <div class="form-group col-sm">
+                <button type="submit" onclick="return confirm('Salvar configurações?');" class="btn btn-success">
+                Salvar
+                </button>
+            </div>
+        </div>
+        
 </form>
     
 @endsection

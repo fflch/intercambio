@@ -15,6 +15,8 @@ class GeneralSettings extends Settings
     public string $email_cg;
     public string $email_sg;
 
+    public string $tipos_pedido;
+
     public static function group(): string
     {
         return 'general';

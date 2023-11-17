@@ -87,6 +87,20 @@
         @endforeach
       </select>
     </div>
+
+    <div class="form-group">
+      <label id="tipo" for="tipo" class="required"><b>Tipo de intercâmbio</b></label>
+      <br>
+      <select name="tipo">
+          <option value=""> -- Selecione um tipo --</option> 
+          @foreach($tipos as $tipo)
+              <option value="{{ trim($tipo) }}" @if(old('tipo', trim($pedido->tipo)) == trim($tipo)) selected @endif>
+                  {{ $tipo }}
+              </option>
+          @endforeach
+          </select>
+    </div>
+
     <div class="form-group">
           <label for="file" class="required" enctype="multipart/form-data">
             <b>Adicione o boletim das matérias cursadas:</b><br>

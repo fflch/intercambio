@@ -25,6 +25,7 @@ class PedidoRequest extends FormRequest
     {
         $rules =  [
             'instituicao_id' => 'required',
+            'tipo' => 'required',
         ];
 
         if ($this->method() == 'PATCH' || $this->method() == 'PUT'){

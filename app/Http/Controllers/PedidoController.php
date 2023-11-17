@@ -13,6 +13,7 @@ use Uspdev\Replicado\Pessoa;
 use App\Service\Utils;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Storage;
+use App\Service\GeneralSettings;
 
 class PedidoController extends Controller
 {
@@ -42,10 +43,13 @@ class PedidoController extends Controller
         $this->authorize('grad');
         $countries = Country::all()->sortBy('nome');
 
+        $tipos = explode(PHP_EOL,app(GeneralSettings::class)->tipos_pedido);
+
         return view('pedidos.create',[
             'pedido' => new Pedido,
             'countries' => $countries,
             'instituicoes' => array(),
+            'tipos' => $tipos,
         ]);
     }
 
@@ -107,6 +111,8 @@ class PedidoController extends Controller
     public function edit(Pedido $pedido)
     {
         $this->authorize('owner',$pedido);
+        $tipos = explode(PHP_EOL,app(GeneralSettings::class)->tipos_pedido);
+
         $countries = Country::all()->pluck('nome', 'id')->sortBy('nome');
         $instituicao = Instituicao::find($pedido->instituicao_id);
         $instituicoes = Instituicao::where('country_id', $instituicao->country_id)
@@ -118,6 +124,7 @@ class PedidoController extends Controller
             'countries' => $countries,
             'country_id' => $instituicao->country_id,
             'instituicoes' => $instituicoes,
+            'tipos' => $tipos,
         ]);
     }
 

@@ -60,7 +60,7 @@
       <label id="instituicao" for="instituicao" class="required"><b>Selecione a Instituição </b></label>
       <br>
       <select id="instituicao_id" name="instituicao_id">
-              <option value="">Selecione uma Instituição </option>
+          <option value="">Selecione uma Instituição </option>
           @foreach($instituicoes as $insti)
               <option value="{{ $insti['id'] }}" 
                   @if(old('nome_instituicao') == $insti['nome_instituicao']) selected @endif>
@@ -69,6 +69,20 @@
           @endforeach
           </select>
     </div>
+
+    <div class="form-group">
+      <label id="tipo" for="tipo" class="required"><b>Tipo de intercâmbio</b></label>
+      <br>
+      <select name="tipo">
+          <option value=""> -- Selecione um tipo --</option>
+          @foreach($tipos as $tipo)
+              <option value="{{ trim($tipo) }}" @if(old('tipo') == trim($tipo)) selected @endif>
+                  {{ $tipo }}
+              </option>
+          @endforeach
+          </select>
+    </div>
+
     <div class="form-group">
           <label for="file" class="required" enctype="multipart/form-data"><b>Adicione o boletim das matérias cursadas:</b></label> <br>
           <input type="file" name="file">   

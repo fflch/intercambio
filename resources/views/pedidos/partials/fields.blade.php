@@ -8,6 +8,7 @@
 
     <div class="card-body">
         <b>Nome:</b> {{ $pedido->nome ?? '' }}<br>
+        <b>Tipo do Intercâmbio:</b> {{ $pedido->tipo ?? '' }}</br>
         <b>Número USP:</b> {{ $pedido->codpes ?? '' }}<br>
         <b>Curso:</b> {{ $pedido->curso ?? '' }}</br>
         <b>Instituição:</b> {{ $pedido->instituicao->nome_instituicao ?? '' }}<br>

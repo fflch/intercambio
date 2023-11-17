@@ -10,39 +10,55 @@
               Informações do pedido
             </div>
             <ul class="list-group list-group-flush">
+
               <li class="list-group-item">
                 <b>Número USP discente:</b> {{ $disciplina->pedido->user->codpes }}
               </li>
+
               <li class="list-group-item">
                 <b>Nome discente:</b> {{ $disciplina->pedido->nome }}
               </li>
+
+              <li class="list-group-item">
+                <b>Tipo do Intercâmbio:</b> {{ $disciplina->pedido->tipo }}
+              </li>
+              
               <li class="list-group-item">
                 <b>Curso:</b> {{ $disciplina->pedido->curso }}
               </li>
+
               <li class="list-group-item">
                 <b>Instituição:</b> {{ $disciplina->pedido->instituicao->nome_instituicao }}
               </li>
+
               <li class="list-group-item">
                 <b>Disciplina na Instituição:</b> {{ $disciplina->nome }}
               </li>
+
               <li class="list-group-item">
                 <b>Disciplina USP:</b> {{ $disciplina->codigo }} - {{ \Uspdev\Replicado\Graduacao::nomeDisciplina($disciplina->codigo) }}
               </li>
+
               <li class="list-group-item">
                 <b>Nota:</b> {{ $disciplina->nota }}
               </li>
+
               <li class="list-group-item">
                 <b>Carga horária semestral:</b> {{ $disciplina->carga_horaria }}
               </li>
+
               <li class="list-group-item">
                 <b>Créditos Obtidos:</b> {{ $disciplina->creditos }}
               </li>
+
               <li class="list-group-item">
                 <b>Boletim:</b> <a href="/pedidos/{{ $disciplina->pedido->id }}/showfile"><i class="far fa-file-pdf"></i></a> 
               </li>
+
               <li class="list-group-item">
                 <b>Ementa:</b> <a href="/disciplinas/{{ $disciplina->id }}/showfile"><i class="far fa-file-pdf"></i></a>
-              </li>           
+              </li>  
+                       
             </ul>
           </div>
 

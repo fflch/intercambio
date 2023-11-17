@@ -3,6 +3,7 @@
         <tr> 
           <th><h4>Número USP</h4></th>
           <th><h4>Nome</h4></th>
+          <th><h4>Tipo do Intercâmbio</h4></th>
           <th><h4>Curso</h4></th>
           <th><h4>Instituição</h4></th>
           <th><h4>Status</h4></th>
@@ -15,6 +16,7 @@
         <tr>
           <td><a href="/pedidos/{{$pedido->id}}">{{$pedido->user->codpes}}</a></td>
           <td>{{$pedido->nome}}</td>
+          <td>{{$pedido->tipo}}</td>
           <td>{{$pedido->curso}}</td>
           <td>{{$pedido->instituicao->nome_instituicao}}</td>
           <td>{{$pedido->status}}</td>
