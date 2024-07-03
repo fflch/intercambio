@@ -31,6 +31,8 @@
 <p>Agora, caso esteja tudo correto o status poderá ser alterado para "Deferido", será obrigatório uma conversão de valores pela CCINT em disciplinas marcadas onde o campo "tipo" seja Optativas (ambas), essa conversão se baseia em passar os valores da nota estrangeira para os da USP.</p><br>
 <p>Quando todas disciplinas forem atualizadas, o <b>Pedido</b> será “Finalizado” e dará fim ao momento atual da etapa virtual para a CCINT.</p>
 
+## Users
+<p>Este model serve somente para salvar e vincular os usuários do sistema aos seus pedidos e cursos</P> 
 
 ## Notas para desenvolvedores
 
