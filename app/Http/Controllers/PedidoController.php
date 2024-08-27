@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Pedido;
 use App\Models\Country;
 use App\Models\Instituicao;
+use App\Models\Relatorio;
 use Illuminate\Http\Request;
 use App\Http\Requests\PedidoRequest;
 use Uspdev\Replicado\Graduacao;
@@ -37,9 +38,9 @@ class PedidoController extends Controller
         ]);
     }
 
-
-    public function create(Country $country)
+    public function create(Country $country, Pedido $pedido)
     {
+       
         $this->authorize('grad');
         $countries = Country::all()->sortBy('nome');
 
@@ -50,6 +51,8 @@ class PedidoController extends Controller
             'countries' => $countries,
             'instituicoes' => array(),
             'tipos' => $tipos,
+            'pedido' => $pedido
+
         ]);
     }
 
@@ -83,12 +86,17 @@ class PedidoController extends Controller
         $validated['path'] = $request->file('file')->store('.');
         $pedido = Pedido::create($validated);
 
-        request()->session()->flash('alert-info','Pedido cadastrado com sucesso.');
-        return redirect("/pedidos/$pedido->id");
+        request()->session()->flash('alert-danger','O preenchimento do relatório é obrigatorio para dar continuidade ao pedido');
+        return redirect("/relatorios/$pedido->id");
     }
 
     public function show(Pedido $pedido, Stepper $stepper)
     {
+        $relatorio = Relatorio::where("pedido_id", $pedido->id)->first();
+        if(!$relatorio){
+            request()->session()->flash('alert-danger','O preenchimento do relatório é obrigatorio para dar continuidade ao pedido');
+            return redirect("/relatorios/$pedido->id");
+        }
         if($pedido->status == 'Comissão de Graduação'){
             $docentes = Pessoa::listarDocentes();
         } else {

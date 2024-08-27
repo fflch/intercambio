@@ -87,7 +87,6 @@
           <label for="file" class="required" enctype="multipart/form-data"><b>Adicione o boletim das matérias cursadas:</b></label> <br>
           <input type="file" name="file">   
     </div>
-    <div class="form-group">
           <button type="submit" class="btn btn-success">Enviar</button>
     </div>
     </form>

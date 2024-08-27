@@ -2,7 +2,6 @@
 
 use Illuminate\Support\Facades\Route;
 
-
 use App\Http\Controllers\PedidoController;
 use App\Http\Controllers\IndexController;
 use App\Http\Controllers\LoginController;
@@ -12,6 +11,7 @@ use App\Http\Controllers\WorkflowController;
 use App\Http\Controllers\GeneralSettingsController;
 use App\Http\Controllers\CountryController;
 use App\Http\Controllers\InstituicaoController;
+use App\Http\Controllers\RelatorioController;
 
 Route::get('/', [IndexController::class,'index']);
 
@@ -64,3 +64,10 @@ Route::post('store_parecer/{disciplina}', [WorkflowController::class,'store_pare
 Route::get('sg', [WorkflowController::class,'sg']);
 Route::get('cg', [WorkflowController::class,'cg']);
 
+//Rotas: Relatório de intercâmbio
+Route::get('/relatorios/{pedido}', [RelatorioController::class, 'create'])->name('relatorio.create');
+Route::post('/getinstituicaorelatorio',[RelatorioController::class,'getinstituicao'])
+    ->name('relatorios.getinstituicao');
+    Route::middleware('auth')->group(function () {
+Route::post('/salvar-relatorio', [RelatorioController::class, 'store'])->name('salvar.relatorio');
+  });

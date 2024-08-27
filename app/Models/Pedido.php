@@ -48,4 +48,5 @@ class Pedido extends Model
     public function instituicao(){
         return $this->belongsTo(\App\Models\Instituicao::class);
     }
+
 }
