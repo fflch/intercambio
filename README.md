@@ -44,3 +44,7 @@ Para adicionar novas mensagens é preciso criar um atributo na classe **app/Serv
 php artisan migrate
 ```
 <br>
+
+## Idealização
+
+O sistema de aproveitamento de créditos foi implementado conforme fluxograma e demandas fornecidas por Márcia Cassemiro da Silva e Vivian Pamella Viviani de Castro
