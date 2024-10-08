@@ -66,8 +66,4 @@ Route::get('cg', [WorkflowController::class,'cg']);
 
 //Rotas: Relatório de intercâmbio
 Route::get('/relatorios/{pedido}', [RelatorioController::class, 'create'])->name('relatorio.create');
-Route::post('/getinstituicaorelatorio',[RelatorioController::class,'getinstituicao'])
-    ->name('relatorios.getinstituicao');
-    Route::middleware('auth')->group(function () {
-Route::post('/salvar-relatorio', [RelatorioController::class, 'store'])->name('salvar.relatorio');
-  });
+Route::post('/salvar-relatorio/{pedido}', [RelatorioController::class, 'store'])->name('salvar.relatorio');

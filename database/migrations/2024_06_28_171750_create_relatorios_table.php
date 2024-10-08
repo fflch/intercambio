@@ -47,7 +47,7 @@ class CreateRelatoriosTable extends Migration
             $table->text('orientacaoexp')->nullable();
             $table->boolean('cursoidioma')->default(false);
             $table->boolean('cursoidiomagratuidade')->default(false);
-            $table->boolean('cursoidiomavalor')->default(false);
+            $table->string('cursoidiomavalor')->nullable();
             $table->text('matricula');
             $table->boolean('aulasantes')->default(false);
             $table->boolean('restauranteuniversitario')->default(false);
@@ -73,7 +73,6 @@ class CreateRelatoriosTable extends Migration
             $table->text('atvremuneradaexp')->nullable();
             $table->text('dicas');
 
-            #FOTOS n sei formato
         });
     }
 
