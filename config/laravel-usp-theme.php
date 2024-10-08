@@ -1,9 +1,17 @@
 <?php
 
+$pedidos = [
+    [
+        'text' => 'Reaproveitamento de créditos',
+        'url'  =>  config('app.url') . '/pedidos/create',
+        'can'  => 'grad'
+    ],
+];
+
 $menu = [
     [
         'text' => 'Nova solicitação',
-        'url'  =>  config('app.url') . '/pedidos/create',
+        'submenu' => $pedidos,
         'can'  => 'grad'
     ],
     [
