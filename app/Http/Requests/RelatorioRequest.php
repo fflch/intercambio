@@ -11,6 +11,13 @@ class RelatorioRequest extends FormRequest
      *
      * @return bool
      */
+    /**
+    * Indicates if the validator should stop on the first rule failure.
+    *
+    * @var bool
+    */
+    protected $stopOnFirstFailure = true;
+
     public function authorize()
     {
         return true;
@@ -24,7 +31,7 @@ class RelatorioRequest extends FormRequest
     public function rules()
     {
         return [
-            'autorizacao' => 'required|in:sim,nao',
+            'autorizacao' => 'required|in:simnomecontato,simnome,sim,nao',
             'periodo' => 'required|string',
             'pescolhadestino' => 'required|string',
             'pvisto' => 'required|string',
@@ -79,6 +86,12 @@ class RelatorioRequest extends FormRequest
             'atvremunerada' => 'nullable|boolean',
             'atvremuneradaexp' => 'nullable|string',
             'dicas' => 'required|string',
+        ];
+    }
+
+    public function messages(){
+        return [
+            'required' => 'Todos os campos com asterisco são requeridos',
         ];
     }
 }

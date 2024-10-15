@@ -16,6 +16,7 @@ use App\Service\Utils;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Storage;
 use App\Service\GeneralSettings;
+use PDF;
 
 
 class RelatorioController extends Controller
@@ -28,7 +29,6 @@ class RelatorioController extends Controller
             'relatorio' => new Relatorio,
             'pedido' => $pedido
         ]);
-
     }
 
     public function store(RelatorioRequest $request, Pedido $pedido){
@@ -43,7 +43,6 @@ class RelatorioController extends Controller
             ['user_id' => auth()->user()->id, 'pedido_id' => $pedido->id]
         );
 
-        // Mensagem de sucesso e redirecionamento
         request()->session()->flash('alert-info', 'Relatório cadastrado com sucesso.');
         return redirect("/pedidos/{$pedido->id}");
 
