@@ -16,7 +16,6 @@ use App\Service\Utils;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Storage;
 use App\Service\GeneralSettings;
-use PDF;
 
 
 class RelatorioController extends Controller
