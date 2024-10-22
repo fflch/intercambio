@@ -93,7 +93,7 @@ class PedidoController extends Controller
     public function show(Pedido $pedido, Stepper $stepper)
     {
         $relatorio = Relatorio::where("pedido_id", $pedido->id)->first();
-        if(!$relatorio){
+        if(!$relatorio && $pedido->status == 'Em Elaboração'){
             request()->session()->flash('alert-danger','O preenchimento do relatório é obrigatorio para dar continuidade ao pedido');
             return redirect("/relatorios/$pedido->id");
         }
