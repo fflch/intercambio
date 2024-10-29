@@ -17,8 +17,20 @@ $menu = [
     [
         'text' => 'Pedidos',
         'url' => config('app.url') . '/pedidos',
-        'can' => 'admin'
-    ],
+        'can' => 'admin',
+        'submenu' => [
+                [
+                    'text' => 'Pedidos',
+                    'url' => config('app.url') . '/pedidos',
+                    'can' => 'admin',
+                ],
+                [
+                    'text' => 'Relatórios para Aprovação',
+                    'url' => config('app.url') . '/relatorios',
+                    'can' => 'admin',
+                ]
+            ]
+        ],
     [
         'text' => 'Meus Pedidos',
         'url' => config('app.url') . '/meus_pedidos',
@@ -33,6 +45,10 @@ $menu = [
         'text' => 'Meus Pareceres',
         'url' => config('app.url') . '/docente',
         'can' => 'docente',
+    ],
+    [
+        'text' => 'Relatórios',
+        'url' => config('app.url') . '/relatorios/aprovados',
     ],
     [
         'text' => 'Serviço de Graduação',
