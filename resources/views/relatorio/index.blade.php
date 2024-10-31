@@ -1,11 +1,12 @@
 @extends('main')
 
 @section('content')
+<h2>Relatório para Aprovação</h2>
 {{ $relatorios->appends(request()->query())->links() }}
 <table class="table table-striped">
     <thead>
-        <tr> 
-          <th><h4>Relatório</h4></th>
+        <tr>
+          <th><h4>&#8470 USP</h4></th>
           <th><h4>Nome</h4></th>
           <th><h4>Curso</h4></th>
           <th><h4>Período</h4></th>
@@ -24,8 +25,8 @@
           <td>{{ $relatorio->pedido->instituicao->country->nome }}</td>
           <td>{{ $relatorio->pedido->instituicao->nome_instituicao }}</td>
           <td>
-            <button class="btn approval-toggle {{ $relatorio->aprovacao ? 'btn-success' : 'btn-primary' }}" 
-                    data-id="{{ $relatorio->id }}" 
+            <button class="btn approval-toggle {{ $relatorio->aprovacao ? 'btn-success' : 'btn-primary' }}"
+                    data-id="{{ $relatorio->id }}"
                     data-approved="{{ $relatorio->aprovacao }}">
               {{ $relatorio->aprovacao ? 'Aprovado' : 'Aprovar' }}
             </button>

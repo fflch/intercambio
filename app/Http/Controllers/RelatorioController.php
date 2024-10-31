@@ -47,53 +47,53 @@ class RelatorioController extends Controller
         return redirect("/pedidos/{$pedido->id}");
 
     }
-    
+
     public function index(){
         Gate::authorize('admin');
-    
+
         $relatorios = Relatorio::paginate(10);
-    
+
         return view('relatorio.index', compact('relatorios'));
     }
-    
-    public function showAdmin($id){
+
+    public function showAdmin(int $id){
         Gate::authorize('admin');
 
         $relatorio = Relatorio::with('pedido.instituicao.country')->findOrFail($id);
-    
+
         $pdf = PDF::loadView('relatorio.show', compact('relatorio'));
-    
+
         return $pdf->download("relatorio_{$relatorio->id}.pdf");
     }
 
-    public function showPublico($id) {
+    public function showPublico(int $id) {
         $relatorio = Relatorio::with('pedido.instituicao.country')
             ->whereIn('autorizacao', ['simnomecontato', 'simnome', 'sim'])
             ->where('aprovacao', true)
             ->findOrFail($id);
 
         $pdf = PDF::loadView('relatorio.show', compact('relatorio'));
-        
+
         return $pdf->download("relatorio_{$relatorio->id}.pdf");
     }
 
-    public function aprovar($id) {
+    public function aprovar(int $id) {
         Gate::authorize('admin');;
-    
+
         $relatorio = Relatorio::find($id);
         if ($relatorio) {
             $relatorio->aprovacao = !$relatorio->aprovacao;
             $relatorio->save();
-    
+
             return response()->json(['success' => true, 'aprovacao' => $relatorio->aprovacao]);
         }
     }
-    
+
     public function aprovados() {
         $relatorios = Relatorio::whereIn('autorizacao', ['simnomecontato', 'simnome', 'sim'])
             ->where('aprovacao', true)
             ->paginate(10);
-    
+
         return view('relatorio.aprovados', compact('relatorios'));
     }
 
