@@ -87,7 +87,7 @@ class PedidoController extends Controller
         $pedido = Pedido::create($validated);
 
         request()->session()->flash('alert-danger','O preenchimento do relatório é obrigatorio para dar continuidade ao pedido');
-        return redirect("/relatorios/$pedido->id");
+        return redirect("/relatorios/$pedido->id/create");
     }
 
     public function show(Pedido $pedido, Stepper $stepper)

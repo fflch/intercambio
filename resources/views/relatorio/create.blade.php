@@ -3,7 +3,7 @@
 
 <div class="container">
   <h2>Formulário de Relatório de Intercâmbio</h2>
-  <form method="POST" action="{{ route('salvar.relatorio', $pedido->id) }}">
+  <form method="POST" action="/relatorios/{{ $pedido->id }}">
     @csrf
     <br>
     <div class="form-group">
