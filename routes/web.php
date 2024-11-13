@@ -65,10 +65,10 @@ Route::get('sg', [WorkflowController::class,'sg']);
 Route::get('cg', [WorkflowController::class,'cg']);
 
 //Rotas: Relatório de intercâmbio
-Route::get('/relatorios', [RelatorioController::class, 'index']);
+Route::get('/relatorios', [RelatorioController::class, 'index'])->name('relatorio.index');
 Route::get('/relatorios/aprovados', [RelatorioController::class, 'aprovados']);
 Route::get('/relatorios/{id}/admin', [RelatorioController::class, 'showAdmin']);
 Route::get('/relatorios/{id}/publico', [RelatorioController::class, 'showPublico']);
 Route::get('/relatorios/{pedido}/create', [RelatorioController::class, 'create']);
-Route::post('/relatorios/{pedido}/aprovar', [RelatorioController::class, 'aprovar']);
+Route::post('/relatorios/{pedido}/aprovar', [RelatorioController::class, 'aprovar'])->name('relatorio.aprovar');
 Route::post('/relatorios/{pedido}', [RelatorioController::class, 'store']);

@@ -9,6 +9,7 @@ use App\Models\Relatorio;
 use App\Models\Instituicao;
 use App\Http\Requests\PedidoRequest;
 use App\Http\Requests\RelatorioRequest;
+use App\Http\Requests\RelatorioSearchRequest;
 use Uspdev\Replicado\Graduacao;
 use Fflch\LaravelFflchStepper\Stepper;
 use Uspdev\Replicado\Pessoa;
@@ -21,7 +22,6 @@ use PDF;
 
 class RelatorioController extends Controller
 {
-
     public function create(Pedido $pedido)
     {
         Gate::authorize('grad');
@@ -47,11 +47,29 @@ class RelatorioController extends Controller
         return redirect("/pedidos/{$pedido->id}");
 
     }
+    
+    public function index(RelatorioSearchRequest $request)
+    {
+        $filtro = $request->filtro();  
 
-    public function index(){
-        Gate::authorize('admin');
+        $relatorios = Relatorio::with('pedido');
 
-        $relatorios = Relatorio::paginate(10);
+        if (empty($filtro['search'])) {
+            $relatorios = $relatorios->where('aprovacao', false);
+        } else {
+            $relatorios = $relatorios->where(function ($consultaRelatorio) use ($filtro) {
+                $consultaRelatorio->whereHas('pedido', function ($pedidoConsulta) use ($filtro) {
+                    $pedidoConsulta->where('nome', 'like', "%{$filtro['search']}%")
+                      ->orWhere('codpes', 'like', "%{$filtro['search']}%");
+                });
+            });
+        }
+
+        $relatorios = $relatorios->paginate(10);
+
+        if ($request->ajax()) {
+            return view('relatorio.partials.filtro', compact('relatorios'))->render();
+        }
 
         return view('relatorio.index', compact('relatorios'));
     }
