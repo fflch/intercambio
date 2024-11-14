@@ -2,7 +2,7 @@
 
 @section('content')
  {{ $relatorios->appends(request()->query())->links() }}
-<h2>Relatório Aprovados</h2>
+<h2>Relatórios Aprovados</h2>
 <table class="table table-striped">
     <thead>
         <tr>
