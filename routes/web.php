@@ -72,3 +72,4 @@ Route::get('/relatorios/{id}/publico', [RelatorioController::class, 'showPublico
 Route::get('/relatorios/{pedido}/create', [RelatorioController::class, 'create']);
 Route::post('/relatorios/{pedido}/aprovar', [RelatorioController::class, 'aprovar'])->name('relatorio.aprovar');
 Route::post('/relatorios/{pedido}', [RelatorioController::class, 'store']);
+Route::get('/relatorios/search', [RelatorioController::class, 'search'])->name('relatorio.search');

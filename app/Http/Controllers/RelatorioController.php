@@ -47,29 +47,12 @@ class RelatorioController extends Controller
         return redirect("/pedidos/{$pedido->id}");
 
     }
-    
-    public function index(RelatorioSearchRequest $request)
+
+    public function index()
     {
-        $filtro = $request->filtro();  
+        Gate::authorize('admin');
 
-        $relatorios = Relatorio::with('pedido');
-
-        if (empty($filtro['search'])) {
-            $relatorios = $relatorios->where('aprovacao', false);
-        } else {
-            $relatorios = $relatorios->where(function ($consultaRelatorio) use ($filtro) {
-                $consultaRelatorio->whereHas('pedido', function ($pedidoConsulta) use ($filtro) {
-                    $pedidoConsulta->where('nome', 'like', "%{$filtro['search']}%")
-                      ->orWhere('codpes', 'like', "%{$filtro['search']}%");
-                });
-            });
-        }
-
-        $relatorios = $relatorios->paginate(10);
-
-        if ($request->ajax()) {
-            return view('relatorio.partials.filtro', compact('relatorios'))->render();
-        }
+        $relatorios = Relatorio::where('aprovacao', false)->paginate(10);
 
         return view('relatorio.index', compact('relatorios'));
     }
@@ -113,6 +96,18 @@ class RelatorioController extends Controller
             ->paginate(10);
 
         return view('relatorio.aprovados', compact('relatorios'));
+    }
+
+    public function search(RelatorioSearchRequest $request) {
+        Gate::authorize('admin');
+
+        $search = $request->filtro();
+        $relatorios = Relatorio::whereHas('pedido', function ($query) use ($search) {
+            $query->where('nome', 'like', "%{$search['search']}%")
+                  ->orWhere('codpes', 'like', "%{$search['search']}%");
+            })->paginate(10);
+
+        return view('relatorio.partials.filtro', compact('relatorios'))->render();
     }
 
 }
