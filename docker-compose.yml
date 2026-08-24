@@ -28,6 +28,22 @@ services:
     networks:
       - intercambio-network
 
+  phpmyadmin:
+    image: phpmyadmin:latest
+    container_name: intercambio_phpmyadmin
+    restart: always
+    depends_on:
+      - mariadb
+    ports:
+      - "8081:80"
+    environment:
+      PMA_HOST: mariadb
+      PMA_PORT: 3306
+      PMA_USER: root
+      PMA_PASSWORD: intercambio
+    networks:
+      - intercambio-network
+
   selenium:
     image: selenium/standalone-chrome
     container_name: intercambio_selenium
@@ -48,6 +64,15 @@ services:
       intercambio-network:
         aliases:
           - auth.local
+  
+  mailpit:
+    image: axllent/mailpit:latest
+    container_name: intercambio_mailpit
+    ports:
+      - "1025:1025"   # SMTP
+      - "8025:8025"   # Interface Web
+    networks:
+      - intercambio-network
 
 networks:
   intercambio-network:
