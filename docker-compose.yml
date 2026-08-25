@@ -1,5 +1,6 @@
 services:
   intercambio:
+    build: .
     image: intercambio:latest
     container_name: intercambio
     ports:
