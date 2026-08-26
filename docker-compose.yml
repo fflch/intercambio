@@ -1,0 +1,82 @@
+services:
+  intercambio:
+    build: .
+    image: intercambio:latest
+    container_name: intercambio
+    ports:
+      - "8000:80"
+    depends_on:
+      - mariadb
+    networks:
+      - intercambio-network
+    volumes:
+      - ./:/var/www/html
+    environment:
+      HOME: /tmp
+    user: "${UID:-1000}:${GID:-1000}"
+
+  mariadb:
+    image: mariadb:11
+    container_name: intercambio_mariadb
+    restart: always
+    environment:
+      MYSQL_DATABASE: intercambio
+      MYSQL_USER: intercambio
+      MYSQL_PASSWORD: intercambio
+      MYSQL_ROOT_PASSWORD: intercambio
+    volumes:
+      - mariadb_data:/var/lib/mysql
+    networks:
+      - intercambio-network
+
+  phpmyadmin:
+    image: phpmyadmin:latest
+    container_name: intercambio_phpmyadmin
+    restart: always
+    depends_on:
+      - mariadb
+    ports:
+      - "8081:80"
+    environment:
+      PMA_HOST: mariadb
+      PMA_PORT: 3306
+      PMA_USER: root
+      PMA_PASSWORD: intercambio
+    networks:
+      - intercambio-network
+
+  selenium:
+    image: selenium/standalone-chrome
+    container_name: intercambio_selenium
+    ports:
+      - "7900:7900" # VNC (pra ver o browser rodando)
+    networks:
+      - intercambio-network
+    shm_size: 2gb
+    
+  senhaunica-faker:
+    image: uspdev/senhaunica-faker
+    container_name: intercambio_senhaunica-faker
+    ports:
+      - "3141:3141"
+    environment:
+          - APP_URL=http://auth.local:3141
+    networks:
+      intercambio-network:
+        aliases:
+          - auth.local
+  
+  mailpit:
+    image: axllent/mailpit:latest
+    container_name: intercambio_mailpit
+    ports:
+      - "1025:1025"   # SMTP
+      - "8025:8025"   # Interface Web
+    networks:
+      - intercambio-network
+
+networks:
+  intercambio-network:
+
+volumes:
+  mariadb_data:
