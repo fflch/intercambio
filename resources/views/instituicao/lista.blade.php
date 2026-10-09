@@ -14,11 +14,11 @@
           <tr>
             <td>{{$insti->nome_instituicao}}</td>
             <td align="center">
-              <a href="/instituicao/{{$insti->id}}/edit"><i class="fas fa-pencil-alt" color="#007bff"></i></a>
+              <a href="/instituicao/{{$insti->id}}/edit"><i class="fas fa-pencil-alt" color="#007bff"></i>Editar</a>
               <form method="POST" action="/instituicao/{{$insti->id}}"> 
                   @csrf
                   @method('delete')
-                  <button type="submit" onclick="return confirm('Tem certeza que deseja excluir a Instituição?');" style="background-color: transparent;border: none;"><i class="far fa-trash-alt" color="#007bff"></i></button>  
+                  <button type="submit" onclick="return confirm('Tem certeza que deseja excluir a Instituição?');" style="background-color: transparent;border: none;"><i class="far fa-trash-alt" color="#007bff"></i>Deletar</button>  
               </form>
             </td>
           </tr>
