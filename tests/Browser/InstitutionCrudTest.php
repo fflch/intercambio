@@ -11,7 +11,7 @@ class InstitutionCrudTest extends DuskTestCase
     /**
      * A Dusk test example.
      */
-    public function test_example(): void
+    public function test_instituicao_crud(): void
     {
         $this->browse(function (Browser $browser) {
             $browser->visit('/')
@@ -40,6 +40,14 @@ class InstitutionCrudTest extends DuskTestCase
                 ->assertDialogOpened('Tem certeza que deseja excluir a Instituição?')
                 ->acceptDialog()
                 ->assertSee('Instituição excluída com sucesso.');
+
+            $browser->clicklink('Países')
+                ->waitForText('Brasil');
+
+            $browser->press('Deletar')
+                ->assertDialogOpened('Tem certeza que deseja excluir o País?')
+                ->acceptDialog()
+                ->assertSee('País excluído com sucesso.');
         });
     }
 }
