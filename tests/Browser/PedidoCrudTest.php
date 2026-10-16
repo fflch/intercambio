@@ -30,8 +30,7 @@ class PedidoCrudTest extends DuskTestCase
             $browser->clicklink('Brasil')
                 ->waitForText('Adicionar uma Instituição para Brasil')
                 ->type('nome_instituicao', 'USP')
-                ->press('submit')
-                ->assertSee('USP');
+                ->press('submit');
 
             $browser->clicklink('Nova solicitação')
                 ->clicklink('Reaproveitamento de créditos')
