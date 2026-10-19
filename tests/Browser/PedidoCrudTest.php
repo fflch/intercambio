@@ -41,7 +41,11 @@ class PedidoCrudTest extends DuskTestCase
                 ->press('Enviar')
                 ->assertSee("O preenchimento do");
             
-            $browser->radio('autorizacao', 'simnomecontato');
+            $browser->clicklink('Intercambio')
+                ->press('Deletar')
+                ->pause(5000)
+                ->assertDialogOpened('Tem certeza que deseja excluir?')
+                ->acceptDialog();
         });
 
         if (file_exists($filePath)) {
