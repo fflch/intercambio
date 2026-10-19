@@ -9,11 +9,10 @@ class Utils
 {
     public static function disciplinas($codpes)
     {
-        $curso = Graduacao::curso($codpes,env('REPLICADO_CODUNDCLG'));
+        $curso = Graduacao::obterCursoAtivo($codpes);
         if(!empty($curso)) {
             return Graduacao::listarDisciplinasGradeCurricular($curso['codcur'], $curso['codhab']);
         }
-        return [];
     }
 
     public static function nomeDisciplinaUsp($coddis){
