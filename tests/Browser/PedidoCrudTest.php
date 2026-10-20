@@ -46,6 +46,19 @@ class PedidoCrudTest extends DuskTestCase
                 ->pause(5000)
                 ->assertDialogOpened('Tem certeza que deseja excluir?')
                 ->acceptDialog();
+
+            $browser->clicklink('Países')
+                ->clicklink('Brasil')
+                ->press('Deletar')
+                ->assertDialogOpened('Tem certeza que deseja excluir a Instituição?')
+                ->acceptDialog()
+                ->assertSee('Instituição excluída com sucesso.');
+
+            $browser->clicklink('Países')
+                ->press('Deletar')
+                ->assertDialogOpened('Tem certeza que deseja excluir o País?')
+                ->acceptDialog()
+                ->assertSee('País excluído com sucesso.');
         });
 
         if (file_exists($filePath)) {

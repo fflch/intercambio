@@ -39,8 +39,7 @@ class CountriesCrudTest extends DuskTestCase
             $browser->press('Deletar')
                 ->assertDialogOpened('Tem certeza que deseja excluir o País?')
                 ->acceptDialog()
-                ->assertSee('País excluído com sucesso.');
-            
+                ->assertSee('País excluído com sucesso.');  
         });
     }
 }
