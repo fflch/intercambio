@@ -131,8 +131,9 @@ class DisciplinaCrudTest extends DuskTestCase
             $browser->type('conversao', '2')
                 ->press('Enviar para Comissão de Graduação')
                 ->assertDialogOpened('Tem certeza que deseja enviar para comissão de graduação? ')
-                ->acceptDialog()
-                ->assertSee('Disciplina Teste');
+                ->acceptDialog();
+                
+            $browser->assertSee('Disciplina Teste');
         });
     }
 }
