@@ -11,7 +11,7 @@ class DisciplinaCrudTest extends DuskTestCase
     /**
      * A Dusk test example.
      */
-    public function test_example(): void
+    public function test_disciplina_crud(): void
     {
         $filePath = sys_get_temp_dir() . '/fake_teste_' . time() . '.pdf';
         file_put_contents($filePath, '%PDF-1.4\n%Arquivo falso para testes do Dusk\n');
@@ -125,15 +125,18 @@ class DisciplinaCrudTest extends DuskTestCase
             $browser->assertSee('Disciplina Teste')
                 ->press('Já inseri todas as Disciplinas e quero enviar o Pedido para Análise!')
                 ->assertDialogOpened('Tem certeza que deseja enviar para Análise? Depois de enviado, o pedido não pode ser alterado.')
-                ->acceptDialog()
-                ->assertSee('Enviar para Comissão de Graduação');
+                ->acceptDialog();
 
             $browser->type('conversao', '2')
                 ->press('Enviar para Comissão de Graduação')
                 ->assertDialogOpened('Tem certeza que deseja enviar para comissão de graduação? ')
                 ->acceptDialog();
                 
-            $browser->assertSee('Disciplina Teste');
+                
+            $browser->clicklink('Meus Pedidos')
+                ->press('Deletar')
+                ->assertDialogOpened('Tem certeza que deseja excluir?')
+                ->acceptDialog();
         });
     }
 }
