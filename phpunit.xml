@@ -5,6 +5,15 @@
          colors="true"
 >
     <testsuites>
+        <testsuite name="Browser">
+            <file>./tests/Browser/IndexTest.php</file>
+            <file>./tests/Browser/LoginTest.php</file>
+            <file>./tests/Browser/CountriesCrudTest.php</file>
+            <file>./tests/Browser/InstitutionCrudTest.php</file>
+            <file>./tests/Browser/PedidoCrudTest.php</file>
+            <file>./tests/Browser/RelatorioCrudTest.php</file>
+            <file>./tests/Browser/RelatorioCrudTest.php</file>
+        </testsuite>
         <testsuite name="Unit">
             <directory suffix="Test.php">./tests/Unit</directory>
         </testsuite>

@@ -119,8 +119,7 @@ class DisciplinaCrudTest extends DuskTestCase
                 ->type('creditos', '4')
                 ->type('carga_horaria', '20')
                 ->attach('file', $filePath)
-                ->press('Adicionar')
-                ->waitForText('Disciplina Teste');
+                ->press('Adicionar');
 
             $browser->assertSee('Disciplina Teste')
                 ->press('Já inseri todas as Disciplinas e quero enviar o Pedido para Análise!')
@@ -131,7 +130,6 @@ class DisciplinaCrudTest extends DuskTestCase
                 ->press('Enviar para Comissão de Graduação')
                 ->assertDialogOpened('Tem certeza que deseja enviar para comissão de graduação? ')
                 ->acceptDialog();
-                
                 
             $browser->clicklink('Meus Pedidos')
                 ->press('Deletar')
