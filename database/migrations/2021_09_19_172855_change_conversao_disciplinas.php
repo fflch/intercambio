@@ -14,7 +14,7 @@ class ChangeConversaoDisciplinas extends Migration
     public function up()
     {
         Schema::table('disciplinas', function (Blueprint $table) {
-            $table->float('conversao')->change();
+            $table->float('conversao')->nullable()->change();
         });
     }
 

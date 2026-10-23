@@ -17,7 +17,7 @@
                 $('#instituicao_id').html('<option value="">Aguarde... </option>');
               },
               success: function( data ) {
-                 var options = '<option value="">Selecione a Instituição</option>';
+                 var options = '<option value="" disabled selected>Selecione a Instituição</option>';
                  for (var i = 0; i < data.length; i++) {
                   options += '<option value="' + data[i].id + '">'
                      +data[i].nome_instituicao + '</option>';
@@ -47,7 +47,7 @@
       <label id="id_pais" for="id_pais" class="required"><b>Selecione o país da Instituição</b></label>
       <br>
         <select id="id_country" name="id_country">
-              <option value="">Selecione um País </option>
+              <option value="" disabled selected>Selecione um País </option>
           @foreach($countries as $country)
               <option value="{{ $country['id'] }}" 
                   @if(old('nome') == $country['nome']) selected @endif>
@@ -60,7 +60,7 @@
       <label id="instituicao" for="instituicao" class="required"><b>Selecione a Instituição </b></label>
       <br>
       <select id="instituicao_id" name="instituicao_id">
-          <option value="">Selecione uma Instituição </option>
+          <option value="" disabled selected>Selecione uma Instituição </option>
           @foreach($instituicoes as $insti)
               <option value="{{ $insti['id'] }}" 
                   @if(old('nome_instituicao') == $insti['nome_instituicao']) selected @endif>
@@ -74,7 +74,7 @@
       <label id="tipo" for="tipo" class="required"><b>Tipo de intercâmbio</b></label>
       <br>
       <select name="tipo">
-          <option value=""> -- Selecione um tipo --</option>
+          <option value="" disabled selected> -- Selecione um tipo --</option>
           @foreach($tipos as $tipo)
               <option value="{{ trim($tipo) }}" @if(old('tipo') == trim($tipo)) selected @endif>
                   {{ $tipo }}

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<phpunit backupGlobals="false"
+         beStrictAboutTestsThatDoNotTestAnything="false"
+         colors="true"
+         processIsolation="false"
+         stopOnError="false"
+         stopOnFailure="false"
+         cacheDirectory=".phpunit.cache"
+         backupStaticProperties="false">
+    <testsuites>
+        <testsuite name="Browser">
+            <file>./tests/Browser/IndexTest.php</file>
+            <file>./tests/Browser/LoginTest.php</file>
+            <file>./tests/Browser/CountriesCrudTest.php</file>
+            <file>./tests/Browser/InstitutionCrudTest.php</file>
+            <file>./tests/Browser/PedidoCrudTest.php</file>
+            <file>./tests/Browser/RelatorioCrudTest.php</file>
+            <file>./tests/Browser/RelatorioCrudTest.php</file>
+        </testsuite>
+        <!-- <testsuite name="Browser Test Suite">
+            <directory suffix="Test.php">./tests/Browser</directory>
+        </testsuite> -->
+    </testsuites>
+</phpunit>
